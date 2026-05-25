@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HavenLink - Connecting Families to Licensed Adoption Agencies</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="logo.png" alt="HavenLink Logo" class="logo-icon">
+        <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+      </div>
+      
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="team.html" class="nav-link">Team</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-container">
+      <div class="hero-content">
+        <h1 class="hero-title">Connecting Children to Loving Families Through Technology</h1>
+        <p class="hero-subtitle">
+          HavenLink is a secure, structured platform that bridges prospective adoptive families with licensed adoption agencies. We make the adoption journey clearer, faster, and more human.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn btn-primary" onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'})">
+            Learn How It Works
+          </button>
+          <button class="btn btn-secondary" onclick="document.getElementById('safety').scrollIntoView({behavior: 'smooth'})">
+            View Safety & Privacy
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About / Mission Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <h2 class="section-title">Our Mission</h2>
+      <p class="section-subtitle">
+        HavenLink was built to transform the adoption process into a secure, transparent, and family-centered experience. We believe that connecting children with loving families should be faster, clearer, and more human.
+      </p>
+      
+      <div class="value-cards">
+        <div class="value-card">
+          <svg class="icon" viewBox="0 0 64 64" width="48" height="48">
+            <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 32 16 L 40 24 L 32 32 L 24 24 Z" fill="#3b82f6"/>
+            <circle cx="32" cy="45" r="3" fill="#3b82f6"/>
+          </svg>
+          <h3>Secure & Structured Matching</h3>
+          <p>A transparent, data-driven process that ensures compatibility between families and available children.</p>
+        </div>
+        
+        <div class="value-card">
+          <svg class="icon" viewBox="0 0 64 64" width="48" height="48">
+            <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 20 24 L 28 32 L 20 40" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M 32 28 L 48 28" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <h3>Licensed Agency Verification</h3>
+          <p>Every partner agency on HavenLink is thoroughly vetted and licensed, ensuring compliance and accountability.</p>
+        </div>
+        
+        <div class="value-card">
+          <svg class="icon" viewBox="0 0 64 64" width="48" height="48">
+            <path d="M 32 12 L 44 20 L 44 36 Q 32 48 32 48 Q 20 36 20 36 L 20 20 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 28 32 L 32 36 L 38 30" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Family-Centered Design</h3>
+          <p>Built with sensitivity to the emotional journey of adoptive families, with empathy at every step.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem">
+    <div class="problem-container">
+      <div class="problem-content">
+        <h2>The Challenge</h2>
+        <p>
+          The adoption process today is often fragmented across multiple platforms, agencies, and paperwork systems. Families struggle to navigate the complexity, verify which agencies are legitimate, and communicate clearly throughout their journey.
+        </p>
+        <p>
+          HavenLink consolidates this experience into one secure, well-structured platform—letting families focus on what matters: building their family.
+        </p>
+      </div>
+      <div class="problem-stat">
+        <div class="stat-number">87%</div>
+        <div class="stat-label">of families report confusion when navigating adoption agencies</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <p class="section-subtitle">Four simple steps to connect families with their perfect match</p>
+      
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">01</div>
+          <svg class="step-icon" viewBox="0 0 64 64" width="48" height="48">
+            <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <line x1="20" y1="24" x2="44" y2="24" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="20" y1="32" x2="44" y2="32" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="20" y1="40" x2="36" y2="40" stroke="#3b82f6" stroke-width="1.5"/>
+          </svg>
+          <h3>Family Intake Form</h3>
+          <p>Complete a secure, guided intake form to share your family profile, preferences, and support needs.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">02</div>
+          <svg class="step-icon" viewBox="0 0 64 64" width="48" height="48">
+            <circle cx="20" cy="24" r="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <circle cx="32" cy="20" r="2" fill="#3b82f6"/>
+            <circle cx="32" cy="28" r="2" fill="#3b82f6"/>
+            <path d="M 28 24 L 30 24 M 30 20 L 32 20 M 30 28 L 32 28" stroke="#3b82f6" stroke-width="1.5"/>
+            <rect x="40" y="12" width="20" height="24" rx="2" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <line x1="44" y1="16" x2="56" y2="16" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="44" y1="22" x2="56" y2="22" stroke="#3b82f6" stroke-width="1"/>
+            <line x1="44" y1="28" x2="52" y2="28" stroke="#3b82f6" stroke-width="1"/>
+          </svg>
+          <h3>Agency-Managed Profiles</h3>
+          <p>Verified agencies post and manage child profiles with full transparency and structured information.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">03</div>
+          <svg class="step-icon" viewBox="0 0 64 64" width="48" height="48">
+            <circle cx="24" cy="28" r="10" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <circle cx="40" cy="28" r="10" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <ellipse cx="32" cy="28" rx="6" ry="10" fill="none" stroke="#60a5fa" stroke-width="2"/>
+            <circle cx="32" cy="28" r="2" fill="#3b82f6"/>
+          </svg>
+          <h3>Compatibility Matching</h3>
+          <p>Our algorithm intelligently matches families with children based on preferences, needs, and fit.</p>
+        </div>
+        
+        <div class="step">
+          <div class="step-number">04</div>
+          <svg class="step-icon" viewBox="0 0 64 64" width="48" height="48">
+            <rect x="14" y="16" width="36" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <path d="M 22 26 L 28 32 L 42 18" stroke="#3b82f6" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="20" y1="40" x2="44" y2="40" stroke="#3b82f6" stroke-width="1.5"/>
+          </svg>
+          <h3>Application & Tracking</h3>
+          <p>Track your application status, communicate with agencies, and stay informed every step of the way.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">Core Features</h2>
+      <p class="section-subtitle">Built with adoptive families and agencies in mind</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <line x1="20" y1="24" x2="44" y2="24" stroke="#1e3a8a" stroke-width="1.5"/>
+            <line x1="20" y1="32" x2="44" y2="32" stroke="#1e3a8a" stroke-width="1.5"/>
+            <line x1="20" y1="40" x2="36" y2="40" stroke="#1e3a8a" stroke-width="1.5"/>
+          </svg>
+          <h3>Family Intake Form</h3>
+          <p>A comprehensive, guided intake capturing family profiles, preferences, and support needs securely.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <rect x="16" y="12" width="32" height="40" rx="3" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <line x1="20" y1="24" x2="44" y2="24" stroke="#1e3a8a" stroke-width="1.5"/>
+            <line x1="20" y1="32" x2="44" y2="32" stroke="#1e3a8a" stroke-width="1.5"/>
+            <line x1="20" y1="40" x2="40" y2="40" stroke="#1e3a8a" stroke-width="1.5"/>
+            <circle cx="32" cy="50" r="3" fill="#1e3a8a"/>
+          </svg>
+          <h3>Agency-Managed Child Profiles</h3>
+          <p>Agencies maintain structured, detailed profiles of children with photos, backgrounds, and needs.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <circle cx="32" cy="28" r="2" fill="#1e3a8a"/>
+            <path d="M 20 20 Q 32 10 44 20 Q 44 35 32 44 Q 20 35 20 20" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <circle cx="24" cy="24" r="2" fill="#1e3a8a"/>
+            <circle cx="40" cy="24" r="2" fill="#1e3a8a"/>
+          </svg>
+          <h3>Compatibility Matching</h3>
+          <p>Smart matching algorithm that considers family preferences and child needs for better outcomes.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <rect x="12" y="16" width="40" height="36" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <line x1="20" y1="24" x2="44" y2="24" stroke="#1e3a8a" stroke-width="1.5"/>
+            <circle cx="22" cy="32" r="1.5" fill="#1e3a8a"/>
+            <line x1="26" y1="32" x2="42" y2="32" stroke="#1e3a8a" stroke-width="1"/>
+            <circle cx="22" cy="40" r="1.5" fill="#1e3a8a"/>
+            <line x1="26" y1="40" x2="42" y2="40" stroke="#1e3a8a" stroke-width="1"/>
+          </svg>
+          <h3>Application Tracker</h3>
+          <p>Real-time status updates and secure communication channel between families and agencies.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <rect x="14" y="12" width="36" height="40" rx="3" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <line x1="20" y1="20" x2="44" y2="20" stroke="#1e3a8a" stroke-width="1.5"/>
+            <path d="M 20 28 L 22 32 L 20 36" stroke="#1e3a8a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <line x1="28" y1="32" x2="44" y2="32" stroke="#1e3a8a" stroke-width="1.5"/>
+            <line x1="28" y1="42" x2="44" y2="42" stroke="#1e3a8a" stroke-width="1.5"/>
+          </svg>
+          <h3>Document Vault</h3>
+          <p>Secure storage and organization of documents, legal files, and important records with encryption.</p>
+        </div>
+        
+        <div class="feature-card">
+          <svg class="feature-icon" viewBox="0 0 64 64" width="40" height="40">
+            <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <line x1="20" y1="24" x2="44" y2="24" stroke="#1e3a8a" stroke-width="1.5"/>
+            <circle cx="18" cy="32" r="2" fill="#1e3a8a"/>
+            <line x1="24" y1="32" x2="44" y2="32" stroke="#1e3a8a" stroke-width="1"/>
+            <circle cx="18" cy="40" r="2" fill="#1e3a8a"/>
+            <line x1="24" y1="40" x2="44" y2="40" stroke="#1e3a8a" stroke-width="1"/>
+          </svg>
+          <h3>Resource Library & Support Hub</h3>
+          <p>Access guides, community resources, and post-adoption support tools for ongoing family success.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Safety & Trust Section -->
+  <section class="safety" id="safety">
+    <div class="container">
+      <h2 class="section-title">Built with Child Safety & Privacy First</h2>
+      <p class="section-subtitle">HavenLink is designed with the highest standards of security and legal compliance</p>
+      
+      <div class="safety-highlights">
+        <div class="safety-item">
+          <svg class="safety-icon" viewBox="0 0 64 64" width="32" height="32">
+            <path d="M 32 12 L 44 20 L 44 36 Q 32 48 32 48 Q 20 36 20 36 L 20 20 Z" fill="none" stroke="#1e3a8a" stroke-width="2.5"/>
+            <circle cx="32" cy="32" r="4" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+          </svg>
+          <h3>No Direct Family-to-Child Contact</h3>
+          <p>All communication flows through verified agencies to protect child safety and privacy.</p>
+        </div>
+        
+        <div class="safety-item">
+          <svg class="safety-icon" viewBox="0 0 64 64" width="32" height="32">
+            <rect x="16" y="16" width="32" height="32" rx="4" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <path d="M 28 28 L 32 32 L 40 24" stroke="#1e3a8a" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <h3>Verified Agency Partners</h3>
+          <p>Every partner agency is thoroughly vetted and licensed by child welfare authorities.</p>
+        </div>
+        
+        <div class="safety-item">
+          <svg class="safety-icon" viewBox="0 0 64 64" width="32" height="32">
+            <rect x="18" y="12" width="28" height="32" rx="3" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <circle cx="32" cy="24" r="3" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <rect x="24" y="32" width="16" height="8" rx="2" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+          </svg>
+          <h3>Secure Authentication</h3>
+          <p>Multi-factor authentication and industry-standard encryption protect all user accounts and data.</p>
+        </div>
+        
+        <div class="safety-item">
+          <svg class="safety-icon" viewBox="0 0 64 64" width="32" height="32">
+            <circle cx="20" cy="20" r="8" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <path d="M 20 20 L 24 28 L 16 28 Z" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <circle cx="44" cy="40" r="10" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <path d="M 44 36 L 48 42 L 40 42 Z" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+          </svg>
+          <h3>Privacy-Focused Data Handling</h3>
+          <p>Data minimization, anonymization, and strict compliance with FERPA, COPPA, and adoption privacy laws.</p>
+        </div>
+        
+        <div class="safety-item">
+          <svg class="safety-icon" viewBox="0 0 64 64" width="32" height="32">
+            <ellipse cx="32" cy="28" rx="18" ry="16" fill="none" stroke="#1e3a8a" stroke-width="2"/>
+            <path d="M 24 24 L 28 28 L 24 32 M 40 24 L 36 28 L 40 32" stroke="#1e3a8a" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+          <h3>Moderated Community Spaces</h3>
+          <p>Any discussion areas are actively moderated to maintain safety, respect, and appropriateness.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Future Roadmap Section -->
+  <section class="roadmap">
+    <div class="container">
+      <h2 class="section-title">What's Coming Next</h2>
+      <p class="section-subtitle">We're continuously expanding HavenLink to serve the adoption community better</p>
+      
+      <div class="roadmap-grid">
+        <div class="roadmap-card">
+          <h3>State Foster Care System Integration</h3>
+          <p>Direct API integration with state foster care databases to streamline public child welfare matching.</p>
+        </div>
+        
+        <div class="roadmap-card">
+          <h3>Caseworker Portal</h3>
+          <p>Dedicated tools for caseworkers to manage cases, track progress, and support families in real-time.</p>
+        </div>
+        
+        <div class="roadmap-card">
+          <h3>Multilingual Support</h3>
+          <p>Full platform localization to serve adoptive families and agencies in multiple languages and cultures.</p>
+        </div>
+        
+        <div class="roadmap-card">
+          <h3>Legal Aid Directory</h3>
+          <p>Vetted directory of adoption-focused legal professionals to support families throughout their journey.</p>
+        </div>
+        
+        <div class="roadmap-card">
+          <h3>Agency Analytics Dashboard</h3>
+          <p>Advanced analytics and reporting tools to help agencies understand trends and improve outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About HavenLink</h3>
+        <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#safety">Safety</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/havenlink_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="mailto:unicef.trinityprep@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <path d="M 2 6 L 12 13 L 22 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
