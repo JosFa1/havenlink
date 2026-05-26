@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adopt — Family Intake Form | HavenLink</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="/logo.png" alt="HavenLink" class="logo-icon">
+        <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+      </div>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li class="nav-item adopt-menu">
+          <button class="nav-link adopt-toggle" aria-haspopup="true" aria-expanded="false">Adopt ▾</button>
+          <ul class="adopt-dropdown" role="menu" aria-label="Adoption steps">
+            <li role="none"><a role="menuitem" href="/adopt/home-study.html" class="nav-link">01 — Home Study Service</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/family-intake.html" class="nav-link">02 — Family Intake Form</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/agency-profiles.html" class="nav-link">03 — Agency-Managed Profiles</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/compatibility-matching.html" class="nav-link">04 — Compatibility Matching</a></li>
+          </ul>
+        </li>
+        <li><a href="/team.html" class="nav-link">Team</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="adopt-subnav" role="navigation" aria-label="Adoption steps sub navigation">
+    <ul class="adopt-steps">
+      <li><a href="/adopt/home-study.html"><span class="step-badge">01</span> Home Study</a></li>
+      <li><a href="/adopt/family-intake.html" class="active"><span class="step-badge">02</span> Family Intake</a></li>
+      <li><a href="/adopt/agency-profiles.html"><span class="step-badge">03</span> Agency Profiles</a></li>
+      <li><a href="/adopt/compatibility-matching.html"><span class="step-badge">04</span> Compatibility</a></li>
+    </ul>
+  </div>
+
+  <main class="container" style="padding:2.5rem 1.5rem;">
+    <section class="form-wizard" aria-labelledby="intakeTitle">
+      <div class="wizard-header">
+        <div>
+          <h1 id="intakeTitle" class="section-title">Family Intake Form</h1>
+          <p class="inline-help">This guided intake helps agencies understand your family, preferences, and readiness. Your answers are kept private until you choose to submit.</p>
+        </div>
+        <div style="min-width:220px; text-align:right;">
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <div style="font-size:0.9rem; color:var(--text-light);">Progress</div>
+            <div class="progress" aria-hidden="true"><div class="bar" id="wizardProgress" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <form id="familyIntakeForm" novalidate>
+        <!-- STEP 1: Household Profile -->
+        <div class="wizard-step" data-step="1">
+          <h2 class="section-title">Household Profile</h2>
+
+          <div class="form-row">
+            <label for="q1">Q1. How many adults (18+) will be living in the home?</label>
+            <input id="q1" name="q1" class="input" type="number" min="1" max="10" required aria-required="true" />
+          </div>
+
+          <div class="form-row">
+            <label for="q2">Q2. Relationship between household adults</label>
+            <select id="q2" name="q2" class="input" required>
+              <option value="">Choose one</option>
+              <option>Single adult</option>
+              <option>Married couple</option>
+              <option>Domestic partners</option>
+              <option>Co-parents (unmarried)</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <fieldset class="form-row" style="border:none; padding:0; margin:0;">
+            <label>Q3. Do you currently have children living in your home?</label>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <label><input type="radio" name="q3" value="yes"> Yes</label>
+              <label><input type="radio" name="q3" value="no" checked> No</label>
+            </div>
+          </fieldset>
+
+          <div id="q4_container" class="wizard-subsection" style="margin-top:0.75rem; display:none;">
+            <div class="form-row">
+              <label for="q4_count">Q4. How many children?</label>
+              <input id="q4_count" name="q4_count" class="input" type="number" min="1" max="10">
+            </div>
+            <div id="q4_ages" style="margin-top:0.5rem; display:grid; gap:0.5rem;"></div>
+          </div>
+
+          <div class="form-row">
+            <label for="q5">Q5. What type of home do you live in?</label>
+            <select id="q5" name="q5" class="input" required>
+              <option value="">Choose one</option>
+              <option>Single-family house</option>
+              <option>Townhouse</option>
+              <option>Apartment / Condo</option>
+              <option>Mobile home</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q6">Q6. Do you own or rent your home?</label>
+            <select id="q6" name="q6" class="input">
+              <option value="">Choose one</option>
+              <option>Own</option>
+              <option>Rent</option>
+              <option>Other arrangement</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q7">Q7. How many bedrooms are available for an adopted child?</label>
+            <select id="q7" name="q7" class="input">
+              <option value="">Choose one</option>
+              <option>Shared room available</option>
+              <option>1 private room</option>
+              <option>2+ rooms available</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q8">Q8. What state do you reside in?</label>
+            <select id="q8" name="q8" class="input" required>
+              <option value="">Select state</option>
+              <!-- US states list -->
+              <option>AL</option>
+              <option>AK</option>
+              <option>AZ</option>
+              <option>AR</option>
+              <option>CA</option>
+              <option>CO</option>
+              <option>CT</option>
+              <option>DE</option>
+              <option>FL</option>
+              <option>GA</option>
+              <option>HI</option>
+              <option>ID</option>
+              <option>IL</option>
+              <option>IN</option>
+              <option>IA</option>
+              <option>KS</option>
+              <option>KY</option>
+              <option>LA</option>
+              <option>ME</option>
+              <option>MD</option>
+              <option>MA</option>
+              <option>MI</option>
+              <option>MN</option>
+              <option>MS</option>
+              <option>MO</option>
+              <option>MT</option>
+              <option>NE</option>
+              <option>NV</option>
+              <option>NH</option>
+              <option>NJ</option>
+              <option>NM</option>
+              <option>NY</option>
+              <option>NC</option>
+              <option>ND</option>
+              <option>OH</option>
+              <option>OK</option>
+              <option>OR</option>
+              <option>PA</option>
+              <option>RI</option>
+              <option>SC</option>
+              <option>SD</option>
+              <option>TN</option>
+              <option>TX</option>
+              <option>UT</option>
+              <option>VT</option>
+              <option>VA</option>
+              <option>WA</option>
+              <option>WV</option>
+              <option>WI</option>
+              <option>WY</option>
+              <option>DC</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q9">Q9. Approximate combined household income</label>
+            <select id="q9" name="q9" class="input">
+              <option value="">Choose one</option>
+              <option>Under $30,000</option>
+              <option>$30k–$50k</option>
+              <option>$50k–$75k</option>
+              <option>$75k–$100k</option>
+              <option>$100k+</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 2: Lifestyle & Values -->
+        <div class="wizard-step" data-step="2">
+          <h2 class="section-title">Lifestyle & Values</h2>
+
+          <div class="form-row">
+            <label for="q10">Q10. Household activity level</label>
+            <select id="q10" name="q10" class="input">
+              <option value="">Choose one</option>
+              <option>Very active / outdoorsy</option>
+              <option>Moderately active</option>
+              <option>Relaxed / home-oriented</option>
+              <option>Varies</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q11">Q11. Religious affiliation</label>
+            <select id="q11" name="q11" class="input">
+              <option value="">Choose one</option>
+              <option value="yes">Yes (optional to specify)</option>
+              <option value="no">No</option>
+              <option value="spiritual">Spiritual but not religious</option>
+              <option value="prefer_not">Prefer not to say</option>
+            </select>
+          </div>
+
+          <div id="q11_specify" class="form-row" style="display:none;">
+            <label for="q11_text">If yes, please specify</label>
+            <input id="q11_text" name="q11_text" class="input" type="text">
+          </div>
+
+          <div class="form-row">
+            <label for="q12">Q12. Open to different cultural/ethnic background?</label>
+            <select id="q12" name="q12" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, fully open</option>
+              <option>Prefer same background</option>
+              <option>Open with support resources</option>
+              <option>Unsure</option>
+            </select>
+          </div>
+
+          <fieldset class="form-row" style="border:none; padding:0; margin:0;">
+            <label>Q13. Do you have pets in the home?</label>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <label><input type="radio" name="q13" value="yes"> Yes</label>
+              <label><input type="radio" name="q13" value="no" checked> No</label>
+            </div>
+          </fieldset>
+
+          <div id="q13_pets" style="display:none; margin-top:0.5rem;">
+            <div class="form-row">
+              <label>Pet types</label>
+              <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                <label><input type="checkbox" name="q13_pets" value="dogs"> Dogs</label>
+                <label><input type="checkbox" name="q13_pets" value="cats"> Cats</label>
+                <label><input type="checkbox" name="q13_pets" value="birds"> Birds</label>
+                <label><input type="checkbox" name="q13_pets" value="other"> Other</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="q14">Q14. Typical weekday structure</label>
+            <select id="q14" name="q14" class="input">
+              <option value="">Choose one</option>
+              <option>Both parents work full-time</option>
+              <option>One parent works / one stays home</option>
+              <option>Work from home</option>
+              <option>Retired / flexible schedule</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>Q15. Languages spoken at home</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <label><input type="checkbox" name="q15_lang" value="English"> English</label>
+              <label><input type="checkbox" name="q15_lang" value="Spanish"> Spanish</label>
+              <label><input type="checkbox" name="q15_lang" value="Other"> Other</label>
+            </div>
+            <div id="q15_other" style="display:none; width:100%; margin-top:0.5rem;">
+              <input id="q15_other_text" name="q15_other_text" class="input" placeholder="Specify other languages">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3: Experience & Background -->
+        <div class="wizard-step" data-step="3">
+          <h2 class="section-title">Experience & Background</h2>
+
+          <div class="form-row">
+            <label for="q16">Q16. Have you previously fostered or adopted?</label>
+            <select id="q16" name="q16" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, foster care</option>
+              <option>Yes, adoption</option>
+              <option>Yes, both</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <div id="q17_container" style="display:none;">
+            <div class="form-row">
+              <label for="q17_count">Q17. How many placements have you had?</label>
+              <input id="q17_count" name="q17_count" class="input" type="number" min="0">
+            </div>
+            <div class="form-row" id="q17_ages_container"></div>
+          </div>
+
+          <div class="form-row">
+            <label for="q18">Q18. Professional childcare experience</label>
+            <select id="q18" name="q18" class="input">
+              <option value="">Choose one</option>
+              <option>Teacher / educator</option>
+              <option>Social worker</option>
+              <option>Therapist / counselor</option>
+              <option>Healthcare (pediatric)</option>
+              <option>None</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q19">Q19. Adoption or foster training completed?</label>
+            <select id="q19" name="q19" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, PRIDE or equivalent</option>
+              <option>Yes, other training</option>
+              <option>In progress</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <fieldset class="form-row" style="border:none; padding:0; margin:0;">
+            <label>Q20. Has your household ever had a CPS report?</label>
+            <div style="display:flex; gap:0.75rem; align-items:center;">
+              <label><input type="radio" name="q20" value="yes"> Yes</label>
+              <label><input type="radio" name="q20" value="no" checked> No</label>
+            </div>
+          </fieldset>
+
+          <div id="q20_explain" style="display:none; margin-top:0.5rem;">
+            <label for="q20_text">If yes, brief explanation (private)</label>
+            <textarea id="q20_text" name="q20_text" class="input" rows="3"></textarea>
+            <div class="inline-help">This information is confidential and is used only for routing and support.</div>
+          </div>
+
+          <div class="form-row">
+            <label for="q21">Q21. Do you have non-family references available?</label>
+            <select id="q21" name="q21" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, 2 or more</option>
+              <option>Yes, 1</option>
+              <option>Working on it</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 4: Adoption Preferences -->
+        <div class="wizard-step" data-step="4">
+          <h2 class="section-title">Adoption Preferences</h2>
+
+          <div class="form-row">
+            <label>Q22. What age range are you hoping to adopt?</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <label><input type="checkbox" name="q22" value="Infant"> Infant (0–1)</label>
+              <label><input type="checkbox" name="q22" value="Toddler"> Toddler (2–4)</label>
+              <label><input type="checkbox" name="q22" value="School"> School age (5–9)</label>
+              <label><input type="checkbox" name="q22" value="Preteen"> Preteen (10–12)</label>
+              <label><input type="checkbox" name="q22" value="Teen"> Teen (13–17)</label>
+              <label><input type="checkbox" name="q22" value="Any"> Open to any age</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="q23">Q23. Open to adopting siblings together?</label>
+            <select id="q23" name="q23" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, open to any group size</option>
+              <option>Yes, up to 2 siblings</option>
+              <option>Prefer single child</option>
+              <option>Unsure</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q24">Q24. Preference for child's gender</label>
+            <select id="q24" name="q24" class="input">
+              <option value="">Choose one</option>
+              <option>No preference</option>
+              <option>Boy</option>
+              <option>Girl</option>
+              <option>Non-binary / open</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label>Q25. Open to a child with a diagnosed medical condition?</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <label><input type="checkbox" name="q25" value="NoMedical"> No medical needs preferred</label>
+              <label><input type="checkbox" name="q25" value="Minor"> Minor/manageable conditions</label>
+              <label><input type="checkbox" name="q25" value="Moderate"> Moderate ongoing needs</label>
+              <label><input type="checkbox" name="q25" value="Significant"> Significant medical needs</label>
+              <label><input type="checkbox" name="q25" value="Open"> Open to any</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label>Q26. Open to behavioral or developmental diagnoses?</label>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <label><input type="checkbox" name="q26" value="NoBehavioral"> No behavioral needs preferred</label>
+              <label><input type="checkbox" name="q26" value="ADHD"> ADHD / attention needs</label>
+              <label><input type="checkbox" name="q26" value="Anxiety"> Anxiety / mood disorders</label>
+              <label><input type="checkbox" name="q26" value="Developmental"> Developmental delays</label>
+              <label><input type="checkbox" name="q26" value="Autism"> Autism spectrum</label>
+              <label><input type="checkbox" name="q26" value="Trauma"> Trauma history (PTSD)</label>
+              <label><input type="checkbox" name="q26" value="Open"> Open to any</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="q27">Q27. Access to therapeutic or specialized support services?</label>
+            <select id="q27" name="q27" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, actively connected</option>
+              <option>Yes, could access if needed</option>
+              <option>Limited access in our area</option>
+              <option>Unsure</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q28">Q28. Open to a child with history of trauma or abuse?</label>
+            <select id="q28" name="q28" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, we have training/experience</option>
+              <option>Yes, willing to learn</option>
+              <option>Prefer not</option>
+              <option>Unsure</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q29">Q29. Open to maintaining contact with birth family?</label>
+            <select id="q29" name="q29" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, open adoption</option>
+              <option>Yes, occasional contact</option>
+              <option>Prefer closed adoption</option>
+              <option>Open to agency guidance</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- STEP 5: Legal Readiness -->
+        <div class="wizard-step" data-step="5">
+          <h2 class="section-title">Legal Readiness</h2>
+
+          <div class="form-row">
+            <label for="q30">Q30. What state will the adoption take place in?</label>
+            <select id="q30" name="q30" class="input" required>
+              <option value="">Select state</option>
+              <!-- replicate same state list used in Q8 -->
+              <option>AL</option>
+              <option>AK</option>
+              <option>AZ</option>
+              <option>AR</option>
+              <option>CA</option>
+              <option>CO</option>
+              <option>CT</option>
+              <option>DE</option>
+              <option>FL</option>
+              <option>GA</option>
+              <option>HI</option>
+              <option>ID</option>
+              <option>IL</option>
+              <option>IN</option>
+              <option>IA</option>
+              <option>KS</option>
+              <option>KY</option>
+              <option>LA</option>
+              <option>ME</option>
+              <option>MD</option>
+              <option>MA</option>
+              <option>MI</option>
+              <option>MN</option>
+              <option>MS</option>
+              <option>MO</option>
+              <option>MT</option>
+              <option>NE</option>
+              <option>NV</option>
+              <option>NH</option>
+              <option>NJ</option>
+              <option>NM</option>
+              <option>NY</option>
+              <option>NC</option>
+              <option>ND</option>
+              <option>OH</option>
+              <option>OK</option>
+              <option>OR</option>
+              <option>PA</option>
+              <option>RI</option>
+              <option>SC</option>
+              <option>SD</option>
+              <option>TN</option>
+              <option>TX</option>
+              <option>UT</option>
+              <option>VT</option>
+              <option>VA</option>
+              <option>WA</option>
+              <option>WV</option>
+              <option>WI</option>
+              <option>WY</option>
+              <option>DC</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q31">Q31. Have you started a home study yet?</label>
+            <select id="q31" name="q31" class="input" required>
+              <option value="">Choose one</option>
+              <option>Yes, completed</option>
+              <option>Yes, in progress</option>
+              <option>No, not yet started</option>
+              <option>Unsure what this is</option>
+            </select>
+          </div>
+
+          <div id="q31_explain_card" style="display:none;" class="results-card">
+            <strong>Home study primer</strong>
+            <p class="inline-help">A home study is a licensed assessment that reviews daily life, references, background checks, finances, and home safety. Contact our Resource Library for a step-by-step guide.</p>
+          </div>
+
+          <div class="form-row">
+            <label for="q32">Q32. Have you engaged an attorney or agency?</label>
+            <select id="q32" name="q32" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, attorney retained</option>
+              <option>Yes, working with an agency</option>
+              <option>Both</option>
+              <option>No, just starting</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q33">Q33. Prepared for adoption costs?</label>
+            <select id="q33" name="q33" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, we have budgeted</option>
+              <option>Partially — exploring options</option>
+              <option>No, seeking financial assistance</option>
+              <option>Not sure of the costs yet</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q34">Q34. Have all adults completed background checks?</label>
+            <select id="q34" name="q34" class="input" required>
+              <option value="">Choose one</option>
+              <option>Yes, all complete</option>
+              <option>In progress</option>
+              <option>Not yet started</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="q35">Q35. Do you have legal representation or plan to seek it?</label>
+            <select id="q35" name="q35" class="input">
+              <option value="">Choose one</option>
+              <option>Yes, attorney retained</option>
+              <option>Planning to find one</option>
+              <option>Will use agency counsel</option>
+              <option>Unsure if needed</option>
+            </select>
+          </div>
+
+          <div style="margin-top:1rem;">
+            <div class="inline-help">Privacy note: This form collects sensitive household information to support matching and routing. Data is stored locally until you submit. Do not include identifying information about children.</div>
+          </div>
+        </div>
+
+        <div class="wizard-actions">
+          <div class="left">
+            <button type="button" id="btnSave" class="btn btn-secondary">Save</button>
+            <button type="button" id="btnBack" class="btn btn-secondary">Back</button>
+          </div>
+          <div class="right">
+            <button type="button" id="btnNext" class="btn btn-primary">Next</button>
+            <button type="submit" id="btnSubmit" class="btn btn-primary" style="display:none;">Submit Intake</button>
+          </div>
+        </div>
+      </form>
+
+      <div id="resultsPanel" style="display:none;" aria-live="polite">
+        <h2 class="section-title">Recommended Matches & Readiness</h2>
+        <div id="resultsContent"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/script.js"></script>
+  <script src="/adopt/adopt.js"></script>
+</body>
+</html>

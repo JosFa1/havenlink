@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adopt — Home Study Service | HavenLink</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <img src="/logo.png" alt="HavenLink" class="logo-icon">
+        <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+      </div>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li class="nav-item adopt-menu">
+          <button class="nav-link adopt-toggle" aria-haspopup="true" aria-expanded="false">Adopt ▾</button>
+          <ul class="adopt-dropdown" role="menu" aria-label="Adoption steps">
+            <li role="none"><a role="menuitem" href="/adopt/home-study.html" class="nav-link">01 — Home Study Service</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/family-intake.html" class="nav-link">02 — Family Intake Form</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/agency-profiles.html" class="nav-link">03 — Agency-Managed Profiles</a></li>
+            <li role="none"><a role="menuitem" href="/adopt/compatibility-matching.html" class="nav-link">04 — Compatibility Matching</a></li>
+          </ul>
+        </li>
+        <li><a href="/team.html" class="nav-link">Team</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="adopt-subnav" role="navigation" aria-label="Adoption steps sub navigation">
+    <ul class="adopt-steps">
+      <li><a href="/adopt/home-study.html" class="active"><span class="step-badge">01</span> Home Study</a></li>
+      <li><a href="/adopt/family-intake.html"><span class="step-badge">02</span> Family Intake</a></li>
+      <li><a href="/adopt/agency-profiles.html"><span class="step-badge">03</span> Agency Profiles</a></li>
+      <li><a href="/adopt/compatibility-matching.html"><span class="step-badge">04</span> Compatibility</a></li>
+    </ul>
+  </div>
+
+  <main class="container" style="padding:2.5rem 1.5rem;">
+    <section class="form-wizard">
+      <header class="wizard-header">
+        <div>
+          <h1 class="section-title">Home Study Service</h1>
+          <p class="inline-help">A home study is a readiness assessment performed by a licensed social worker. It helps agencies confirm that your home provides a safe, stable, and nurturing environment for a child.</p>
+        </div>
+        <div style="min-width:220px; text-align:right;">
+          <a class="btn btn-primary" href="/adopt/family-intake.html">Start Family Intake</a>
+        </div>
+      </header>
+
+      <div style="display:grid; grid-template-columns: 1fr; gap:1rem;">
+        <div class="results-card">
+          <h3 style="margin-bottom:0.5rem;">What happens during a home study?</h3>
+          <p class="inline-help">A licensed social worker will review household composition, background checks, finances, references, and your readiness to parent. The process helps identify supports you may need and prepares your family for a successful placement.</p>
+        </div>
+
+        <div class="results-card">
+          <h3 style="margin-bottom:0.5rem;">Why it matters</h3>
+          <p class="inline-help">Home studies are required by most agencies and by interstate rules. Completing a home study early can speed matching, help with agency routing, and clarify required steps for legal readiness.</p>
+        </div>
+
+        <div class="results-card">
+          <h3 style="margin-bottom:0.5rem;">Next step</h3>
+          <p class="inline-help">When you’re ready, proceed to the Family Intake Form where we collect more detail to help match you with appropriate agencies and children.</p>
+          <div style="margin-top:0.75rem;"><a href="/adopt/family-intake.html" class="btn btn-primary">Go to Family Intake</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/script.js"></script>
+  <script src="/adopt/adopt.js"></script>
+</body>
+</html>

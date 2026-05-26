@@ -1057,3 +1057,229 @@ button:focus-visible {
   object-fit: contain;
   border-radius: 0.5rem;
 }
+
+/* ==================== Adopt Flow: Dropdown, Subnav, Wizard ==================== */
+
+.adopt-menu {
+  position: relative;
+}
+
+.adopt-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--white);
+  border: 1px solid var(--gray-light);
+  box-shadow: var(--shadow-md);
+  border-radius: 0.75rem;
+  min-width: 240px;
+  padding: 0.5rem;
+  display: none;
+  z-index: 1100;
+}
+
+.adopt-dropdown li {
+  list-style: none;
+}
+
+.adopt-dropdown a {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  color: var(--text-dark);
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+
+.adopt-dropdown a:hover {
+  background: #f8fafc;
+  color: var(--blue);
+}
+
+.adopt-menu:hover .adopt-dropdown {
+  display: block;
+}
+
+/* Mobile / open state */
+.nav-links .adopt-menu.open .adopt-dropdown,
+.adopt-menu.open .adopt-dropdown {
+  display: block;
+  position: relative;
+  box-shadow: none;
+  border: none;
+  padding-left: 0.5rem;
+}
+
+.adopt-subnav {
+  position: sticky;
+  top: 64px;
+  z-index: 900;
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.adopt-steps {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.adopt-steps li {
+  padding: 0.35rem 0.5rem;
+  border-radius: 999px;
+}
+
+.adopt-steps a {
+  text-decoration: none;
+  color: var(--navy);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adopt-steps .step-badge {
+  background: var(--blue-light);
+  color: #fff;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  min-width: 36px;
+  text-align: center;
+}
+
+.adopt-steps .active {
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  color: #fff;
+}
+
+.adopt-steps .active .step-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.form-wizard {
+  max-width: 960px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: 12px;
+  border: 1px solid var(--gray-light);
+  box-shadow: var(--shadow-sm);
+}
+
+.wizard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.progress {
+  height: 10px;
+  background: var(--gray-light);
+  border-radius: 999px;
+  overflow: hidden;
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.progress > .bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  width: 0%;
+  transition: width .35s ease;
+}
+
+.wizard-step {
+  display: none;
+}
+
+.wizard-step.active {
+  display: block;
+  animation: fadeIn 0.35s ease;
+}
+
+.form-row {
+  margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.form-row label {
+  min-width: 200px;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.input, select, textarea {
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+  width: 100%;
+  max-width: 100%;
+}
+
+.input[type="number"] {
+  width: 120px;
+}
+
+.inline-help {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+}
+
+.wizard-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.wizard-actions .left {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.wizard-actions .right {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.results-card {
+  padding: 1rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #eaf2ff 100%);
+  border: 1px solid var(--blue-lighter);
+  margin-top: 1rem;
+}
+
+.score-circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--navy);
+  background: #fff;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .adopt-subnav { top: 56px; }
+  .form-row label { min-width: 140px; }
+  .input, select, textarea { font-size: 0.95rem; }
+}

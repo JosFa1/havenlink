@@ -156,5 +156,32 @@ const announceNavigation = (message) => {
   setTimeout(() => announcement.remove(), 1000);
 };
 
+// Adopt dropdown toggle (mobile tap) and outside click
+const adoptToggle = document.querySelector('.adopt-toggle');
+if (adoptToggle) {
+  const adoptMenu = adoptToggle.closest('.adopt-menu');
+  adoptToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const expanded = adoptToggle.getAttribute('aria-expanded') === 'true';
+    adoptToggle.setAttribute('aria-expanded', String(!expanded));
+    adoptMenu.classList.toggle('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!adoptMenu.contains(e.target)) {
+      adoptMenu.classList.remove('open');
+      adoptToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  const adoptLinks = adoptMenu.querySelectorAll('.adopt-dropdown a');
+  adoptLinks.forEach(a => a.addEventListener('click', () => {
+    adoptMenu.classList.remove('open');
+    adoptToggle.setAttribute('aria-expanded', 'false');
+    mobileMenuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  }));
+}
+
 // Log page load for analytics (commented out for production)
 // console.log('HavenLink homepage loaded successfully');
