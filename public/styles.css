@@ -1217,6 +1217,347 @@ p {
   font-size: 0.95rem;
 }
 
+/* ==================== Intake Form Styles ==================== */
+
+.form-container {
+  padding: 3rem 1.5rem;
+  background-color: var(--white);
+}
+
+.form-progress {
+  background-color: var(--gray);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.progress-header h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.5rem;
+}
+
+.progress-percentage {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.progress-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+  min-width: 100px;
+}
+
+.progress-step:hover {
+  opacity: 0.8;
+}
+
+.progress-step[tabindex="-1"] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.progress-step-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--gray-light);
+  border: 2px solid var(--gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: var(--transition);
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+.progress-step.current .progress-step-circle {
+  background-color: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+.progress-step.accessible:not(.current) .progress-step-circle {
+  background-color: var(--white);
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.progress-step.completed .progress-step-circle {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: var(--white);
+}
+
+.progress-step-check {
+  display: none;
+  position: absolute;
+}
+
+.progress-step.completed .progress-step-check {
+  display: block;
+}
+
+.progress-step.completed .progress-step-number {
+  display: none;
+}
+
+.progress-step-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.progress-step.current .progress-step-label {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.progress-step.completed .progress-step-label {
+  color: #10b981;
+}
+
+.progress-connector {
+  flex: 1;
+  height: 2px;
+  background-color: var(--gray-light);
+  margin: 0 0.5rem;
+}
+
+.progress-step.completed ~ .progress-connector {
+  background-color: #10b981;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--gray-light);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--blue-lighter) 100%);
+  border-radius: 3px;
+  transition: width 0.5s ease-out;
+}
+
+.form-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-section {
+  animation: slideInUp 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+.form-section.active {
+  opacity: 1;
+  animation: slideInUp 0.4s ease-out;
+}
+
+.section-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  align-items: flex-start;
+}
+
+.section-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  color: var(--white);
+  font-size: 1.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.section-title-group {
+  flex: 1;
+}
+
+.section-title {
+  margin: 0 0 0.75rem 0;
+  color: var(--navy);
+  font-size: 2rem;
+}
+
+.section-description {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.section-content {
+  background-color: var(--gray);
+  border-radius: 0.75rem;
+  padding: 3rem 2rem;
+  margin-bottom: 3rem;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.question-placeholder {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  color: var(--text-light);
+}
+
+.question-placeholder svg {
+  width: 60px;
+  height: 60px;
+  opacity: 0.4;
+}
+
+.question-placeholder h3 {
+  color: var(--navy);
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.question-placeholder p {
+  margin: 0;
+  color: var(--text-light);
+  font-size: 0.95rem;
+  max-width: 400px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.form-actions .btn {
+  padding: 0.875rem 2rem;
+}
+
+.privacy-notice {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(96, 165, 250, 0.04) 100%);
+  border: 1px solid var(--blue-lighter);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  color: var(--text-dark);
+}
+
+.privacy-notice svg {
+  width: 20px;
+  height: 20px;
+  color: var(--blue);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.privacy-notice p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+}
+
+/* ==================== Notifications ==================== */
+
+.notification {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  z-index: 1100;
+  animation: slideInRight 0.3s ease-out;
+  max-width: 400px;
+}
+
+.notification.notification-success {
+  background-color: #10b981;
+  color: var(--white);
+  border: 1px solid #059669;
+}
+
+.notification.notification-error {
+  background-color: #ef4444;
+  color: var(--white);
+  border: 1px solid #dc2626;
+}
+
+.notification.notification-info {
+  background-color: var(--blue);
+  color: var(--white);
+  border: 1px solid #1e40af;
+}
+
+.notification.fade-out {
+  animation: slideOutRight 0.3s ease-out forwards;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
 /* ==================== Responsive Design ==================== */
 
 @media (max-width: 768px) {
@@ -1345,6 +1686,74 @@ p {
   .score-breakdown-demo {
     padding: 1.5rem;
   }
+
+  .form-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-progress {
+    padding: 1.5rem;
+  }
+
+  .progress-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .progress-steps {
+    justify-content: center;
+    gap: 0.25rem;
+  }
+
+  .progress-step {
+    min-width: 90px;
+    flex: 0 1 auto;
+  }
+
+  .progress-step-label {
+    font-size: 0.65rem;
+  }
+
+  .progress-connector {
+    margin: 0 0.25rem;
+    flex: 0;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .section-number {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+
+  .section-content {
+    padding: 2rem 1.5rem;
+    min-height: 250px;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .notification {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    max-width: none;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1404,6 +1813,54 @@ p {
 
   .footer-section h3 {
     font-size: 1.1rem;
+  }
+
+  .form-progress {
+    padding: 1.5rem 1rem;
+  }
+
+  .progress-steps {
+    gap: 0;
+  }
+
+  .progress-step {
+    min-width: 70px;
+  }
+
+  .progress-step-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .progress-connector {
+    display: none;
+  }
+
+  .progress-step-label {
+    font-size: 0.6rem;
+  }
+
+  .section-header {
+    gap: 1rem;
+  }
+
+  .section-number {
+    width: 44px;
+    height: 44px;
+    font-size: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .section-description {
+    font-size: 0.95rem;
+  }
+
+  .form-actions {
+    gap: 0.75rem;
   }
 }
 
