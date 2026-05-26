@@ -396,6 +396,29 @@ p {
   font-weight: 500;
 }
 
+/* ==================== Our Belief Section ==================== */
+
+.belief {
+  padding: 4rem 1.5rem;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  text-align: center;
+}
+
+.belief-title {
+  color: var(--navy);
+  margin-bottom: 2rem;
+}
+
+.belief-quote {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+}
+
 /* ==================== How It Works Section ==================== */
 
 .how-it-works {
@@ -600,7 +623,7 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -633,6 +656,24 @@ p {
 
 .footer-section a:hover {
   color: var(--blue-lighter);
+}
+
+.hotline-link {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--blue-lighter);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.hotline-link:hover {
+  color: var(--white);
+}
+
+.hotline-desc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
 }
 
 .social-links {
@@ -673,11 +714,6 @@ p {
 .footer-bottom p {
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.9rem;
-}
-
-.footer-links {
-  display: flex;
-  gap: 2rem;
 }
 
 /* ==================== Responsive Design ==================== */
@@ -738,9 +774,8 @@ p {
     align-items: flex-start;
   }
 
-  .footer-links {
-    flex-direction: column;
-    gap: 1rem;
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   h1 {
@@ -918,6 +953,10 @@ button:focus-visible {
   margin-bottom: 1rem;
 }
 
+.team-title-link {
+  color: var(--blue-light);
+}
+
 .team-subtitle {
   font-size: 1.1rem;
   color: var(--text-light);
@@ -925,6 +964,8 @@ button:focus-visible {
   margin: 0 auto;
   line-height: 1.8;
 }
+
+/* ==================== Team Section ==================== */
 
 .team-section {
   padding: 5rem 1.5rem;
@@ -974,6 +1015,13 @@ button:focus-visible {
 
 .member-icon {
   color: var(--blue);
+}
+
+.member-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.5rem;
 }
 
 .member-name {
