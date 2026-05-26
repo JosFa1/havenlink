@@ -1,19 +1,22 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adopt — Home Study Service | HavenLink</title>
-  <link rel="stylesheet" href="/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Study Service - HavenLink</title>
+  <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
+  <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="nav-brand">
-        <img src="/logo.png" alt="HavenLink" class="logo-icon">
-        <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+        <a href="../index.html" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
+          <img src="../logo.png" alt="HavenLink Logo" class="logo-icon">
+          <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+        </a>
       </div>
-
+      
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -21,64 +24,245 @@
       </button>
 
       <ul class="nav-links" id="navLinks">
-        <li><a href="/index.html" class="nav-link">Home</a></li>
-        <li class="nav-item adopt-menu">
-          <button class="nav-link adopt-toggle" aria-haspopup="true" aria-expanded="false">Adopt ▾</button>
-          <ul class="adopt-dropdown" role="menu" aria-label="Adoption steps">
-            <li role="none"><a role="menuitem" href="/adopt/home-study.html" class="nav-link">01 — Home Study Service</a></li>
-            <li role="none"><a role="menuitem" href="/adopt/family-intake.html" class="nav-link">02 — Family Intake Form</a></li>
-            <li role="none"><a role="menuitem" href="/adopt/agency-profiles.html" class="nav-link">03 — Agency-Managed Profiles</a></li>
-            <li role="none"><a role="menuitem" href="/adopt/compatibility-matching.html" class="nav-link">04 — Compatibility Matching</a></li>
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="adoptDropdown" aria-expanded="false" aria-label="Adopt menu">
+            Adopt
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="adoptMenu" role="menu">
+            <li role="none"><a href="home-study.html" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
+            <li role="none"><a href="intake-form.html" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
+            <li role="none"><a href="agency-profiles.html" class="dropdown-item" role="menuitem">3. Agency-Managed Profiles</a></li>
+            <li role="none"><a href="matching.html" class="dropdown-item" role="menuitem">4. Compatibility Matching</a></li>
           </ul>
         </li>
-        <li><a href="/team.html" class="nav-link">Team</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
+        <li><a href="../team.html" class="nav-link">Team</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
       </ul>
     </div>
   </nav>
 
-  <div class="adopt-subnav" role="navigation" aria-label="Adoption steps sub navigation">
-    <ul class="adopt-steps">
-      <li><a href="/adopt/home-study.html" class="active"><span class="step-badge">01</span> Home Study</a></li>
-      <li><a href="/adopt/family-intake.html"><span class="step-badge">02</span> Family Intake</a></li>
-      <li><a href="/adopt/agency-profiles.html"><span class="step-badge">03</span> Agency Profiles</a></li>
-      <li><a href="/adopt/compatibility-matching.html"><span class="step-badge">04</span> Compatibility</a></li>
-    </ul>
-  </div>
+  <!-- Adopt Process Sub-navigation -->
+  <nav class="adopt-subnav" id="adoptSubnav">
+    <div class="subnav-container">
+      <a href="home-study.html" class="subnav-item active" data-step="1">
+        <span class="subnav-step">1</span>
+        <span class="subnav-label">Home Study</span>
+      </a>
+      <a href="intake-form.html" class="subnav-item" data-step="2">
+        <span class="subnav-step">2</span>
+        <span class="subnav-label">Intake Form</span>
+      </a>
+      <a href="agency-profiles.html" class="subnav-item" data-step="3">
+        <span class="subnav-step">3</span>
+        <span class="subnav-label">Agencies</span>
+      </a>
+      <a href="matching.html" class="subnav-item" data-step="4">
+        <span class="subnav-step">4</span>
+        <span class="subnav-label">Matching</span>
+      </a>
+    </div>
+  </nav>
 
-  <main class="container" style="padding:2.5rem 1.5rem;">
-    <section class="form-wizard">
-      <header class="wizard-header">
-        <div>
-          <h1 class="section-title">Home Study Service</h1>
-          <p class="inline-help">A home study is a readiness assessment performed by a licensed social worker. It helps agencies confirm that your home provides a safe, stable, and nurturing environment for a child.</p>
-        </div>
-        <div style="min-width:220px; text-align:right;">
-          <a class="btn btn-primary" href="/adopt/family-intake.html">Start Family Intake</a>
-        </div>
-      </header>
+  <!-- Main Content -->
+  <div class="adopt-container">
+    <section class="adopt-hero">
+      <div class="container">
+        <h1>Home Study Service</h1>
+        <p class="adopt-hero-subtitle">Step 1 of Your Adoption Journey</p>
+      </div>
+    </section>
 
-      <div style="display:grid; grid-template-columns: 1fr; gap:1rem;">
-        <div class="results-card">
-          <h3 style="margin-bottom:0.5rem;">What happens during a home study?</h3>
-          <p class="inline-help">A licensed social worker will review household composition, background checks, finances, references, and your readiness to parent. The process helps identify supports you may need and prepares your family for a successful placement.</p>
-        </div>
+    <section class="adopt-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-main">
+            <h2>What is a Home Study?</h2>
+            <p>
+              A home study is a comprehensive evaluation conducted by a licensed social worker to assess your family's readiness for adoption. It's one of the most important steps in the adoption process and is required by law in every state.
+            </p>
+            <p>
+              The home study process helps ensure that your home provides a safe, stable, and supportive environment for an adopted child, and gives you confidence that you're prepared for the unique joys and challenges of adoption.
+            </p>
 
-        <div class="results-card">
-          <h3 style="margin-bottom:0.5rem;">Why it matters</h3>
-          <p class="inline-help">Home studies are required by most agencies and by interstate rules. Completing a home study early can speed matching, help with agency routing, and clarify required steps for legal readiness.</p>
-        </div>
+            <h3 style="margin-top: 2.5rem;">What to Expect</h3>
+            <div class="process-list">
+              <div class="process-item">
+                <div class="process-icon">1</div>
+                <div class="process-content">
+                  <h4>Application & Interview</h4>
+                  <p>You'll complete an application and have an initial conversation with your social worker to discuss your family's background, values, and goals.</p>
+                </div>
+              </div>
 
-        <div class="results-card">
-          <h3 style="margin-bottom:0.5rem;">Next step</h3>
-          <p class="inline-help">When you’re ready, proceed to the Family Intake Form where we collect more detail to help match you with appropriate agencies and children.</p>
-          <div style="margin-top:0.75rem;"><a href="/adopt/family-intake.html" class="btn btn-primary">Go to Family Intake</a></div>
+              <div class="process-item">
+                <div class="process-icon">2</div>
+                <div class="process-content">
+                  <h4>In-Home Visit</h4>
+                  <p>A social worker will visit your home to assess its safety, stability, and suitability for a child. They'll review bedrooms, childproofing, and space for an adopted child.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">3</div>
+                <div class="process-content">
+                  <h4>Background Checks</h4>
+                  <p>Criminal background checks and child welfare checks will be conducted for all adults in the household to ensure child safety.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">4</div>
+                <div class="process-content">
+                  <h4>Adoption Training</h4>
+                  <p>You may be required to complete adoption education (such as PRIDE training) to prepare you for the emotional and developmental needs of adopted children.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">5</div>
+                <div class="process-content">
+                  <h4>Report & Approval</h4>
+                  <p>Your social worker will prepare a comprehensive home study report for submission to adoption agencies and courts.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 2.5rem;">Why It Matters</h3>
+            <div class="why-matters">
+              <div class="why-card">
+                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                  <path d="M 32 12 L 44 20 L 44 36 Q 32 48 32 48 Q 20 36 20 36 L 20 20 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                  <path d="M 28 32 L 32 36 L 38 30" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h4>Child Safety</h4>
+                <p>Protects vulnerable children by ensuring they'll be placed in safe, stable homes.</p>
+              </div>
+
+              <div class="why-card">
+                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                  <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                  <line x1="20" y1="24" x2="44" y2="24" stroke="#3b82f6" stroke-width="1.5"/>
+                  <line x1="20" y1="32" x2="44" y2="32" stroke="#3b82f6" stroke-width="1.5"/>
+                  <line x1="20" y1="40" x2="36" y2="40" stroke="#3b82f6" stroke-width="1.5"/>
+                </svg>
+                <h4>Legal Requirement</h4>
+                <p>Required by law in all 50 states and necessary to proceed with adoption.</p>
+              </div>
+
+              <div class="why-card">
+                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                  <circle cx="32" cy="24" r="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                  <path d="M 20 48 Q 20 40 32 40 Q 44 40 44 48" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M 32 24 L 32 44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <h4>Family Preparation</h4>
+                <p>Helps you understand your readiness and prepares you for the adoption journey ahead.</p>
+              </div>
+            </div>
+
+            <div class="readiness-callout">
+              <h3>Is Your Family Ready?</h3>
+              <p>
+                If you haven't started a home study yet, that's okay! HavenLink can help you prepare. Our Family Intake Form will help you reflect on your readiness, assess your preferences, and connect you with resources to get started.
+              </p>
+              <a href="intake-form.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                Continue to Family Intake Form →
+              </a>
+            </div>
+          </div>
+
+          <div class="content-sidebar">
+            <div class="sidebar-card">
+              <h3>Quick Facts</h3>
+              <ul class="quick-facts">
+                <li><strong>Duration:</strong> 2-6 months typically</li>
+                <li><strong>Cost:</strong> $500-$3,000 USD (varies by state)</li>
+                <li><strong>Required For:</strong> All adoptions (domestic and international)</li>
+                <li><strong>Who Conducts:</strong> Licensed social workers or agencies</li>
+                <li><strong>Validity:</strong> Usually valid for 1-2 years</li>
+              </ul>
+            </div>
+
+            <div class="sidebar-card">
+              <h3>Next Steps</h3>
+              <ol class="next-steps">
+                <li>Review this information with your family</li>
+                <li>Contact a licensed adoption agency or social worker</li>
+                <li>Complete the home study process</li>
+                <li>Return to HavenLink to complete your intake form</li>
+                <li>Explore agencies and child profiles</li>
+              </ol>
+            </div>
+
+            <div class="sidebar-card info-card">
+              <svg class="info-icon" viewBox="0 0 64 64" width="32" height="32">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
+                <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <p style="font-size: 0.9rem;">
+                Need help finding a home study provider? Check your state's adoption resources or contact HavenLink support.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
-  </main>
+  </div>
 
-  <script src="/script.js"></script>
-  <script src="/adopt/adopt.js"></script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About HavenLink</h3>
+        <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../index.html#safety">Safety</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Adoption Hotline</h3>
+        <p>
+          <a href="tel:1-800-236-7846" class="hotline-link">1-800-ADOPTION</a>
+        </p>
+        <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/havenlink_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="mailto:unicef.trinityprep@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <path d="M 2 6 L 12 13 L 22 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
 </html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compatibility Matching - HavenLink</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="../index.html" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
+          <img src="../logo.png" alt="HavenLink Logo" class="logo-icon">
+          <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+        </a>
+      </div>
+      
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="adoptDropdown" aria-expanded="false" aria-label="Adopt menu">
+            Adopt
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="adoptMenu" role="menu">
+            <li role="none"><a href="home-study.html" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
+            <li role="none"><a href="intake-form.html" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
+            <li role="none"><a href="agency-profiles.html" class="dropdown-item" role="menuitem">3. Agency-Managed Profiles</a></li>
+            <li role="none"><a href="matching.html" class="dropdown-item" role="menuitem">4. Compatibility Matching</a></li>
+          </ul>
+        </li>
+        <li><a href="../team.html" class="nav-link">Team</a></li>
+        <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Adopt Process Sub-navigation -->
+  <nav class="adopt-subnav" id="adoptSubnav">
+    <div class="subnav-container">
+      <a href="home-study.html" class="subnav-item" data-step="1">
+        <span class="subnav-step">1</span>
+        <span class="subnav-label">Home Study</span>
+      </a>
+      <a href="intake-form.html" class="subnav-item" data-step="2">
+        <span class="subnav-step">2</span>
+        <span class="subnav-label">Intake Form</span>
+      </a>
+      <a href="agency-profiles.html" class="subnav-item" data-step="3">
+        <span class="subnav-step">3</span>
+        <span class="subnav-label">Agencies</span>
+      </a>
+      <a href="matching.html" class="subnav-item active" data-step="4">
+        <span class="subnav-step">4</span>
+        <span class="subnav-label">Matching</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="adopt-container">
+    <section class="adopt-hero">
+      <div class="container">
+        <h1>Compatibility Matching</h1>
+        <p class="adopt-hero-subtitle">Step 4 of Your Adoption Journey</p>
+      </div>
+    </section>
+
+    <section class="adopt-content">
+      <div class="container">
+        <div class="content-grid">
+          <div class="content-main">
+            <h2>Finding Your Perfect Match</h2>
+            <p>
+              The HavenLink matching system uses deterministic, data-driven scoring to suggest matches between your family profile and available children. Our algorithm considers multiple factors about your family, your preferences, and each child's needs—not guesswork or artificial intelligence, but transparent logic designed to support better outcomes.
+            </p>
+
+            <h3 style="margin-top: 2.5rem;">How Our Matching Works</h3>
+            <p>
+              Our matching process is built on transparency. Every match suggestion includes a detailed breakdown of the compatibility score and the factors that influenced it. We never hide the reasoning—you'll understand exactly why we suggest a particular pairing.
+            </p>
+
+            <div class="process-list">
+              <div class="process-item">
+                <div class="process-icon">1</div>
+                <div class="process-content">
+                  <h4>Your Family Profile</h4>
+                  <p>From your intake form, we understand your household, values, experience, and preferences for a child's age, needs, and background.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">2</div>
+                <div class="process-content">
+                  <h4>Child Profile Data</h4>
+                  <p>Licensed agencies provide rich, detailed information about each child: age, developmental stage, health, personality, interests, and support needs.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">3</div>
+                <div class="process-content">
+                  <h4>Algorithmic Scoring</h4>
+                  <p>Our deterministic algorithm calculates a compatibility score (0-100) by analyzing alignment on age preference, special needs openness, sibling placement, trauma readiness, and other key factors.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">4</div>
+                <div class="process-content">
+                  <h4>Transparent Results</h4>
+                  <p>We show you the match score, the scoring breakdown, and the agency responsible for the child's profile. You can then reach out to the agency to explore the match further.</p>
+                </div>
+              </div>
+
+              <div class="process-item">
+                <div class="process-icon">5</div>
+                <div class="process-content">
+                  <h4>Agency Communication</h4>
+                  <p>Once you've expressed interest, HavenLink facilitates communication between you and the agency. The agency manages all next steps, including visits and legal processes.</p>
+                </div>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 2.5rem;">Sample Compatibility Score</h3>
+            <p>
+              Here's an example of what a match score looks like. This is illustrative—your actual scores will be calculated based on your unique family profile and available children:
+            </p>
+
+            <div class="score-breakdown-demo">
+              <div class="score-header">
+                <div class="score-circle">
+                  <div class="score-value">78</div>
+                  <div class="score-label">Match Score</div>
+                </div>
+                <div class="score-status">
+                  <span class="score-badge high">Good Match</span>
+                  <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--text-light);">This family and child have strong alignment on age range and family structure.</p>
+                </div>
+              </div>
+
+              <div class="score-factors">
+                <div class="score-factor">
+                  <div class="factor-name">Age Range Alignment</div>
+                  <div class="factor-bar">
+                    <div class="factor-fill" style="width: 95%;"></div>
+                  </div>
+                  <div class="factor-score">+18 pts</div>
+                </div>
+
+                <div class="score-factor">
+                  <div class="factor-name">Special Needs Openness</div>
+                  <div class="factor-bar">
+                    <div class="factor-fill" style="width: 75%;"></div>
+                  </div>
+                  <div class="factor-score">+15 pts</div>
+                </div>
+
+                <div class="score-factor">
+                  <div class="factor-name">Sibling Placement Fit</div>
+                  <div class="factor-bar">
+                    <div class="factor-fill" style="width: 100%;"></div>
+                  </div>
+                  <div class="factor-score">+20 pts</div>
+                </div>
+
+                <div class="score-factor">
+                  <div class="factor-name">Trauma Readiness</div>
+                  <div class="factor-bar">
+                    <div class="factor-fill" style="width: 70%;"></div>
+                  </div>
+                  <div class="factor-score">+14 pts</div>
+                </div>
+
+                <div class="score-factor">
+                  <div class="factor-name">Prior Adoption Experience Bonus</div>
+                  <div class="factor-bar">
+                    <div class="factor-fill" style="width: 100%;"></div>
+                  </div>
+                  <div class="factor-score">+11 pts</div>
+                </div>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 2.5rem;">Understanding Your Score</h3>
+            <div class="why-matters">
+              <div class="why-card">
+                <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;">85–100</div>
+                <h4>Excellent Match</h4>
+                <p>Strong alignment across most factors. High potential for successful placement.</p>
+              </div>
+
+              <div class="why-card">
+                <div style="font-size: 1.8rem; font-weight: 700; color: #f59e0b;">70–84</div>
+                <h4>Good Match</h4>
+                <p>Solid compatibility with some areas of alignment. Worth exploring further.</p>
+              </div>
+
+              <div class="why-card">
+                <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6;">50–69</div>
+                <h4>Potential Match</h4>
+                <p>Mixed alignment. May benefit from deeper conversations with the agency.</p>
+              </div>
+
+              <div class="why-card">
+                <div style="font-size: 1.8rem; font-weight: 700; color: #6b7280;">Below 50</div>
+                <h4>Limited Fit</h4>
+                <p>Lower compatibility on key factors. Consider exploring other options.</p>
+              </div>
+            </div>
+
+            <h3 style="margin-top: 2.5rem;">Important Notes on Matching</h3>
+            <ul style="font-size: 0.95rem; line-height: 1.8; color: var(--text-light);">
+              <li><strong>Not AI-Driven:</strong> Our scoring is deterministic and based on explicit logic, not machine learning. We believe transparency in matching is essential.</li>
+              <li><strong>Not a Guarantee:</strong> A high match score suggests good compatibility, but final placement decisions involve many factors, including agency assessment and legal considerations.</li>
+              <li><strong>You Choose:</strong> You see all match suggestions and decide which to pursue. There's no automatic assignment.</li>
+              <li><strong>Agency Led:</strong> Once you express interest, the licensed agency takes the lead in assessing fit and guiding the placement process.</li>
+              <li><strong>Ongoing Support:</strong> Successful adoption continues after placement. We recommend post-adoption support resources for all families.</li>
+            </ul>
+
+            <div class="readiness-callout">
+              <h3>Ready to Start?</h3>
+              <p>
+                If you haven't completed your family intake form yet, start there. Your detailed answers will enable our matching system to find the best possible pairing for your family.
+              </p>
+              <a href="intake-form.html" class="btn btn-primary" style="margin-top: 1.5rem;">
+                Go to Family Intake Form
+              </a>
+            </div>
+          </div>
+
+          <div class="content-sidebar">
+            <div class="sidebar-card">
+              <h3>Matching Factors</h3>
+              <p style="font-size: 0.95rem; color: var(--text-light); margin: 0;">Our algorithm considers:</p>
+              <ul class="quick-facts" style="margin-top: 1rem;">
+                <li>Age & development</li>
+                <li>Special needs fit</li>
+                <li>Sibling groups</li>
+                <li>Trauma readiness</li>
+                <li>Household fit</li>
+                <li>Experience bonus</li>
+                <li>Geographic routing</li>
+              </ul>
+            </div>
+
+            <div class="sidebar-card">
+              <h3>What Score Means</h3>
+              <p style="font-size: 0.95rem; color: var(--text-light); margin: 0;">
+                Scores range from 0–100 and represent weighted compatibility across all key factors.
+              </p>
+              <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem;">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">85</div>
+                  <span>Excellent</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #f59e0b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">75</div>
+                  <span>Good</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">60</div>
+                  <span>Potential</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-card info-card">
+              <svg class="info-icon" viewBox="0 0 64 64" width="32" height="32">
+                <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
+                <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <p style="font-size: 0.9rem;">
+                Questions about a match? Reach out to the partnering agency or contact HavenLink support.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About HavenLink</h3>
+        <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#about">About</a></li>
+          <li><a href="../index.html#how-it-works">How It Works</a></li>
+          <li><a href="../index.html#safety">Safety</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Adoption Hotline</h3>
+        <p>
+          <a href="tel:1-800-236-7846" class="hotline-link">1-800-ADOPTION</a>
+        </p>
+        <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/havenlink_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="mailto:unicef.trinityprep@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <path d="M 2 6 L 12 13 L 22 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

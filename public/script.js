@@ -156,32 +156,47 @@ const announceNavigation = (message) => {
   setTimeout(() => announcement.remove(), 1000);
 };
 
-// Adopt dropdown toggle (mobile tap) and outside click
-const adoptToggle = document.querySelector('.adopt-toggle');
-if (adoptToggle) {
-  const adoptMenu = adoptToggle.closest('.adopt-menu');
-  adoptToggle.addEventListener('click', (e) => {
+// Log page load for analytics (commented out for production)
+// console.log('HavenLink homepage loaded successfully');
+
+// Adopt Dropdown Menu Handling
+const adoptDropdown = document.getElementById('adoptDropdown');
+const adoptMenu = document.getElementById('adoptMenu');
+
+if (adoptDropdown && adoptMenu) {
+  // Toggle dropdown on click
+  adoptDropdown.addEventListener('click', (e) => {
+    e.preventDefault();
     e.stopPropagation();
-    const expanded = adoptToggle.getAttribute('aria-expanded') === 'true';
-    adoptToggle.setAttribute('aria-expanded', String(!expanded));
-    adoptMenu.classList.toggle('open');
+    const isExpanded = adoptDropdown.getAttribute('aria-expanded') === 'true';
+    adoptDropdown.setAttribute('aria-expanded', !isExpanded);
+    adoptMenu.classList.toggle('active');
   });
 
+  // Close dropdown when a menu item is clicked
+  adoptMenu.querySelectorAll('.dropdown-item').forEach(item => {
+    item.addEventListener('click', () => {
+      adoptDropdown.setAttribute('aria-expanded', 'false');
+      adoptMenu.classList.remove('active');
+      mobileMenuToggle.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Close dropdown when clicking outside
   document.addEventListener('click', (e) => {
-    if (!adoptMenu.contains(e.target)) {
-      adoptMenu.classList.remove('open');
-      adoptToggle.setAttribute('aria-expanded', 'false');
+    if (!adoptDropdown.closest('.nav-dropdown').contains(e.target)) {
+      adoptDropdown.setAttribute('aria-expanded', 'false');
+      adoptMenu.classList.remove('active');
     }
   });
 
-  const adoptLinks = adoptMenu.querySelectorAll('.adopt-dropdown a');
-  adoptLinks.forEach(a => a.addEventListener('click', () => {
-    adoptMenu.classList.remove('open');
-    adoptToggle.setAttribute('aria-expanded', 'false');
-    mobileMenuToggle.classList.remove('active');
-    navLinks.classList.remove('active');
-  }));
+  // Handle keyboard navigation
+  adoptMenu.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      adoptDropdown.setAttribute('aria-expanded', 'false');
+      adoptMenu.classList.remove('active');
+      adoptDropdown.focus();
+    }
+  });
 }
-
-// Log page load for analytics (commented out for production)
-// console.log('HavenLink homepage loaded successfully');

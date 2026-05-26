@@ -23,13 +23,16 @@
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#home" class="nav-link">Home</a></li>
-        <li class="nav-item adopt-menu">
-          <button class="nav-link adopt-toggle" aria-haspopup="true" aria-expanded="false">Adopt ▾</button>
-          <ul class="adopt-dropdown" role="menu" aria-label="Adoption steps">
-            <li role="none"><a role="menuitem" href="adopt/home-study.html" class="nav-link">01 — Home Study Service</a></li>
-            <li role="none"><a role="menuitem" href="adopt/family-intake.html" class="nav-link">02 — Family Intake Form</a></li>
-            <li role="none"><a role="menuitem" href="adopt/agency-profiles.html" class="nav-link">03 — Agency-Managed Profiles</a></li>
-            <li role="none"><a role="menuitem" href="adopt/compatibility-matching.html" class="nav-link">04 — Compatibility Matching</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="adoptDropdown" aria-expanded="false" aria-label="Adopt menu">
+            Adopt
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="adoptMenu" role="menu">
+            <li role="none"><a href="adopt/home-study.html" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
+            <li role="none"><a href="adopt/intake-form.html" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
+            <li role="none"><a href="adopt/agency-profiles.html" class="dropdown-item" role="menuitem">3. Agency-Managed Profiles</a></li>
+            <li role="none"><a href="adopt/matching.html" class="dropdown-item" role="menuitem">4. Compatibility Matching</a></li>
           </ul>
         </li>
         <li><a href="team.html" class="nav-link">Team</a></li>
@@ -128,11 +131,10 @@
         <div class="step">
           <div class="step-number">01</div>
           <svg class="step-icon" viewBox="0 0 64 64" width="48" height="48">
-            <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
-            <path d="M 18 25 Q 32 18 46 25" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-            <circle cx="24" cy="38" r="2" fill="#3b82f6"/>
-            <circle cx="40" cy="38" r="2" fill="#3b82f6"/>
-            <path d="M 20 42 L 44 42" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M 32 16 L 48 30 L 48 48 L 16 48 L 16 30 Z" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="26" y="36" width="12" height="12" fill="none" stroke="#3b82f6" stroke-width="2"/>
+            <line x1="32" y1="36" x2="32" y2="48" stroke="#3b82f6" stroke-width="1.5"/>
+            <line x1="26" y1="42" x2="38" y2="42" stroke="#3b82f6" stroke-width="1.5"/>
           </svg>
           <h3>Home Study Service</h3>
           <p>A comprehensive assessment by a licensed social worker evaluates your home, background, finances, and readiness to adopt, ensuring a safe and supportive environment for a child.</p>
