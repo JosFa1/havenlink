@@ -74,214 +74,231 @@
       </div>
     </section>
 
-    <section class="intake-form-section">
+    <!-- Form Section -->
+    <section class="form-container">
       <div class="container">
         <!-- Progress Indicator -->
-        <div class="form-progress-container">
-          <div class="form-progress-header">
-            <h2>Family Intake Progress</h2>
+        <div class="form-progress">
+          <div class="progress-header">
+            <h2>Intake Progress</h2>
             <div class="progress-percentage">
-              <span id="progressPercent">0</span>% Complete
+              <span id="percentComplete">0</span>% Complete
             </div>
           </div>
-
-          <div class="progress-bar-wrapper">
-            <div class="progress-bar">
-              <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
-            </div>
-          </div>
-
+          
           <div class="progress-steps">
-            <button class="progress-step" data-section="1" aria-label="Go to Household Profile section">
-              <span class="step-indicator">1</span>
-              <span class="step-label">Household</span>
-              <span class="step-status" id="status-1"></span>
-            </button>
-            <button class="progress-step" data-section="2" aria-label="Go to Lifestyle & Values section">
-              <span class="step-indicator">2</span>
-              <span class="step-label">Lifestyle</span>
-              <span class="step-status" id="status-2"></span>
-            </button>
-            <button class="progress-step" data-section="3" aria-label="Go to Experience & Background section">
-              <span class="step-indicator">3</span>
-              <span class="step-label">Experience</span>
-              <span class="step-status" id="status-3"></span>
-            </button>
-            <button class="progress-step" data-section="4" aria-label="Go to Adoption Preferences section">
-              <span class="step-indicator">4</span>
-              <span class="step-label">Preferences</span>
-              <span class="step-status" id="status-4"></span>
-            </button>
-            <button class="progress-step" data-section="5" aria-label="Go to Legal Readiness section">
-              <span class="step-indicator">5</span>
-              <span class="step-label">Legal</span>
-              <span class="step-status" id="status-5"></span>
-            </button>
+            <div class="progress-step" data-section="household">
+              <div class="progress-step-circle">
+                <span class="progress-step-number">1</span>
+                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="progress-step-label">Household</span>
+            </div>
+
+            <div class="progress-connector"></div>
+
+            <div class="progress-step" data-section="lifestyle">
+              <div class="progress-step-circle">
+                <span class="progress-step-number">2</span>
+                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="progress-step-label">Lifestyle</span>
+            </div>
+
+            <div class="progress-connector"></div>
+
+            <div class="progress-step" data-section="experience">
+              <div class="progress-step-circle">
+                <span class="progress-step-number">3</span>
+                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="progress-step-label">Experience</span>
+            </div>
+
+            <div class="progress-connector"></div>
+
+            <div class="progress-step" data-section="preferences">
+              <div class="progress-step-circle">
+                <span class="progress-step-number">4</span>
+                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="progress-step-label">Preferences</span>
+            </div>
+
+            <div class="progress-connector"></div>
+
+            <div class="progress-step" data-section="legal">
+              <div class="progress-step-circle">
+                <span class="progress-step-number">5</span>
+                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
+                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="progress-step-label">Legal</span>
+            </div>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress-bar-fill" style="width: 0%"></div>
           </div>
         </div>
 
-        <!-- Form Sections Container -->
-        <div class="form-sections-container">
+        <!-- Form Content -->
+        <form id="intakeForm" class="form-content">
           <!-- Section 1: Household Profile -->
-          <div class="form-section" data-section="1" id="section-1">
+          <section class="form-section active" id="section-household" data-section="household">
             <div class="section-header">
-              <div class="section-number">Section 1 of 5</div>
-              <h2>Household Profile</h2>
-              <p class="section-description">
-                Tell us about your household structure, home environment, and family composition.
-              </p>
+              <div class="section-number">1</div>
+              <div class="section-title-group">
+                <h2 class="section-title">Household Profile</h2>
+                <p class="section-description">Tell us about your family structure, home, and living situation.</p>
+              </div>
             </div>
 
             <div class="section-content">
-              <div class="questions-container" id="questions-section-1">
-                <!-- Questions will be inserted here -->
-                <div class="placeholder-card">
-                  <svg class="placeholder-icon" viewBox="0 0 64 64" width="48" height="48">
-                    <path d="M 32 16 L 48 30 L 48 48 L 16 48 L 16 30 Z" fill="none" stroke="#b0bec5" stroke-width="2" stroke-linejoin="round"/>
-                    <rect x="26" y="36" width="12" height="12" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                  </svg>
-                  <p>Household Profile Questions</p>
-                  <span class="placeholder-count">9 questions in this section</span>
-                </div>
+              <div class="question-placeholder">
+                <svg viewBox="0 0 64 64" width="48" height="48">
+                  <circle cx="32" cy="20" r="10" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                  <path d="M 16 48 Q 16 36 32 36 Q 48 36 48 48 L 48 52 Q 32 56 32 56 Q 16 56 16 52 Z" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                </svg>
+                <h3>Household Profile Questions</h3>
+                <p>Learn about your family structure, home type, and living situation.</p>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Section 2: Lifestyle & Values -->
-          <div class="form-section hidden" data-section="2" id="section-2">
+          <section class="form-section" id="section-lifestyle" data-section="lifestyle" style="display: none;">
             <div class="section-header">
-              <div class="section-number">Section 2 of 5</div>
-              <h2>Lifestyle & Values</h2>
-              <p class="section-description">
-                Share about your family's lifestyle, values, and household environment.
-              </p>
+              <div class="section-number">2</div>
+              <div class="section-title-group">
+                <h2 class="section-title">Lifestyle & Values</h2>
+                <p class="section-description">Share your family's values, interests, and daily life.</p>
+              </div>
             </div>
 
             <div class="section-content">
-              <div class="questions-container" id="questions-section-2">
-                <!-- Questions will be inserted here -->
-                <div class="placeholder-card">
-                  <svg class="placeholder-icon" viewBox="0 0 64 64" width="48" height="48">
-                    <circle cx="32" cy="24" r="8" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                    <path d="M 20 40 Q 20 32 32 32 Q 44 32 44 40 L 44 48 Q 32 52 32 52 Q 20 52 20 48 Z" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                  </svg>
-                  <p>Lifestyle & Values Questions</p>
-                  <span class="placeholder-count">6 questions in this section</span>
-                </div>
+              <div class="question-placeholder">
+                <svg viewBox="0 0 64 64" width="48" height="48">
+                  <circle cx="32" cy="32" r="2" fill="#60a5fa"/>
+                  <path d="M 20 32 L 30 32 M 34 32 L 44 32" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M 32 20 L 32 30 M 32 34 L 32 44" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                  <circle cx="32" cy="32" r="24" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+                </svg>
+                <h3>Lifestyle & Values Questions</h3>
+                <p>Explore your family's activity level, values, and cultural interests.</p>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Section 3: Experience & Background -->
-          <div class="form-section hidden" data-section="3" id="section-3">
+          <section class="form-section" id="section-experience" data-section="experience" style="display: none;">
             <div class="section-header">
-              <div class="section-number">Section 3 of 5</div>
-              <h2>Experience & Background</h2>
-              <p class="section-description">
-                Tell us about your prior experience with foster care, adoption, and childcare.
-              </p>
+              <div class="section-number">3</div>
+              <div class="section-title-group">
+                <h2 class="section-title">Experience & Background</h2>
+                <p class="section-description">Tell us about your experience with children and adoption.</p>
+              </div>
             </div>
 
             <div class="section-content">
-              <div class="questions-container" id="questions-section-3">
-                <!-- Questions will be inserted here -->
-                <div class="placeholder-card">
-                  <svg class="placeholder-icon" viewBox="0 0 64 64" width="48" height="48">
-                    <rect x="12" y="16" width="40" height="32" rx="4" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                    <line x1="20" y1="24" x2="44" y2="24" stroke="#b0bec5" stroke-width="1.5"/>
-                    <line x1="20" y1="32" x2="44" y2="32" stroke="#b0bec5" stroke-width="1.5"/>
-                    <line x1="20" y1="40" x2="36" y2="40" stroke="#b0bec5" stroke-width="1.5"/>
-                  </svg>
-                  <p>Experience & Background Questions</p>
-                  <span class="placeholder-count">6 questions in this section</span>
-                </div>
+              <div class="question-placeholder">
+                <svg viewBox="0 0 64 64" width="48" height="48">
+                  <path d="M 20 20 L 28 16 L 36 20 L 36 32 Q 28 40 28 40 Q 20 32 20 32 Z" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                  <path d="M 40 28 L 48 24 L 56 28 L 56 40 Q 48 48 48 48 Q 40 40 40 40 Z" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                  <circle cx="28" cy="26" r="2" fill="#60a5fa"/>
+                  <circle cx="48" cy="34" r="2" fill="#60a5fa"/>
+                </svg>
+                <h3>Experience & Background Questions</h3>
+                <p>Share your prior experience with foster care, adoption, or childcare.</p>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Section 4: Adoption Preferences -->
-          <div class="form-section hidden" data-section="4" id="section-4">
+          <section class="form-section" id="section-preferences" data-section="preferences" style="display: none;">
             <div class="section-header">
-              <div class="section-number">Section 4 of 5</div>
-              <h2>Adoption Preferences</h2>
-              <p class="section-description">
-                Share your preferences for the child's age, needs, and background.
-              </p>
+              <div class="section-number">4</div>
+              <div class="section-title-group">
+                <h2 class="section-title">Adoption Preferences</h2>
+                <p class="section-description">Tell us what kind of child and family structure you're hoping for.</p>
+              </div>
             </div>
 
             <div class="section-content">
-              <div class="questions-container" id="questions-section-4">
-                <!-- Questions will be inserted here -->
-                <div class="placeholder-card">
-                  <svg class="placeholder-icon" viewBox="0 0 64 64" width="48" height="48">
-                    <path d="M 20 20 Q 20 10 32 10 Q 44 10 44 20 Q 44 30 32 44 Q 20 30 20 20" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                    <circle cx="32" cy="22" r="3" fill="#b0bec5"/>
-                  </svg>
-                  <p>Adoption Preferences Questions</p>
-                  <span class="placeholder-count">8 questions in this section</span>
-                </div>
+              <div class="question-placeholder">
+                <svg viewBox="0 0 64 64" width="48" height="48">
+                  <rect x="16" y="16" width="32" height="32" rx="4" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="20" y1="24" x2="44" y2="24" stroke="#60a5fa" stroke-width="1.5"/>
+                  <line x1="20" y1="32" x2="44" y2="32" stroke="#60a5fa" stroke-width="1.5"/>
+                  <line x1="20" y1="40" x2="40" y2="40" stroke="#60a5fa" stroke-width="1.5"/>
+                </svg>
+                <h3>Adoption Preferences Questions</h3>
+                <p>Help us understand your preferences for age, special needs, and family structure.</p>
               </div>
             </div>
-          </div>
+          </section>
 
           <!-- Section 5: Legal Readiness -->
-          <div class="form-section hidden" data-section="5" id="section-5">
+          <section class="form-section" id="section-legal" data-section="legal" style="display: none;">
             <div class="section-header">
-              <div class="section-number">Section 5 of 5</div>
-              <h2>Legal Readiness</h2>
-              <p class="section-description">
-                Information about your legal status and readiness for the adoption process.
-              </p>
+              <div class="section-number">5</div>
+              <div class="section-title-group">
+                <h2 class="section-title">Legal Readiness</h2>
+                <p class="section-description">Confirm your legal and logistical preparedness for adoption.</p>
+              </div>
             </div>
 
             <div class="section-content">
-              <div class="questions-container" id="questions-section-5">
-                <!-- Questions will be inserted here -->
-                <div class="placeholder-card">
-                  <svg class="placeholder-icon" viewBox="0 0 64 64" width="48" height="48">
-                    <rect x="16" y="16" width="32" height="32" rx="2" fill="none" stroke="#b0bec5" stroke-width="2"/>
-                    <line x1="20" y1="24" x2="44" y2="24" stroke="#b0bec5" stroke-width="1.5"/>
-                    <line x1="20" y1="32" x2="44" y2="32" stroke="#b0bec5" stroke-width="1.5"/>
-                    <line x1="20" y1="40" x2="44" y2="40" stroke="#b0bec5" stroke-width="1.5"/>
-                  </svg>
-                  <p>Legal Readiness Questions</p>
-                  <span class="placeholder-count">6 questions in this section</span>
-                </div>
+              <div class="question-placeholder">
+                <svg viewBox="0 0 64 64" width="48" height="48">
+                  <rect x="16" y="12" width="32" height="40" rx="2" fill="none" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="20" y1="20" x2="44" y2="20" stroke="#60a5fa" stroke-width="1.5"/>
+                  <circle cx="24" cy="32" r="2" fill="#60a5fa"/>
+                  <line x1="30" y1="32" x2="44" y2="32" stroke="#60a5fa" stroke-width="1"/>
+                  <circle cx="24" cy="42" r="2" fill="#60a5fa"/>
+                  <line x1="30" y1="42" x2="44" y2="42" stroke="#60a5fa" stroke-width="1"/>
+                </svg>
+                <h3>Legal Readiness Questions</h3>
+                <p>Confirm your location, legal representation, and readiness for the adoption process.</p>
               </div>
             </div>
-          </div>
-        </div>
+          </section>
 
-        <!-- Form Navigation Buttons -->
-        <div class="form-navigation">
-          <button class="btn btn-secondary" id="backBtn" style="visibility: hidden;">
-            ← Back
-          </button>
-
-          <div class="nav-spacer"></div>
-
-          <div class="nav-buttons">
-            <button class="btn btn-outline" id="saveBtn" aria-label="Save progress">
-              💾 Save & Continue
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="backBtn" aria-label="Go to previous section" style="display: none;">
+              ← Back
             </button>
-            <button class="btn btn-primary" id="nextBtn">
+
+            <button type="button" class="btn btn-secondary" id="saveBtn">
+              Save & Continue
+            </button>
+
+            <button type="button" class="btn btn-primary" id="nextBtn">
               Next Section →
             </button>
           </div>
-        </div>
 
-        <!-- Privacy Notice -->
-        <div class="privacy-notice">
-          <svg class="notice-icon" viewBox="0 0 64 64" width="24" height="24">
-            <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
-            <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
-            <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <p>
-            Your responses are encrypted and secure. Your family data is only shared when you explicitly submit an inquiry to an adoption agency. 
-            <a href="#" style="color: var(--blue); text-decoration: underline;">Learn about our privacy practices.</a>
-          </p>
-        </div>
+          <!-- Privacy Notice -->
+          <div class="privacy-notice">
+            <svg viewBox="0 0 24 24" width="20" height="20">
+              <path d="M 12 2 L 24 8 L 24 14 Q 12 22 12 22 Q 0 14 0 14 L 0 8 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            </svg>
+            <p>
+              Your information is secure and confidential. We comply with all adoption privacy laws and never share your data without explicit consent.
+            </p>
+          </div>
+        </form>
       </div>
     </section>
   </div>
