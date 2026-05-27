@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Partner With HavenLink - Adoption Agencies</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <a href="/home" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
+          <img src="/logo.png" alt="HavenLink Logo" class="logo-icon">
+          <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
+        </a>
+      </div>
+      
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/home" class="nav-link">Home</a></li>
+        <li class="nav-dropdown">
+          <button class="nav-link dropdown-toggle" id="adoptDropdown" aria-expanded="false" aria-label="Adopt menu">
+            Adopt
+            <span class="dropdown-arrow">▼</span>
+          </button>
+          <ul class="dropdown-menu" id="adoptMenu" role="menu">
+            <li role="none"><a href="/adopt/home-study" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
+            <li role="none"><a href="/adopt/intake-form" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
+            <li role="none"><a href="/adopt/agency-profiles" class="dropdown-item" role="menuitem">3. Agency-Managed Profiles</a></li>
+            <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">4. Compatibility Matching</a></li>
+          </ul>
+        </li>
+        <li><a href="/team" class="nav-link">Team</a></li>
+        <li><a href="/partner" class="nav-link">Partner</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); padding: 4rem 0;">
+    <div class="container" style="text-align: center;">
+      <h1 style="color: white; font-size: 2.5rem; margin-bottom: 1rem;">Partner With HavenLink</h1>
+      <p style="color: rgba(255, 255, 255, 0.95); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+        Join us in transforming adoption by connecting families with trusted agencies on a secure, transparent platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="adopt-content">
+    <div class="container">
+      <div class="content-grid">
+        <div class="content-main">
+          <h2 id="why-partner">Why Partner With HavenLink?</h2>
+          <p>
+            HavenLink is revolutionizing adoption by making the process clearer, faster, and more human. We're building a platform that serves licensed adoption agencies, families, and most importantly, the children who deserve loving homes.
+          </p>
+
+          <div class="why-matters" style="margin-top: 2rem;">
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <circle cx="32" cy="20" r="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <path d="M 20 40 Q 20 32 32 32 Q 44 32 44 40 L 44 48 Q 32 52 32 52 Q 20 52 20 48 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <path d="M 28 32 L 28 44" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M 36 32 L 36 44" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <h4>Expanded Reach</h4>
+              <p>Connect with prospective families actively searching for adoption opportunities through our nationwide platform.</p>
+            </div>
+
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <rect x="16" y="16" width="32" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <line x1="20" y1="24" x2="44" y2="24" stroke="#3b82f6" stroke-width="1.5"/>
+                <line x1="20" y1="32" x2="44" y2="32" stroke="#3b82f6" stroke-width="1.5"/>
+                <line x1="20" y1="40" x2="40" y2="40" stroke="#3b82f6" stroke-width="1.5"/>
+              </svg>
+              <h4>Streamlined Operations</h4>
+              <p>Manage child profiles, family inquiries, and communications from one secure, intuitive platform.</p>
+            </div>
+
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <path d="M 32 12 L 44 20 L 44 36 Q 32 48 32 48 Q 20 36 20 36 L 20 20 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <path d="M 28 32 L 32 36 L 38 30" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h4>Enhanced Safety</h4>
+              <p>Verified agencies only. All families and child profiles undergo rigorous screening and verification processes.</p>
+            </div>
+
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <circle cx="32" cy="32" r="20" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="32" cy="32" r="12" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+                <circle cx="32" cy="32" r="4" fill="#3b82f6"/>
+                <line x1="32" y1="32" x2="32" y2="12" stroke="#3b82f6" stroke-width="1.5"/>
+              </svg>
+              <h4>Data-Driven Matching</h4>
+              <p>Our transparent algorithm helps ensure better compatibility between families and children, improving outcomes.</p>
+            </div>
+
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <path d="M 24 24 L 32 32 L 48 16 M 32 12 L 52 12 L 52 32" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="20" cy="40" r="8" fill="none" stroke="#3b82f6" stroke-width="1.5"/>
+                <line x1="14" y1="46" x2="26" y2="46" stroke="#3b82f6" stroke-width="1"/>
+              </svg>
+              <h4>Compliance & Support</h4>
+              <p>We handle regulatory requirements and provide dedicated support to ensure your agency thrives on our platform.</p>
+            </div>
+
+            <div class="why-card">
+              <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
+                <path d="M 32 16 L 48 24 L 48 40 Q 32 50 32 50 Q 16 40 16 40 L 16 24 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
+                <path d="M 24 32 L 28 36 L 40 24" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h4>Mission Alignment</h4>
+              <p>We share your commitment to child welfare and family-centered adoption practices.</p>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 3rem;" id="partnership-form">Partner With Us</h2>
+          <p>
+            Tell us about your organization. Fill out the form below and we'll be in touch to discuss how HavenLink can support your agency's mission.
+          </p>
+
+          <!-- Partnership Form -->
+          <form class="partnership-form" style="margin-top: 2rem;">
+            <div class="form-group">
+              <label for="org-name">Organization Name *</label>
+              <input type="text" id="org-name" name="org_name" required placeholder="Your agency's legal name">
+            </div>
+
+            <div class="form-group">
+              <label for="org-type">Organization Type *</label>
+              <select id="org-type" name="org_type" required>
+                <option value="">Select an option</option>
+                <option value="adoption-agency">Adoption Agency</option>
+                <option value="foster-care">Foster Care Agency</option>
+                <option value="social-services">Social Services Organization</option>
+                <option value="nonprofit">Nonprofit Organization</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="description">What does your organization do? *</label>
+              <textarea id="description" name="description" required placeholder="Describe your services and mission" rows="4"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Primary Contact Name *</label>
+                <input type="text" id="contact-name" name="contact_name" required placeholder="Full name">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-title">Title/Position *</label>
+                <input type="text" id="contact-title" name="contact_title" required placeholder="e.g., Executive Director">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-email">Email Address *</label>
+                <input type="email" id="contact-email" name="contact_email" required placeholder="your@email.com">
+              </div>
+
+              <div class="form-group">
+                <label for="contact-phone">Phone Number *</label>
+                <input type="tel" id="contact-phone" name="contact_phone" required placeholder="(555) 000-0000">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="website">Organization Website</label>
+              <input type="url" id="website" name="website" placeholder="https://youragency.org">
+            </div>
+
+            <div class="form-group">
+              <label for="location">Primary Service Location *</label>
+              <input type="text" id="location" name="location" required placeholder="City, State">
+            </div>
+
+            <div class="form-group">
+              <label for="states">States You Serve *</label>
+              <input type="text" id="states" name="states" required placeholder="e.g., California, Texas, New York">
+            </div>
+
+            <div class="form-group">
+              <label for="experience">Years of Experience in Adoption Services *</label>
+              <input type="number" id="experience" name="experience" required min="0" placeholder="Enter number of years">
+            </div>
+
+            <div class="form-group">
+              <label for="licensing">Licensing Status *</label>
+              <select id="licensing" name="licensing" required>
+                <option value="">Select an option</option>
+                <option value="licensed">Licensed</option>
+                <option value="in-process">In Process</option>
+                <option value="not-licensed">Not Licensed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Additional Information</label>
+              <textarea id="message" name="message" placeholder="Tell us anything else about your agency or how we can help" rows="4"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label style="display: flex; align-items: center; gap: 0.5rem; font-weight: normal;">
+                <input type="checkbox" name="agree" required>
+                <span>I agree to HavenLink's terms and conditions *</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="margin-top: 1.5rem; width: 100%;">
+              Submit Partnership Request
+            </button>
+          </form>
+
+          <div class="readiness-callout" style="margin-top: 3rem;">
+            <h3>Ready to Get Started?</h3>
+            <p>
+              Questions about partnership? We'd love to hear from you. Our partnership team will review your submission and reach out within 3-5 business days.
+            </p>
+          </div>
+        </div>
+
+        <div class="content-sidebar">
+          <div class="sidebar-card">
+            <h3>Partnership Requirements</h3>
+            <ul class="quick-facts">
+              <li>✓ Licensed or in-process licensing</li>
+              <li>✓ Demonstrated child welfare commitment</li>
+              <li>✓ Compliance with state regulations</li>
+              <li>✓ Professional team</li>
+              <li>✓ Secure practices</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card">
+            <h3>What We Provide</h3>
+            <ul class="quick-facts">
+              <li>✓ Profile management tools</li>
+              <li>✓ Family inquiries</li>
+              <li>✓ Secure communication</li>
+              <li>✓ Technical support</li>
+              <li>✓ Training & resources</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-card info-card">
+            <svg class="info-icon" viewBox="0 0 64 64" width="32" height="32">
+              <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
+              <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
+              <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <p style="font-size: 0.9rem;">
+              Have questions before applying? Contact our partnership team at partnerships@havenlink.org
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>About HavenLink</h3>
+        <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="#why-partner">Why Partner</a></li>
+          <li><a href="#partnership-form">Partnership Form</a></li>
+          <li><a href="/team">Team</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Adoption Hotline</h3>
+        <p>
+          <a href="tel:1-800-236-7846" class="hotline-link">1-800-ADOPTION</a>
+        </p>
+        <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Connect</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/havenlink_/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+              <circle cx="18" cy="6" r="1" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="mailto:unicef.trinityprep@gmail.com" aria-label="Email">
+            <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+              <path d="M 2 6 L 12 13 L 22 6"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>
+</body>
+</html>
