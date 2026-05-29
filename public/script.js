@@ -241,4 +241,82 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // Partnership Form Submission Handling
+  const partnershipForm = document.getElementById('partnershipForm');
+  if (partnershipForm) {
+    partnershipForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const formMessage = document.getElementById('formMessage');
+      const originalText = submitBtn.textContent;
+
+      // Disable submit button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        // Collect form data
+        const formData = new FormData(partnershipForm);
+        const data = Object.fromEntries(formData);
+
+        // Send POST request to backend
+        const response = await fetch('/api/partnership-request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // Success
+          formMessage.style.display = 'block';
+          formMessage.style.backgroundColor = '#d1fae5';
+          formMessage.style.color = '#065f46';
+          formMessage.style.border = '1px solid #6ee7b7';
+          formMessage.textContent =
+            'Thank you! Your partnership request has been submitted successfully. We will be in touch within 3-5 business days.';
+
+          // Reset form
+          partnershipForm.reset();
+
+          // Scroll to message
+          formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Hide message after 5 seconds
+          setTimeout(() => {
+            formMessage.style.display = 'none';
+          }, 5000);
+        } else {
+          // Error
+          formMessage.style.display = 'block';
+          formMessage.style.backgroundColor = '#fee2e2';
+          formMessage.style.color = '#991b1b';
+          formMessage.style.border = '1px solid #fca5a5';
+          formMessage.textContent = result.error || 'Failed to submit partnership request. Please try again.';
+
+          // Scroll to message
+          formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      } catch (error) {
+        console.error('Error submitting partnership request:', error);
+        formMessage.style.display = 'block';
+        formMessage.style.backgroundColor = '#fee2e2';
+        formMessage.style.color = '#991b1b';
+        formMessage.style.border = '1px solid #fca5a5';
+        formMessage.textContent = 'An error occurred. Please try again or contact us directly at havenlink.org@gmail.com';
+
+        // Scroll to message
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } finally {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  }
 });

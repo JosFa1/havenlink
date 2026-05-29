@@ -1,11 +1,111 @@
 import express from "express";
 import path from "path";
+import nodemailer from "nodemailer";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
+
+// Email transporter configuration
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER || "havenlink.org@gmail.com",
+    pass: process.env.EMAIL_PASSWORD || "",
+  },
+});
+
+// Partnership form submission endpoint
+app.post("/api/partnership-request", async (req, res) => {
+  try {
+    const {
+      org_name,
+      org_type,
+      description,
+      contact_name,
+      contact_title,
+      contact_email,
+      contact_phone,
+      website,
+      location,
+      states,
+      experience,
+      licensing,
+      message,
+    } = req.body;
+
+    // Validate required fields
+    if (!org_name || !contact_name || !contact_email) {
+      return res.status(400).json({ error: "Missing required fields" });
+    }
+
+    // Create email content
+    const emailContent = `
+New Partnership Request from HavenLink
+
+Organization Information:
+- Organization Name: ${org_name}
+- Organization Type: ${org_type}
+- Description: ${description}
+- Primary Location: ${location}
+- States Served: ${states}
+- Years of Experience: ${experience}
+- Licensing Status: ${licensing}
+- Website: ${website || "Not provided"}
+
+Contact Information:
+- Name: ${contact_name}
+- Title: ${contact_title}
+- Email: ${contact_email}
+- Phone: ${contact_phone}
+
+Additional Information:
+${message || "No additional information provided"}
+    `;
+
+    // Send email to HavenLink
+    const mailOptions = {
+      from: process.env.EMAIL_USER || "havenlink.org@gmail.com",
+      to: "havenlink.org@gmail.com",
+      subject: `Partnership Request: ${org_name}`,
+      text: emailContent,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    // Send confirmation email to the organization
+    const confirmationEmail = {
+      from: process.env.EMAIL_USER || "havenlink.org@gmail.com",
+      to: contact_email,
+      subject: "Partnership Request Received - HavenLink",
+      text: `Hello ${contact_name},
+
+Thank you for submitting your partnership request to HavenLink! We've received your information and our partnership team will review it shortly.
+
+We aim to respond to all partnership inquiries within 3-5 business days. If you have any questions in the meantime, feel free to reach out.
+
+Best regards,
+The HavenLink Team
+havenlink.org@gmail.com
+      `,
+    };
+
+    await transporter.sendMail(confirmationEmail);
+
+    res.json({
+      success: true,
+      message: "Partnership request submitted successfully!",
+    });
+  } catch (error) {
+    console.error("Email sending error:", error);
+    res.status(500).json({
+      error: "Failed to submit partnership request. Please try again or contact us directly at havenlink.org@gmail.com",
+    });
+  }
+});
 
 // ===== CLEAN URL ROUTES (without .html extensions) =====
 

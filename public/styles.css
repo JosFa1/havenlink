@@ -1648,6 +1648,25 @@ p {
   accent-color: var(--blue);
 }
 
+.form-message {
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  border-left: 4px solid;
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .form-group label[style*="display: flex"] {
   cursor: pointer;
   user-select: none;
