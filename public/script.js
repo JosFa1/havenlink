@@ -200,3 +200,45 @@ if (adoptDropdown && adoptMenu) {
     }
   });
 }
+
+// Privacy Policy Modal Handling
+document.addEventListener('DOMContentLoaded', () => {
+  const privacyModal = document.getElementById('privacyModal');
+  const privacyPolicyLinks = document.querySelectorAll('.privacy-policy-link, a[href="#privacy-policy"]');
+  const privacyModalClose = document.getElementById('privacyModalClose');
+
+  if (privacyModal) {
+    // Open modal when clicking privacy policy link
+    privacyPolicyLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        privacyModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Close modal when clicking close button
+    if (privacyModalClose) {
+      privacyModalClose.addEventListener('click', () => {
+        privacyModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    }
+
+    // Close modal when clicking outside the modal content
+    privacyModal.addEventListener('click', (e) => {
+      if (e.target === privacyModal) {
+        privacyModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && privacyModal.classList.contains('active')) {
+        privacyModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  }
+});

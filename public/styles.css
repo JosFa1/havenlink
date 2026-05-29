@@ -1558,6 +1558,272 @@ p {
   }
 }
 
+/* ==================== Partnership Form Styles ==================== */
+
+.partnership-form {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-dark);
+  background-color: var(--white);
+  transition: var(--transition);
+  line-height: 1.5;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-light);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: var(--white);
+}
+
+.form-group input:hover:not(:focus),
+.form-group select:hover:not(:focus),
+.form-group textarea:hover:not(:focus) {
+  border-color: var(--blue-lighter);
+}
+
+.form-group select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 20px;
+  padding-right: 2.75rem;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 0;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+.form-group input[type="checkbox"] {
+  width: auto;
+  height: auto;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  accent-color: var(--blue);
+}
+
+.form-group label[style*="display: flex"] {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* ==================== Privacy Policy Modal ==================== */
+
+.privacy-modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.privacy-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.privacy-modal-content {
+  background-color: var(--white);
+  border-radius: 0.75rem;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 0.3s ease-out;
+  position: relative;
+}
+
+.privacy-modal-header {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+  color: var(--white);
+  padding: 2rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2001;
+}
+
+.privacy-modal-header h2 {
+  color: var(--white);
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.privacy-modal-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  border-radius: 0.25rem;
+}
+
+.privacy-modal-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.privacy-modal-body {
+  padding: 2rem;
+  color: var(--text-dark);
+  line-height: 1.8;
+}
+
+.privacy-modal-body h1 {
+  color: var(--navy);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-modal-body h2 {
+  color: var(--navy);
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--blue-lighter);
+  padding-bottom: 0.5rem;
+}
+
+.privacy-modal-body h3 {
+  color: var(--blue);
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.privacy-modal-body h4 {
+  color: var(--navy);
+  font-size: 1.05rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.privacy-modal-body p {
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.privacy-modal-body ul,
+.privacy-modal-body ol {
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+}
+
+.privacy-modal-body li {
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+}
+
+.privacy-modal-body strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.privacy-modal-body a {
+  color: var(--blue);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.privacy-modal-body a:hover {
+  color: var(--indigo);
+  text-decoration: underline;
+}
+
+.privacy-policy-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: var(--transition);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.privacy-policy-link:hover {
+  color: var(--blue-lighter);
+}
+
 /* ==================== Responsive Design ==================== */
 
 @media (max-width: 768px) {
@@ -1753,6 +2019,15 @@ p {
     right: 1rem;
     left: 1rem;
     max-width: none;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 1.5rem;
   }
 }
 
