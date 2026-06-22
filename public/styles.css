@@ -1843,6 +1843,374 @@ p {
   color: var(--blue-lighter);
 }
 
+/* ==================== Intake Form Questions ==================== */
+
+/* Real questions replace the centered placeholder layout */
+.section-content.has-questions {
+  display: block;
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 2.5rem 2rem;
+}
+
+.q-block {
+  margin-bottom: 2.5rem;
+}
+
+.q-block:last-child {
+  margin-bottom: 0;
+}
+
+.q-block > .q-label,
+.q-legend {
+  display: block;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+  padding: 0;
+}
+
+/* Reset native fieldset chrome so a group of radios/checkboxes reads like a labelled question */
+.q-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+
+.q-help {
+  display: block;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 0.9rem 0;
+}
+
+.required-star {
+  color: #dc2626;
+  margin-left: 0.2rem;
+}
+
+.optional-tag {
+  color: var(--text-light);
+  font-weight: 500;
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+}
+
+/* Selectable option cards (radio + checkbox groups) */
+.option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.option-group.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 0.5rem;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.4;
+}
+
+.option:hover {
+  border-color: var(--blue-lighter);
+}
+
+.option input[type="radio"],
+.option input[type="checkbox"] {
+  margin: 0.15rem 0 0 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--blue);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Visual selected state (works alongside the native control for sighted users) */
+.option:has(input:checked) {
+  border-color: var(--blue);
+  background-color: #f0f7ff;
+}
+
+/* Keyboard focus visibility on the card */
+.option:has(input:focus-visible) {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.option-text {
+  flex: 1;
+}
+
+/* Inline number / text fields inside a question */
+.q-inline-field {
+  max-width: 320px;
+}
+
+.q-inline-field.q-number {
+  max-width: 160px;
+}
+
+/* Child-age repeater (Q4) and placement repeater */
+.repeater-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.repeater-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.repeater-row label {
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  margin: 0;
+  min-width: 90px;
+}
+
+.repeater-row input {
+  max-width: 120px;
+  padding: 0.6rem 0.75rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+
+.repeater-row input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Conditional blocks: hidden until a branch activates, retained in the DOM */
+.conditional {
+  display: none;
+}
+
+.conditional.show {
+  display: block;
+  animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* A nested follow-up question that belongs to its parent question */
+.q-followup {
+  margin-top: 1.25rem;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--blue-lighter);
+}
+
+/* Inline validation error text, announced via aria-live */
+.field-error {
+  display: none;
+  color: #dc2626;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.6rem;
+}
+
+.field-error.show {
+  display: block;
+}
+
+.q-block.has-error .option-group .option,
+.q-block.has-error > input,
+.q-block.has-error > select,
+.q-block.has-error .q-inline-field {
+  border-color: #dc2626;
+}
+
+/* Informational / resource / explainer cards */
+.info-card {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(96, 165, 250, 0.04) 100%);
+  border: 1px solid var(--blue-lighter);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 1.25rem;
+}
+
+.info-card h4 {
+  color: var(--navy);
+  font-size: 1.05rem;
+  margin: 0 0 0.6rem 0;
+}
+
+.info-card p {
+  color: var(--text-dark);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin: 0 0 0.6rem 0;
+}
+
+.info-card ul {
+  margin: 0 0 0.6rem 1.1rem;
+  color: var(--text-dark);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.info-card a {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.info-card a:hover {
+  text-decoration: underline;
+}
+
+/* Alert banners: info / warning / sensitive */
+.alert-banner {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  border-radius: 0.5rem;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.alert-banner .alert-body {
+  flex: 1;
+}
+
+.alert-banner .alert-body strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.98rem;
+}
+
+.alert-banner.alert-info {
+  background-color: #eff6ff;
+  border: 1px solid var(--blue-lighter);
+  color: var(--text-dark);
+}
+
+.alert-banner.alert-info strong {
+  color: var(--navy);
+}
+
+.alert-banner.alert-warning {
+  background-color: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #78350f;
+}
+
+.alert-banner.alert-warning strong {
+  color: #92400e;
+}
+
+.alert-banner.alert-sensitive {
+  background-color: #f5f3ff;
+  border: 1px solid #c4b5fd;
+  color: #4c1d95;
+}
+
+.alert-banner.alert-sensitive strong {
+  color: #5b21b6;
+}
+
+.alert-icon {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.alert-dismiss {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.alert-dismiss:hover {
+  opacity: 1;
+}
+
+/* Sensitive (Q20) acknowledgment overlay */
+.ack-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  background-color: rgba(12, 35, 64, 0.55);
+  backdrop-filter: blur(2px);
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.ack-overlay.active {
+  display: flex;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.ack-dialog {
+  background-color: var(--white);
+  border-radius: 0.75rem;
+  max-width: 520px;
+  width: 100%;
+  padding: 2.25rem;
+  box-shadow: var(--shadow-xl);
+}
+
+.ack-dialog h3 {
+  color: var(--navy);
+  font-size: 1.4rem;
+  margin: 0 0 1rem 0;
+}
+
+.ack-dialog p {
+  color: var(--text-dark);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  margin: 0 0 1rem 0;
+}
+
+.ack-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.75rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .ack-dialog {
+    padding: 1.75rem;
+  }
+  .option-group.option-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ==================== Responsive Design ==================== */
 
 @media (max-width: 768px) {
