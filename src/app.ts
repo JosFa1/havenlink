@@ -1,22 +1,37 @@
+// Config is imported first so .env is loaded and validated before anything else.
+import { config } from "./config";
 import express from "express";
 import path from "path";
-import nodemailer from "nodemailer";
+import cookieParser from "cookie-parser";
+import { transporter } from "./auth/email";
+import { sessionMiddleware } from "./middleware/session";
+import { securityHeaders } from "./middleware/security";
+import { invalidCsrfTokenError } from "./middleware/security";
+import { passport, configurePassport } from "./auth/passport";
+import { authRouter } from "./auth/routes";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = config.PORT;
 
+// Behind AWS App Runner / load balancer: trust the proxy so Secure cookies and
+// rate-limit client IPs work correctly.
+if (config.isProd) app.set("trust proxy", 1);
+
+// ----- Core middleware (order matters) ---------------------------------------
+app.use(securityHeaders());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // required by csrf-csrf to read the CSRF cookie
+app.use(sessionMiddleware());
+
+configurePassport();
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Email transporter configuration
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER || "havenlink.org@gmail.com",
-    pass: process.env.EMAIL_PASSWORD || "",
-  },
-});
+// ----- Auth routes ------------------------------------------------------------
+app.use("/auth", authRouter);
 
 // Partnership form submission endpoint
 app.post("/api/partnership-request", async (req, res) => {
@@ -68,7 +83,7 @@ ${message || "No additional information provided"}
 
     // Send email to HavenLink
     const mailOptions = {
-      from: process.env.EMAIL_USER || "havenlink.org@gmail.com",
+      from: config.EMAIL_USER,
       to: "havenlink.org@gmail.com",
       subject: `Partnership Request: ${org_name}`,
       text: emailContent,
@@ -78,7 +93,7 @@ ${message || "No additional information provided"}
 
     // Send confirmation email to the organization
     const confirmationEmail = {
-      from: process.env.EMAIL_USER || "havenlink.org@gmail.com",
+      from: config.EMAIL_USER,
       to: contact_email,
       subject: "Partnership Request Received - HavenLink",
       text: `Hello ${contact_name},
@@ -108,6 +123,15 @@ havenlink.org@gmail.com
 });
 
 // ===== CLEAN URL ROUTES (without .html extensions) =====
+
+// Auth pages
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/signup.html"));
+});
 
 // Home page
 app.get("/home", (req, res) => {
@@ -177,6 +201,27 @@ app.get(/^\/(?!adopt\/).*$/, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+// ----- Error handler (last) ---------------------------------------------------
+// 4-arg signature required for Express to treat this as an error handler.
+app.use(
+  (
+    err: unknown,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    if (err === invalidCsrfTokenError) {
+      return res.status(403).json({ error: "Invalid or missing CSRF token." });
+    }
+    console.error(
+      "Unhandled error:",
+      err instanceof Error ? err.message : String(err)
+    );
+    if (res.headersSent) return next(err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+);
+
 app.listen(PORT, () => {
-  console.log(`HavenLink running at http://localhost:${PORT}`);
+  console.log(`HavenLink running at ${config.APP_BASE_URL} (port ${PORT})`);
 });
