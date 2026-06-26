@@ -65,7 +65,6 @@
         "Google sign-in failed. Please try again.",
         "error",
       ],
-      "login=success": ["You're signed in.", "success"],
     };
     for (const key in map) {
       const [k, v] = key.split("=");
@@ -137,7 +136,7 @@
       try {
         const { ok, data } = await postJson("/auth/login", { email, password });
         if (ok) {
-          window.location.href = "/home?login=success";
+          window.location.href = "/home";
         } else {
           showMessage(msg, data.error || "Sign in failed.", "error");
         }

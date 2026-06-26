@@ -85,10 +85,12 @@ ${message || "No additional information provided"}
     const mailOptions = {
       from: config.EMAIL_USER,
       to: "havenlink.org@gmail.com",
+      replyTo: contact_email, // let the team reply straight to the applicant
       subject: `Partnership Request: ${org_name}`,
       text: emailContent,
     };
 
+    // Critical path: the request is only "received" once HavenLink is notified.
     await transporter.sendMail(mailOptions);
 
     // Send confirmation email to the organization
@@ -108,7 +110,16 @@ havenlink.org@gmail.com
       `,
     };
 
-    await transporter.sendMail(confirmationEmail);
+    // Best-effort: a bad/typo'd applicant address must not fail a request that
+    // HavenLink has already been notified about.
+    try {
+      await transporter.sendMail(confirmationEmail);
+    } catch (confirmErr) {
+      console.error(
+        "Partnership confirmation email failed (request still recorded):",
+        confirmErr instanceof Error ? confirmErr.message : String(confirmErr)
+      );
+    }
 
     res.json({
       success: true,
@@ -141,6 +152,11 @@ app.get("/home", (req, res) => {
 // Team page
 app.get("/team", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/team.html"));
+});
+
+// Partner page
+app.get("/partner", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/partner.html"));
 });
 
 // Adoption pages - clean URLs

@@ -224,7 +224,7 @@ authRouter.get("/google/callback", (req, res, next) => {
       if (!user) return res.redirect("/login?error=google_failed");
       try {
         await loginSession(req, user);
-        return res.redirect("/home?login=success");
+        return res.redirect("/home");
       } catch (loginErr) {
         return next(loginErr);
       }
