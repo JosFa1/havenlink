@@ -46,7 +46,13 @@ function publicUser(user: User) {
 // stable for subsequent protected POSTs.
 authRouter.get("/csrf", (req, res) => {
   req.session.csrfInit = true;
-  const csrfToken = generateToken(req, res);
+  // overwrite=true: always mint a fresh token bound to the CURRENT session id and
+  // replace any existing cookie. Without this, a stale/invalid csrf cookie (e.g.
+  // left over from a pre-login session id or an old SESSION_SECRET) makes
+  // generateToken THROW invalidCsrfTokenError, deadlocking token issuance — the
+  // client can then never obtain a valid token (breaks logout, signup, login).
+  const csrfToken = generateToken(req, res, true);
+  res.set("Cache-Control", "no-store"); // tokens must never be cached
   res.json({ csrfToken });
 });
 
@@ -228,6 +234,8 @@ authRouter.get("/google/callback", (req, res, next) => {
 
 // ---- Current user ------------------------------------------------------------
 authRouter.get("/me", (req, res) => {
+  // Auth state is per-session and must never be served stale from a cache.
+  res.set("Cache-Control", "no-store");
   const user = req.user as User | undefined;
   if (!req.isAuthenticated?.() || !user) {
     return res.status(401).json({ authenticated: false });

@@ -70,6 +70,9 @@ web_modules/
 .env.*
 !.env.example
 
+# Local secret-bearing handoff docs — never commit
+*WITH-SECRETS*
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache

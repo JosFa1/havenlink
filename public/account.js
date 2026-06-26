@@ -12,7 +12,10 @@
   "use strict";
 
   async function getCsrfToken() {
-    const res = await fetch("/auth/csrf", { credentials: "same-origin" });
+    const res = await fetch("/auth/csrf", {
+      credentials: "same-origin",
+      cache: "no-store",
+    });
     if (!res.ok) throw new Error("Could not get CSRF token");
     const data = await res.json();
     return data.csrfToken;
@@ -146,26 +149,54 @@
     });
   }
 
+  /* ---- Logout click handler ---- */
+  // Must never fail silently: on any error we restore the control and tell the
+  // user, instead of leaving the page looking like "nothing happened".
+  async function handleLogout(e) {
+    e.preventDefault();
+    const link = e.currentTarget;
+    if (link.dataset.busy === "1") return; // ignore rapid double-clicks
+    link.dataset.busy = "1";
+    const original = link.textContent;
+    link.textContent = "Logging out…";
+    try {
+      const { ok, status } = await postJson("/auth/logout", {});
+      if (!ok) throw new Error("Logout failed (HTTP " + status + ")");
+      // Full navigation so the destination re-reads auth state from a fresh
+      // /auth/me; assign() reloads even when we're already on /home.
+      window.location.assign("/home");
+    } catch (err) {
+      console.error("[HavenLink] Logout failed:", err);
+      link.textContent = original;
+      link.dataset.busy = "";
+      showMessage(
+        document.getElementById("formMessage"),
+        "Could not log out. Please check your connection and try again.",
+        "error"
+      );
+      alert("Could not log out. Please try again.");
+    }
+  }
+
   /* ---- Nav auth state (for any page with #navAuth) ---- */
   async function renderNavAuth() {
     const container = document.getElementById("navAuth");
     if (!container) return;
     try {
-      const res = await fetch("/auth/me", { credentials: "same-origin" });
+      // no-store: never let a cached response misreport whether we're signed in.
+      const res = await fetch("/auth/me", {
+        credentials: "same-origin",
+        cache: "no-store",
+      });
       const data = await res.json();
-      if (data.authenticated) {
+      if (data && data.authenticated) {
         container.innerHTML =
           '<a href="#" class="nav-link" id="logoutLink">Log Out</a>';
         document
           .getElementById("logoutLink")
-          .addEventListener("click", async (e) => {
-            e.preventDefault();
-            await postJson("/auth/logout", {});
-            window.location.href = "/home";
-          });
+          .addEventListener("click", handleLogout);
       } else {
-        container.innerHTML =
-          '<a href="/login" class="nav-link">Log In</a>';
+        container.innerHTML = '<a href="/login" class="nav-link">Log In</a>';
       }
     } catch {
       container.innerHTML = '<a href="/login" class="nav-link">Log In</a>';
