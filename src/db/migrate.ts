@@ -4,8 +4,10 @@
  */
 import fs from "fs";
 import path from "path";
+import { Client } from "pg";
 import { pool } from "./pool";
 import { config } from "../config";
+import { sslConfig } from "./pool";
 
 /**
  * `tsc` does not copy .sql files into dist/, so when running compiled
@@ -32,8 +34,42 @@ async function main() {
     }
   })();
   console.log(`Starting database migration against ${dbHost}...`);
+  await ensureDatabaseExists();
   await pool.query(readSchema());
   console.log("Migration applied successfully.");
+}
+
+function quoteIdentifier(identifier: string): string {
+  return `"${identifier.replace(/"/g, '""')}"`;
+}
+
+function maintenanceConnectionString(): string {
+  const url = new URL(config.DATABASE_URL);
+  url.pathname = "/postgres";
+  return url.toString();
+}
+
+async function ensureDatabaseExists(): Promise<void> {
+  const targetDb = new URL(config.DATABASE_URL).pathname.replace(/^\/+/, "");
+  if (!targetDb || targetDb === "postgres") return;
+
+  const client = new Client({
+    connectionString: maintenanceConnectionString(),
+    ssl: sslConfig(),
+  });
+
+  await client.connect();
+  try {
+    const existing = await client.query(
+      "SELECT 1 FROM pg_database WHERE datname = $1",
+      [targetDb]
+    );
+    if (existing.rowCount && existing.rowCount > 0) return;
+    await client.query(`CREATE DATABASE ${quoteIdentifier(targetDb)}`);
+    console.log(`Created missing database ${targetDb}.`);
+  } finally {
+    await client.end();
+  }
 }
 
 main()
