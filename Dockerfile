@@ -11,14 +11,14 @@ RUN npm run build
 
 FROM node:20-slim AS runtime
 ENV NODE_ENV=production
-ENV PGSSLROOTCERT=/app/certs/rds-global-bundle.pem
+ENV PGSSLROOTCERT=/app/certs/us-east-1-bundle.pem
 WORKDIR /app
 COPY package*.json ./
 RUN apt-get update \
   && apt-get install -y --no-install-recommends ca-certificates curl \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /app/certs \
-  && curl -fsSL https://truststore.pki.rds.amazonaws.com/global/global-bundle.pem -o /app/certs/rds-global-bundle.pem
+  && curl -fsSL https://truststore.pki.rds.amazonaws.com/us-east-1/us-east-1-bundle.pem -o /app/certs/us-east-1-bundle.pem
 # Reuse the already-built native modules (e.g. argon2) from the builder, then
 # drop dev dependencies to slim the image.
 COPY --from=builder /app/node_modules ./node_modules
