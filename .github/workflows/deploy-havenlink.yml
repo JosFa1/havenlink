@@ -1,0 +1,83 @@
+name: Deploy HavenLink
+
+on:
+  push:
+    branches:
+      - prod
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+  APP_NAME: ${{ vars.APP_NAME }}
+  STACK_NAME: ${{ vars.STACK_NAME }}
+  DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+  IMAGE_TAG: ${{ github.sha }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+
+      - name: Deploy CloudFormation stack
+        run: |
+          aws cloudformation deploy \
+            --stack-name "$STACK_NAME" \
+            --template-file deploy/cloudformation/havenlink-ecs-fargate.yml \
+            --region "$AWS_REGION" \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --no-fail-on-empty-changeset \
+            --parameter-overrides \
+              AppName="$APP_NAME" \
+              DomainName="$DOMAIN_NAME" \
+              VpcId="${{ vars.VPC_ID }}" \
+              PublicSubnets="${{ vars.PUBLIC_SUBNETS }}" \
+              EcsSecurityGroupId="${{ vars.ECS_SECURITY_GROUP_ID }}" \
+              ImageUri="${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:${IMAGE_TAG}" \
+              ContainerPort="${{ vars.CONTAINER_PORT }}" \
+              DesiredCount="${{ vars.DESIRED_COUNT }}" \
+              TaskCpu="${{ vars.TASK_CPU }}" \
+              TaskMemory="${{ vars.TASK_MEMORY }}" \
+              CertificateArn="${{ vars.CERTIFICATE_ARN }}" \
+              DatabaseUrlSecretArn="${{ secrets.DATABASE_URL_SECRET_ARN }}" \
+              SessionSecretSecretArn="${{ secrets.SESSION_SECRET_SECRET_ARN }}" \
+              GoogleClientSecretSecretArn="${{ secrets.GOOGLE_CLIENT_SECRET_SECRET_ARN }}" \
+              SmtpPasswordSecretArn="${{ secrets.SMTP_PASSWORD_SECRET_ARN }}" \
+              GoogleClientId="${{ vars.GOOGLE_CLIENT_ID }}" \
+              GoogleCallbackUrl="${{ vars.GOOGLE_CALLBACK_URL }}" \
+              EmailFrom="${{ vars.EMAIL_FROM }}" \
+              SmtpHost="${{ vars.SMTP_HOST }}" \
+              SmtpPort="${{ vars.SMTP_PORT }}" \
+              SmtpSecure="${{ vars.SMTP_SECURE }}" \
+              SmtpUser="${{ vars.SMTP_USER }}"
+
+      - name: Print stack outputs
+        run: |
+          aws cloudformation describe-stacks \
+            --stack-name "$STACK_NAME" \
+            --region "$AWS_REGION" \
+            --query 'Stacks[0].Outputs' \
+            --output table

@@ -6,10 +6,12 @@ import nodemailer from "nodemailer";
 import { config } from "../config";
 
 export const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: config.SMTP_HOST,
+  port: config.SMTP_PORT,
+  secure: config.SMTP_SECURE,
   auth: {
-    user: config.EMAIL_USER,
-    pass: config.EMAIL_PASSWORD,
+    user: config.SMTP_USER,
+    pass: config.SMTP_PASSWORD,
   },
 });
 
@@ -25,7 +27,7 @@ export async function sendVerificationEmail(
 ): Promise<void> {
   const link = verificationLink(rawToken);
   await transporter.sendMail({
-    from: config.EMAIL_USER,
+    from: config.EMAIL_FROM,
     to,
     subject: "Verify your HavenLink email",
     text: `Welcome to HavenLink!

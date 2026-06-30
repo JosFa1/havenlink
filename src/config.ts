@@ -32,9 +32,16 @@ const schema = z.object({
   GOOGLE_CLIENT_SECRET: z.string().min(1),
   GOOGLE_CALLBACK_URL: z.string().url(),
 
-  // Email (existing nodemailer / Gmail app password setup).
-  EMAIL_USER: z.string().email().default("havenlink.org@gmail.com"),
-  EMAIL_PASSWORD: z.string().default(""),
+  // Transactional email over SMTP (Amazon SES in production).
+  EMAIL_FROM: z.string().min(1),
+  SMTP_HOST: z.string().min(1),
+  SMTP_PORT: z.coerce.number().int().positive().default(587),
+  SMTP_SECURE: z
+    .enum(["true", "false"])
+    .default("false")
+    .transform((value) => value === "true"),
+  SMTP_USER: z.string().min(1),
+  SMTP_PASSWORD: z.string().min(1),
 });
 
 const parsed = schema.safeParse(process.env);
