@@ -5,6 +5,7 @@
 import fs from "fs";
 import path from "path";
 import { pool } from "./pool";
+import { config } from "../config";
 
 /**
  * `tsc` does not copy .sql files into dist/, so when running compiled
@@ -23,6 +24,14 @@ function readSchema(): string {
 }
 
 async function main() {
+  const dbHost = (() => {
+    try {
+      return new URL(config.DATABASE_URL).hostname;
+    } catch {
+      return "(unparsed)";
+    }
+  })();
+  console.log(`Starting database migration against ${dbHost}...`);
   await pool.query(readSchema());
   console.log("Migration applied successfully.");
 }
@@ -30,6 +39,9 @@ async function main() {
 main()
   .then(() => pool.end())
   .catch((err) => {
-    console.error("Migration failed:", err.message);
+    console.error(
+      "Migration failed:",
+      err instanceof Error ? err.stack ?? err.message : String(err)
+    );
     pool.end().finally(() => process.exit(1));
   });

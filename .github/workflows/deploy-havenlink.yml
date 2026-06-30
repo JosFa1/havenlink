@@ -72,7 +72,7 @@ jobs:
               SmtpHost="${{ vars.SMTP_HOST }}" \
               SmtpPort="${{ vars.SMTP_PORT }}" \
               SmtpSecure="${{ vars.SMTP_SECURE }}" \
-              SmtpUser="${{ vars.SMTP_USER }}"
+              SmtpUser="${{ secrets.SMTP_USER }}"
 
       - name: Print stack outputs
         run: |

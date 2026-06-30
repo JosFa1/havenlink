@@ -23,7 +23,94 @@ else
   aws iam create-role --role-name "$ROLE_NAME" --assume-role-policy-document "$(aws_file_uri "$ROOT_DIR/deploy/tmp-github-trust.json")" >/dev/null
 fi
 cat > "$ROOT_DIR/deploy/tmp-github-policy.json" <<'JSON'
-{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["ecr:GetAuthorizationToken"],"Resource":"*"},{"Effect":"Allow","Action":["ecr:BatchCheckLayerAvailability","ecr:BatchGetImage","ecr:CompleteLayerUpload","ecr:CreateRepository","ecr:DescribeRepositories","ecr:InitiateLayerUpload","ecr:PutImage","ecr:UploadLayerPart"],"Resource":"*"},{"Effect":"Allow","Action":["cloudformation:CreateStack","cloudformation:UpdateStack","cloudformation:DescribeStacks","cloudformation:DescribeStackEvents","cloudformation:DescribeChangeSet","cloudformation:CreateChangeSet","cloudformation:ExecuteChangeSet","cloudformation:DeleteChangeSet","cloudformation:GetTemplateSummary"],"Resource":"*"},{"Effect":"Allow","Action":["iam:CreateRole","iam:GetRole","iam:PassRole","iam:PutRolePolicy","iam:AttachRolePolicy","iam:TagRole","iam:UpdateAssumeRolePolicy"],"Resource":"*"},{"Effect":"Allow","Action":["ecs:*","elasticloadbalancing:*","ec2:Describe*","ec2:AuthorizeSecurityGroupIngress","ec2:CreateSecurityGroup","ec2:RevokeSecurityGroupIngress","logs:CreateLogGroup","logs:PutRetentionPolicy","application-autoscaling:*"],"Resource":"*"},{"Effect":"Allow","Action":["secretsmanager:DescribeSecret","secretsmanager:GetSecretValue","kms:Decrypt"],"Resource":"*"}]}
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["ecr:GetAuthorizationToken"],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:CompleteLayerUpload",
+        "ecr:CreateRepository",
+        "ecr:DescribeRepositories",
+        "ecr:InitiateLayerUpload",
+        "ecr:PutImage",
+        "ecr:UploadLayerPart"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "cloudformation:CreateStack",
+        "cloudformation:UpdateStack",
+        "cloudformation:DeleteStack",
+        "cloudformation:DescribeStacks",
+        "cloudformation:DescribeStackEvents",
+        "cloudformation:DescribeChangeSet",
+        "cloudformation:CreateChangeSet",
+        "cloudformation:ExecuteChangeSet",
+        "cloudformation:DeleteChangeSet",
+        "cloudformation:GetTemplateSummary"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateRole",
+        "iam:DeleteRole",
+        "iam:GetRole",
+        "iam:PassRole",
+        "iam:PutRolePolicy",
+        "iam:DeleteRolePolicy",
+        "iam:AttachRolePolicy",
+        "iam:DetachRolePolicy",
+        "iam:TagRole",
+        "iam:UntagRole",
+        "iam:UpdateAssumeRolePolicy"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecs:*",
+        "elasticloadbalancing:*",
+        "ec2:Describe*",
+        "ec2:CreateSecurityGroup",
+        "ec2:DeleteSecurityGroup",
+        "ec2:AuthorizeSecurityGroupIngress",
+        "ec2:RevokeSecurityGroupIngress",
+        "ec2:AuthorizeSecurityGroupEgress",
+        "ec2:RevokeSecurityGroupEgress",
+        "ec2:CreateTags",
+        "ec2:DeleteTags",
+        "logs:CreateLogGroup",
+        "logs:DeleteLogGroup",
+        "logs:DescribeLogGroups",
+        "logs:PutRetentionPolicy",
+        "application-autoscaling:*"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:GetSecretValue",
+        "kms:Decrypt"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
 JSON
 aws iam put-role-policy --role-name "$ROLE_NAME" --policy-name havenlink-github-deploy --policy-document "$(aws_file_uri "$ROOT_DIR/deploy/tmp-github-policy.json")" >/dev/null
 ROLE_ARN="$(aws iam get-role --role-name "$ROLE_NAME" --query Role.Arn --output text)"

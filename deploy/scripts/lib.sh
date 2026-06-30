@@ -1,7 +1,7 @@
 set -euo pipefail
 # Prevent Git Bash from rewriting AWS resource paths such as /havenlink/prod/*.
 if [ -n "${MSYSTEM:-}" ]; then
-  export MSYS2_ARG_CONV_EXCL='*'
+  export MSYS2_ARG_CONV_EXCL='/havenlink/'
 fi
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 ENV_FILE="$ROOT_DIR/.env.local"
