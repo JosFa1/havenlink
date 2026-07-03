@@ -11,6 +11,8 @@ export interface User {
   email_verified: boolean;
   password_hash: string | null;
   google_sub: string | null;
+  newsletter_prompt_pending: boolean;
+  newsletter_subscribed: boolean;
   created_at: Date;
   updated_at: Date;
 }
@@ -37,8 +39,8 @@ export async function createPasswordUser(
   passwordHash: string
 ): Promise<User> {
   const { rows } = await query<User>(
-    `INSERT INTO users (email, password_hash, email_verified)
-     VALUES ($1, $2, false)
+    `INSERT INTO users (email, password_hash, email_verified, newsletter_prompt_pending)
+     VALUES ($1, $2, false, true)
      RETURNING *`,
     [email, passwordHash]
   );
@@ -51,8 +53,8 @@ export async function createGoogleUser(
   googleSub: string
 ): Promise<User> {
   const { rows } = await query<User>(
-    `INSERT INTO users (email, google_sub, email_verified, password_hash)
-     VALUES ($1, $2, true, NULL)
+    `INSERT INTO users (email, google_sub, email_verified, password_hash, newsletter_prompt_pending)
+     VALUES ($1, $2, true, NULL, true)
      RETURNING *`,
     [email, googleSub]
   );
@@ -78,5 +80,24 @@ export async function markEmailVerified(userId: string): Promise<void> {
   await query(
     `UPDATE users SET email_verified = true, updated_at = now() WHERE id = $1`,
     [userId]
+  );
+}
+
+/**
+ * Record the user's response to the one-time newsletter prompt. Always clears
+ * the pending flag (so it never shows again); when they accept, marks them
+ * subscribed. `OR $2` means declining never wipes a prior opt-in.
+ */
+export async function resolveNewsletterPrompt(
+  userId: string,
+  subscribe: boolean
+): Promise<void> {
+  await query(
+    `UPDATE users
+        SET newsletter_prompt_pending = false,
+            newsletter_subscribed = newsletter_subscribed OR $2,
+            updated_at = now()
+      WHERE id = $1`,
+    [userId, subscribe]
   );
 }

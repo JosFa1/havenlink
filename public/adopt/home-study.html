@@ -102,7 +102,7 @@
                 <div class="process-icon">2</div>
                 <div class="process-content">
                   <h4>In-Home Visit</h4>
-                  <p>A social worker will visit your home to assess its safety, stability, and suitability for a child. They'll review bedrooms, childproofing, and space for an adopted child.</p>
+                  <p>A social worker will visit your home to assess its safety, stability, and suitability for a child. They'll review sleeping arrangements, childproofing, and space for an adopted child — the specifics vary by state.</p>
                 </div>
               </div>
 
@@ -118,7 +118,7 @@
                 <div class="process-icon">4</div>
                 <div class="process-content">
                   <h4>Adoption Training</h4>
-                  <p>You may be required to complete adoption education (such as PRIDE training) to prepare you for the emotional and developmental needs of adopted children.</p>
+                  <p>You may be required to complete adoption education (such as PRIDE training) to prepare you for the emotional and developmental needs of adopted children. Training requirements vary by state and agency.</p>
                 </div>
               </div>
 
@@ -164,15 +164,377 @@
               </div>
             </div>
 
-            <div id="readiness" class="readiness-callout">
-              <h3>Is Your Family Ready?</h3>
+            <div id="get-started" class="readiness-callout">
+              <h3>Where are you in the home study process?</h3>
               <p>
-                If you haven't started a home study yet, that's okay! HavenLink can help you prepare. Our Family Intake Form will help you reflect on your readiness, assess your preferences, and connect you with resources to get started.
+                Choose the option that fits your family. If you've already completed a home study, we'll collect a few details and move you to the next step. If you haven't, a short readiness check will show you where you stand and how to prepare.
               </p>
-              <a href="intake-form.html" class="btn btn-primary" style="margin-top: 1.5rem;">
-                Continue to Family Intake Form →
-              </a>
+              <div class="fork-buttons">
+                <button type="button" class="btn btn-primary" id="forkCompleted">I've already completed a home study</button>
+                <button type="button" class="btn btn-secondary" id="forkNotYet">I haven't completed a home study yet</button>
+              </div>
             </div>
+
+            <section id="home-study-flow" hidden aria-label="Home study questions">
+              <div class="hs-flow-header">
+                <button type="button" class="btn-link" id="hsStartOver">← Start over</button>
+                <span class="hs-step-indicator" id="hsStepIndicator" aria-live="polite"></span>
+              </div>
+              <div id="hsScreenHost"></div>
+
+              <!-- Path A: already completed a home study -->
+              <template id="tpl-a-state">
+                <div class="hs-screen">
+                  <div class="q-block">
+                    <label class="q-legend" for="aState">Which state was your home study completed in?</label>
+                    <div class="form-group hs-field">
+                      <select id="aState">
+                        <option value="">Select a state…</option>
+                      </select>
+                    </div>
+                    <p class="field-error" data-q-error role="alert">Please select a state to continue.</p>
+                  </div>
+                  <div class="hs-actions">
+                    <button type="button" class="btn btn-primary" data-action="continue">Continue →</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-a-agency">
+                <div class="hs-screen">
+                  <div class="q-block">
+                    <label class="q-legend" for="aAgency">Which agency or provider conducted your home study?</label>
+                    <span class="q-help">The licensed agency, social worker, or organization that completed your study.</span>
+                    <div class="form-group hs-field">
+                      <input type="text" id="aAgency" maxlength="200" placeholder="e.g., Sunshine Family Services" autocomplete="organization">
+                    </div>
+                    <p class="field-error" data-q-error role="alert">Please enter the agency or provider name to continue.</p>
+                  </div>
+                  <div class="hs-actions">
+                    <button type="button" class="btn btn-secondary" data-action="back">← Back</button>
+                    <button type="button" class="btn btn-primary" data-action="continue">Continue →</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-a-date">
+                <div class="hs-screen">
+                  <div class="q-block">
+                    <span class="q-legend">When was your home study completed?</span>
+                    <span class="q-help">Most states consider a home study current for 12–24 months, so the completion date matters.</span>
+                    <div class="hs-date-selects">
+                      <div class="form-group">
+                        <label for="aMonth">Month</label>
+                        <select id="aMonth">
+                          <option value="">Month…</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="aYear">Year</label>
+                        <select id="aYear">
+                          <option value="">Year…</option>
+                        </select>
+                      </div>
+                    </div>
+                    <p class="field-error" data-q-error role="alert">Please select the month and year to continue.</p>
+                  </div>
+                  <div class="hs-actions">
+                    <button type="button" class="btn btn-secondary" data-action="back">← Back</button>
+                    <button type="button" class="btn btn-primary" data-action="continue">Finish →</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-a-end">
+                <div class="hs-screen">
+                  <div class="readiness-callout hs-end-card">
+                    <h3>You're ready for the next step!</h3>
+                    <p>
+                      Since your home study is already complete, you can move straight to Step 2 of your adoption journey: the Family Intake Form. We've sent your home study details to HavenLink so the team has them on file.
+                    </p>
+                    <div class="alert-banner alert-warning" data-expired-note hidden>
+                      <div class="alert-body">
+                        <strong>Your home study may need an update</strong>
+                        It was completed more than 24 months ago, and most states require updates every 12–24 months. Your agency can tell you whether a renewal is needed.
+                      </div>
+                    </div>
+                    <p class="hs-submit-status" data-submit-status aria-live="polite"></p>
+                    <div class="hs-actions">
+                      <a href="/adopt/intake-form" class="btn btn-primary">Continue to Family Intake Form →</a>
+                      <button type="button" class="btn-link" data-action="startover">Start over</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <!-- Path B: readiness screener -->
+              <template id="tpl-b-state">
+                <div class="hs-screen">
+                  <div class="q-block">
+                    <label class="q-legend" for="bState">Before we get started, which state do you currently live in?</label>
+                    <span class="q-help">Home study requirements differ by state, so we'll tailor the rest of the questions to where you live.</span>
+                    <div class="form-group hs-field">
+                      <select id="bState">
+                        <option value="">Select your state…</option>
+                      </select>
+                    </div>
+                    <p class="field-error" data-q-error role="alert">Please select your state to continue.</p>
+                  </div>
+                  <div class="hs-actions">
+                    <button type="button" class="btn btn-primary" data-action="continue">Continue →</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-b-question">
+                <div class="hs-screen">
+                  <fieldset class="q-block q-fieldset">
+                    <legend class="q-legend" data-q-text></legend>
+                    <span class="q-help" data-q-why></span>
+                    <div class="option-group">
+                      <label class="option"><input type="radio" name="hsAnswer" value="yes"><span class="option-text">Yes</span></label>
+                      <label class="option"><input type="radio" name="hsAnswer" value="no"><span class="option-text">No</span></label>
+                      <label class="option" data-q-na hidden><input type="radio" name="hsAnswer" value="na"><span class="option-text" data-q-na-label></span></label>
+                    </div>
+                    <p class="field-error" data-q-error role="alert">Please select an answer to continue.</p>
+                  </fieldset>
+                  <div class="hs-actions">
+                    <button type="button" class="btn btn-secondary" data-action="back">← Back</button>
+                    <button type="button" class="btn btn-primary" data-action="continue">Continue →</button>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-b-disqualified">
+                <div class="hs-screen">
+                  <div class="hs-end-card">
+                    <h3>You're not quite ready yet — and that's okay</h3>
+                    <p data-dq-message></p>
+                    <h4>Here's what you can do next →</h4>
+                    <ul class="hs-next-steps" data-dq-steps></ul>
+                    <p class="hs-submit-status" data-submit-status aria-live="polite"></p>
+                    <div class="hs-actions">
+                      <button type="button" class="btn btn-primary" data-action="resources">View Preparation Resources</button>
+                      <button type="button" class="btn-link" data-action="startover">Start over</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-b-international">
+                <div class="hs-screen">
+                  <div class="hs-end-card">
+                    <h3>For families living outside the United States</h3>
+                    <p>
+                      Home studies for international residents must be conducted through a USCIS-accredited agency in your country of residence. Please visit
+                      <a href="https://www.uscis.gov/adoption" target="_blank" rel="noopener noreferrer">uscis.gov/adoption</a> for guidance.
+                    </p>
+                    <p class="hs-submit-status" data-submit-status aria-live="polite"></p>
+                    <div class="hs-actions">
+                      <button type="button" class="btn-link" data-action="startover">Start over</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-b-passed">
+                <div class="hs-screen">
+                  <div class="readiness-callout hs-end-card">
+                    <h3>Great news — you appear to meet the basic requirements!</h3>
+                    <p data-passed-message>
+                      Based on your answers, you appear to meet the basic eligibility requirements for a home study in [State]. We've sent your results to HavenLink — one of our partners will reach out at your account email to walk you through next steps and help schedule your consultation.
+                    </p>
+                    <p>
+                      In the meantime, the preparation resources below will help you get ready for the interview, the paperwork, and the home visit.
+                    </p>
+                    <p class="hs-submit-status" data-submit-status aria-live="polite"></p>
+                    <div class="hs-actions">
+                      <button type="button" class="btn btn-primary" data-action="resources">View Preparation Resources</button>
+                      <button type="button" class="btn-link" data-action="startover">Start over</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+
+              <template id="tpl-config-error">
+                <div class="hs-screen">
+                  <div class="hs-end-card">
+                    <h3>We couldn't load the screening questions</h3>
+                    <p>Something went wrong while loading your state's requirements. Please check your connection and try again.</p>
+                    <div class="hs-actions">
+                      <button type="button" class="btn btn-primary" data-action="retry">Try again</button>
+                      <button type="button" class="btn-link" data-action="startover">Start over</button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+            </section>
+
+            <section id="preparation-resources" aria-labelledby="prep-heading">
+              <h3 id="prep-heading" style="margin-top: 2.5rem;">Preparation Resources</h3>
+              <div class="alert-banner alert-info">
+                <div class="alert-body">
+                  <strong>⚠️ Requirements vary by state</strong>
+                  The information below covers what most states require. Always verify specific requirements with a licensed adoption agency or attorney in your state.
+                </div>
+              </div>
+
+              <details class="prep-accordion" id="prep-interview">
+                <summary>
+                  <span class="prep-summary-title">Interview Preparation</span>
+                </summary>
+                <div class="prep-body">
+                  <p>
+                    The home study interview is a conversation, not a test. The social worker's goal is to understand your family — not to find reasons to reject you. The primary applicant(s) and all adults in the home are interviewed, and sometimes older children too.
+                  </p>
+                  <h4>Common topics across all states</h4>
+                  <ul>
+                    <li>Why you want to adopt and what led you to this decision</li>
+                    <li>Your upbringing and family background</li>
+                    <li>Your parenting philosophy and approach to discipline</li>
+                    <li>Relationship history (for couples: how you communicate and handle conflict)</li>
+                    <li>Your support system — friends, family, community</li>
+                    <li>What age range or background of child you're open to</li>
+                    <li>How you plan to support a child's cultural or racial identity (if adopting transracially)</li>
+                    <li>Your understanding of trauma, loss, and attachment</li>
+                  </ul>
+                  <h4>Tips for answering well</h4>
+                  <ul>
+                    <li>Be honest — social workers are trained to recognize rehearsed answers</li>
+                    <li>You don't need to be perfect; you need to show you're self-aware and prepared</li>
+                    <li>It's okay to say "we're still learning about that"</li>
+                    <li>Disagreeing with your partner on some things is fine and normal</li>
+                  </ul>
+                  <h4>What NOT to worry about</h4>
+                  <p>
+                    A small home, modest income, or imperfect past does not automatically disqualify you. The process is designed to rule families in, not out.
+                  </p>
+                  <h4>After the interview</h4>
+                  <p>
+                    The social worker writes up their report, and you may be asked to address specific items. The timeline from interview to approval varies by state — typically 1–6 months.
+                  </p>
+                </div>
+              </details>
+
+              <details class="prep-accordion" id="prep-documents">
+                <summary>
+                  <span class="prep-summary-title">Documentation Checklist</span>
+                  <span class="prep-progress" id="docsProgress"></span>
+                </summary>
+                <div class="prep-body">
+                  <p>
+                    This checklist covers documents required in most states. Your state or agency may require additional items — check with your licensed home study provider for a complete list. Your progress is saved on this device.
+                  </p>
+                  <h4>Identity &amp; Legal</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="photo_id"><span class="option-text">Valid government-issued photo ID — all adults in household</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="birth_certificates"><span class="option-text">Birth certificate — all household members</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="ssn_cards"><span class="option-text">Social Security card — all adults</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="marriage_certificate"><span class="option-text">Marriage certificate (if married)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="divorce_decrees"><span class="option-text">Divorce decree(s) (if previously married)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="name_change"><span class="option-text">Proof of legal name change (if applicable)</span></label></li>
+                  </ul>
+                  <h4>Financial</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="tax_returns"><span class="option-text">Federal tax returns — most recent 2 years</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="pay_stubs"><span class="option-text">Pay stubs or proof of income — most recent 3 months</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="bank_statements"><span class="option-text">Bank statements — most recent 3 months</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="assets_summary"><span class="option-text">General summary of assets (home, vehicles, investments)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="debts_summary"><span class="option-text">General summary of debts (mortgage, loans)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="health_insurance"><span class="option-text">Proof of health insurance coverage</span></label></li>
+                  </ul>
+                  <h4>Medical</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="physical_exam"><span class="option-text">Completed physical exam for all adults (within the past 12 months)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="physician_statement"><span class="option-text">Physician statement confirming physical and mental fitness to parent</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="immunization_records"><span class="option-text">Immunization records for all household members</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="mental_health_clearance"><span class="option-text">Mental health clearance (if requested by agency)</span></label></li>
+                  </ul>
+                  <h4>Background &amp; Legal Clearance</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="state_background"><span class="option-text">State-level criminal background check — all adults (specific agency varies by state)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="fbi_fingerprint"><span class="option-text">FBI fingerprint-based background check — check if required in your state</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="abuse_registry"><span class="option-text">State child abuse registry clearance (required in most states)</span></label></li>
+                  </ul>
+                  <h4>Home</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="home_ownership"><span class="option-text">Proof of homeownership or current lease</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="home_insurance"><span class="option-text">Homeowner's or renter's insurance</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="pet_vaccinations"><span class="option-text">Pet vaccination records (if applicable)</span></label></li>
+                  </ul>
+                  <h4>References</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="reference_letters"><span class="option-text">3–5 personal reference letters (non-relatives preferred) — number varies by state and agency</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="reference_contacts"><span class="option-text">Reference contact information (name, relationship, phone, email)</span></label></li>
+                  </ul>
+                  <h4>Additional (varies by agency or state)</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="vehicle_registration"><span class="option-text">Vehicle registration and insurance</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="life_insurance"><span class="option-text">Life insurance policy documentation (if applicable)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="dd214"><span class="option-text">Military discharge papers DD-214 (if veteran)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="training_certificate"><span class="option-text">Pre-adoption training certificate (required in some states)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="docs" data-item="autobiographical_statement"><span class="option-text">Autobiographical statement (required by many agencies)</span></label></li>
+                  </ul>
+                </div>
+              </details>
+
+              <details class="prep-accordion" id="prep-home">
+                <summary>
+                  <span class="prep-summary-title">Prepare Your Home</span>
+                  <span class="prep-progress" id="homeProgress"></span>
+                </summary>
+                <div class="prep-body">
+                  <p>
+                    During the home visit, a licensed social worker confirms in person that your home is safe and has adequate space. Visits typically take 1–2 hours. Home safety standards are similar across most states, though some are stricter — California, for example, has specific pool safety laws. Your progress is saved on this device.
+                  </p>
+                  <h4>Throughout the home</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="smoke_detectors"><span class="option-text">Working smoke detector on every floor — batteries tested</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="co_detectors"><span class="option-text">Working carbon monoxide detector on every floor</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="fire_extinguisher"><span class="option-text">Fire extinguisher accessible (one per floor recommended)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="exit_plan"><span class="option-text">Emergency exit plan visible or discussed</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="outlet_caps"><span class="option-text">Unused electrical outlets covered with safety caps</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="no_exposed_wiring"><span class="option-text">No exposed wiring or broken outlets</span></label></li>
+                  </ul>
+                  <h4>Kitchen</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="cleaning_products"><span class="option-text">Cleaning products stored in a locked cabinet or out of reach</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="knives"><span class="option-text">Knives stored safely (drawer or knife block, not loose on countertops)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="no_kitchen_meds"><span class="option-text">Medications not stored in the kitchen</span></label></li>
+                  </ul>
+                  <h4>Bathrooms</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="meds_locked"><span class="option-text">All medications locked away or out of reach</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="water_heater"><span class="option-text">Water heater set to 120°F or below to prevent scalding</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="toilet_locks"><span class="option-text">Toilet locks if infant or toddler placement is anticipated</span></label></li>
+                  </ul>
+                  <h4>Bedrooms</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="sleeping_area"><span class="option-text">Child's designated sleeping area identified — appropriate bed or crib</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="no_couch_sleeping"><span class="option-text">No couch, hallway floor, or shared adult bed as the primary sleeping arrangement</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="window_guards"><span class="option-text">Window guards installed if above ground floor (for young children)</span></label></li>
+                  </ul>
+                  <h4>Garage / Storage / Outdoors</h4>
+                  <ul class="prep-checklist">
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="chemicals_locked"><span class="option-text">Chemicals, paints, and fuels in a locked cabinet or shed</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="tools_stored"><span class="option-text">Tools stored safely</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="pool_fenced"><span class="option-text">Pool or hot tub fenced with a self-latching gate (California: must meet CA Swimming Pool Safety Act)</span></label></li>
+                    <li><label class="option"><input type="checkbox" data-checklist="home" data-item="firearms_locked"><span class="option-text">Firearms unloaded, in a locked safe, with ammunition stored separately</span></label></li>
+                  </ul>
+                  <h4>Tips for the visit itself</h4>
+                  <ul>
+                    <li>Cleanliness matters but perfection doesn't — a clean, organized home demonstrates care</li>
+                    <li>Offer a walkthrough proactively; don't wait for the social worker to ask</li>
+                    <li>Be present and relaxed — the visit is a conversation, not an inspection</li>
+                    <li>If you spot something that needs fixing, fix it before the visit rather than explaining it away</li>
+                  </ul>
+                  <h4>After the visit</h4>
+                  <p>
+                    The social worker writes their findings into a report. If any items need attention, you'll be notified and given time to address them before final approval.
+                  </p>
+                </div>
+              </details>
+            </section>
           </div>
 
           <div class="content-sidebar">
@@ -191,10 +553,10 @@
               <h3>Next Steps</h3>
               <ol class="next-steps">
                 <li>Review this information with your family</li>
-                <li>Contact a licensed adoption agency or social worker</li>
-                <li>Complete the home study process</li>
-                <li>Return to HavenLink to complete your intake form</li>
-                <li>Explore agencies and child profiles</li>
+                <li>Tell us where you are — home study completed or not yet</li>
+                <li>Answer a few quick questions about your situation</li>
+                <li>Work through the preparation resources below</li>
+                <li>Continue to the Family Intake Form</li>
               </ol>
             </div>
 
@@ -228,7 +590,8 @@
           <li><a href="#home-study">Home Study</a></li>
           <li><a href="#expectations">Expectations</a></li>
           <li><a href="#importance">Importance</a></li>
-          <li><a href="#readiness">Readiness</a></li>
+          <li><a href="#get-started">Get Started</a></li>
+          <li><a href="#preparation-resources">Preparation Resources</a></li>
         </ul>
       </div>
       
@@ -466,5 +829,6 @@
 
   <script src="../script.js"></script>
   <script src="/account.js"></script>
+  <script src="/adopt/home-study.js"></script>
 </body>
 </html>

@@ -18,6 +18,16 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at      timestamptz NOT NULL DEFAULT now()
 );
 
+-- Newsletter prompt state (added post-launch; ALTERs are idempotent so `npm run
+-- migrate` is safe to re-run). `prompt_pending` is set true only when a brand-new
+-- account is created, so the one-time popup shows for new signups but never for
+-- accounts that predate this feature. It is cleared once the user accepts or
+-- declines. `subscribed` records an accepted opt-in.
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS newsletter_prompt_pending boolean NOT NULL DEFAULT false;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS newsletter_subscribed boolean NOT NULL DEFAULT false;
+
 CREATE TABLE IF NOT EXISTS email_verification_tokens (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id     uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,

@@ -603,22 +603,55 @@ class IntakeFormState {
   }
 
   /* ---------- Submit ---------- */
-  completeForm() {
+  async completeForm() {
     // Collect every section so the full answer set is persisted locally.
     this.sections.forEach(s => this.collectSectionData(s));
     this.saveFormData();
 
-    // PRIVACY: nothing is transmitted to any agency here. Family intake data is only
-    // shared with an agency on an explicit, separate inquiry action — not on form submit.
-    // The Q20 CPS free-text remains in this restricted local store only.
+    // PRIVACY: submission emails the answer set to HavenLink only. The account id
+    // (the signed-in user's email) is attached server-side from the session. Family
+    // intake data is still only shared with an AGENCY on an explicit, separate
+    // inquiry action — not on form submit.
     //
     // TODO: scoring + routing
     //   - deterministic match-score (0–100), age-range recommendation, agency routing,
     //     readiness-stage classification, flags. These are downstream of the form and
     //     should run server-side against the collected `this.formData` keyed answers.
 
-    this.showNotification('Intake form submitted successfully! Redirecting…', 'success');
-    setTimeout(() => { window.location.href = '/adopt/agency-profiles'; }, 2000);
+    const nextBtn = document.getElementById('nextBtn');
+    if (nextBtn) nextBtn.disabled = true;
+    try {
+      // Same double-submit CSRF pattern as account.js: fetch the token, echo it
+      // in the x-csrf-token header (the cookie half is httpOnly).
+      const csrfRes = await fetch('/auth/csrf', { credentials: 'same-origin', cache: 'no-store' });
+      if (!csrfRes.ok) throw new Error('Could not get CSRF token');
+      const { csrfToken } = await csrfRes.json();
+
+      const res = await fetch('/api/intake-submission', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-csrf-token': csrfToken
+        },
+        body: JSON.stringify({
+          household: this.formData.household,
+          lifestyle: this.formData.lifestyle,
+          experience: this.formData.experience,
+          preferences: this.formData.preferences,
+          legal: this.formData.legal,
+          startedAt: this.formData.startedAt
+        })
+      });
+      if (!res.ok) throw new Error(`Submission failed (${res.status})`);
+
+      this.showNotification('Intake form submitted successfully! Redirecting…', 'success');
+      setTimeout(() => { window.location.href = '/adopt/agency-profiles'; }, 2000);
+    } catch (e) {
+      console.error('Intake submission failed:', e);
+      this.showNotification('Submission failed. Please try again.', 'error');
+      if (nextBtn) nextBtn.disabled = false;
+    }
   }
 
   /* ---------- Accessibility ---------- */

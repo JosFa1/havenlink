@@ -39,3 +39,28 @@ If you did not create a HavenLink account, you can safely ignore this email.
 — The HavenLink Team`,
   });
 }
+
+/**
+ * Notify HavenLink that a user opted into the newsletter. Sent to the team inbox
+ * with replyTo set to the subscriber, mirroring the referral/intake emails.
+ */
+export async function sendNewsletterSubscriberNotification(
+  subscriberEmail: string
+): Promise<void> {
+  const submittedAt = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York",
+    timeZoneName: "short",
+  });
+  await transporter.sendMail({
+    from: config.EMAIL_USER,
+    to: "havenlink.org@gmail.com",
+    replyTo: subscriberEmail,
+    subject: `New Newsletter Subscriber: ${subscriberEmail}`,
+    text: `A user opted into the HavenLink Newsletter.
+
+Email: ${subscriberEmail}
+Subscribed: ${submittedAt} (${new Date().toISOString()})
+
+They accepted the newsletter prompt shown after signing up.`,
+  });
+}

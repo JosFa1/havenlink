@@ -1,0 +1,228 @@
+{
+  "FL": {
+    "stateName": "Florida",
+    "additionalQuestions": [
+      {
+        "id": "fl_residency",
+        "question": "Do you currently reside in the state of Florida?",
+        "why": "Florida home studies are only valid for Florida residents.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Florida home studies are only available to Florida residents. If you live in another state, please contact a licensed adoption agency in your state of residence.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "fl_household_background",
+        "question": "Are all members of your household who are age 12 or older prepared to complete state and federal fingerprint-based background checks (FDLE + FBI)?",
+        "why": "Florida requires fingerprint-based background checks for all household members age 12 and older, plus a DCF central abuse registry review.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Florida requires FDLE and FBI fingerprint background checks for all household members age 12 and older, plus a DCF central abuse registry review. Visit our preparation resources to learn how to get started.",
+        "nextSteps": [
+          "Talk with everyone in your household age 12+ about the fingerprinting requirement",
+          "Review the Documentation Checklist below for what the background check involves"
+        ]
+      },
+      {
+        "id": "fl_pets",
+        "question": "If you have pets, are they up to date on vaccinations with documentation available?",
+        "why": "Florida home studies require pet vaccination records.",
+        "inputType": "yes_no_na",
+        "naLabel": "I do not have pets",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Florida home studies require current pet vaccination records. Please get your pets vaccinated and obtain documentation before applying.",
+        "nextSteps": [
+          "Schedule a vet visit to bring vaccinations up to date",
+          "Ask your vet for printed vaccination records to keep with your documents"
+        ]
+      }
+    ]
+  },
+  "TX": {
+    "stateName": "Texas",
+    "additionalQuestions": [
+      {
+        "id": "tx_residency",
+        "question": "Do you currently reside in the state of Texas?",
+        "why": "Texas home studies are conducted under Texas DFPS rules and are only valid for Texas residents.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Texas home studies are only available to Texas residents. If you live in another state, please contact a licensed adoption agency in your state.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "tx_household_background",
+        "question": "Are all members of your household who are age 14 or older prepared to complete state and federal background checks, including a Texas DPS check, FBI fingerprint clearance, and Texas Central Registry check?",
+        "why": "Texas DFPS requires background checks for all household members age 14+.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Texas requires background checks for all household members age 14 and older, including a Texas DPS criminal history check, FBI fingerprint clearance, and Texas Child Abuse and Neglect Central Registry check.",
+        "nextSteps": [
+          "Talk with everyone in your household age 14+ about the background check requirement",
+          "Review the Documentation Checklist below for what the checks involve"
+        ]
+      },
+      {
+        "id": "tx_training",
+        "question": "Are you prepared to complete required pre-adoption training, including CPR and first aid certification?",
+        "why": "Many Texas agencies require CPR/first aid training as part of the home study process.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Texas home studies often require pre-adoption training, including CPR and first aid certification. Our preparation resources include information on how to find approved training programs in Texas.",
+        "nextSteps": [
+          "Look for CPR/first aid classes through the Red Cross or a local hospital",
+          "Ask prospective agencies which training programs they accept"
+        ]
+      }
+    ]
+  },
+  "CA": {
+    "stateName": "California",
+    "additionalQuestions": [
+      {
+        "id": "ca_residency",
+        "question": "Do you currently reside in the state of California?",
+        "why": "California home studies are only valid for California residents.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "California home studies are only available to California residents. Please contact a licensed adoption agency in your state.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "ca_age_gap",
+        "question": "Are you at least 10 years older than the child you are hoping to adopt?",
+        "why": "California law (Fam. Code § 8601) requires adoptive parents to be at least 10 years older than the child, with limited exceptions for stepparents and close relatives.",
+        "inputType": "yes_no_na",
+        "naLabel": "Child's age not yet determined",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "California law generally requires adoptive parents to be at least 10 years older than the child. Exceptions exist for stepparents, siblings, aunts, uncles, and first cousins. If you believe an exception applies to your situation, speak with a licensed California adoption attorney.",
+        "nextSteps": [
+          "Consider whether a stepparent or close-relative exception applies to you",
+          "Speak with a licensed California adoption attorney about your options"
+        ]
+      },
+      {
+        "id": "ca_fingerprints",
+        "question": "Are all adults in your household prepared to submit fingerprints for a California DOJ and FBI background check?",
+        "why": "California requires fingerprint-based background checks from the CA Department of Justice and the FBI for all adults in the household.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "California requires fingerprint-based background checks from the CA Department of Justice and the FBI for all adults in the home. Visit our preparation resources to learn how to complete this step.",
+        "nextSteps": [
+          "Talk with the adults in your household about the fingerprinting requirement",
+          "Review the Documentation Checklist below for what the background check involves"
+        ]
+      },
+      {
+        "id": "ca_pool_safety",
+        "question": "If your home has a swimming pool or spa, does it have at least one approved safety barrier (e.g., an isolation fence, alarmed door/window, or pool alarm)?",
+        "why": "California's Swimming Pool Safety Act imposes stricter pool safety requirements than most other states.",
+        "inputType": "yes_no_na",
+        "naLabel": "My home does not have a pool or spa",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "California law requires pools and spas to have at least one approved safety barrier. Common solutions include an isolation fence or alarmed doors and windows that access the pool. Review our home preparation guide for details.",
+        "nextSteps": [
+          "Get a quote for an isolation fence or approved pool alarm",
+          "Work through the Prepare Your Home checklist below before your home visit"
+        ]
+      }
+    ]
+  },
+  "NY": {
+    "stateName": "New York",
+    "additionalQuestions": [
+      {
+        "id": "ny_residency",
+        "question": "Do you currently reside in the state of New York?",
+        "why": "New York home studies are only valid for New York residents.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "New York home studies are only available to New York residents. Please contact a licensed adoption agency in your state.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "ny_statecheck",
+        "question": "Are all adults in your household prepared to complete a New York State Central Register (SCR) clearance check in addition to a standard criminal background check?",
+        "why": "New York requires an SCR (child abuse registry) check for all adults in the household, in addition to standard criminal checks.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "New York requires all adults in the household to complete a State Central Register (SCR) clearance check for child abuse history, in addition to a criminal background check. Visit our preparation resources to learn how to complete this step.",
+        "nextSteps": [
+          "Talk with the adults in your household about the SCR clearance requirement",
+          "Review the Documentation Checklist below for what the clearances involve"
+        ]
+      }
+    ]
+  },
+  "IL": {
+    "stateName": "Illinois",
+    "additionalQuestions": [
+      {
+        "id": "il_residency",
+        "question": "Do you currently reside in the state of Illinois?",
+        "why": "Illinois home studies are only valid for Illinois residents.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Illinois home studies are only available to Illinois residents. Please contact a licensed adoption agency in your state.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "il_dcfs",
+        "question": "Are all adults and household members age 13 and older prepared to complete an Illinois DCFS background check, including fingerprinting?",
+        "why": "Illinois DCFS requires background checks for all household members age 13 and older.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Illinois requires DCFS background checks, including fingerprinting, for all household members age 13 and older. Visit our preparation resources to learn more.",
+        "nextSteps": [
+          "Talk with everyone in your household age 13+ about the background check requirement",
+          "Review the Documentation Checklist below for what the checks involve"
+        ]
+      }
+    ]
+  },
+  "DEFAULT": {
+    "stateName": "",
+    "note": "Requirements vary by state. These questions cover what most states require — always confirm specifics with a licensed agency in your state.",
+    "additionalQuestions": [
+      {
+        "id": "default_residency",
+        "question": "Do you currently reside in [State]?",
+        "why": "Home studies are generally only valid in the state where you currently reside.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Home studies are generally only valid in the state where you currently reside. If you've recently moved, contact a licensed adoption agency in your current state.",
+        "nextSteps": [
+          "Restart the screener and select the state you actually live in",
+          "Contact a licensed adoption agency in your current state to begin the process there"
+        ]
+      },
+      {
+        "id": "default_references",
+        "question": "Are you able to provide 3 to 4 personal references — typically non-relatives — who can speak to your character and readiness to parent?",
+        "why": "Most states require 3–5 personal references as part of the home study.",
+        "inputType": "yes_no",
+        "disqualifyOn": "no",
+        "disqualifyMessage": "Most states require 3–4 personal references (non-relatives preferred). Start thinking about who those people might be. Our preparation resources include tips on choosing and preparing your references.",
+        "nextSteps": [
+          "List friends, coworkers, or community members who know you well",
+          "Let them know they may be contacted as part of your home study"
+        ]
+      }
+    ]
+  }
+}

@@ -41,6 +41,39 @@
     return { ok: res.ok, status: res.status, data };
   }
 
+  /* ---- Post-login redirect target (?next=) --------------------------------- */
+  // Pages that live behind the login gate. Kept in sync with the server-side
+  // allowlist in src/middleware/pageGuard.ts. Anything not on this list falls
+  // back to /home, so a crafted ?next can never redirect off-site.
+  const PROTECTED_PAGES = [
+    "/adopt/home-study",
+    "/adopt/intake-form",
+    "/adopt/agency-profiles",
+    "/adopt/matching",
+  ];
+
+  // Canonicalise the same way the server does (lower-case, drop trailing slash
+  // and a trailing .html) so the value round-trips cleanly, then allowlist it.
+  function sanitizeNext(raw) {
+    if (!raw) return null;
+    let p;
+    try {
+      p = decodeURIComponent(raw);
+    } catch {
+      return null;
+    }
+    p = p.toLowerCase();
+    if (p.length > 1 && p.endsWith("/")) p = p.slice(0, -1);
+    if (p.endsWith(".html")) p = p.slice(0, -5);
+    return PROTECTED_PAGES.indexOf(p) !== -1 ? p : null;
+  }
+
+  /** The safe redirect target for the current page, or /home. */
+  function postLoginDest() {
+    const next = new URLSearchParams(window.location.search).get("next");
+    return sanitizeNext(next) || "/home";
+  }
+
   function showMessage(el, text, type) {
     if (!el) return;
     el.textContent = text;
@@ -136,7 +169,7 @@
       try {
         const { ok, data } = await postJson("/auth/login", { email, password });
         if (ok) {
-          window.location.href = "/home";
+          window.location.href = postLoginDest();
         } else {
           showMessage(msg, data.error || "Sign in failed.", "error");
         }
@@ -146,6 +179,18 @@
         btn.disabled = false;
       }
     });
+  }
+
+  /* ---- Carry ?next through the Google OAuth link ---- */
+  // The "Continue with Google" control is a static link; append the validated
+  // next so the server can stash it before redirecting to Google.
+  function wireGoogleNext() {
+    const link = document.querySelector('a[href^="/auth/google"]');
+    if (!link) return;
+    const dest = sanitizeNext(
+      new URLSearchParams(window.location.search).get("next")
+    );
+    if (dest) link.href = "/auth/google?next=" + encodeURIComponent(dest);
   }
 
   /* ---- Logout click handler ---- */
@@ -177,36 +222,140 @@
     }
   }
 
-  /* ---- Nav auth state (for any page with #navAuth) ---- */
-  async function renderNavAuth() {
-    const container = document.getElementById("navAuth");
-    if (!container) return;
+  /* ---- Current auth state (fetched once per page load, shared below) ---- */
+  async function fetchAuthState() {
     try {
       // no-store: never let a cached response misreport whether we're signed in.
       const res = await fetch("/auth/me", {
         credentials: "same-origin",
         cache: "no-store",
       });
-      const data = await res.json();
-      if (data && data.authenticated) {
-        container.innerHTML =
-          '<a href="#" class="nav-link" id="logoutLink">Log Out</a>';
-        document
-          .getElementById("logoutLink")
-          .addEventListener("click", handleLogout);
-      } else {
-        container.innerHTML = '<a href="/login" class="nav-link">Log In</a>';
-      }
+      return await res.json();
     } catch {
+      return null;
+    }
+  }
+
+  /* ---- Nav auth state (for any page with #navAuth) ---- */
+  function renderNavAuth(state) {
+    const container = document.getElementById("navAuth");
+    if (!container) return;
+    if (state && state.authenticated) {
+      container.innerHTML =
+        '<a href="#" class="nav-link" id="logoutLink">Log Out</a>';
+      document
+        .getElementById("logoutLink")
+        .addEventListener("click", handleLogout);
+    } else {
       container.innerHTML = '<a href="/login" class="nav-link">Log In</a>';
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  /* ---- One-time newsletter popup (shown after a first signup) ---- */
+  // Suppresses re-nagging within the same tab session even if the server write
+  // failed; the server-side pending flag is the durable "already asked" record.
+  const NEWSLETTER_DISMISS_KEY = "hl_newsletter_dismissed";
+
+  function maybeShowNewsletterPopup(state) {
+    if (!state || !state.authenticated || !state.user) return;
+    if (!state.user.newsletterPromptPending) return;
+    // Never over the auth pages themselves (they redirect away on success anyway).
+    const path = window.location.pathname;
+    if (path === "/login" || path === "/signup") return;
+    try {
+      if (sessionStorage.getItem(NEWSLETTER_DISMISS_KEY)) return;
+    } catch {
+      /* sessionStorage unavailable — fall through and show once */
+    }
+    if (document.getElementById("newsletterModal")) return;
+    buildNewsletterPopup();
+  }
+
+  function buildNewsletterPopup() {
+    const overlay = document.createElement("div");
+    overlay.id = "newsletterModal";
+    overlay.className = "newsletter-overlay";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-modal", "true");
+    overlay.setAttribute("aria-labelledby", "newsletterTitle");
+
+    const card = document.createElement("div");
+    card.className = "newsletter-card";
+
+    const title = document.createElement("h2");
+    title.id = "newsletterTitle";
+    title.className = "newsletter-title";
+    title.textContent = "Join the HavenLink Newsletter";
+
+    const text = document.createElement("p");
+    text.className = "newsletter-text";
+    text.textContent =
+      "Learn how the adoption process really works — what to expect at each step, how to prepare, and the resources that help families move forward. Helpful updates, no spam.";
+
+    const accept = document.createElement("button");
+    accept.type = "button";
+    accept.className = "btn btn-primary newsletter-accept";
+    accept.textContent = "Yes, sign me up";
+
+    const decline = document.createElement("button");
+    decline.type = "button";
+    decline.className = "newsletter-decline";
+    decline.textContent = "No thanks";
+
+    const actions = document.createElement("div");
+    actions.className = "newsletter-actions";
+    actions.appendChild(accept);
+    actions.appendChild(decline);
+
+    card.appendChild(title);
+    card.appendChild(text);
+    card.appendChild(actions);
+    overlay.appendChild(card);
+    document.body.appendChild(overlay);
+    document.body.classList.add("newsletter-open");
+
+    function onKeydown(e) {
+      if (e.key === "Escape") closeNewsletter(overlay, false);
+    }
+    accept.addEventListener("click", () => closeNewsletter(overlay, true));
+    decline.addEventListener("click", () => closeNewsletter(overlay, false));
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) closeNewsletter(overlay, false); // backdrop = decline
+    });
+    document.addEventListener("keydown", onKeydown);
+    overlay._onKeydown = onKeydown; // so closeNewsletter can detach it
+
+    accept.focus();
+  }
+
+  async function closeNewsletter(overlay, subscribe) {
+    if (overlay._onKeydown) {
+      document.removeEventListener("keydown", overlay._onKeydown);
+    }
+    overlay.remove();
+    document.body.classList.remove("newsletter-open");
+    try {
+      sessionStorage.setItem(NEWSLETTER_DISMISS_KEY, "1");
+    } catch {
+      /* ignore */
+    }
+    try {
+      // Records the choice and clears the server-side pending flag. If it fails,
+      // the flag stays set and we'll ask again in a future session.
+      await postJson("/auth/newsletter", { subscribe: !!subscribe });
+    } catch {
+      /* best-effort */
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", async () => {
     const msg = document.getElementById("formMessage");
     renderQueryMessage(msg);
     wireSignup();
     wireLogin();
-    renderNavAuth();
+    wireGoogleNext();
+    const state = await fetchAuthState();
+    renderNavAuth(state);
+    maybeShowNewsletterPopup(state);
   });
 })();

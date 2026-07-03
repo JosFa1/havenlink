@@ -8,11 +8,12 @@ import {
   createPasswordUser,
   findByEmail,
   markEmailVerified,
+  resolveNewsletterPrompt,
   type User,
 } from "../db/users";
 import { issueToken, consumeToken } from "../db/verificationTokens";
 import { hashPassword, verifyPassword, emailSchema, passwordSchema } from "./password";
-import { sendVerificationEmail } from "./email";
+import { sendVerificationEmail, sendNewsletterSubscriberNotification } from "./email";
 import { passport, GoogleEmailUnverifiedError } from "./passport";
 import {
   authRateLimiter,
@@ -20,6 +21,7 @@ import {
   doubleCsrfProtection,
   generateToken,
 } from "../middleware/security";
+import { sanitizeNext } from "../middleware/pageGuard";
 import { z } from "zod";
 
 export const authRouter = Router();
@@ -38,7 +40,13 @@ function loginSession(req: Request, user: User): Promise<void> {
 }
 
 function publicUser(user: User) {
-  return { id: user.id, email: user.email, emailVerified: user.email_verified };
+  return {
+    id: user.id,
+    email: user.email,
+    emailVerified: user.email_verified,
+    // Drives the one-time "Join the newsletter" popup on the client.
+    newsletterPromptPending: user.newsletter_prompt_pending,
+  };
 }
 
 // ---- CSRF token issuance -----------------------------------------------------
@@ -161,6 +169,34 @@ authRouter.post("/logout", doubleCsrfProtection, (req, res, next) => {
   });
 });
 
+// ---- Newsletter prompt response ----------------------------------------------
+// Records the logged-in user's accept/decline for the one-time signup popup and
+// clears the pending flag so it never shows again. Auth + CSRF protected.
+authRouter.post("/newsletter", doubleCsrfProtection, async (req, res, next) => {
+  try {
+    const user = req.user as User | undefined;
+    if (!req.isAuthenticated?.() || !user) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+    const subscribe = req.body?.subscribe === true;
+    await resolveNewsletterPrompt(user.id, subscribe);
+
+    // Notify the team on opt-in. Best-effort: the subscription is already
+    // recorded above, so a mail failure must not fail the user's request.
+    if (subscribe) {
+      try {
+        await sendNewsletterSubscriberNotification(user.email);
+      } catch (mailErr) {
+        console.error("Newsletter subscriber notification failed:", mailErr);
+      }
+    }
+
+    return res.json({ ok: true, subscribed: subscribe });
+  } catch (err) {
+    next(err);
+  }
+});
+
 // ---- Email verification (link target) ----------------------------------------
 authRouter.get("/verify-email", async (req, res, next) => {
   try {
@@ -208,6 +244,13 @@ authRouter.post(
 authRouter.get(
   "/google",
   authRateLimiter,
+  (req, _res, next) => {
+    // Remember where to return the user after login. Stored in the session so it
+    // survives the round-trip to Google; validated so ?next can't open-redirect.
+    req.session.postAuthRedirect =
+      sanitizeNext(req.query.next) ?? undefined;
+    next();
+  },
   passport.authenticate("google", { scope: ["openid", "email", "profile"] })
 );
 
@@ -222,9 +265,12 @@ authRouter.get("/google/callback", (req, res, next) => {
         return next(err);
       }
       if (!user) return res.redirect("/login?error=google_failed");
+      // Read the destination BEFORE loginSession: req.login regenerates the
+      // session (session-fixation defense), which discards postAuthRedirect.
+      const dest = sanitizeNext(req.session.postAuthRedirect) ?? "/home";
       try {
         await loginSession(req, user);
-        return res.redirect("/home");
+        return res.redirect(dest);
       } catch (loginErr) {
         return next(loginErr);
       }

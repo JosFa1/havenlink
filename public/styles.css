@@ -2775,3 +2775,278 @@ button:focus-visible {
   border-radius: 0.5rem;
   margin: auto;
 }
+
+/* ==================== Home Study Flow ==================== */
+
+/* Make the hidden attribute reliable inside the flow even for components whose
+   base class sets a display (e.g., .alert-banner is display:flex). */
+#home-study-flow[hidden],
+#home-study-flow [hidden] {
+  display: none !important;
+}
+
+.fork-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.hs-flow-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0 1rem;
+}
+
+.hs-step-indicator {
+  font-weight: 600;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--blue);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.btn-link:hover {
+  color: var(--navy);
+}
+
+.hs-screen {
+  background-color: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: 0.75rem;
+  padding: 2rem;
+}
+
+.hs-screen .q-block {
+  margin-bottom: 1.5rem;
+}
+
+.hs-field {
+  max-width: 420px;
+}
+
+.hs-date-selects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 220px));
+  gap: 1rem;
+}
+
+.hs-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.hs-end-card h4 {
+  margin: 1.5rem 0 0.5rem;
+  color: var(--navy);
+}
+
+.hs-next-steps {
+  margin: 0;
+  padding-left: 1.4rem;
+  line-height: 1.7;
+}
+
+.hs-submit-status {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 1rem 0 0;
+  min-height: 1.3em;
+}
+
+.hs-submit-status.hs-status-sent {
+  color: #15803d;
+}
+
+.hs-submit-status.hs-status-error {
+  color: #dc2626;
+}
+
+/* ==================== Preparation Resources ==================== */
+
+#preparation-resources {
+  margin-top: 1rem;
+}
+
+.prep-accordion {
+  background-color: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: 0.75rem;
+  margin-top: 1.25rem;
+  overflow: hidden;
+}
+
+.prep-accordion summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--navy);
+  list-style: none;
+  user-select: none;
+}
+
+.prep-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.prep-accordion summary::after {
+  content: '▾';
+  color: var(--blue);
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.prep-accordion[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.prep-accordion summary:hover {
+  background-color: #f8fafc;
+}
+
+.prep-summary-title {
+  flex: 1;
+}
+
+.prep-progress {
+  background-color: #f0f7ff;
+  color: var(--blue);
+  border: 1px solid var(--blue-lighter);
+  border-radius: 999px;
+  padding: 0.15rem 0.7rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.prep-body {
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid var(--gray-light);
+}
+
+.prep-body > p:first-child {
+  margin-top: 1.25rem;
+}
+
+.prep-body h4 {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--navy);
+}
+
+.prep-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.prep-checklist .option:has(input:checked) .option-text {
+  text-decoration: line-through;
+  color: var(--text-light);
+}
+
+@media (max-width: 640px) {
+  .fork-buttons {
+    flex-direction: column;
+  }
+
+  .fork-buttons .btn {
+    width: 100%;
+  }
+
+  .hs-screen {
+    padding: 1.25rem;
+  }
+}
+
+/* ==================== Newsletter Popup ==================== */
+
+.newsletter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2200; /* above the privacy modal (2000) and notifications (2100) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  animation: fadeIn 0.25s ease-out;
+}
+
+.newsletter-card {
+  background-color: var(--white);
+  border-radius: 1rem;
+  max-width: 460px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+  animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.newsletter-title {
+  color: var(--navy);
+  margin: 0 0 0.85rem;
+  font-size: 1.5rem;
+}
+
+.newsletter-text {
+  color: var(--text-dark);
+  line-height: 1.7;
+  margin: 0 0 1.75rem;
+}
+
+.newsletter-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.newsletter-accept {
+  width: 100%;
+  font-size: 1.05rem;
+  padding: 0.95rem 1.5rem;
+}
+
+.newsletter-decline {
+  background: none;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  color: var(--text-light);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.newsletter-decline:hover {
+  color: var(--text-dark);
+}
+
+body.newsletter-open {
+  overflow: hidden;
+}

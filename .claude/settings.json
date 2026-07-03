@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -r ts-node/register/transpile-only \"C:\\\\Users\\\\asads\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-asads-OneDrive-Documents-FR-havenlink\\\\818c3c67-e905-4f7f-b987-509e584c3398\\\\scratchpad\\\\make-test-user.ts\")"
+    ]
+  }
+}
