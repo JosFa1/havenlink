@@ -10,7 +10,7 @@ import fs from "fs";
 import { Pool } from "pg";
 import { config } from "../config";
 
-function sslConfig() {
+export function sslConfig() {
   if (!config.isProd) return false;
 
   const caPath = process.env.PGSSLROOTCERT;

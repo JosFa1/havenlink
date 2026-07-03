@@ -17,7 +17,13 @@ const PORT = config.PORT;
 
 // Behind AWS App Runner / load balancer: trust the proxy so Secure cookies and
 // rate-limit client IPs work correctly.
-if (config.isProd) app.set("trust proxy", 1);
+if (config.isProd) {
+  app.set("trust proxy", 1);
+  app.use((req, res, next) => {
+    if (req.secure) return next();
+    return res.redirect(301, `https://${req.get("host")}${req.originalUrl}`);
+  });
+}
 
 // ----- Core middleware (order matters) ---------------------------------------
 app.use(securityHeaders());
@@ -89,7 +95,7 @@ ${message || "No additional information provided"}
 
     // Send email to HavenLink
     const mailOptions = {
-      from: config.EMAIL_USER,
+      from: config.EMAIL_FROM,
       to: "havenlink.org@gmail.com",
       replyTo: contact_email, // let the team reply straight to the applicant
       subject: `Partnership Request: ${org_name}`,
@@ -101,7 +107,7 @@ ${message || "No additional information provided"}
 
     // Send confirmation email to the organization
     const confirmationEmail = {
-      from: config.EMAIL_USER,
+      from: config.EMAIL_FROM,
       to: contact_email,
       subject: "Partnership Request Received - HavenLink",
       text: `Hello ${contact_name},
