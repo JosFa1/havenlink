@@ -11,29 +11,9 @@ if aws ecr describe-repositories --repository-names "$ECR_REPOSITORY" --region "
 else
   aws ecr create-repository --repository-name "$ECR_REPOSITORY" --image-scanning-configuration scanOnPush=true --region "$AWS_REGION" >/dev/null
 fi
-aws ecr put-lifecycle-policy \
-  --repository-name "$ECR_REPOSITORY" \
-  --region "$AWS_REGION" \
-  --lifecycle-policy-text '{
-    "rules": [
-      {
-        "rulePriority": 1,
-        "description": "Keep the five most recent HavenLink images",
-        "selection": {
-          "tagStatus": "any",
-          "countType": "imageCountMoreThan",
-          "countNumber": 5
-        },
-        "action": {
-          "type": "expire"
-        }
-      }
-    ]
-  }' >/dev/null
 aws ec2 authorize-security-group-ingress --group-id "$RDS_SECURITY_GROUP_ID" --protocol tcp --port 5432 --source-group "$ECS_SECURITY_GROUP_ID" --region "$AWS_REGION" >/dev/null 2>&1 || true
 ECR_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY"
 upsert_generated AWS_ACCOUNT_ID "$ACCOUNT_ID"
 upsert_generated ECR_URI "$ECR_URI"
 echo "ECR repository ready: $ECR_URI"
-echo "ECR lifecycle policy keeps only the five newest images."
 echo "RDS security group ingress was checked."

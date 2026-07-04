@@ -35,28 +35,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Keep only recent ECR images
-        run: |
-          aws ecr put-lifecycle-policy \
-            --repository-name "$ECR_REPOSITORY" \
-            --region "$AWS_REGION" \
-            --lifecycle-policy-text '{
-              "rules": [
-                {
-                  "rulePriority": 1,
-                  "description": "Keep the five most recent HavenLink images",
-                  "selection": {
-                    "tagStatus": "any",
-                    "countType": "imageCountMoreThan",
-                    "countNumber": 5
-                  },
-                  "action": {
-                    "type": "expire"
-                  }
-                }
-              ]
-            }'
-
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
@@ -80,9 +58,9 @@ jobs:
               EcsSecurityGroupId="${{ vars.ECS_SECURITY_GROUP_ID }}" \
               ImageUri="${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:${IMAGE_TAG}" \
               ContainerPort="${{ vars.CONTAINER_PORT }}" \
-              DesiredCount="${{ vars.DESIRED_COUNT || '1' }}" \
-              TaskCpu="256" \
-              TaskMemory="512" \
+              DesiredCount="${{ vars.DESIRED_COUNT }}" \
+              TaskCpu="${{ vars.TASK_CPU }}" \
+              TaskMemory="${{ vars.TASK_MEMORY }}" \
               CertificateArn="${{ vars.CERTIFICATE_ARN }}" \
               DatabaseUrlSecretArn="${{ secrets.DATABASE_URL_SECRET_ARN }}" \
               SessionSecretSecretArn="${{ secrets.SESSION_SECRET_SECRET_ARN }}" \
