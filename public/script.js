@@ -1,4 +1,8 @@
 // Mobile Menu Toggle
+const PARTNERSHIP_BACKEND_DISABLED = true;
+const PARTNERSHIP_BACKEND_DISABLED_MESSAGE =
+  'Online submissions are temporarily paused while HavenLink reduces hosting costs. Please email havenlink.org@gmail.com and we will follow up directly.';
+
 const mobileMenuToggle = document.getElementById('mobileMenuToggle');
 const navLinks = document.getElementById('navLinks');
 
@@ -246,11 +250,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // Partnership Form Submission Handling
   const partnershipForm = document.getElementById('partnershipForm');
   if (partnershipForm) {
+    const formMessage = document.getElementById('formMessage');
+    const submitBtn = document.getElementById('submitBtn');
+    if (PARTNERSHIP_BACKEND_DISABLED) {
+      if (submitBtn) submitBtn.disabled = true;
+      if (formMessage) {
+        formMessage.style.display = 'block';
+        formMessage.style.backgroundColor = '#eff6ff';
+        formMessage.style.color = '#1e40af';
+        formMessage.style.border = '1px solid #bfdbfe';
+        formMessage.textContent = PARTNERSHIP_BACKEND_DISABLED_MESSAGE;
+      }
+      return;
+    }
+
     partnershipForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      const submitBtn = document.getElementById('submitBtn');
-      const formMessage = document.getElementById('formMessage');
       const originalText = submitBtn.textContent;
 
       // Disable submit button and show loading state

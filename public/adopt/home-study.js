@@ -16,6 +16,10 @@
  */
 
 /* US states + DC (same list as adopt.js — no bundler, each page keeps its own copy). */
+const HOME_STUDY_BACKEND_DISABLED = true;
+const HOME_STUDY_BACKEND_DISABLED_MESSAGE =
+  'Online submissions are temporarily paused while HavenLink reduces hosting costs. Please email havenlink.org@gmail.com and we will follow up directly.';
+
 const HS_US_STATES = [
   ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
   ['CA', 'California'], ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'],
@@ -669,6 +673,10 @@ class HomeStudyFlow {
 
   async submit() {
     if (this.state.submitted || this.submitting) return;
+    if (HOME_STUDY_BACKEND_DISABLED) {
+      this.renderSubmitStatus('paused');
+      return;
+    }
     this.submitting = true;
     this.renderSubmitStatus('sending');
     try {
@@ -710,6 +718,9 @@ class HomeStudyFlow {
     } else if (status === 'sent') {
       el.classList.add('hs-status-sent');
       el.textContent = '✓ Sent — the HavenLink team has been notified.';
+    } else if (status === 'paused') {
+      el.classList.add('hs-status-error');
+      el.textContent = HOME_STUDY_BACKEND_DISABLED_MESSAGE;
     } else {
       el.classList.add('hs-status-error');
       el.textContent = status === 'error'
