@@ -10,8 +10,6 @@ need PUBLIC_SUBNETS
 need ECS_SECURITY_GROUP_ID
 need CONTAINER_PORT
 need DESIRED_COUNT
-need TASK_CPU
-need TASK_MEMORY
 need GOOGLE_CLIENT_ID
 need GOOGLE_CALLBACK_URL
 need EMAIL_FROM
@@ -28,6 +26,8 @@ if [ -z "${IMAGE_URI:-}" ]; then
   IMAGE_URI="$ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG"
 fi
 CERT="${CERTIFICATE_ARN:-}"
+TASK_CPU="${TASK_CPU:-256}"
+TASK_MEMORY="${TASK_MEMORY:-512}"
 aws cloudformation deploy \
   --stack-name "$STACK_NAME" \
   --template-file "$ROOT_DIR/deploy/cloudformation/havenlink-ecs-fargate.yml" \

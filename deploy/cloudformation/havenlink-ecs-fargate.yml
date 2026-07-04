@@ -22,10 +22,10 @@ Parameters:
     Default: 1
   TaskCpu:
     Type: String
-    Default: '512'
+    Default: '256'
   TaskMemory:
     Type: String
-    Default: '1024'
+    Default: '512'
   CertificateArn:
     Type: String
     Default: ''
@@ -65,7 +65,7 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /ecs/${AppName}
-      RetentionInDays: 14
+      RetentionInDays: 3
 
   Cluster:
     Type: AWS::ECS::Cluster
@@ -262,6 +262,8 @@ Resources:
       LaunchType: FARGATE
       HealthCheckGracePeriodSeconds: 60
       DeploymentConfiguration:
+        MaximumPercent: 100
+        MinimumHealthyPercent: 0
         DeploymentCircuitBreaker:
           Enable: true
           Rollback: true
