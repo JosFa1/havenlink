@@ -206,7 +206,7 @@ ${sectionsText}
 
     // Critical path: the submission is only "received" once HavenLink is notified.
     await transporter.sendMail({
-      from: config.EMAIL_USER,
+      from: config.EMAIL_FROM,
       to: "havenlink.org@gmail.com",
       replyTo: user.email, // let the team reply straight to the family
       subject: `Family Intake Form Submission: ${user.email}`,
@@ -400,7 +400,7 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
 
     // Critical path: the submission is only "received" once HavenLink is notified.
     await transporter.sendMail({
-      from: config.EMAIL_USER,
+      from: config.EMAIL_FROM,
       to: "havenlink.org@gmail.com",
       replyTo: user.email, // let the team reply straight to the family
       subject: email.subject,

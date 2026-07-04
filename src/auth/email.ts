@@ -54,7 +54,7 @@ export async function sendNewsletterSubscriberNotification(
     timeZoneName: "short",
   });
   await transporter.sendMail({
-    from: config.EMAIL_USER,
+    from: config.EMAIL_FROM,
     to: "havenlink.org@gmail.com",
     replyTo: subscriberEmail,
     subject: `New Newsletter Subscriber: ${subscriberEmail}`,
