@@ -85,7 +85,9 @@ window.addEventListener('scroll', () => {
 
   navLinkElements.forEach(link => {
     link.classList.remove('active');
-    if (link.getAttribute('href').slice(1) === current) {
+    // Some nav controls (e.g. the Adopt dropdown <button>) have no href.
+    const href = link.getAttribute('href');
+    if (href && href.slice(1) === current) {
       link.style.color = 'var(--blue)';
     } else {
       link.style.color = '';
@@ -93,17 +95,16 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Add subtle parallax effect to hero section
-const heroScroll = () => {
-  const hero = document.querySelector('.hero');
-  const scrollPosition = window.pageYOffset;
-
-  if (scrollPosition < 800) {
-    hero.style.backgroundPosition = `50% ${scrollPosition * 0.5}px`;
-  }
-};
-
-window.addEventListener('scroll', heroScroll);
+// Add subtle parallax effect to hero section (only on pages that have a hero)
+const heroEl = document.querySelector('.hero');
+if (heroEl) {
+  window.addEventListener('scroll', () => {
+    const scrollPosition = window.pageYOffset;
+    if (scrollPosition < 800) {
+      heroEl.style.backgroundPosition = `50% ${scrollPosition * 0.5}px`;
+    }
+  });
+}
 
 // Button ripple effect
 const buttons = document.querySelectorAll('.btn');

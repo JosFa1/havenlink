@@ -2690,6 +2690,9 @@ button:focus-visible {
 
 .member-placeholder.partner {
   background: linear-gradient(135deg, #e0e7ff 0%, #dbeafe 100%);
+  /* Center the logo box within its link even when a long name widens the anchor */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .member-icon {
@@ -3049,4 +3052,180 @@ button:focus-visible {
 
 body.newsletter-open {
   overflow: hidden;
+}
+
+/* ==================== Global Reach / Expansion Map ==================== */
+
+.expansion-section {
+  background-color: var(--gray);
+}
+
+.expansion-map {
+  position: relative;
+  max-width: 960px;
+  margin: 2.5rem auto 0;
+}
+
+.map-viewport svg,
+.map-inset-svg svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Regions: neutral land by default, brand navy for partners, light blue while
+   in negotiation. A lighter version of the partner colour = --blue-lighter. */
+.map-region {
+  fill: var(--gray-light);
+  stroke: var(--white);
+  stroke-width: 0.5;
+  transition: fill 0.25s ease;
+}
+
+.map-region.is-partner { fill: var(--navy); }
+.map-region.is-negotiating { fill: var(--blue-lighter); }
+
+/* Hover feedback */
+.map-viewport .map-region:hover,
+.map-inset-svg .map-region:hover { fill: var(--blue); }
+.map-region.is-partner:hover { fill: var(--navy-dark); }
+.map-region.is-negotiating:hover { fill: var(--blue-light); }
+
+/* The United States is the gateway into the states inset */
+.map-region--us { cursor: pointer; }
+.map-region--us:focus { outline: none; }
+.map-region--us:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* US states inset — "expands" open over the world map */
+.map-inset {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(58%, 460px);
+  transform: translate(-50%, -50%) scale(0.9);
+  transform-origin: center;
+  opacity: 0;
+  pointer-events: none;
+  background-color: var(--white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-xl);
+  padding: 1.25rem 1.25rem 1rem;
+  z-index: 5;
+  transition: opacity 0.28s ease,
+              transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.map-inset.open {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+.map-inset[hidden] { display: none; }
+
+.map-inset-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.map-inset-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--text-light);
+  cursor: pointer;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.4rem;
+  transition: var(--transition);
+}
+
+.map-inset-close:hover {
+  color: var(--navy);
+  background: var(--gray-light);
+}
+
+/* Cursor-following tooltip (visual aid only; region names live in SVG <title>) */
+.map-tooltip {
+  position: fixed;
+  z-index: 20;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  background-color: var(--navy-dark);
+  color: var(--white);
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  box-shadow: var(--shadow-lg);
+}
+
+.map-tooltip[hidden] { display: none; }
+.map-tooltip .tt-name { font-weight: 600; }
+.map-tooltip .tt-status {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.map-tooltip .tt-partner { color: var(--white); }
+.map-tooltip .tt-negotiating { color: var(--blue-lighter); }
+
+/* Legend */
+.map-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+  padding: 0;
+}
+
+.map-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.legend-swatch {
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 0.28rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.legend-partner { background-color: var(--navy); }
+.legend-negotiating { background-color: var(--blue-lighter); }
+
+.map-fallback {
+  text-align: center;
+  color: var(--text-light);
+  padding: 3rem 1rem;
+}
+
+@media (max-width: 640px) {
+  .map-inset { width: min(88%, 420px); padding: 1rem 1rem 0.75rem; }
+  .map-legend { gap: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map-region { transition: none; }
+  .map-inset { transition: opacity 0.2s ease; }
+  .map-inset.open { transform: translate(-50%, -50%) scale(1); }
 }
