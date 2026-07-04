@@ -8,10 +8,6 @@
  * but nothing is persisted until a section boundary.
  */
 
-const INTAKE_BACKEND_DISABLED = true;
-const INTAKE_BACKEND_DISABLED_MESSAGE =
-  'Online submissions are temporarily paused while HavenLink reduces hosting costs. Please email havenlink.org@gmail.com and we will follow up directly.';
-
 /* US states + DC, used for Q8 (residence) and Q30 (adoption state). */
 const US_STATES = [
   ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
@@ -621,11 +617,6 @@ class IntakeFormState {
     //   - deterministic match-score (0–100), age-range recommendation, agency routing,
     //     readiness-stage classification, flags. These are downstream of the form and
     //     should run server-side against the collected `this.formData` keyed answers.
-
-    if (INTAKE_BACKEND_DISABLED) {
-      this.showNotification(INTAKE_BACKEND_DISABLED_MESSAGE, 'info');
-      return;
-    }
 
     const nextBtn = document.getElementById('nextBtn');
     if (nextBtn) nextBtn.disabled = true;

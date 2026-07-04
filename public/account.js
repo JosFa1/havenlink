@@ -11,30 +11,6 @@
 (function () {
   "use strict";
 
-  const ACCOUNT_BACKEND_DISABLED = true;
-  const ACCOUNT_BACKEND_DISABLED_MESSAGE =
-    "HavenLink account features are temporarily paused while we reduce hosting costs. For help, email havenlink.org@gmail.com.";
-
-  function renderBackendDisabled(msgEl) {
-    showMessage(msgEl, ACCOUNT_BACKEND_DISABLED_MESSAGE, "info");
-    document
-      .querySelectorAll("#loginForm input, #loginForm button, #signupForm input, #signupForm button")
-      .forEach((el) => {
-        el.disabled = true;
-      });
-    document.querySelectorAll('a[href^="/auth/google"]').forEach((link) => {
-      link.removeAttribute("href");
-      link.setAttribute("aria-disabled", "true");
-      link.style.pointerEvents = "none";
-      link.style.opacity = "0.65";
-    });
-    const nav = document.getElementById("navAuth");
-    if (nav) {
-      nav.innerHTML =
-        '<a href="mailto:havenlink.org@gmail.com" class="nav-link">Contact</a>';
-    }
-  }
-
   async function getCsrfToken() {
     const res = await fetch("/auth/csrf", {
       credentials: "same-origin",
@@ -374,10 +350,6 @@
 
   document.addEventListener("DOMContentLoaded", async () => {
     const msg = document.getElementById("formMessage");
-    if (ACCOUNT_BACKEND_DISABLED) {
-      renderBackendDisabled(msg);
-      return;
-    }
     renderQueryMessage(msg);
     wireSignup();
     wireLogin();
