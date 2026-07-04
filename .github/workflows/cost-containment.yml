@@ -13,7 +13,6 @@ permissions:
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   STACK_NAME: ${{ vars.STACK_NAME }}
-  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
 
 jobs:
   shutdown-ecs:
@@ -49,49 +48,3 @@ jobs:
             echo "No CloudFormation stack named $STACK_NAME exists in $AWS_REGION."
           fi
 
-      - name: Best-effort stop HavenLink RDS databases
-        run: |
-          set +e
-
-          DB_IDS="$(aws rds describe-db-instances \
-            --region "$AWS_REGION" \
-            --query "DBInstances[?contains(DBInstanceIdentifier, 'havenlink') && DBInstanceStatus == 'available'].DBInstanceIdentifier" \
-            --output text 2>/dev/null)"
-
-          if [ -z "$DB_IDS" ]; then
-            echo "No available HavenLink RDS instances found, or this role cannot read RDS."
-            exit 0
-          fi
-
-          for db in $DB_IDS; do
-            echo "Stopping RDS instance: $db"
-            aws rds stop-db-instance \
-              --db-instance-identifier "$db" \
-              --region "$AWS_REGION" || true
-          done
-
-      - name: Best-effort clear HavenLink ECR images
-        run: |
-          set +e
-
-          if [ -z "${ECR_REPOSITORY:-}" ]; then
-            echo "ECR_REPOSITORY repository variable is not set; skipping ECR cleanup."
-            exit 0
-          fi
-
-          IMAGES="$(aws ecr list-images \
-            --repository-name "$ECR_REPOSITORY" \
-            --region "$AWS_REGION" \
-            --query 'imageIds' \
-            --output json 2>/dev/null)"
-
-          if [ -z "$IMAGES" ] || [ "$IMAGES" = "[]" ]; then
-            echo "No ECR images found, or this role cannot read ECR images."
-            exit 0
-          fi
-
-          echo "$IMAGES" > /tmp/havenlink-ecr-images.json
-          aws ecr batch-delete-image \
-            --repository-name "$ECR_REPOSITORY" \
-            --region "$AWS_REGION" \
-            --image-ids file:///tmp/havenlink-ecr-images.json || true
