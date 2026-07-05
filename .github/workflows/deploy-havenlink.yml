@@ -54,13 +54,13 @@ jobs:
               AppName="$APP_NAME" \
               DomainName="$DOMAIN_NAME" \
               VpcId="${{ vars.VPC_ID }}" \
-              PublicSubnets="${{ vars.PUBLIC_SUBNETS }}" \
+              PublicSubnets="subnet-0fd862b2f26316d03,subnet-046458b437630e1ad" \
               EcsSecurityGroupId="${{ vars.ECS_SECURITY_GROUP_ID }}" \
               ImageUri="${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:${IMAGE_TAG}" \
               ContainerPort="${{ vars.CONTAINER_PORT }}" \
               DesiredCount="${{ vars.DESIRED_COUNT }}" \
-              TaskCpu="${{ vars.TASK_CPU }}" \
-              TaskMemory="${{ vars.TASK_MEMORY }}" \
+              TaskCpu="256" \
+              TaskMemory="512" \
               CertificateArn="${{ vars.CERTIFICATE_ARN }}" \
               DatabaseUrlSecretArn="${{ secrets.DATABASE_URL_SECRET_ARN }}" \
               SessionSecretSecretArn="${{ secrets.SESSION_SECRET_SECRET_ARN }}" \
