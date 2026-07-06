@@ -85,7 +85,7 @@
       greeted = true;
       addMessage(
         "bot",
-        "Hi! I'm Haven \u{1F44B} I can answer questions about HavenLink — the adoption process, home study, family intake, agency matching, and more. What would you like to know?"
+      "Hi! I'm Haven \u{1F44B} I can answer questions about HavenLink, including the adoption process, home studies, family intake, and agency matching. What would you like to know?"
       );
     }
     input.focus();

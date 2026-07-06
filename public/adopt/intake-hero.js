@@ -224,6 +224,24 @@
     if (document.hidden) stop(); else start();
   });
 
+  if (!reduce) {
+    var driftRaf = null;
+    canvas.parentElement.addEventListener("pointermove", function (event) {
+      if (driftRaf != null) cancelAnimationFrame(driftRaf);
+      driftRaf = requestAnimationFrame(function () {
+        var rect = canvas.getBoundingClientRect();
+        var nx = (event.clientX - rect.left) / rect.width - 0.5;
+        var ny = (event.clientY - rect.top) / rect.height - 0.5;
+        canvas.style.transform =
+          "translate3d(" + (nx * 10).toFixed(2) + "px," +
+          (ny * 7).toFixed(2) + "px,0) scale(1.025)";
+      });
+    });
+    canvas.parentElement.addEventListener("pointerleave", function () {
+      canvas.style.transform = "translate3d(0,0,0) scale(1.015)";
+    });
+  }
+
   resize();
   start();
 })();

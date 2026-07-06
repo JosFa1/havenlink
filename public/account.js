@@ -290,7 +290,7 @@
     const text = document.createElement("p");
     text.className = "newsletter-text";
     text.textContent =
-      "Learn how the adoption process really works — what to expect at each step, how to prepare, and the resources that help families move forward. Helpful updates, no spam.";
+      "Learn what to expect at each stage of adoption, how to prepare, and which resources can help your family move forward. Helpful updates, no spam.";
 
     const accept = document.createElement("button");
     accept.type = "button";

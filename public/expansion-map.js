@@ -136,7 +136,7 @@
     usTrigger = usEls[0];
     usTrigger.setAttribute('tabindex', '0');
     usTrigger.setAttribute('role', 'button');
-    usTrigger.setAttribute('aria-label', 'United States — show partner states');
+      usTrigger.setAttribute('aria-label', 'United States, show partner states');
     usTrigger.setAttribute('aria-expanded', 'false');
     usTrigger.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); toggleInset(); }

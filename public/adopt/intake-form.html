@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../png/logo.png">
   <title>Family Intake Form - HavenLink</title>
-  <meta name="description" content="HavenLink's family intake form — tell us about your household, values, and hopes so licensed agencies can find the right match.">
+  <meta name="description" content="Tell HavenLink about your household, daily life, adoption preferences, and readiness.">
   <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -80,10 +80,10 @@
     <section class="ed-hero" id="top">
       <canvas id="ikThreads" class="ed-hero-canvas" aria-hidden="true"></canvas>
       <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 02 — Family Intake</p>
-        <h1 class="ed-hero-title hm-reveal" style="--d:.08s">Tell us who your family <em>is.</em></h1>
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 02 - Family Intake Form</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d:.08s">A clearer picture<br>of <em>home.</em></h1>
         <p class="ed-hero-standfirst hm-reveal" style="--d:.16s">
-          Thirty-five short questions about your household, your values, and the child you hope to welcome. Answer honestly — it's how we find the family a child will one day call home.
+          Thirty-five questions about your household, daily life, experience, and adoption preferences. Your answers help licensed agencies understand your family.
         </p>
         <div class="ed-hero-actions hm-reveal" style="--d:.24s">
           <a href="#intake-form" class="hm-btn hm-btn--ink">Begin the form <span class="hm-btn-arrow">→</span></a>
@@ -103,17 +103,17 @@
       <div class="hm-container hm-container--editorial">
         <div class="hm-secthead hm-reveal">
           <p class="hm-eyebrow">Before you begin</p>
-          <span class="hm-index">01 — 05</span>
+          <span class="hm-index">01 / 05</span>
         </div>
         <div class="hm-grid">
           <div class="ed-col-left">
-            <p class="ed-statement hm-reveal">A few honest answers help us find the family a child will call <em>home.</em></p>
+            <p class="ed-statement hm-reveal">Share what life in your home actually <em>looks like.</em></p>
           </div>
           <div class="ed-col-right">
             <ul class="ed-checklist hm-reveal" style="--d:.08s">
-              <li><span class="ed-tick">01</span> Takes about ten minutes — there are no wrong answers, only your family's truth.</li>
-              <li><span class="ed-tick">02</span> Your progress saves automatically, so you can step away and return whenever you like.</li>
-              <li><span class="ed-tick">03</span> Nothing is shared until you choose an agency — your story stays yours.</li>
+              <li><span class="ed-tick">01</span> Plan for about ten minutes. Answer in the way that best reflects your household.</li>
+              <li><span class="ed-tick">02</span> Progress saves on this device when you continue to the next section.</li>
+              <li><span class="ed-tick">03</span> Your intake is sent to HavenLink and handled as confidential account information.</li>
             </ul>
           </div>
         </div>
@@ -126,9 +126,9 @@
         <!-- Progress Indicator -->
         <div class="form-progress">
           <div class="progress-header">
-            <h2>Intake Progress</h2>
+            <h2>Your intake</h2>
             <div class="progress-percentage">
-              <span id="percentComplete">0</span>% Complete
+              <span id="percentComplete">0</span>% complete
             </div>
           </div>
           
@@ -205,7 +205,7 @@
               <div class="section-number">1</div>
               <div class="section-title-group">
                 <h2 class="section-title">Household Profile</h2>
-                <p class="section-description" style="text-align: center;">Tell us about your family structure, home, and living situation.</p>
+                <p class="section-description">Who lives with you and how your home is set up.</p>
               </div>
             </div>
 
@@ -215,7 +215,7 @@
                 <label class="q-label" for="q01_adults">How many adults (18+) will be living in the home?<span class="required-star" aria-hidden="true">*</span></label>
                 <span class="q-help" id="q01_help">Include yourself and any other adults aged 18 or older.</span>
                 <input type="number" id="q01_adults" name="q01_adults" class="q-inline-field q-number" min="1" max="10" step="1" inputmode="numeric" required aria-required="true" aria-describedby="q01_help q01_error">
-                <p class="field-error" id="q01_error" role="alert" aria-live="assertive">Please enter the number of adults (1–10).</p>
+                <p class="field-error" id="q01_error" role="alert" aria-live="assertive">Please enter the number of adults (1-10).</p>
               </div>
 
               <!-- Q2 -->
@@ -293,12 +293,12 @@
 
               <!-- Q9 -->
               <fieldset class="q-block q-fieldset" data-question="q9">
-                <legend class="q-legend">Approximate combined household income?</legend>
+                <legend class="q-legend">What is your approximate combined household income?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q09_income" value="under_30k"><span class="option-text">Under $30,000</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="30k_50k"><span class="option-text">$30k – $50k</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="50k_75k"><span class="option-text">$50k – $75k</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="75k_100k"><span class="option-text">$75k – $100k</span></label>
+                  <label class="option"><input type="radio" name="q09_income" value="30k_50k"><span class="option-text">$30k - $50k</span></label>
+                  <label class="option"><input type="radio" name="q09_income" value="50k_75k"><span class="option-text">$50k - $75k</span></label>
+                  <label class="option"><input type="radio" name="q09_income" value="75k_100k"><span class="option-text">$75k - $100k</span></label>
                   <label class="option"><input type="radio" name="q09_income" value="100k_plus"><span class="option-text">$100k+</span></label>
                   <label class="option"><input type="radio" name="q09_income" value="prefer_not"><span class="option-text">Prefer not to say</span></label>
                 </div>
@@ -312,14 +312,14 @@
               <div class="section-number">2</div>
               <div class="section-title-group">
                 <h2 class="section-title">Lifestyle & Values</h2>
-                <p class="section-description" style="text-align: center;">Share your family's values, interests, and daily life.</p>
+                <p class="section-description">The routines, values, and interests that shape daily life.</p>
               </div>
             </div>
 
             <div class="section-content has-questions">
               <!-- Q10 -->
               <fieldset class="q-block q-fieldset" data-question="q10">
-                <legend class="q-legend">Household activity level?</legend>
+                <legend class="q-legend">How active is your household?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q10_activity" value="very_active"><span class="option-text">Very active / outdoorsy</span></label>
                   <label class="option"><input type="radio" name="q10_activity" value="moderately_active"><span class="option-text">Moderately active</span></label>
@@ -346,7 +346,7 @@
 
               <!-- Q12 -->
               <fieldset class="q-block q-fieldset" data-question="q12">
-                <legend class="q-legend">Open to a child of a different cultural / ethnic background?</legend>
+                <legend class="q-legend">Are you open to a child of a different cultural or ethnic background?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q12_cultural_openness" value="fully_open"><span class="option-text">Yes, fully open</span></label>
                   <label class="option"><input type="radio" name="q12_cultural_openness" value="prefer_same"><span class="option-text">Prefer same background</span></label>
@@ -407,7 +407,7 @@
               <div class="section-number">3</div>
               <div class="section-title-group">
                 <h2 class="section-title">Experience & Background</h2>
-                <p class="section-description" style="text-align: center;">Tell us about your experience with children and adoption.</p>
+                <p class="section-description">Your experience caring for children and your background with adoption.</p>
               </div>
             </div>
 
@@ -431,18 +431,18 @@
                   </div>
                   <span class="q-help">Age ranges of those placements (select all that apply):</span>
                   <div class="option-group option-grid">
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="infant"><span class="option-text">Infant (0–1)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="toddler"><span class="option-text">Toddler (2–4)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="school_age"><span class="option-text">School age (5–9)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="preteen"><span class="option-text">Preteen (10–12)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="teen"><span class="option-text">Teen (13–17)</span></label>
+                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="infant"><span class="option-text">Infant (0-1)</span></label>
+                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="toddler"><span class="option-text">Toddler (2-4)</span></label>
+                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="school_age"><span class="option-text">School age (5-9)</span></label>
+                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="preteen"><span class="option-text">Preteen (10-12)</span></label>
+                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="teen"><span class="option-text">Teen (13-17)</span></label>
                   </div>
                 </fieldset>
               </fieldset>
 
               <!-- Q18 -->
               <fieldset class="q-block q-fieldset" data-question="q18">
-                <legend class="q-legend">Professional childcare experience?</legend>
+                <legend class="q-legend">Do you have professional childcare experience?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q18_professional_exp" value="teacher"><span class="option-text">Teacher / educator</span></label>
                   <label class="option"><input type="radio" name="q18_professional_exp" value="social_worker"><span class="option-text">Social worker</span></label>
@@ -455,7 +455,7 @@
 
               <!-- Q19 -->
               <fieldset class="q-block q-fieldset" data-question="q19">
-                <legend class="q-legend">Have any adults completed adoption / foster training?</legend>
+                <legend class="q-legend">Have any adults completed adoption or foster training?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q19_training" value="pride"><span class="option-text">Yes, PRIDE or equivalent</span></label>
                   <label class="option"><input type="radio" name="q19_training" value="other_training"><span class="option-text">Yes, other training</span></label>
@@ -467,7 +467,7 @@
               <!-- Q20 (sensitive) -->
               <fieldset class="q-block q-fieldset" data-question="q20">
                 <legend class="q-legend">Has your household ever had a CPS report?</legend>
-                <span class="q-help">This does <strong>not</strong> disqualify your family. It is used only to route you to the right support — your answer is kept confidential.</span>
+                <span class="q-help">This does <strong>not</strong> disqualify your family. We use the answer to identify relevant support and keep it confidential.</span>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q20_cps_report" value="yes" data-branch="q20"><span class="option-text">Yes</span></label>
                   <label class="option"><input type="radio" name="q20_cps_report" value="no" data-branch="q20"><span class="option-text">No</span></label>
@@ -475,14 +475,14 @@
                 <!-- Conditional explanation, revealed only after the acknowledgment dialog -->
                 <div class="conditional q-followup" id="cond-q20">
                   <label class="q-label" for="q20_explanation">In a few words, please share what happened.</label>
-                  <span class="q-help" id="q20_help">This note is stored confidentially and is visible only to your assigned agency representative — never to families or in any public listing.</span>
+                  <span class="q-help" id="q20_help">This note is confidential. Only your assigned agency representative can view it.</span>
                   <textarea id="q20_explanation" name="q20_explanation" rows="4" class="q-inline-field" style="max-width:100%; width:100%;" aria-describedby="q20_help"></textarea>
                 </div>
               </fieldset>
 
               <!-- Q21 -->
               <fieldset class="q-block q-fieldset" data-question="q21">
-                <legend class="q-legend">Non-family references available?</legend>
+                <legend class="q-legend">Can you provide non-family references?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q21_references" value="two_plus"><span class="option-text">Yes, 2 or more</span></label>
                   <label class="option"><input type="radio" name="q21_references" value="one"><span class="option-text">Yes, 1</span></label>
@@ -499,21 +499,21 @@
               <div class="section-number">4</div>
               <div class="section-title-group">
                 <h2 class="section-title">Adoption Preferences</h2>
-                <p class="section-description" style="text-align: center;">Tell us what kind of child and family structure you're hoping for.</p>
+                <p class="section-description">The ages, needs, and family relationships you feel prepared to support.</p>
               </div>
             </div>
 
             <div class="section-content has-questions">
-              <!-- Q22 (age range — accessible multi-select) -->
+              <!-- Q22 (age range - accessible multi-select) -->
               <fieldset class="q-block q-fieldset" data-question="q22">
                 <legend class="q-legend">Preferred age range of child?<span class="required-star" aria-hidden="true">*</span></legend>
                 <span class="q-help" id="q22_help">Select every age band you are open to. Choosing “Open to any age” covers all bands.</span>
                 <div class="option-group option-grid" aria-required="true" aria-describedby="q22_help q22_error">
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="infant"><span class="option-text">Infant (0–1)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="toddler"><span class="option-text">Toddler (2–4)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="school_age"><span class="option-text">School age (5–9)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="preteen"><span class="option-text">Preteen (10–12)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="teen" data-branch="q22"><span class="option-text">Teen (13–17)</span></label>
+                  <label class="option"><input type="checkbox" name="q22_age_range" value="infant"><span class="option-text">Infant (0-1)</span></label>
+                  <label class="option"><input type="checkbox" name="q22_age_range" value="toddler"><span class="option-text">Toddler (2-4)</span></label>
+                  <label class="option"><input type="checkbox" name="q22_age_range" value="school_age"><span class="option-text">School age (5-9)</span></label>
+                  <label class="option"><input type="checkbox" name="q22_age_range" value="preteen"><span class="option-text">Preteen (10-12)</span></label>
+                  <label class="option"><input type="checkbox" name="q22_age_range" value="teen" data-branch="q22"><span class="option-text">Teen (13-17)</span></label>
                   <label class="option"><input type="checkbox" name="q22_age_range" value="any"><span class="option-text">Open to any age</span></label>
                 </div>
                 <p class="field-error" id="q22_error" role="alert" aria-live="assertive">Please select at least one age range.</p>
@@ -521,7 +521,7 @@
 
               <!-- Q23 -->
               <fieldset class="q-block q-fieldset" data-question="q23">
-                <legend class="q-legend">Open to adopting siblings together?</legend>
+                <legend class="q-legend">Are you open to adopting siblings together?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q23_siblings" value="any_size"><span class="option-text">Yes, any group size</span></label>
                   <label class="option"><input type="radio" name="q23_siblings" value="up_to_2"><span class="option-text">Yes, up to 2 siblings</span></label>
@@ -585,7 +585,7 @@
                     <span class="alert-icon" aria-hidden="true">!</span>
                     <div class="alert-body">
                       <strong>Let's connect you with support</strong>
-                      You indicated openness to higher support needs with limited local access. Specialized services make a real difference — and many are available remotely.
+                      You indicated openness to higher support needs with limited local access. Many specialized services are available remotely.
                       <p style="margin:0.6rem 0 0;"><a href="https://www.psychologytoday.com/us/therapists/child" target="_blank" rel="noopener noreferrer">Find a child &amp; family therapist near you →</a></p>
                     </div>
                   </div>
@@ -606,7 +606,7 @@
 
               <!-- Q28 -->
               <fieldset class="q-block q-fieldset" data-question="q28">
-                <legend class="q-legend">Open to a child with a history of trauma / abuse?</legend>
+                <legend class="q-legend">Are you open to a child with a history of trauma or abuse?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q28_trauma_openness" value="trained" data-branch="q28"><span class="option-text">Yes, we have training / experience</span></label>
                   <label class="option"><input type="radio" name="q28_trauma_openness" value="willing" data-branch="q28"><span class="option-text">Yes, willing to learn</span></label>
@@ -620,7 +620,7 @@
                     <span class="alert-icon" aria-hidden="true">i</span>
                     <div class="alert-body">
                       <strong>A note about teens in care</strong>
-                      Many teenagers awaiting adoption have experienced some trauma, and most go on to flourish in stable, loving homes. This is shared for context only — it does not affect your eligibility, and you can continue either way.
+                      Many teenagers awaiting adoption have experienced trauma. This context does not affect your eligibility, and you can continue either way.
                     </div>
                     <button type="button" class="alert-dismiss" data-dismiss="banner-teen" aria-label="Dismiss this notice">&times;</button>
                   </div>
@@ -646,7 +646,7 @@
               <div class="section-number">5</div>
               <div class="section-title-group">
                 <h2 class="section-title">Legal Readiness</h2>
-                <p class="section-description" style="text-align: center;">Confirm your legal and logistical preparedness for adoption.</p>
+                <p class="section-description">Where you are in the legal, financial, and home-study process.</p>
               </div>
             </div>
 
@@ -654,7 +654,7 @@
               <!-- Q30 -->
               <div class="q-block" data-question="q30">
                 <label class="q-label" for="q30_adoption_state">What state will the adoption take place in?<span class="required-star" aria-hidden="true">*</span></label>
-                <span class="q-help" id="q30_help">Pre-filled from your state of residence — change it if the adoption will occur elsewhere.</span>
+                <span class="q-help" id="q30_help">This uses your state of residence. Change it if the adoption will occur elsewhere.</span>
                 <select id="q30_adoption_state" name="q30_adoption_state" class="q-inline-field" required aria-required="true" aria-describedby="q30_help q30_error">
                   <option value="">Select a state…</option>
                 </select>
@@ -666,7 +666,7 @@
                     <span class="alert-icon" aria-hidden="true">i</span>
                     <div class="alert-body">
                       <strong>Interstate adoption (ICPC) applies</strong>
-                      Your residence and the adoption state differ, so this will be an interstate placement governed by the Interstate Compact on the Placement of Children (ICPC). It adds a review step between the two states' agencies — your assigned agency will guide you through it.
+                      Your residence and adoption state differ, so the Interstate Compact on the Placement of Children (ICPC) applies. Your agency will guide the review between both states.
                     </div>
                   </div>
                   <div class="info-card">
@@ -691,11 +691,11 @@
                 <!-- Home-study explainer (Q31 = Unsure) -->
                 <div class="conditional" id="card-homestudy">
                   <div class="info-card">
-                    <h4>What is a Home Study?</h4>
+                    <h4>What is a home study?</h4>
                     <p>A home study is a written assessment by a licensed social worker confirming your home is a safe, stable place for a child. It usually includes interviews, background checks, a home visit, and reference checks.</p>
                     <ul>
-                      <li><strong>Estimated cost:</strong> typically $1,000–$3,000 (often reduced or waived in foster-to-adopt cases).</li>
-                      <li><strong>Typical timeline:</strong> about 2–6 months from start to approval.</li>
+                      <li><strong>Estimated cost:</strong> typically $1,000-$3,000 (often reduced or waived in foster-to-adopt cases).</li>
+                      <li><strong>Typical timeline:</strong> about 2-6 months from start to approval.</li>
                     </ul>
                     <p>You don't need this completed to continue. <a href="/adopt/home-study">Visit our Home Study service →</a></p>
                   </div>
@@ -715,10 +715,10 @@
 
               <!-- Q33 -->
               <fieldset class="q-block q-fieldset" data-question="q33">
-                <legend class="q-legend">Prepared for adoption costs?</legend>
+                <legend class="q-legend">Are you prepared for adoption costs?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q33_costs" value="budgeted" data-branch="q33"><span class="option-text">Yes, we have budgeted</span></label>
-                  <label class="option"><input type="radio" name="q33_costs" value="partially" data-branch="q33"><span class="option-text">Partially — exploring options</span></label>
+                  <label class="option"><input type="radio" name="q33_costs" value="partially" data-branch="q33"><span class="option-text">Partially - exploring options</span></label>
                   <label class="option"><input type="radio" name="q33_costs" value="seeking_assistance" data-branch="q33"><span class="option-text">No, seeking financial assistance</span></label>
                   <label class="option"><input type="radio" name="q33_costs" value="not_sure" data-branch="q33"><span class="option-text">Not sure of the costs yet</span></label>
                 </div>
@@ -729,9 +729,9 @@
                     <h4>Financial assistance for adoption</h4>
                     <p>Adoption is more affordable than many families expect. These programs can substantially reduce costs:</p>
                     <ul>
-                      <li><a href="https://www.irs.gov/taxtopics/tc607" target="_blank" rel="noopener noreferrer">Federal Adoption Tax Credit</a> — a sizable per-child credit on qualified expenses.</li>
-                      <li><a href="https://www.childwelfare.gov/topics/adoption/adopt-assistance/" target="_blank" rel="noopener noreferrer">State adoption subsidy programs</a> — ongoing support, especially for foster adoption.</li>
-                      <li><a href="https://adoptionnetwork.com/adoption-grants/" target="_blank" rel="noopener noreferrer">Nonprofit grant directory</a> — grants and low-interest loans for adoptive families.</li>
+                      <li><a href="https://www.irs.gov/taxtopics/tc607" target="_blank" rel="noopener noreferrer">Federal Adoption Tax Credit</a>, a per-child credit for qualified expenses.</li>
+                      <li><a href="https://www.childwelfare.gov/topics/adoption/adopt-assistance/" target="_blank" rel="noopener noreferrer">State adoption subsidy programs</a>, with ongoing support for eligible families.</li>
+                      <li><a href="https://adoptionnetwork.com/adoption-grants/" target="_blank" rel="noopener noreferrer">Nonprofit grant directory</a>, including grants and low-interest loans.</li>
                     </ul>
                   </div>
                 </div>
@@ -750,7 +750,7 @@
 
               <!-- Q35 -->
               <fieldset class="q-block q-fieldset" data-question="q35">
-                <legend class="q-legend">Legal representation, or plan to seek it?</legend>
+                <legend class="q-legend">Do you have legal representation or a plan to seek it?</legend>
                 <div class="option-group" role="radiogroup">
                   <label class="option"><input type="radio" name="q35_legal_rep" value="attorney" data-branch="q35"><span class="option-text">Yes, attorney retained</span></label>
                   <label class="option"><input type="radio" name="q35_legal_rep" value="planning" data-branch="q35"><span class="option-text">Planning to find one</span></label>
@@ -795,7 +795,7 @@
               <circle cx="12" cy="12" r="2" fill="currentColor"/>
             </svg>
             <p>
-              Your information is secure and confidential. We comply with all adoption privacy laws and never share your data without explicit consent.
+              Your answers are confidential and tied to your HavenLink account. We do not publish intake responses.
             </p>
           </div>
         </form>
@@ -808,7 +808,7 @@
     <div class="footer-container">
       <div class="footer-section">
         <h3>About HavenLink</h3>
-        <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
+        <p>HavenLink connects prospective adoptive families with licensed agencies, practical resources, and a structured intake process.</p>
       </div>
       
       <div class="footer-section">
@@ -999,7 +999,7 @@
         </ul>
         
         <h3>Transfer of Your Personal Data</h3>
-        <p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.</p>
+        <p>Your information, including Personal Data, is processed at the Company's operating offices and in other places where the parties involved in processing are located. This information may be transferred to and maintained on computers outside Your state, province, country, or other governmental jurisdiction, where data protection laws may differ.</p>
         <p>Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
         
         <h3>Delete Your Personal Data</h3>
@@ -1054,7 +1054,7 @@
   <div id="cpsAckOverlay" class="ack-overlay" role="dialog" aria-modal="true" aria-labelledby="cpsAckTitle" aria-describedby="cpsAckBody">
     <div class="ack-dialog">
       <h3 id="cpsAckTitle">Thank you for your honesty</h3>
-      <p id="cpsAckBody">We know this can be a difficult question to answer. A past CPS report does <strong>not</strong> disqualify your family from adopting — families grow and circumstances change, and many wonderful adoptive parents have a history they were once worried about.</p>
+      <p id="cpsAckBody">We know this can be difficult to answer. A past CPS report does <strong>not</strong> automatically disqualify your family. Agencies review the circumstances and any changes made since the report.</p>
       <p>If you're comfortable, the next field lets you share a brief note. It is stored securely and seen only by your assigned agency representative. You can also leave it blank.</p>
       <div class="ack-actions">
         <button type="button" class="btn btn-secondary" id="cpsAckBack">Go back</button>
@@ -1068,7 +1068,7 @@
     <div class="ik-complete-inner">
       <p class="ik-complete-eyebrow hm-eyebrow">Family Intake · Complete</p>
       <h2 id="ikCompleteTitle" class="ik-complete-title">Received. Your family's story is <em>with us.</em></h2>
-      <p class="ik-complete-body">Thank you for trusting HavenLink with the details of your home and your hopes. From here, the licensed agencies you choose can review your profile and reach out — you are never contacted without your say.</p>
+      <p class="ik-complete-body">Thank you for sharing these details. HavenLink has received your intake and will use it to support the next step with licensed agencies.</p>
       <div class="ik-complete-actions">
         <a href="/adopt/agency-profiles" class="hm-btn hm-btn--paper">See agencies <span class="hm-btn-arrow">→</span></a>
       </div>

@@ -569,7 +569,7 @@ body.editorial .prep-summary-title::after {
 }
 
 body.editorial .prep-accordion[open] .prep-summary-title::after {
-  content: "–";
+  content: "/";
 }
 
 body.editorial .prep-progress {

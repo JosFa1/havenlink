@@ -1,5 +1,5 @@
 /* ============================================================
-   HavenLink — Family Intake Form (adopt step 2, "Light Editorial")
+   HavenLink - Family Intake Form (adopt step 2, "Light Editorial")
    Requires editorial.css first. Restyles the (preserved) multi-step form into
    the editorial system. Every adopt.js hook is untouched: #section-* / .active
    (toggled via inline display), data-question, .q-block.has-error + .field-error
@@ -663,5 +663,489 @@ body.editorial .notification.fade-out {
   body.editorial .ik-complete-body,
   body.editorial .ik-complete-actions {
     animation: none;
+  }
+}
+
+/* ============================================================
+   Immersive intake composition
+   ============================================================ */
+
+body.intake-form .ed-hero {
+  background: var(--paper);
+  color: var(--ink);
+  isolation: isolate;
+}
+
+body.intake-form .ed-hero::after {
+  content: none;
+}
+
+body.intake-form .ed-hero-canvas {
+  opacity: 0.72;
+  transform-origin: 72% 48%;
+  transition: transform 1.1s var(--ease-out);
+}
+
+body.intake-form .ed-hero-standfirst {
+  max-width: 38rem;
+}
+
+body.intake-form .form-container {
+  position: relative;
+  padding-block: clamp(4.5rem, 10vw, 9rem);
+  background:
+    linear-gradient(90deg, rgba(20, 33, 61, 0.035) 0, rgba(20, 33, 61, 0.035) 1px, transparent 1px)
+      center / min(90vw, 78rem) 100% no-repeat,
+    var(--paper);
+}
+
+body.intake-form .form-container .container {
+  width: min(100%, 86rem);
+  max-width: none;
+  display: grid;
+  grid-template-columns: minmax(10rem, 14rem) minmax(0, 1fr);
+  align-items: start;
+  column-gap: clamp(3rem, 8vw, 8rem);
+}
+
+body.intake-form .form-progress {
+  position: sticky;
+  top: calc(var(--hm-nav-h) + 4.75rem);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body.intake-form .progress-header {
+  display: block;
+  margin-bottom: 2rem;
+}
+
+body.intake-form .progress-header h2 {
+  margin-bottom: 0.65rem;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 620;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+body.intake-form .progress-percentage {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+body.intake-form .progress-percentage #percentComplete {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  font-weight: 430;
+  letter-spacing: 0;
+  color: var(--terracotta);
+}
+
+body.intake-form .progress-steps {
+  position: relative;
+  display: grid;
+  gap: 0;
+  margin: 0 0 2rem;
+}
+
+body.intake-form .progress-steps::before {
+  content: "";
+  position: absolute;
+  left: 0.88rem;
+  top: 0.9rem;
+  bottom: 1.75rem;
+  width: 1px;
+  background: rgba(20, 33, 61, 0.2);
+}
+
+body.intake-form .progress-step {
+  position: relative;
+  z-index: 1;
+  min-height: 3.5rem;
+  gap: 0.8rem;
+  cursor: default;
+}
+
+body.intake-form .progress-step-circle {
+  width: 1.8rem;
+  height: 1.8rem;
+  background: var(--paper);
+}
+
+body.intake-form .progress-step.current .progress-step-circle {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+body.intake-form .progress-step.current .progress-step-number {
+  color: var(--paper);
+}
+
+body.intake-form .progress-step-label {
+  font-size: 0.84rem;
+}
+
+body.intake-form .progress-connector {
+  display: none;
+}
+
+body.intake-form .progress-bar {
+  width: 100%;
+  height: 1px;
+}
+
+body.intake-form .form-content {
+  min-width: 0;
+}
+
+body.intake-form .section-content {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body.intake-form .section-header {
+  display: grid;
+  grid-template-columns: 3.25rem minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  margin-bottom: clamp(2rem, 6vh, 4.5rem);
+  padding-bottom: clamp(2rem, 5vh, 3.5rem);
+}
+
+body.intake-form .section-number {
+  padding-top: 0.35rem;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 640;
+  letter-spacing: 0.12em;
+}
+
+body.intake-form .section-number::before {
+  content: "0";
+}
+
+body.intake-form .section-title {
+  max-width: 14ch;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+body.intake-form .section-description {
+  margin-top: 1rem;
+  max-width: 34rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+body.intake-form .q-block,
+body.intake-form .q-fieldset {
+  display: grid;
+  grid-template-columns: minmax(12rem, 0.78fr) minmax(17rem, 1.22fr);
+  column-gap: clamp(2.25rem, 6vw, 6.5rem);
+  row-gap: 0.6rem;
+  padding: clamp(2rem, 5.5vh, 3.6rem) 0;
+}
+
+body.intake-form .q-block > .q-label,
+body.intake-form .q-block > .q-legend {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  line-height: 1.22;
+}
+
+body.intake-form .q-block > .q-help {
+  grid-column: 1;
+  grid-row: 2;
+  margin: 0;
+  padding-right: 1rem;
+}
+
+body.intake-form .q-block > .option-group,
+body.intake-form .q-block > .q-inline-field,
+body.intake-form .q-block > .repeater-rows,
+body.intake-form .q-block > .repeater-row,
+body.intake-form .q-block > .conditional,
+body.intake-form .q-block > .q-followup,
+body.intake-form .q-block > .field-error {
+  grid-column: 2;
+}
+
+body.intake-form .q-block > .option-group,
+body.intake-form .q-block > .q-inline-field,
+body.intake-form .q-block > .repeater-row {
+  grid-row: 1 / span 2;
+  align-self: start;
+}
+
+body.intake-form .option-group {
+  gap: 0;
+  margin: 0;
+}
+
+body.intake-form .option-group.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1.5rem;
+}
+
+body.intake-form .option {
+  position: relative;
+  min-height: 3.15rem;
+  gap: 0.9rem;
+  padding: 0.75rem 0;
+  border: 0;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.14);
+  background: transparent;
+}
+
+body.intake-form .option:hover,
+body.intake-form .option:has(input:checked) {
+  border-color: rgba(180, 85, 31, 0.62);
+  background: transparent;
+}
+
+body.intake-form .option input {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0;
+  border: 1px solid rgba(20, 33, 61, 0.45);
+  background: transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+body.intake-form .option input[type="radio"] {
+  border-radius: 50%;
+}
+
+body.intake-form .option input[type="checkbox"] {
+  border-radius: 2px;
+}
+
+body.intake-form .option input:checked {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+  box-shadow: inset 0 0 0 3px var(--paper);
+}
+
+body.intake-form .option input[type="checkbox"]:checked {
+  box-shadow: none;
+  background:
+    linear-gradient(135deg, transparent 43%, var(--paper) 43%, var(--paper) 54%, transparent 54%) 1px 1px / 7px 7px no-repeat,
+    linear-gradient(45deg, transparent 37%, var(--paper) 37%, var(--paper) 50%, transparent 50%) 4px 5px / 5px 5px no-repeat,
+    var(--terracotta);
+}
+
+body.intake-form .option-text {
+  line-height: 1.45;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+body.intake-form .option:has(input:checked) .option-text {
+  color: var(--terracotta-deep);
+  transform: translateX(0.2rem);
+}
+
+body.intake-form .q-inline-field,
+body.intake-form .repeater-row input {
+  max-width: none;
+  min-height: 3.25rem;
+  padding: 0.65rem 0.1rem;
+  border-bottom-color: rgba(20, 33, 61, 0.3);
+  background-image: linear-gradient(var(--terracotta), var(--terracotta));
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0 2px;
+  transition: background-size 0.4s var(--ease-out), border-color 0.3s ease;
+}
+
+body.intake-form .q-inline-field:focus,
+body.intake-form .repeater-row input:focus {
+  border-bottom-color: transparent;
+  background-size: 100% 2px;
+}
+
+body.intake-form .q-number {
+  max-width: 10rem;
+}
+
+body.intake-form .conditional,
+body.intake-form .q-followup {
+  margin-top: 1.4rem;
+  padding: 1.25rem 0 0 1.5rem;
+}
+
+body.intake-form .info-card,
+body.intake-form .alert-banner {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.intake-form .form-actions {
+  position: static;
+  z-index: 20;
+  margin-top: clamp(3rem, 8vh, 6rem);
+  padding: 1.1rem 0;
+  background: transparent;
+}
+
+body.intake-form .form-actions .btn {
+  min-height: 3rem;
+  border-radius: 2px;
+  padding: 0.85rem 1.4rem;
+  letter-spacing: 0;
+  transform: none;
+}
+
+body.intake-form .form-actions .btn:hover {
+  transform: none;
+}
+
+body.intake-form .privacy-notice {
+  max-width: 38rem;
+  margin-left: auto;
+}
+
+@media (max-width: 980px) {
+  body.intake-form .form-container .container {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.intake-form .form-progress {
+    position: relative;
+    top: auto;
+    margin-bottom: clamp(3rem, 8vh, 5rem);
+    padding-bottom: 1.5rem;
+    border-bottom: var(--hairline);
+  }
+
+  body.intake-form .progress-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+  }
+
+  body.intake-form .progress-steps {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  body.intake-form .progress-steps::before {
+    left: 10%;
+    right: 10%;
+    top: 0.9rem;
+    bottom: auto;
+    width: 80%;
+    height: 1px;
+  }
+
+  body.intake-form .progress-step {
+    min-height: auto;
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+  }
+
+  body.intake-form .progress-step-label {
+    display: none;
+  }
+
+}
+
+@media (max-width: 760px) {
+  body.intake-form .form-container {
+    padding-inline: 1.25rem;
+  }
+
+  body.intake-form .form-container .container {
+    width: 100%;
+    padding-inline: 0;
+  }
+
+  body.intake-form .form-progress,
+  body.intake-form .form-content,
+  body.intake-form .form-section,
+  body.intake-form .section-content {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  body.intake-form .progress-step {
+    min-width: 0;
+  }
+
+  body.intake-form .ed-hero-canvas {
+    opacity: 0.46;
+  }
+
+  body.intake-form .q-block,
+  body.intake-form .q-fieldset {
+    grid-template-columns: 1fr;
+    row-gap: 0.75rem;
+  }
+
+  body.intake-form .q-block > .q-label,
+  body.intake-form .q-block > .q-legend,
+  body.intake-form .q-block > .q-help,
+  body.intake-form .q-block > .option-group,
+  body.intake-form .q-block > .q-inline-field,
+  body.intake-form .q-block > .repeater-rows,
+  body.intake-form .q-block > .repeater-row,
+  body.intake-form .q-block > .conditional,
+  body.intake-form .q-block > .q-followup,
+  body.intake-form .q-block > .field-error {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  body.intake-form .q-block > .q-help {
+    margin-bottom: 0.5rem;
+  }
+
+  body.intake-form .option-group.option-grid {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+
+  body.intake-form .option-text {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  body.intake-form .form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  body.intake-form .form-actions .btn-primary {
+    width: auto;
+    margin: 0;
+  }
+
+  body.intake-form #saveBtn {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.intake-form .ed-hero-canvas,
+  body.intake-form .option-text,
+  body.intake-form .option input,
+  body.intake-form .q-inline-field,
+  body.intake-form .repeater-row input {
+    transition: none;
   }
 }

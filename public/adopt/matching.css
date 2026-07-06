@@ -297,7 +297,7 @@ html.js body.editorial .mt-score.is-in .mt-factor-fill {
 }
 
 .mt-note::before {
-  content: "—";
+  content: "/";
   position: absolute;
   left: 0;
   color: var(--terracotta);

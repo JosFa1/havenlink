@@ -50,7 +50,7 @@ const HS_UNIVERSAL_QUESTIONS = [
     disqualifyOn: 'no',
     disqualifyMessage: 'You must be at least 18 years old to begin the home study process in [State]. Please check back when you meet this requirement.',
     nextSteps: [
-      "Check back once you're 18 — there's no penalty for waiting",
+      "Check back once you're 18. There is no penalty for waiting.",
       'In the meantime, learn what to expect with the preparation resources below'
     ]
   },
@@ -84,19 +84,19 @@ const HS_UNIVERSAL_QUESTIONS = [
     why: 'Medical evaluations are required in all states. The physician must certify fitness to parent.',
     inputType: 'yes_no',
     disqualifyOn: 'no',
-    disqualifyMessage: 'A medical evaluation is required for all adults in the home in [State]. Many health conditions do not disqualify applicants — what matters is that a licensed physician confirms your ability to care for a child. Visit our preparation resources for guidance.',
+    disqualifyMessage: 'A medical evaluation is required for all adults in the home in [State]. Many health conditions do not disqualify applicants. A licensed physician must confirm your ability to care for a child. Visit our preparation resources for guidance.',
     nextSteps: [
-      'Talk with your physician first — many conditions do not disqualify applicants',
+      'Talk with your physician first because many conditions do not disqualify applicants',
       'Schedule physical exams for the adults in your household'
     ]
   },
   {
     id: 'u5_financial',
-    question: "Do you have a stable, legal, and verifiable source of income that can cover a child's basic needs — housing, food, medical care, and education — without depending on public assistance?",
-    why: 'No state requires a specific income dollar amount. Income must be sufficient, legal, and verifiable — receiving some forms of public assistance does not automatically disqualify an applicant.',
+    question: "Do you have a stable, legal, and verifiable source of income that can cover a child's housing, food, medical care, and education without depending on public assistance?",
+    why: 'No state requires a specific income dollar amount. Income must be sufficient, legal, and verifiable. Receiving some forms of public assistance does not automatically disqualify an applicant.',
     inputType: 'yes_no',
     disqualifyOn: 'no',
-    disqualifyMessage: "Financial stability is a key part of the home study in [State]. You don't need to be wealthy — you need to show that your income is stable and sufficient to meet a child's needs. Visit our resources for tips on how to document and present your finances.",
+    disqualifyMessage: "Financial stability is a key part of the home study in [State]. You must show that your income is stable and sufficient to meet a child's needs. Visit our resources for guidance on documenting your finances.",
     nextSteps: [
       'Gather pay stubs, tax returns, and bank statements to see where you stand',
       'Use the Documentation Checklist below to organize your financial records'
@@ -110,7 +110,7 @@ const HS_UNIVERSAL_QUESTIONS = [
     disqualifyOn: 'no',
     disqualifyMessage: 'Your home must have adequate space for a child, including a proper sleeping area. Review our home preparation guide for details on what social workers look for during a home visit in [State].',
     nextSteps: [
-      "A child usually doesn't need their own bedroom — just a designated, appropriate sleeping space",
+      "A child usually needs a designated, appropriate sleeping space, though a separate bedroom is not always required",
       'See the Prepare Your Home checklist below for what social workers look for'
     ]
   },
@@ -123,7 +123,7 @@ const HS_UNIVERSAL_QUESTIONS = [
     disqualifyMessage: "Basic home safety is required for a home study approval in [State]. Our preparation guide includes a room-by-room checklist so you know exactly what to address before the social worker's visit.",
     nextSteps: [
       'Work through the room-by-room checklist in Prepare Your Home below',
-      'Most fixes are quick — detectors, locks, and safe storage cover the majority'
+      'Detectors, locks, and safe storage address many common home-safety issues'
     ]
   }
 ];
@@ -709,7 +709,7 @@ class HomeStudyFlow {
       el.textContent = 'Sending your details to HavenLink…';
     } else if (status === 'sent') {
       el.classList.add('hs-status-sent');
-      el.textContent = '✓ Sent — the HavenLink team has been notified.';
+      el.textContent = '✓ Sent. The HavenLink team has been notified.';
     } else {
       el.classList.add('hs-status-error');
       el.textContent = status === 'error'
