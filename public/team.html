@@ -5,19 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/png/logo.png">
   <title>The HavenLink Team - Meet Our Founders</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Meet the founders, partner agencies, and organizations behind HavenLink — the civic technology platform making adoption clearer and more human.">
+  <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/editorial.css">
+  <link rel="stylesheet" href="/team.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="editorial team">
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/home" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
-          <img src="png/logo.png" alt="HavenLink Logo" class="logo-icon">
+          <img src="/png/logo.png" alt="HavenLink Logo" class="logo-icon">
           <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
         </a>
       </div>
-      
+
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -45,489 +52,328 @@
     </div>
   </nav>
 
-  <!-- Team Header Section -->
-  <section class="team-hero" id="top">
-    <div class="container">
-      <h1 class="team-title">The Haven<span class="team-title-link">Link</span> Team</h1>
-      <p class="team-subtitle">
-        Dedicated to transforming adoption through compassion, technology, and civic impact.
-      </p>
-    </div>
-  </section>
+  <main class="tm-main">
 
-  <!-- Founders Section -->
-  <section class="team-section" id="founders">
-    <div class="container">
-      <h2 class="section-title">Founders</h2>
-      <div class="team-grid">
-        
-        <!-- Asad Sadikov -->
-        <div class="team-member">
-          <div class="member-placeholder">
-            <img src="png/asadsadikov.png" alt="Asad Sadikov" class="member-photo">
-          </div>
-          <h2 class="member-name">Asad Sadikov</h2>
-          <p class="member-role">Co-Founder</p>
-          <div class="member-description">
-            <p>Asad Sadikov is a Co-Founder and lead technologist at HavenLink with strong expertise in data analysis, machine learning, and scalable system design. He builds the analytics and matching infrastructure that powers fair and privacy-preserving adoption workflows, turning complex datasets into actionable insights. Asad is passionately committed to children’s equality and uses technical rigor to ensure the platform improves safety, access, and equitable outcomes for families and children.</p>
-          </div>          <div class="member-social">
-            <a href="https://www.instagram.com/asadsadikov10/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:asadsadikov07@gmail.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>        </div>
-
-        <!-- Aarav Gupta -->
-        <div class="team-member">
-          <div class="member-placeholder">
-            <img src="png/aaravgupta.png" alt="Aarav Gupta" class="member-photo">
-          </div>
-          <h2 class="member-name">Aarav Gupta</h2>
-          <p class="member-role">Co-Founder</p>
-          <div class="member-description">
-            <p>Aarav Gupta is the Co-Founder of HavenLink, a platform focused on making adoption more accessible, transparent, and family-centered through technology. Driven by a passion for civic impact and innovation, he helps lead HavenLink's mission to connect adoptive families with trusted agencies and resources while simplifying the adoption journey. Outside of HavenLink, Aarav enjoys trying new restaurants, spending time with friends, and competing in debate, where he has earned recognition and rankings at both the state and national level.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/aaravgupta7041/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:aaravgupta0910@gmail.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
+    <!-- Hero -->
+    <section class="tm-hero" id="top">
+      <canvas id="tmNetwork" class="tm-hero-canvas" aria-hidden="true"></canvas>
+      <div class="tm-hero-inner">
+        <p class="tm-hero-eyebrow hm-eyebrow hm-reveal">The people behind HavenLink</p>
+        <h1 class="tm-hero-title hm-reveal" style="--d: .08s">The team building adoption's <em>connective tissue.</em></h1>
+        <p class="tm-hero-standfirst hm-reveal" style="--d: .16s">
+          Founders, licensed agencies, and civic partners — brought together to make the adoption journey more transparent, more compassionate, and more human at every step.
+        </p>
+        <div class="tm-hero-actions hm-reveal" style="--d: .24s">
+          <a href="#founders" class="hm-btn hm-btn--ink">Meet the founders <span class="hm-btn-arrow">→</span></a>
+          <a href="#expansion" class="hm-textlink">See our global reach</a>
         </div>
-
-        <!-- Joe Borgman -->
-        <div class="team-member">
-          <div class="member-placeholder">
-            <img src="png/joeborgman.png" alt="Joe Borgman" class="member-photo">
-          </div>
-          <h2 class="member-name">Joe Borgman</h2>
-          <p class="member-role">Co-Founder</p>
-          <div class="member-description">
-            <p>Joe Borgman helps build the technical infrastructure behind HavenLink, focusing on server systems, backend reliability, and secure data management. With experience in maintaining and optimizing technical environments, he helps ensure HavenLink remains scalable, efficient, and capable of supporting sensitive adoption-related information responsibly. His work centers on building dependable systems that enable families, agencies, and resources to connect seamlessly.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/joe.borgman/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:joseph.borgman.2008@gmail.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
-
-  <!-- Partner Adoption Agencies Section -->
-  <section class="team-section" id="adoption-agencies">
-    <div class="container">
-      <h2 class="section-title">Partner Adoption Agencies</h2>
-      <div class="team-grid">
-
-        <!-- Connecting Hearts Adoption -->
-        <div class="team-member">
-          <a href="https://www.connectingheartsadoption.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/connecting-hearts-logo.png" alt="Connecting Hearts Adoption Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://www.connectingheartsadoption.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Connecting Hearts</h2>
-          </a>          <div class="member-description">
-            <p>Connecting Hearts Adoption is a licensed adoption agency in the State of Florida, focusing on the adoption home study.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/connecting.hearts.adoption/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:hello@connectingheartsadoption.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Hearts of Adoptions Alliance -->
-        <div class="team-member">
-          <a href="https://adopthoaa.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/hoaa-logo.png" alt="Hearts of Adoptions Alliance Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://adopthoaa.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Hearts of Adoptions Alliance</h2>
-          </a>          <div class="member-description">
-            <p>HOAA is a non-profit 501(c)(3) licensed child-placing agency dedicated to connecting children with safe and loving families.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/heart.of.adoptions.alliance/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:info@adoptthoaa.org" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Hand in Hand Adoptions -->
-        <div class="team-member">
-          <a href="https://www.hihiadopt.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/hihi-logo.png" alt="Hand in Hand Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://www.hihiadopt.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Hand in Hand</h2>
-          </a>          <div class="member-description">
-            <p>Hand in Hand has been offering child welfare services around the globe since 1974. Our mission is to provide the necessary foundations for orphaned children to develop to their fullest potential.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.facebook.com/HandInHandInternationalAdoptions/" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M 24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="mailto:florida@hihiadopt.org" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Adoption and Beyond -->
-        <div class="team-member">
-          <a href="https://adoption-beyond.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/adoption-beyond.png" alt="Adoption and Beyond Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://adoption-beyond.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Adoption and Beyond</h2>
-          </a>          <div class="member-description">
-            <p>Adoption & Beyond is available to perform domestic, international, private, and embryo home study assessments.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/adoptionbeyond1/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:adopt@adoption-beyond.org" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Options 4 Adoption -->
-        <div class="team-member">
-          <a href="https://options4adoption.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/options4adoption.png" alt="Options 4 Adoption Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://options4adoption.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Options 4 Adoption</h2>
-          </a>          <div class="member-description">
-            <p>Options 4 Adoption focuses on preparing the adoptive family's home study report and follow-up post placement visits. They have been assisting families and children since 2004 with both domestic and international adoption home studies.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.facebook.com/p/Options-4-Adoption-Inc-100064383561749/" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M 24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="mailto:homestudy@options4adoption.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Greater Hopes -->
-        <div class="team-member">
-          <a href="https://greaterhopes.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/greater-hopes.png" alt="Greater Hopes Logo" class="partner-logo">
-            </div>
-          </a>
-          <a href="https://greaterhopes.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <h2 class="member-name">Greater Hopes</h2>
-          </a>          <div class="member-description">
-            <p>Greater Hopes operates a full service Child Placing Agency. They are licensed by the State of Michigan to perform private infant and early childhood adoption.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/greater_hopes?utm_source=qr&amp;igshid=MzNlNGNkZWQ4Mg%3D%3D" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="tel:1-616-451-0245" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
+      <div class="tm-hero-meta">
+        <a href="#founders" class="tm-scrollcue" aria-label="Scroll to founders"><span class="tm-scrollcue-line"></span>Scroll</a>
+        <span class="tm-hero-meta-item">Founder-led</span>
+        <span class="tm-hero-meta-item">Licensed agency network</span>
+        <span class="tm-hero-meta-item">Global footprint</span>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Partner Organizations Section -->
-  <section class="team-section" id="organizations">
-    <div class="container">
-      <h2 class="section-title">Partner Organizations</h2>
-      <div class="team-grid">
-
-        <!-- UNICEF -->
-        <div class="team-member">
-          <a href="https://www.unicef.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/unicef-logo.png" alt="UNICEF Logo" class="unicef-logo">
+    <!-- Founders -->
+    <section class="tm-section" id="founders">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Founders</span>
+          <span class="hm-index">01 — 04</span>
+        </header>
+        <ul class="tm-people">
+          <li class="tm-person hm-reveal">
+            <div class="tm-person-portrait"><img src="/png/asadsadikov.png" alt="Asad Sadikov"></div>
+            <div class="tm-person-body">
+              <span class="tm-person-index">01</span>
+              <h3 class="tm-person-name">Asad Sadikov</h3>
+              <p class="tm-person-role">Co-Founder</p>
+              <p class="tm-person-bio">Asad Sadikov is a Co-Founder and lead technologist at HavenLink with strong expertise in data analysis, machine learning, and scalable system design. He builds the analytics and matching infrastructure that powers fair and privacy-preserving adoption workflows, turning complex datasets into actionable insights. Asad is passionately committed to children's equality and uses technical rigor to ensure the platform improves safety, access, and equitable outcomes for families and children.</p>
+              <div class="tm-social">
+                <a href="https://www.instagram.com/asadsadikov10/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                  </svg>
+                </a>
+                <a href="mailto:asadsadikov07@gmail.com" aria-label="Email">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                    <path d="M 2 6 L 12 13 L 22 6"/>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h2 class="member-name">UNICEF</h2>
-          </a>
-          <p class="member-role">International Organization</p>
-          <div class="member-description">
-            <p>An agency of the United Nations responsible for providing humanitarian and developmental aid to children worldwide.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/unicef/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="mailto:unicef.trinityprep@gmail.com" aria-label="Email">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
-                <path d="M 2 6 L 12 13 L 22 6"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+          </li>
 
-        <!-- UNFPA -->
-        <div class="team-member">
-          <a href="https://www.unfpa.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/unfpa-logo.png" alt="UNFPA Logo" class="partner-logo">
+          <li class="tm-person hm-reveal">
+            <div class="tm-person-portrait"><img src="/png/aaravgupta.png" alt="Aarav Gupta"></div>
+            <div class="tm-person-body">
+              <span class="tm-person-index">02</span>
+              <h3 class="tm-person-name">Aarav Gupta</h3>
+              <p class="tm-person-role">Co-Founder</p>
+              <p class="tm-person-bio">Aarav Gupta is the Co-Founder of HavenLink, a platform focused on making adoption more accessible, transparent, and family-centered through technology. Driven by a passion for civic impact and innovation, he helps lead HavenLink's mission to connect adoptive families with trusted agencies and resources while simplifying the adoption journey. Outside of HavenLink, Aarav enjoys trying new restaurants, spending time with friends, and competing in debate, where he has earned recognition and rankings at both the state and national level.</p>
+              <div class="tm-social">
+                <a href="https://www.instagram.com/aaravgupta7041/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                  </svg>
+                </a>
+                <a href="mailto:aaravgupta0910@gmail.com" aria-label="Email">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                    <path d="M 2 6 L 12 13 L 22 6"/>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h2 class="member-name">UNFPA</h2>
-          </a>
-          <p class="member-role">International Organization</p>
-          <div class="member-description">
-            <p>The United Nations sexual and reproductive health agency, working to ensure every pregnancy is wanted, every childbirth is safe, and every young person's potential is fulfilled.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/unfpa/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="tel:+1-212-297-5000" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
+          </li>
 
-        <!-- Florida Department of Children and Families -->
-        <div class="team-member">
-          <a href="https://www.myflfamilies.com/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/dcf-logo.png" alt="Florida Department of Children and Families Logo" class="partner-logo">
+          <li class="tm-person hm-reveal">
+            <div class="tm-person-portrait"><img src="/png/joeborgman.png" alt="Joe Borgman"></div>
+            <div class="tm-person-body">
+              <span class="tm-person-index">03</span>
+              <h3 class="tm-person-name">Joe Borgman</h3>
+              <p class="tm-person-role">Co-Founder</p>
+              <p class="tm-person-bio">Joe Borgman helps build the technical infrastructure behind HavenLink, focusing on server systems, backend reliability, and secure data management. With experience in maintaining and optimizing technical environments, he helps ensure HavenLink remains scalable, efficient, and capable of supporting sensitive adoption-related information responsibly. His work centers on building dependable systems that enable families, agencies, and resources to connect seamlessly.</p>
+              <div class="tm-social">
+                <a href="https://www.instagram.com/joe.borgman/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                    <circle cx="18" cy="6" r="1" fill="currentColor"/>
+                  </svg>
+                </a>
+                <a href="mailto:joseph.borgman.2008@gmail.com" aria-label="Email">
+                  <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+                    <path d="M 2 6 L 12 13 L 22 6"/>
+                  </svg>
+                </a>
+              </div>
             </div>
-            <h2 class="member-name">Florida Department of Children and Families</h2>
-          </a>
-          <p class="member-role">State Agency</p>
-          <div class="member-description">
-            <p>Florida's state agency for child welfare, adoption, and family services, working to protect the vulnerable and strengthen families across the state.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/myflfamilies/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="tel:+1-850-300-4323" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- City of Orlando -->
-        <div class="team-member">
-          <a href="https://www.orlando.gov/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/orlando-logo.png" alt="City of Orlando Logo" class="partner-logo">
-            </div>
-            <h2 class="member-name">City of Orlando</h2>
-          </a>
-          <p class="member-role">Municipal Government</p>
-          <div class="member-description">
-            <p>The municipal government of Orlando, Florida, serving residents and supporting families and children across Central Florida's largest city.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/thecitybeautiful/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="tel:+1-407-246-2121" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- City of Winter Park -->
-        <div class="team-member">
-          <a href="https://cityofwinterpark.org/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/winter-park-logo.png" alt="City of Winter Park Logo" class="partner-logo">
-            </div>
-            <h2 class="member-name">City of Winter Park</h2>
-          </a>
-          <p class="member-role">Municipal Government</p>
-          <div class="member-description">
-            <p>The municipal government of Winter Park, Florida, dedicated to serving its community and the well-being of local families and children.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.instagram.com/winterparkfla/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
-                <circle cx="18" cy="6" r="1" fill="currentColor"/>
-              </svg>
-            </a>
-            <a href="tel:+1-407-599-3399" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- City of Oviedo -->
-        <div class="team-member">
-          <a href="https://www.cityofoviedo.net/" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">
-            <div class="member-placeholder partner">
-              <img src="png/oviedo-logo.png" alt="City of Oviedo Logo" class="partner-logo">
-            </div>
-            <h2 class="member-name">City of Oviedo</h2>
-          </a>
-          <p class="member-role">Municipal Government</p>
-          <div class="member-description">
-            <p>The municipal government of Oviedo, Florida, committed to serving residents and fostering a safe, family-friendly community in Seminole County.</p>
-          </div>
-          <div class="member-social">
-            <a href="https://www.facebook.com/OviedoCityGov/" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M 24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="tel:+1-407-971-5555" aria-label="Phone">
-              <svg class="social-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-              </svg>
-            </a>
-          </div>
-        </div>
-
+          </li>
+        </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Global Reach / Expansion Map Section -->
-  <section class="team-section expansion-section" id="expansion">
-    <div class="container">
-      <h2 class="section-title">Our Global Reach</h2>
-      <p class="section-subtitle">Where HavenLink operates through our partner agencies — and where we're growing next. Hover the United States to explore state-by-state.</p>
-      <div class="expansion-map" id="expansionMap" role="group" aria-label="Interactive map of HavenLink partner and prospective regions">
-        <div class="map-viewport" id="mapWorld"><!-- world.svg injected by expansion-map.js --></div>
-        <div class="map-inset" id="usInset" hidden>
-          <button type="button" class="map-inset-close" aria-label="Close United States detail">&times;</button>
-          <div class="map-inset-title">United States</div>
-          <div class="map-inset-svg" id="mapUS"><!-- us-states.svg injected by expansion-map.js --></div>
-        </div>
-        <div class="map-tooltip" id="mapTooltip" aria-hidden="true" hidden></div>
+    <!-- Partner Adoption Agencies -->
+    <section class="tm-section tm-section--dim" id="adoption-agencies">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Partner adoption agencies</span>
+          <span class="hm-index">02 — 04</span>
+        </header>
+        <p class="tm-lede hm-reveal">Every agency in the HavenLink network is licensed, vetted, and accountable — the trusted hands that carry each family through the journey.</p>
+        <ul class="tm-ledger">
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.connectingheartsadoption.com/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">01</span>
+              <span class="tm-ledger-logo"><img src="/png/connecting-hearts-logo.png" alt="Connecting Hearts Adoption logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Connecting Hearts</span>
+                <span class="tm-ledger-desc">A licensed adoption agency in the State of Florida, focusing on the adoption home study.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://adopthoaa.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">02</span>
+              <span class="tm-ledger-logo"><img src="/png/hoaa-logo.png" alt="Hearts of Adoptions Alliance logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Hearts of Adoptions Alliance</span>
+                <span class="tm-ledger-desc">A non-profit 501(c)(3) licensed child-placing agency dedicated to connecting children with safe and loving families.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.hihiadopt.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">03</span>
+              <span class="tm-ledger-logo"><img src="/png/hihi-logo.png" alt="Hand in Hand logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Hand in Hand</span>
+                <span class="tm-ledger-desc">Offering child welfare services around the globe since 1974.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://adoption-beyond.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">04</span>
+              <span class="tm-ledger-logo"><img src="/png/adoption-beyond.png" alt="Adoption and Beyond logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Adoption and Beyond</span>
+                <span class="tm-ledger-desc">Available to perform domestic, international, private, and embryo home study assessments.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://options4adoption.com/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">05</span>
+              <span class="tm-ledger-logo"><img src="/png/options4adoption.png" alt="Options 4 Adoption logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Options 4 Adoption</span>
+                <span class="tm-ledger-desc">Focused on preparing the adoptive family's home study report and follow-up post-placement visits.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://greaterhopes.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">06</span>
+              <span class="tm-ledger-logo"><img src="/png/greater-hopes.png" alt="Greater Hopes logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Greater Hopes</span>
+                <span class="tm-ledger-desc">A full-service child placing agency, licensed by the State of Michigan to perform private infant and early childhood adoption.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://childrenoftheworlddelhi.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">07</span>
+              <span class="tm-ledger-logo"><img src="/png/children-of-the-world-delhi.png" alt="Children of the World Delhi logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Children of the World Delhi</span>
+                <span class="tm-ledger-desc">Helping abandoned, orphaned, and destitute children through adoption, sponsorship, and community development across the Delhi NCR.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul class="map-legend">
-        <li><span class="legend-swatch legend-partner"></span> Partner region</li>
-        <li><span class="legend-swatch legend-negotiating"></span> In negotiation</li>
-      </ul>
-    </div>
-  </section>
+    </section>
 
-  <!-- Our Belief Section -->
-  <section class="belief" id="our-belief">
-    <div class="container">
-      <h2 class="belief-title">Our Belief</h2>
-      <p class="belief-quote">"Every child deserves a home. Every family deserves a path to find them."</p>
-    </div>
-  </section>
+    <!-- Partner Organizations -->
+    <section class="tm-section" id="organizations">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Partner organizations</span>
+          <span class="hm-index">03 — 04</span>
+        </header>
+        <p class="tm-lede hm-reveal">International bodies, state agencies, and local governments that share our commitment to children and families.</p>
+        <ul class="tm-ledger">
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.unicef.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">01</span>
+              <span class="tm-ledger-logo"><img src="/png/unicef-logo.png" alt="UNICEF logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">UNICEF</span>
+                <span class="tm-ledger-role">International Organization</span>
+                <span class="tm-ledger-desc">An agency of the United Nations responsible for providing humanitarian and developmental aid to children worldwide.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.unfpa.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">02</span>
+              <span class="tm-ledger-logo"><img src="/png/unfpa-logo.png" alt="UNFPA logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">UNFPA</span>
+                <span class="tm-ledger-role">International Organization</span>
+                <span class="tm-ledger-desc">The United Nations sexual and reproductive health agency, working so every pregnancy is wanted, every childbirth is safe, and every young person's potential is fulfilled.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.myflfamilies.com/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">03</span>
+              <span class="tm-ledger-logo"><img src="/png/dcf-logo.png" alt="Florida Department of Children and Families logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">Florida Department of Children and Families</span>
+                <span class="tm-ledger-role">State Agency</span>
+                <span class="tm-ledger-desc">Florida's state agency for child welfare, adoption, and family services, working to protect the vulnerable and strengthen families across the state.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.orlando.gov/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">04</span>
+              <span class="tm-ledger-logo"><img src="/png/orlando-logo.png" alt="City of Orlando logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">City of Orlando</span>
+                <span class="tm-ledger-role">Municipal Government</span>
+                <span class="tm-ledger-desc">The municipal government of Orlando, Florida, serving residents and supporting families and children across Central Florida's largest city.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://cityofwinterpark.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">05</span>
+              <span class="tm-ledger-logo"><img src="/png/winter-park-logo.png" alt="City of Winter Park logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">City of Winter Park</span>
+                <span class="tm-ledger-role">Municipal Government</span>
+                <span class="tm-ledger-desc">The municipal government of Winter Park, Florida, dedicated to serving its community and the well-being of local families and children.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-ledger-item hm-reveal">
+            <a class="tm-ledger-link" href="https://www.cityofoviedo.net/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-ledger-num">06</span>
+              <span class="tm-ledger-logo"><img src="/png/oviedo-logo.png" alt="City of Oviedo logo"></span>
+              <span class="tm-ledger-text">
+                <span class="tm-ledger-name">City of Oviedo</span>
+                <span class="tm-ledger-role">Municipal Government</span>
+                <span class="tm-ledger-desc">The municipal government of Oviedo, Florida, committed to serving residents and fostering a safe, family-friendly community in Seminole County.</span>
+              </span>
+              <span class="tm-ledger-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Global Reach / Expansion Map -->
+    <section class="tm-section tm-section--dim" id="expansion">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Global reach</span>
+          <span class="hm-index">04 — 04</span>
+        </header>
+        <p class="tm-lede hm-reveal">Where HavenLink operates through our partner agencies — and where we're growing next. Hover the United States to explore state by state.</p>
+        <div class="tm-map hm-reveal">
+          <div class="expansion-map" id="expansionMap" role="group" aria-label="Interactive map of HavenLink partner and prospective regions">
+            <div class="map-viewport" id="mapWorld"><!-- world.svg injected by expansion-map.js --></div>
+            <div class="map-inset" id="usInset" hidden>
+              <button type="button" class="map-inset-close" aria-label="Close United States detail">&times;</button>
+              <div class="map-inset-title">United States</div>
+              <div class="map-inset-svg" id="mapUS"><!-- us-states.svg injected by expansion-map.js --></div>
+            </div>
+            <div class="map-tooltip" id="mapTooltip" aria-hidden="true" hidden></div>
+          </div>
+          <ul class="map-legend">
+            <li><span class="legend-swatch legend-partner"></span> Partner region</li>
+            <li><span class="legend-swatch legend-negotiating"></span> In negotiation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Belief (closing ink band) -->
+    <section class="tm-belief hm-on-ink" id="our-belief">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Our belief</span>
+        </header>
+        <p class="tm-belief-quote hm-reveal" style="--d: .08s">Every child deserves a home. Every family deserves a <em>path to find them.</em></p>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -536,7 +382,7 @@
         <h3>About HavenLink</h3>
         <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Navigation</h3>
         <ul>
@@ -546,7 +392,7 @@
           <li><a href="#expansion">Global Reach</a></li>
         </ul>
       </div>
-      
+
       <div class="footer-section">
         <h3>Adoption Hotline</h3>
         <p>
@@ -554,7 +400,7 @@
         </p>
         <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Connect</h3>
         <div class="social-links">
@@ -574,7 +420,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
@@ -593,11 +439,11 @@
         <p><strong>Last updated: May 29, 2026</strong></p>
         <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
         <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
-        
+
         <h2>Interpretation and Definitions</h2>
         <h3>Interpretation</h3>
         <p>The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-        
+
         <h3>Definitions</h3>
         <p>For the purposes of this Privacy Policy:</p>
         <ul>
@@ -614,10 +460,10 @@
           <li><strong>Website</strong> refers to HavenLink, accessible from <a href="https://havenlink.org/" target="_blank">https://havenlink.org/</a>.</li>
           <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
         </ul>
-        
+
         <h2>Collecting and Using Your Personal Data</h2>
         <h3>Types of Data Collected</h3>
-        
+
         <h4>Personal Data</h4>
         <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
         <ul>
@@ -626,13 +472,13 @@
           <li>Phone number</li>
           <li>Address, State, Province, ZIP/Postal code, City</li>
         </ul>
-        
+
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
         <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device's unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
         <p>We may also collect information that Your browser sends whenever You visit Our Service or when You access the Service by or through a mobile device.</p>
-        
+
         <h4>Tracking Technologies and Cookies</h4>
         <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies We use include beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
         <ul>
@@ -663,7 +509,7 @@
           </li>
         </ul>
         <p>For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of Our Privacy Policy.</p>
-        
+
         <h3>Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>
         <ul>
@@ -685,7 +531,7 @@
           <li><strong>With other users:</strong> If Our Service offers public areas, when You share Personal Data or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.</li>
           <li><strong>With Your consent</strong>: We may disclose Your Personal Data for any other purpose with Your consent.</li>
         </ul>
-        
+
         <h3>Retention of Your Personal Data</h3>
         <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if We are required to retain Your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
         <p>Where possible, We apply shorter retention periods and/or reduce identifiability by deleting, aggregating, or anonymizing data. Unless otherwise stated, the retention periods below are maximum periods ("up to") and We may delete or anonymize data sooner when it is no longer needed for the relevant purpose. We apply different retention periods to different categories of Personal Data based on the purpose of processing and legal obligations:</p>
@@ -726,24 +572,24 @@
           <li>Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.</li>
           <li>Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.</li>
         </ul>
-        
+
         <h3>Transfer of Your Personal Data</h3>
         <p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.</p>
         <p>Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
-        
+
         <h3>Delete Your Personal Data</h3>
         <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
         <p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
         <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any Personal Data that You have provided to Us.</p>
         <p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
-        
+
         <h3>Disclosure of Your Personal Data</h3>
         <h4>Business Transactions</h4>
         <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
-        
+
         <h4>Law enforcement</h4>
         <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
-        
+
         <h4>Other legal requirements</h4>
         <p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
@@ -753,23 +599,23 @@
           <li>Protect the personal safety of Users of the Service or the public</li>
           <li>Protect against legal liability</li>
         </ul>
-        
+
         <h3>Security of Your Personal Data</h3>
         <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
-        
+
         <h2>Children's Privacy</h2>
         <p>Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under the age of 16. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 16 without verification of parental consent, We take steps to remove that information from Our servers.</p>
         <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
-        
+
         <h2>Links to Other Websites</h2>
         <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-        
+
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
         <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-        
+
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
@@ -779,8 +625,11 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
   <script src="/account.js"></script>
-  <script src="/expansion-map.js"></script>
+  <script src="/editorial.js" defer></script>
+  <script src="/team.js" defer></script>
+  <script src="/expansion-map.js" defer></script>
+  <script src="/chat-widget.js" defer></script>
 </body>
 </html>

@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../png/logo.png">
+  <link rel="icon" type="image/png" href="/png/logo.png">
   <title>Compatibility Matching - HavenLink</title>
+  <meta name="description" content="How HavenLink's transparent, deterministic compatibility scoring suggests matches between families and children.">
+  <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../editorial.css">
+  <link rel="stylesheet" href="matching.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="editorial matching">
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/home" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
-          <img src="../png/logo.png" alt="HavenLink Logo" class="logo-icon">
+          <img src="/png/logo.png" alt="HavenLink Logo" class="logo-icon">
           <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
         </a>
       </div>
-      
+
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -49,247 +56,225 @@
   <nav class="adopt-subnav" id="adoptSubnav">
     <div class="subnav-container">
       <a href="/adopt/home-study" class="subnav-item" data-step="1">
-        <span class="subnav-step">1</span>
+        <span class="subnav-step">01</span>
         <span class="subnav-label">Home Study</span>
       </a>
       <a href="/adopt/intake-form" class="subnav-item" data-step="2">
-        <span class="subnav-step">2</span>
+        <span class="subnav-step">02</span>
         <span class="subnav-label">Intake Form</span>
       </a>
       <a href="/adopt/agency-profiles" class="subnav-item" data-step="3">
-        <span class="subnav-step">3</span>
+        <span class="subnav-step">03</span>
         <span class="subnav-label">Agencies</span>
       </a>
       <a href="/adopt/matching" class="subnav-item active" data-step="4">
-        <span class="subnav-step">4</span>
+        <span class="subnav-step">04</span>
         <span class="subnav-label">Matching</span>
       </a>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="adopt-container">
-    <section class="adopt-hero">
-      <div class="container">
-        <h1>Compatibility Matching</h1>
-        <p class="adopt-hero-subtitle">Step 4 of Your Adoption Journey</p>
+  <main class="mt-main">
+
+    <!-- Hero -->
+    <section class="ed-hero" id="top">
+      <canvas id="mtResonance" class="ed-hero-canvas" aria-hidden="true"></canvas>
+      <div class="ed-hero-inner">
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 04 — Compatibility Matching</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">The match, and the <em>reasoning</em> behind it.</h1>
+        <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
+          HavenLink suggests pairings with transparent, deterministic scoring — never a black box. Every suggestion shows its score and exactly why it was made, so you decide with clarity.
+        </p>
+        <div class="ed-hero-actions hm-reveal" style="--d: .24s">
+          <a href="#process" class="hm-btn hm-btn--ink">See how scoring works <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/intake-form" class="hm-textlink">Go to the intake form</a>
+        </div>
+      </div>
+      <div class="ed-hero-meta">
+        <a href="#match-system" class="ed-scrollcue" aria-label="Scroll to how matching works"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <span class="ed-hero-meta-item">Deterministic scoring</span>
+        <span class="ed-hero-meta-item">0–100 compatibility</span>
+        <span class="ed-hero-meta-item">You decide</span>
       </div>
     </section>
 
-    <section class="adopt-content">
-      <div class="container">
-        <div class="content-grid">
-          <div class="content-main">
-            <h2>Finding Your Perfect Match</h2>
-            <p>
-              The HavenLink matching system uses deterministic, data-driven scoring to suggest matches between your family profile and available children. Our algorithm considers multiple factors about your family, your preferences, and each child's needs—not guesswork or artificial intelligence, but transparent logic designed to support better outcomes.
-            </p>
-
-            <h3 style="margin-top: 2.5rem;" id="match-system">How Our Matching Works</h3>
-            <p>
-              Our matching process is built on transparency. Every match suggestion includes a detailed breakdown of the compatibility score and the factors that influenced it. We never hide the reasoning—you'll understand exactly why we suggest a particular pairing.
-            </p>
-
-            <div class="process-list">
-              <div class="process-item">
-                <div class="process-icon">1</div>
-                <div class="process-content">
-                  <h4>Your Family Profile</h4>
-                  <p>From your intake form, we understand your household, values, experience, and preferences for a child's age, needs, and background.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">2</div>
-                <div class="process-content">
-                  <h4>Child Profile Data</h4>
-                  <p>Licensed agencies provide rich, detailed information about each child: age, developmental stage, health, personality, interests, and support needs.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">3</div>
-                <div class="process-content">
-                  <h4>Algorithmic Scoring</h4>
-                  <p>Our deterministic algorithm calculates a compatibility score (0-100) by analyzing alignment on age preference, special needs openness, sibling placement, trauma readiness, and other key factors.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">4</div>
-                <div class="process-content">
-                  <h4>Transparent Results</h4>
-                  <p>We show you the match score, the scoring breakdown, and the agency responsible for the child's profile. You can then reach out to the agency to explore the match further.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">5</div>
-                <div class="process-content">
-                  <h4>Agency Communication</h4>
-                  <p>Once you've expressed interest, HavenLink facilitates communication between you and the agency. The agency manages all next steps, including visits and legal processes.</p>
-                </div>
-              </div>
-            </div>
-
-            <h3 style="margin-top: 2.5rem;" id="sample-score">Sample Compatibility Score</h3>
-            <p>
-              Here's an example of what a match score looks like. This is illustrative—your actual scores will be calculated based on your unique family profile and available children:
-            </p>
-
-            <div class="score-breakdown-demo">
-              <div class="score-header">
-                <div class="score-circle">
-                  <div class="score-value">78</div>
-                  <div class="score-label">Match Score</div>
-                </div>
-                <div class="score-status">
-                  <span class="score-badge high">Good Match</span>
-                  <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--text-light);">This family and child have strong alignment on age range and family structure.</p>
-                </div>
-              </div>
-
-              <div class="score-factors">
-                <div class="score-factor">
-                  <div class="factor-name">Age Range Alignment</div>
-                  <div class="factor-bar">
-                    <div class="factor-fill" style="width: 95%;"></div>
-                  </div>
-                  <div class="factor-score">+18 pts</div>
-                </div>
-
-                <div class="score-factor">
-                  <div class="factor-name">Special Needs Openness</div>
-                  <div class="factor-bar">
-                    <div class="factor-fill" style="width: 75%;"></div>
-                  </div>
-                  <div class="factor-score">+15 pts</div>
-                </div>
-
-                <div class="score-factor">
-                  <div class="factor-name">Sibling Placement Fit</div>
-                  <div class="factor-bar">
-                    <div class="factor-fill" style="width: 100%;"></div>
-                  </div>
-                  <div class="factor-score">+20 pts</div>
-                </div>
-
-                <div class="score-factor">
-                  <div class="factor-name">Trauma Readiness</div>
-                  <div class="factor-bar">
-                    <div class="factor-fill" style="width: 70%;"></div>
-                  </div>
-                  <div class="factor-score">+14 pts</div>
-                </div>
-
-                <div class="score-factor">
-                  <div class="factor-name">Prior Adoption Experience Bonus</div>
-                  <div class="factor-bar">
-                    <div class="factor-fill" style="width: 100%;"></div>
-                  </div>
-                  <div class="factor-score">+11 pts</div>
-                </div>
-              </div>
-            </div>
-
-            <h3 style="margin-top: 2.5rem;" id="score-meaning">Understanding Your Score</h3>
-            <div class="why-matters">
-              <div class="why-card">
-                <div style="font-size: 1.8rem; font-weight: 700; color: #10b981;">85–100</div>
-                <h4>Excellent Match</h4>
-                <p>Strong alignment across most factors. High potential for successful placement.</p>
-              </div>
-
-              <div class="why-card">
-                <div style="font-size: 1.8rem; font-weight: 700; color: #f59e0b;">70–84</div>
-                <h4>Good Match</h4>
-                <p>Solid compatibility with some areas of alignment. Worth exploring further.</p>
-              </div>
-
-              <div class="why-card">
-                <div style="font-size: 1.8rem; font-weight: 700; color: #3b82f6;">50–69</div>
-                <h4>Potential Match</h4>
-                <p>Mixed alignment. May benefit from deeper conversations with the agency.</p>
-              </div>
-
-              <div class="why-card">
-                <div style="font-size: 1.8rem; font-weight: 700; color: #6b7280;">Below 50</div>
-                <h4>Limited Fit</h4>
-                <p>Lower compatibility on key factors. Consider exploring other options.</p>
-              </div>
-            </div>
-
-            <h3 style="margin-top: 2.5rem;" id="match-notes">Important Notes on Matching</h3>
-            <ul style="font-size: 0.95rem; line-height: 1.8; color: var(--text-light);">
-              <li><strong>Not AI-Driven:</strong> Our scoring is deterministic and based on explicit logic, not machine learning. We believe transparency in matching is essential.</li>
-              <li><strong>Not a Guarantee:</strong> A high match score suggests good compatibility, but final placement decisions involve many factors, including agency assessment and legal considerations.</li>
-              <li><strong>You Choose:</strong> You see all match suggestions and decide which to pursue. There's no automatic assignment.</li>
-              <li><strong>Agency Led:</strong> Once you express interest, the licensed agency takes the lead in assessing fit and guiding the placement process.</li>
-              <li><strong>Ongoing Support:</strong> Successful adoption continues after placement. We recommend post-adoption support resources for all families.</li>
-            </ul>
-
-            <div class="readiness-callout">
-              <h3>Ready to Start?</h3>
-              <p>
-                If you haven't completed your family intake form yet, start there. Your detailed answers will enable our matching system to find the best possible pairing for your family.
-              </p>
-              <a href="intake-form.html" class="btn btn-primary" style="margin-top: 1.5rem;">
-                Go to Family Intake Form
-              </a>
-            </div>
-          </div>
-
-          <div class="content-sidebar">
-            <div class="sidebar-card" id="match-factors">
-              <h3>Matching Factors</h3>
-              <p style="font-size: 0.95rem; color: var(--text-light); margin: 0;">Our algorithm considers:</p>
-              <ul class="quick-facts" style="margin-top: 1rem;">
-                <li>Age & development</li>
-                <li>Special needs fit</li>
-                <li>Sibling groups</li>
-                <li>Trauma readiness</li>
-                <li>Household fit</li>
-                <li>Experience bonus</li>
-                <li>Geographic routing</li>
-              </ul>
-            </div>
-
-            <div class="sidebar-card">
-              <h3>What Score Means</h3>
-              <p style="font-size: 0.95rem; color: var(--text-light); margin: 0;">
-                Scores range from 0–100 and represent weighted compatibility across all key factors.
-              </p>
-              <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; font-size: 0.85rem;">
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #10b981; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">85</div>
-                  <span>Excellent</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #f59e0b; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">75</div>
-                  <span>Good</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                  <div style="width: 24px; height: 24px; border-radius: 50%; background-color: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem;">60</div>
-                  <span>Potential</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="sidebar-card info-card">
-              <svg class="info-icon" viewBox="0 0 64 64" width="32" height="32">
-                <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
-                <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <p style="font-size: 0.9rem;">
-                Questions about a match? Reach out to the partnering agency or contact HavenLink support.
-              </p>
-            </div>
-          </div>
+    <!-- Intro -->
+    <section class="ed-section" id="match-system">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">How matching works</span>
+          <span class="hm-index">01 — 04</span>
+        </header>
+        <div class="hm-grid">
+          <h2 class="mt-intro-statement hm-reveal">Matching you can <em>see the reasoning</em> behind.</h2>
+          <p class="mt-intro-body hm-reveal" style="--d: .1s">
+            The HavenLink matching system uses deterministic, data-driven scoring to suggest matches between your family profile and available children — not guesswork or artificial intelligence, but transparent logic designed to support better outcomes. Every suggestion carries a full breakdown of the factors behind it.
+          </p>
+          <ul class="mt-intro-factors">
+            <li class="hm-reveal" style="--d: .12s"><span class="mt-tick">01</span>Age &amp; development</li>
+            <li class="hm-reveal" style="--d: .17s"><span class="mt-tick">02</span>Special-needs fit</li>
+            <li class="hm-reveal" style="--d: .22s"><span class="mt-tick">03</span>Sibling groups</li>
+            <li class="hm-reveal" style="--d: .27s"><span class="mt-tick">04</span>Trauma readiness</li>
+            <li class="hm-reveal" style="--d: .32s"><span class="mt-tick">05</span>Household fit</li>
+            <li class="hm-reveal" style="--d: .37s"><span class="mt-tick">06</span>Experience bonus</li>
+            <li class="hm-reveal" style="--d: .42s"><span class="mt-tick">07</span>Geographic routing</li>
+          </ul>
         </div>
       </div>
     </section>
-  </div>
+
+    <!-- Process -->
+    <section class="ed-section ed-section--dim" id="process">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">The matching process</span>
+          <span class="hm-index">02 — 04</span>
+        </header>
+        <ol class="mt-steps">
+          <li class="mt-step hm-reveal">
+            <div class="mt-step-head">
+              <span class="mt-step-index">Step 01</span>
+              <h3 class="mt-step-title">Your family profile</h3>
+            </div>
+            <p class="mt-step-desc">From your intake form, we understand your household, values, experience, and preferences for a child's age, needs, and background.</p>
+          </li>
+          <li class="mt-step hm-reveal">
+            <div class="mt-step-head">
+              <span class="mt-step-index">Step 02</span>
+              <h3 class="mt-step-title">Child profile data</h3>
+            </div>
+            <p class="mt-step-desc">Licensed agencies provide rich, detailed information about each child: age, developmental stage, health, personality, interests, and support needs.</p>
+          </li>
+          <li class="mt-step hm-reveal">
+            <div class="mt-step-head">
+              <span class="mt-step-index">Step 03</span>
+              <h3 class="mt-step-title">Algorithmic scoring</h3>
+            </div>
+            <p class="mt-step-desc">Our deterministic algorithm calculates a compatibility score (0–100) by analyzing alignment on age preference, special-needs openness, sibling placement, trauma readiness, and other key factors.</p>
+          </li>
+          <li class="mt-step hm-reveal">
+            <div class="mt-step-head">
+              <span class="mt-step-index">Step 04</span>
+              <h3 class="mt-step-title">Transparent results</h3>
+            </div>
+            <p class="mt-step-desc">We show you the match score, the scoring breakdown, and the agency responsible for the child's profile. You can then reach out to the agency to explore the match further.</p>
+          </li>
+          <li class="mt-step hm-reveal">
+            <div class="mt-step-head">
+              <span class="mt-step-index">Step 05</span>
+              <h3 class="mt-step-title">Agency communication</h3>
+            </div>
+            <p class="mt-step-desc">Once you've expressed interest, HavenLink facilitates communication between you and the agency. The agency manages all next steps, including visits and legal processes.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Sample score -->
+    <section class="ed-section" id="sample-score">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">A score you can read</span>
+          <span class="hm-index">03 — 04</span>
+        </header>
+        <h2 class="mt-intro-statement hm-reveal">Every match, fully <em>itemized.</em></h2>
+        <p class="mt-intro-body hm-reveal" style="--d: .1s; grid-column: auto; max-width: 46rem;">
+          Here's what a match score looks like. It's illustrative — your actual scores are calculated from your unique family profile and the children available through our agencies.
+        </p>
+
+        <div class="mt-score hm-reveal">
+          <div class="mt-score-head">
+            <div class="mt-score-figure">
+              <span class="mt-score-num" data-countup="78">78</span>
+              <span class="mt-score-max">/ 100</span>
+            </div>
+            <div class="mt-score-meta">
+              <span class="mt-score-badge">Good match</span>
+              <p class="mt-score-note">This family and child have strong alignment on age range and family structure.</p>
+            </div>
+          </div>
+          <ul class="mt-factors">
+            <li class="mt-factor">
+              <span class="mt-factor-name">Age range alignment</span>
+              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 95%;"></span></span>
+              <span class="mt-factor-pts">+18</span>
+            </li>
+            <li class="mt-factor">
+              <span class="mt-factor-name">Special-needs openness</span>
+              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 75%;"></span></span>
+              <span class="mt-factor-pts">+15</span>
+            </li>
+            <li class="mt-factor">
+              <span class="mt-factor-name">Sibling placement fit</span>
+              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 100%;"></span></span>
+              <span class="mt-factor-pts">+20</span>
+            </li>
+            <li class="mt-factor">
+              <span class="mt-factor-name">Trauma readiness</span>
+              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 70%;"></span></span>
+              <span class="mt-factor-pts">+14</span>
+            </li>
+            <li class="mt-factor">
+              <span class="mt-factor-name">Prior adoption experience</span>
+              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 100%;"></span></span>
+              <span class="mt-factor-pts">+11</span>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="mt-tiers" id="score-meaning">
+          <li class="mt-tier hm-reveal">
+            <span class="mt-tier-range">85–100</span>
+            <span><span class="mt-tier-name">Excellent match</span><span class="mt-tier-desc">Strong alignment across most factors. High potential for a successful placement.</span></span>
+          </li>
+          <li class="mt-tier hm-reveal">
+            <span class="mt-tier-range">70–84</span>
+            <span><span class="mt-tier-name">Good match</span><span class="mt-tier-desc">Solid compatibility with clear areas of alignment. Worth exploring further.</span></span>
+          </li>
+          <li class="mt-tier hm-reveal">
+            <span class="mt-tier-range">50–69</span>
+            <span><span class="mt-tier-name">Potential match</span><span class="mt-tier-desc">Mixed alignment. May benefit from deeper conversations with the agency.</span></span>
+          </li>
+          <li class="mt-tier hm-reveal">
+            <span class="mt-tier-range">&lt; 50</span>
+            <span><span class="mt-tier-name">Limited fit</span><span class="mt-tier-desc">Lower compatibility on key factors. Consider exploring other options.</span></span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Notes -->
+    <section class="ed-section ed-section--dim" id="match-notes">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Important notes on matching</span>
+          <span class="hm-index">04 — 04</span>
+        </header>
+        <ul class="mt-notes">
+          <li class="mt-note hm-reveal"><strong>Not AI-driven.</strong> Our scoring is deterministic and based on explicit logic, not machine learning. We believe transparency in matching is essential.</li>
+          <li class="mt-note hm-reveal"><strong>Not a guarantee.</strong> A high match score suggests good compatibility, but final placement decisions involve many factors, including agency assessment and legal considerations.</li>
+          <li class="mt-note hm-reveal"><strong>You choose.</strong> You see all match suggestions and decide which to pursue. There's no automatic assignment.</li>
+          <li class="mt-note hm-reveal"><strong>Agency led.</strong> Once you express interest, the licensed agency takes the lead in assessing fit and guiding the placement process.</li>
+          <li class="mt-note hm-reveal"><strong>Ongoing support.</strong> Successful adoption continues after placement. We recommend post-adoption support resources for all families.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="mt-cta hm-on-ink">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Ready to start</span>
+        </header>
+        <p class="mt-cta-line hm-reveal" style="--d: .08s">Your profile is what makes the <em>match possible.</em></p>
+        <div class="ed-hero-actions hm-reveal" style="--d: .16s">
+          <a href="/adopt/intake-form" class="hm-btn hm-btn--paper">Go to the Family Intake Form <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/home-study" class="hm-textlink">Start with the home study</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -298,18 +283,18 @@
         <h3>About HavenLink</h3>
         <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Navigation</h3>
         <ul>
-          <li><a href="#match-factors">Match Factors</a></li>
-          <li><a href="#match-system">Match System</a></li>
+          <li><a href="#match-system">How Matching Works</a></li>
+          <li><a href="#process">The Process</a></li>
           <li><a href="#sample-score">Sample Score</a></li>
           <li><a href="#score-meaning">Score Meaning</a></li>
           <li><a href="#match-notes">Match Notes</a></li>
         </ul>
       </div>
-      
+
       <div class="footer-section">
         <h3>Adoption Hotline</h3>
         <p>
@@ -317,7 +302,7 @@
         </p>
         <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Connect</h3>
         <div class="social-links">
@@ -337,7 +322,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
@@ -356,11 +341,11 @@
         <p><strong>Last updated: May 29, 2026</strong></p>
         <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
         <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
-        
+
         <h2>Interpretation and Definitions</h2>
         <h3>Interpretation</h3>
         <p>The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-        
+
         <h3>Definitions</h3>
         <p>For the purposes of this Privacy Policy:</p>
         <ul>
@@ -377,10 +362,10 @@
           <li><strong>Website</strong> refers to HavenLink, accessible from <a href="https://havenlink.org/" target="_blank">https://havenlink.org/</a>.</li>
           <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
         </ul>
-        
+
         <h2>Collecting and Using Your Personal Data</h2>
         <h3>Types of Data Collected</h3>
-        
+
         <h4>Personal Data</h4>
         <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
         <ul>
@@ -389,13 +374,13 @@
           <li>Phone number</li>
           <li>Address, State, Province, ZIP/Postal code, City</li>
         </ul>
-        
+
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
         <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device's unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
         <p>We may also collect information that Your browser sends whenever You visit Our Service or when You access the Service by or through a mobile device.</p>
-        
+
         <h4>Tracking Technologies and Cookies</h4>
         <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies We use include beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
         <ul>
@@ -426,7 +411,7 @@
           </li>
         </ul>
         <p>For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of Our Privacy Policy.</p>
-        
+
         <h3>Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>
         <ul>
@@ -448,7 +433,7 @@
           <li><strong>With other users:</strong> If Our Service offers public areas, when You share Personal Data or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.</li>
           <li><strong>With Your consent</strong>: We may disclose Your Personal Data for any other purpose with Your consent.</li>
         </ul>
-        
+
         <h3>Retention of Your Personal Data</h3>
         <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if We are required to retain Your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
         <p>Where possible, We apply shorter retention periods and/or reduce identifiability by deleting, aggregating, or anonymizing data. Unless otherwise stated, the retention periods below are maximum periods ("up to") and We may delete or anonymize data sooner when it is no longer needed for the relevant purpose. We apply different retention periods to different categories of Personal Data based on the purpose of processing and legal obligations:</p>
@@ -489,24 +474,24 @@
           <li>Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.</li>
           <li>Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.</li>
         </ul>
-        
+
         <h3>Transfer of Your Personal Data</h3>
         <p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.</p>
         <p>Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
-        
+
         <h3>Delete Your Personal Data</h3>
         <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
         <p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
         <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any Personal Data that You have provided to Us.</p>
         <p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
-        
+
         <h3>Disclosure of Your Personal Data</h3>
         <h4>Business Transactions</h4>
         <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
-        
+
         <h4>Law enforcement</h4>
         <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
-        
+
         <h4>Other legal requirements</h4>
         <p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
@@ -516,23 +501,23 @@
           <li>Protect the personal safety of Users of the Service or the public</li>
           <li>Protect against legal liability</li>
         </ul>
-        
+
         <h3>Security of Your Personal Data</h3>
         <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
-        
+
         <h2>Children's Privacy</h2>
         <p>Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under the age of 16. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 16 without verification of parental consent, We take steps to remove that information from Our servers.</p>
         <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
-        
+
         <h2>Links to Other Websites</h2>
         <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-        
+
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
         <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-        
+
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
@@ -542,7 +527,10 @@
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="/script.js"></script>
   <script src="/account.js"></script>
+  <script src="/editorial.js" defer></script>
+  <script src="matching.js" defer></script>
+  <script src="/chat-widget.js" defer></script>
 </body>
 </html>

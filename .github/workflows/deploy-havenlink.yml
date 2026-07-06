@@ -72,7 +72,11 @@ jobs:
               SmtpHost="${{ vars.SMTP_HOST }}" \
               SmtpPort="${{ vars.SMTP_PORT }}" \
               SmtpSecure="${{ vars.SMTP_SECURE }}" \
-              SmtpUser="${{ secrets.SMTP_USER }}"
+              SmtpUser="${{ secrets.SMTP_USER }}" \
+              GeminiSaKeySecretArn="${{ secrets.GEMINI_SA_KEY_SECRET_ARN }}" \
+              GeminiUseVertex="true" \
+              GoogleCloudProject="havenlink-500500" \
+              GeminiLocation="us-central1"
 
       - name: Print stack outputs
         run: |

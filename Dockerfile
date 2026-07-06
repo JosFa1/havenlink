@@ -24,6 +24,8 @@ RUN apt-get update \
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY public ./public
+# The chatbot reads knowledge-tools/output/site.json at runtime.
+COPY knowledge-tools/output ./knowledge-tools/output
 # tsc does not emit .sql; place the schema next to the compiled migrator.
 COPY src/db/schema.sql ./dist/db/schema.sql
 RUN npm prune --omit=dev

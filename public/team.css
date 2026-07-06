@@ -1,0 +1,519 @@
+/* ============================================================
+   HavenLink — Team page ("Light Editorial")
+   Requires editorial.css (tokens, primitives, nav/footer re-skin)
+   loaded before this sheet. Classes prefixed tm-.
+
+   Contents:
+     1. Hero + network canvas
+     2. Section scaffold
+     3. Founders (alternating editorial rows)
+     4. Ledger lists (agencies / organizations)
+     5. Global-reach map framing
+     6. Belief band
+     7. Responsive
+   ============================================================ */
+
+.tm-main {
+  overflow-x: clip;
+}
+
+/* ==================== 1. Hero ==================== */
+
+.tm-hero {
+  position: relative;
+  min-height: calc(100vh - var(--hm-nav-h));
+  min-height: calc(100svh - var(--hm-nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--paper);
+}
+
+.tm-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(105deg, transparent 4%, rgba(0, 0, 0, 0.4) 30%, #000 58%);
+  mask-image: linear-gradient(105deg, transparent 4%, rgba(0, 0, 0, 0.4) 30%, #000 58%);
+}
+
+.tm-hero-inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: clamp(3rem, 8vh, 6rem) var(--gutter) 0;
+}
+
+.tm-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 4vh, 3rem);
+}
+
+.tm-hero-eyebrow::after {
+  content: "";
+  width: clamp(3rem, 8vw, 7rem);
+  height: 1px;
+  background: rgba(20, 33, 61, 0.3);
+}
+
+.tm-hero-title {
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144;
+  max-width: 15ch;
+  text-wrap: balance;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.tm-hero-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.tm-hero-standfirst {
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  font-weight: 420;
+  color: var(--muted);
+  max-width: 38rem;
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.tm-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.tm-hero-meta {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: 1.4rem var(--gutter) 1.6rem;
+  border-top: var(--hairline);
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+.tm-hero-meta-item {
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tm-scrollcue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  order: -1;
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.tm-scrollcue-line {
+  display: inline-block;
+  width: 1px;
+  height: 26px;
+  background: var(--ink);
+  transform-origin: top;
+  animation: tm-cue 2.4s var(--ease-out) infinite;
+}
+
+@keyframes tm-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ==================== 2. Section scaffold ==================== */
+
+.tm-section {
+  padding-block: var(--section-pad);
+}
+
+.tm-section--dim {
+  background: var(--paper-dim);
+}
+
+.tm-lede {
+  font-size: var(--text-lede);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 40rem;
+  margin-top: -1.5rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+/* ==================== 3. Founders ==================== */
+
+.tm-people {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tm-person {
+  display: grid;
+  grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+  gap: clamp(1.75rem, 5vw, 4.5rem);
+  align-items: center;
+  padding: clamp(2.5rem, 6vh, 4.5rem) 0;
+  border-top: var(--hairline);
+}
+
+.tm-people .tm-person:last-child {
+  border-bottom: var(--hairline);
+}
+
+.tm-person:nth-child(even) .tm-person-portrait {
+  order: 2;
+}
+
+.tm-person-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--paper-dim);
+  border: var(--hairline);
+  overflow: hidden;
+}
+
+.tm-section--dim .tm-person-portrait {
+  background: var(--paper);
+}
+
+.tm-person-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.12) contrast(1.02);
+}
+
+.tm-person-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--terracotta);
+  display: inline-block;
+  margin-bottom: 0.85rem;
+}
+
+.tm-person-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-weight: 440;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  color: var(--ink);
+  margin: 0 0 0.5rem;
+}
+
+.tm-person-role {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 560;
+  color: var(--muted);
+  margin: 0 0 1.5rem;
+}
+
+.tm-person-bio {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.75;
+  max-width: 40rem;
+  margin: 0 0 1.75rem;
+}
+
+.tm-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.tm-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: var(--hairline);
+  border-radius: 50%;
+  color: var(--ink);
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out);
+}
+
+.tm-social a:hover {
+  color: var(--terracotta);
+  border-color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+.tm-social .social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==================== 4. Ledger lists ==================== */
+
+.tm-ledger {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tm-ledger-item {
+  border-top: var(--hairline);
+}
+
+.tm-ledger-item:last-child {
+  border-bottom: var(--hairline);
+}
+
+.tm-ledger-link {
+  display: grid;
+  grid-template-columns: 2.25rem 5rem minmax(0, 1fr) 1.5rem;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  padding: 1.75rem 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tm-ledger-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: rgba(20, 33, 61, 0.4);
+  transition: color 0.3s ease;
+}
+
+.tm-ledger-link:hover .tm-ledger-num {
+  color: var(--terracotta);
+}
+
+.tm-ledger-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--paper);
+  border: var(--hairline);
+}
+
+.tm-section--dim .tm-ledger-logo {
+  background: var(--paper-dim);
+}
+
+.tm-ledger-logo img {
+  max-width: 74%;
+  max-height: 74%;
+  object-fit: contain;
+  display: block;
+}
+
+.tm-ledger-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.tm-ledger-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 460;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+}
+
+.tm-ledger-role {
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--terracotta);
+  margin: 0 0 0.35rem;
+}
+
+.tm-ledger-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.6;
+  max-width: 46rem;
+  margin: 0;
+}
+
+.tm-ledger-arrow {
+  font-size: 1.1rem;
+  color: rgba(20, 33, 61, 0.4);
+  transition: color 0.3s ease, transform 0.3s var(--ease-out);
+  justify-self: end;
+}
+
+.tm-ledger-link:hover .tm-ledger-arrow {
+  color: var(--terracotta);
+  transform: translateX(4px);
+}
+
+.tm-ledger-link:hover .tm-ledger-name {
+  color: var(--terracotta);
+}
+
+/* ==================== 5. Global-reach map ==================== */
+
+.tm-map {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+.tm-map .expansion-map {
+  border: var(--hairline);
+  background: var(--paper);
+}
+
+.tm-section--dim .tm-map .expansion-map {
+  background: var(--paper-dim);
+}
+
+.tm-map .map-legend {
+  margin-top: 1.75rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  font-size: var(--text-meta);
+  color: var(--muted);
+}
+
+.tm-map .map-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tm-map .legend-swatch {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.tm-map .legend-partner {
+  background: var(--ink);
+}
+
+.tm-map .legend-negotiating {
+  background: var(--terracotta);
+}
+
+/* ==================== 6. Belief band ==================== */
+
+.tm-belief {
+  padding-block: clamp(6rem, 14vh, 11rem);
+}
+
+.tm-belief-quote {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  color: var(--paper);
+  max-width: 20ch;
+  text-wrap: balance;
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
+}
+
+.tm-belief-quote em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+/* ==================== 7. Responsive ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .tm-scrollcue-line {
+    animation: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .tm-person {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .tm-person:nth-child(even) .tm-person-portrait {
+    order: 0;
+  }
+
+  .tm-person-portrait {
+    aspect-ratio: 16 / 10;
+    max-width: 22rem;
+  }
+
+  .tm-ledger-link {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    row-gap: 0.75rem;
+  }
+
+  .tm-ledger-num {
+    grid-row: 1;
+  }
+
+  .tm-ledger-logo {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+    width: 3.5rem;
+  }
+
+  .tm-ledger-text {
+    grid-column: 2;
+  }
+
+  .tm-ledger-arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .tm-hero-meta {
+    flex-wrap: wrap;
+    gap: 0.9rem 1.5rem;
+    padding-right: max(var(--gutter), 88px);
+  }
+
+  .tm-hero-meta-item {
+    white-space: normal;
+  }
+
+  .tm-hero-actions .hm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

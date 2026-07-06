@@ -10,6 +10,7 @@ import { doubleCsrfProtection, invalidCsrfTokenError } from "./middleware/securi
 import type { User } from "./db/users";
 import { passport, configurePassport } from "./auth/passport";
 import { authRouter } from "./auth/routes";
+import { chatRouter } from "./chat/routes";
 import { pageGuard } from "./middleware/pageGuard";
 
 const app = express();
@@ -45,10 +46,14 @@ app.use(express.static(path.join(__dirname, "../public")));
 // ----- Auth routes ------------------------------------------------------------
 app.use("/auth", authRouter);
 
+// ----- AI chatbot -------------------------------------------------------------
+app.use("/api/chat", chatRouter);
+
 // Partnership form submission endpoint
 app.post("/api/partnership-request", async (req, res) => {
   try {
     const {
+      partner_type,
       org_name,
       org_type,
       description,
@@ -61,6 +66,7 @@ app.post("/api/partnership-request", async (req, res) => {
       states,
       experience,
       licensing,
+      collaboration,
       message,
     } = req.body;
 
@@ -69,25 +75,35 @@ app.post("/api/partnership-request", async (req, res) => {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
-    // Create email content
+    const partnerTypeLabel =
+      partner_type === "organization"
+        ? "Community organization"
+        : partner_type === "agency"
+          ? "Adoption agency"
+          : "Not provided";
+
+    // Create email content. Organization-variant submissions omit the
+    // adoption-specific fields, so guard everything optional.
     const emailContent = `
 New Partnership Request from HavenLink
 
 Organization Information:
+- Partner Type: ${partnerTypeLabel}
 - Organization Name: ${org_name}
-- Organization Type: ${org_type}
-- Description: ${description}
-- Primary Location: ${location}
-- States Served: ${states}
-- Years of Experience: ${experience}
-- Licensing Status: ${licensing}
+- Organization Type: ${org_type || "Not provided"}
+- Description: ${description || "Not provided"}
+- Primary Location: ${location || "Not provided"}
+- States Served: ${states || "Not provided"}
+- Years of Experience: ${experience || "Not provided"}
+- Licensing Status: ${licensing || "Not provided"}
+- How they'd like to collaborate: ${collaboration || "Not provided"}
 - Website: ${website || "Not provided"}
 
 Contact Information:
 - Name: ${contact_name}
-- Title: ${contact_title}
+- Title: ${contact_title || "Not provided"}
 - Email: ${contact_email}
-- Phone: ${contact_phone}
+- Phone: ${contact_phone || "Not provided"}
 
 Additional Information:
 ${message || "No additional information provided"}

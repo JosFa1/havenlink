@@ -1,0 +1,682 @@
+/* ============================================================
+   HavenLink — Partner page ("Light Editorial")
+   Requires editorial.css (tokens, primitives, nav/footer re-skin)
+   loaded before this sheet. All partner-specific classes are pt-*.
+
+   Contents:
+     1. Opening
+     2. Why partner (ledger grid)
+     3. Application section + margin rail
+     4. Form (switch cards, chapters, fields)
+     5. Stitched seam
+     6. Closing ink band
+     7. Motion + responsive
+   ============================================================ */
+
+/* ==================== 1. Opening ==================== */
+
+.pt-opening {
+  padding: clamp(4.5rem, 10vh, 7.5rem) 0 clamp(3.5rem, 7vh, 5.5rem);
+}
+
+.pt-opening-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
+}
+
+/* dashed terracotta rule — foreshadows the form's stitch seam */
+.pt-opening-eyebrow::after {
+  content: "";
+  width: clamp(3rem, 8vw, 7rem);
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(180, 85, 31, 0.55) 0 8px,
+    transparent 8px 15px
+  );
+}
+
+.pt-title {
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  max-width: 14ch;
+  text-wrap: balance;
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+}
+
+.pt-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.pt-standfirst {
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  font-weight: 420;
+  color: var(--muted);
+  max-width: 38rem;
+  margin-bottom: clamp(1.75rem, 4vh, 2.75rem);
+}
+
+.pt-opening-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.pt-opening-meta {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  flex-wrap: wrap;
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  padding-top: 1.4rem;
+  border-top: var(--hairline);
+}
+
+.pt-opening-meta span {
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* ==================== 2. Why partner (ledger grid) ==================== */
+
+.pt-why {
+  padding-block: clamp(3rem, 6vh, 4.5rem) clamp(4.5rem, 9vh, 7rem);
+}
+
+.pt-why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pt-why-item {
+  padding: 0.5rem clamp(1.5rem, 3vw, 3rem);
+}
+
+.pt-why-item:first-child {
+  padding-left: 0;
+}
+
+.pt-why-item + .pt-why-item {
+  border-left: var(--hairline);
+}
+
+.pt-why-ord {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(2.25rem, 3.5vw, 3.25rem);
+  font-weight: 380;
+  line-height: 1;
+  color: var(--terracotta);
+  margin-bottom: 1.25rem;
+}
+
+.pt-why-name {
+  font-size: clamp(1.35rem, 2vw, 1.75rem);
+  font-weight: 450;
+  line-height: 1.2;
+  font-variation-settings: "opsz" 40;
+  margin-bottom: 0.9rem;
+}
+
+.pt-why-body {
+  color: var(--muted);
+  font-size: 0.9688rem;
+  line-height: 1.7;
+  max-width: 26rem;
+}
+
+/* ==================== 3. Application section + rail ==================== */
+
+.pt-apply {
+  padding-block: clamp(4.5rem, 9vh, 7rem);
+  background: var(--paper-dim);
+}
+
+.pt-apply-title {
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.08;
+  font-variation-settings: "opsz" 60;
+  max-width: 16ch;
+  text-wrap: balance;
+}
+
+.pt-apply-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.pt-apply-sub {
+  font-size: var(--text-lede);
+  color: var(--muted);
+  font-weight: 420;
+  margin-top: 1.1rem;
+  max-width: 36rem;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+}
+
+.pt-apply-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: start;
+}
+
+/* Margin rail: the old sidebar, as quiet editorial margin notes */
+.pt-rail {
+  position: sticky;
+  top: calc(var(--hm-nav-h) + 2rem);
+}
+
+.pt-note {
+  padding: 1.5rem 0;
+  border-top: var(--hairline);
+}
+
+.pt-note:last-child {
+  border-bottom: var(--hairline);
+}
+
+.pt-note[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 1rem);
+}
+
+.pt-note ul {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+}
+
+.pt-note li {
+  position: relative;
+  padding: 0.3rem 0 0.3rem 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.pt-note li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+}
+
+.pt-note p {
+  margin: 0.9rem 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.pt-note .hm-textlink {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+}
+
+/* ==================== 4. Form ==================== */
+
+.pt-form {
+  --pt-pad: clamp(1.6rem, 3.5vw, 3rem);
+  position: relative;
+  background: var(--paper);
+  border: var(--hairline);
+  padding: var(--pt-pad);
+  padding-left: calc(var(--pt-pad) + 2.5rem);
+}
+
+/* ---- Variant switch: two identity cards over hidden radios ---- */
+
+.pt-switchset {
+  border: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.pt-switchset legend {
+  padding: 0;
+  margin-bottom: 0.65rem;
+}
+
+.pt-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pt-switch-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.15rem 1.3rem;
+  border: var(--hairline-strong);
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+
+.pt-switch-card input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.pt-switch-kicker {
+  font-size: 0.75rem;
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.35s var(--ease-out);
+}
+
+.pt-switch-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  line-height: 1.2;
+}
+
+.pt-switch-ord {
+  position: absolute;
+  top: 1rem;
+  right: 1.15rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(20, 33, 61, 0.35);
+  transition: color 0.35s var(--ease-out);
+}
+
+.pt-switch-card.is-checked,
+.pt-switch-card:has(input:checked) {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.pt-switch-card.is-checked .pt-switch-kicker,
+.pt-switch-card:has(input:checked) .pt-switch-kicker,
+.pt-switch-card.is-checked .pt-switch-ord,
+.pt-switch-card:has(input:checked) .pt-switch-ord {
+  color: #e4b79a;
+}
+
+.pt-switch-card:focus-within {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+/* ---- Variant fieldsets: visibility keyed to data-variant ---- */
+
+.pt-only {
+  border: none;
+  margin: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.pt-form[data-variant="agency"] .pt-org-only,
+.pt-form[data-variant="organization"] .pt-agency-only {
+  display: none;
+}
+
+/* ---- Chapter fieldsets ---- */
+
+.pt-chapter {
+  border: none;
+  margin: 2.4rem 0 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.pt-legend {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  width: 100%;
+  padding-bottom: 0.85rem;
+  border-bottom: var(--hairline);
+  margin-bottom: 1.7rem;
+}
+
+.pt-legend-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--terracotta);
+}
+
+.pt-legend-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+/* ---- Fields ---- */
+
+.pt-field {
+  margin-bottom: 1.6rem;
+}
+
+.pt-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.75rem;
+}
+
+.pt-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-bottom: 0.45rem;
+}
+
+.pt-label .pt-req {
+  color: var(--terracotta);
+}
+
+.pt-field input[type="text"],
+.pt-field input[type="email"],
+.pt-field input[type="tel"],
+.pt-field input[type="url"],
+.pt-field input[type="number"] {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: var(--hairline-strong);
+  border-radius: 0;
+  padding: 0.55rem 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pt-field input:focus {
+  outline: none;
+  border-bottom-color: var(--terracotta);
+  box-shadow: 0 1px 0 var(--terracotta);
+}
+
+.pt-field select,
+.pt-field textarea {
+  width: 100%;
+  background: var(--paper);
+  border: var(--hairline-strong);
+  border-radius: 0;
+  padding: 0.75rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--ink);
+  transition: border-color 0.3s ease;
+}
+
+.pt-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%2314213d' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+}
+
+.pt-field textarea {
+  min-height: 7.5rem;
+  resize: vertical;
+}
+
+.pt-field select:focus,
+.pt-field textarea:focus {
+  outline: none;
+  border-color: var(--terracotta);
+}
+
+.pt-field input::placeholder,
+.pt-field textarea::placeholder {
+  color: rgba(74, 84, 104, 0.55);
+}
+
+.pt-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.8125rem;
+  color: rgba(74, 84, 104, 0.75);
+}
+
+/* consent checkbox */
+.pt-agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin: 0.4rem 0 0;
+}
+
+.pt-agree input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+  flex: none;
+  accent-color: var(--terracotta);
+}
+
+.pt-agree span {
+  font-size: 0.9063rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.pt-agree .privacy-policy-link {
+  color: var(--ink);
+  font-size: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.pt-agree .privacy-policy-link:hover {
+  color: var(--terracotta);
+}
+
+/* submit row */
+.pt-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+  margin-top: 2.4rem;
+}
+
+.pt-form-actions .hm-btn {
+  border: none;
+}
+
+/* Styled by ID: script.js writes inline colors on it and account.js can
+   rewrite its className, so the class is not a reliable hook. */
+#formMessage {
+  margin-top: 1.6rem;
+  padding: 1rem 1.25rem;
+  border: var(--hairline-strong);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* ==================== 5. Stitched seam ==================== */
+
+.pt-seam {
+  position: absolute;
+  left: calc(var(--pt-pad) + 0.55rem);
+  top: var(--pt-pad);
+  bottom: var(--pt-pad);
+  width: 2px;
+}
+
+/* no-JS / base state: a quiet dashed seam */
+.pt-seam-line {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(180, 85, 31, 0.35) 0 9px,
+    transparent 9px 17px
+  );
+}
+
+/* solid fill sews downward as required fields complete */
+.pt-seam-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--terracotta);
+  transform-origin: top;
+  transform: scaleY(var(--pt-progress, 0));
+  transition: transform 0.6s var(--ease-out);
+}
+
+/* cross-stitch tick per required field (positioned by partner.js) */
+.pt-seam-tick {
+  position: absolute;
+  left: 50%;
+  width: 13px;
+  height: 2px;
+  background: rgba(20, 33, 61, 0.22);
+  transform: translate(-50%, -50%) rotate(-32deg);
+  transition: background-color 0.3s ease, width 0.3s ease;
+}
+
+.pt-seam-tick.is-done {
+  background: var(--terracotta);
+  width: 18px;
+}
+
+/* "7 of 12" riding the fill edge, set vertically to fit the gutter */
+.pt-seam-count {
+  position: absolute;
+  top: calc(var(--pt-progress, 0) * 100%);
+  left: 9px;
+  writing-mode: vertical-rl;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  color: var(--terracotta);
+  white-space: nowrap;
+  transition: top 0.6s var(--ease-out);
+}
+
+/* ==================== 6. Closing ink band ==================== */
+
+.pt-close {
+  padding-block: clamp(5.5rem, 12vh, 9.5rem) clamp(4.5rem, 9vh, 7rem);
+}
+
+.pt-close-line {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 5vw, 4.25rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  color: var(--paper);
+  max-width: 17ch;
+  text-wrap: balance;
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.pt-close-line em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+.pt-close-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-wrap: wrap;
+}
+
+/* ==================== 7. Motion + responsive ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .pt-seam-fill,
+  .pt-seam-tick,
+  .pt-seam-count {
+    transition: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .pt-apply-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-rail {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .pt-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-why-item {
+    padding: 1.75rem 0;
+  }
+
+  .pt-why-item:first-child {
+    padding-top: 0;
+  }
+
+  .pt-why-item + .pt-why-item {
+    border-left: none;
+    border-top: var(--hairline);
+  }
+}
+
+@media (max-width: 640px) {
+  .pt-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-switch {
+    grid-template-columns: 1fr;
+  }
+
+  .pt-opening-actions .hm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .pt-form {
+    padding-left: calc(var(--pt-pad) + 1.5rem);
+  }
+
+  .pt-seam {
+    left: calc(var(--pt-pad) + 0.15rem);
+  }
+
+  .pt-seam-count {
+    display: none;
+  }
+}

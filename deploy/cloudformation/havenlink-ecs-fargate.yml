@@ -56,6 +56,19 @@ Parameters:
     Default: 'false'
   SmtpUser:
     Type: String
+  GeminiSaKeySecretArn:
+    Type: String
+  GeminiUseVertex:
+    Type: String
+    AllowedValues:
+      - 'true'
+      - 'false'
+    Default: 'true'
+  GoogleCloudProject:
+    Type: String
+  GeminiLocation:
+    Type: String
+    Default: us-central1
 
 Conditions:
   HasCertificate: !Not [!Equals [!Ref CertificateArn, '']]
@@ -173,6 +186,7 @@ Resources:
                   - !Ref SessionSecretSecretArn
                   - !Ref GoogleClientSecretSecretArn
                   - !Ref SmtpPasswordSecretArn
+                  - !Ref GeminiSaKeySecretArn
               - Effect: Allow
                 Action:
                   - kms:Decrypt
@@ -233,6 +247,12 @@ Resources:
               Value: !Ref SmtpSecure
             - Name: SMTP_USER
               Value: !Ref SmtpUser
+            - Name: GEMINI_USE_VERTEX
+              Value: !Ref GeminiUseVertex
+            - Name: GOOGLE_CLOUD_PROJECT
+              Value: !Ref GoogleCloudProject
+            - Name: GEMINI_LOCATION
+              Value: !Ref GeminiLocation
           Secrets:
             - Name: DATABASE_URL
               ValueFrom: !Ref DatabaseUrlSecretArn
@@ -242,6 +262,8 @@ Resources:
               ValueFrom: !Ref GoogleClientSecretSecretArn
             - Name: SMTP_PASSWORD
               ValueFrom: !Ref SmtpPasswordSecretArn
+            - Name: GEMINI_SA_KEY
+              ValueFrom: !Ref GeminiSaKeySecretArn
           LogConfiguration:
             LogDriver: awslogs
             Options:

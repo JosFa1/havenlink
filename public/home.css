@@ -1,0 +1,714 @@
+/* ============================================================
+   HavenLink — Homepage sections ("Light Editorial")
+   Requires editorial.css (tokens, primitives, nav/footer re-skin)
+   loaded before this sheet. Scoped to the homepage's hm-* markup.
+
+   Contents:
+     1. Hero + threads canvas
+     2. Mission
+     3. Stakes (ink band)
+     4. How It Works — stacked default + pinned chapters
+     5. Safety index
+     6. Final CTA band
+     7. Motion + responsive
+   ============================================================ */
+
+/* ==================== 1. Hero ==================== */
+
+.hm-hero {
+  position: relative;
+  min-height: calc(100vh - var(--hm-nav-h));
+  min-height: calc(100svh - var(--hm-nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--paper);
+}
+
+.hm-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* keep the text zone clean — threads fade in from the right */
+  -webkit-mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.45) 32%, #000 58%);
+  mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.45) 32%, #000 58%);
+}
+
+.hm-hero-inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: clamp(3rem, 8vh, 6rem) var(--gutter) 0;
+}
+
+.hm-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 4vh, 3rem);
+}
+
+.hm-hero-eyebrow::after {
+  content: "";
+  width: clamp(3rem, 8vw, 7rem);
+  height: 1px;
+  background: rgba(20, 33, 61, 0.3);
+}
+
+.hm-hero-title {
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144;
+  max-width: 11ch;
+  text-wrap: balance;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.hm-hero-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.hm-hero-standfirst {
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  font-weight: 420;
+  color: var(--muted);
+  max-width: 36rem;
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.hm-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Bottom meta strip: hairline + assurances + scroll cue (kept LEFT —
+   bottom-right belongs to the chat launcher) */
+.hm-hero-meta {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: 1.4rem var(--gutter) 1.6rem;
+  border-top: var(--hairline);
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+.hm-hero-meta-item {
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.hm-scrollcue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  order: -1;
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.hm-scrollcue-line {
+  display: inline-block;
+  width: 1px;
+  height: 26px;
+  background: var(--ink);
+  transform-origin: top;
+  animation: hm-cue 2.4s var(--ease-out) infinite;
+}
+
+@keyframes hm-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ==================== 2. Mission ==================== */
+
+.hm-mission {
+  padding-block: var(--section-pad);
+}
+
+.hm-mission-statement {
+  grid-column: 1 / span 12;
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  text-wrap: balance;
+  max-width: 21ch;
+}
+
+.hm-mission-statement em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.hm-mission-body {
+  grid-column: 1 / span 6;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.hm-mission-values {
+  grid-column: 8 / span 5;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  list-style: none;
+  padding: 0;
+}
+
+.hm-mission-values li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 1.1rem 0;
+  border-bottom: var(--hairline);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.hm-mission-values li:first-child {
+  border-top: var(--hairline);
+}
+
+.hm-mission-values .hm-tick {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--terracotta);
+}
+
+/* ==================== 3. Stakes (ink band) ==================== */
+
+.hm-stakes {
+  padding-block: var(--section-pad);
+}
+
+.hm-stakes-stat {
+  grid-column: 1 / span 5;
+}
+
+.hm-stakes-number {
+  font-family: var(--font-display);
+  font-size: var(--text-giant);
+  font-weight: 360;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144;
+  color: #e4b79a;
+}
+
+.hm-stakes-number sup {
+  font-size: 0.4em;
+  vertical-align: super;
+}
+
+.hm-stakes-caption {
+  margin-top: 1.25rem;
+  max-width: 20rem;
+  font-size: var(--text-meta);
+  line-height: 1.6;
+  color: rgba(250, 248, 245, 0.6);
+  border-left: 2px solid var(--terracotta);
+  padding-left: 1rem;
+}
+
+.hm-stakes-copy {
+  grid-column: 7 / span 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.4rem;
+}
+
+.hm-stakes-copy p {
+  color: rgba(250, 248, 245, 0.78);
+  max-width: 34rem;
+}
+
+.hm-stakes-pivot {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 440;
+  line-height: 1.35;
+  color: var(--paper);
+  margin-top: 0.6rem;
+}
+
+/* ==================== 4. How It Works ==================== */
+
+.hm-hiw {
+  padding-top: var(--section-pad);
+}
+
+.hm-hiw-title {
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.08;
+  font-variation-settings: "opsz" 60;
+  max-width: 14ch;
+}
+
+.hm-hiw-sub {
+  font-size: var(--text-lede);
+  color: var(--muted);
+  font-weight: 420;
+  margin-top: 1.1rem;
+  max-width: 32rem;
+}
+
+.hm-hiw-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ---- Default layout (mobile / reduced motion / no JS): stacked
+   editorial blocks. The pinned experience is layered on below. ---- */
+
+.hm-chapter {
+  position: relative;
+  padding: clamp(2.5rem, 6vh, 4rem) 0;
+  border-top: var(--hairline);
+}
+
+.hm-chapter-ghost {
+  position: absolute;
+  top: 0.5rem;
+  right: 0;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 18vw, 13rem);
+  font-weight: 380;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variation-settings: "opsz" 144;
+  color: rgba(20, 33, 61, 0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+.hm-chapter-index {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--terracotta);
+  margin-bottom: 1.1rem;
+}
+
+.hm-chapter-title {
+  font-size: clamp(1.75rem, 3.4vw, 2.875rem);
+  font-weight: 440;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 40;
+  margin-bottom: 1.1rem;
+  max-width: 16ch;
+}
+
+.hm-chapter-desc {
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: var(--container-text);
+}
+
+.hm-chapter-art {
+  margin-top: 2rem;
+  max-width: 220px;
+}
+
+.hm-chapter-art svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hm-chapter-art .hm-draw {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;      /* paths carry pathLength="1" */
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.9s var(--ease-out);
+}
+
+.hm-chapter-art .hm-draw--accent {
+  stroke: var(--terracotta);
+  transition-delay: 0.25s;
+}
+
+/* stacked mode: draw strokes when the chapter scrolls into view */
+.hm-chapter.is-in .hm-draw,
+html:not(.js) .hm-chapter .hm-draw {
+  stroke-dashoffset: 0;
+}
+
+.hm-hiw-rail {
+  display: none;
+}
+
+.hm-hiw-cta {
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: clamp(3rem, 7vh, 5rem) var(--gutter) var(--section-pad);
+  border-top: var(--hairline);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hm-hiw-cta .hm-eyebrow {
+  margin-right: auto;
+}
+
+/* ---- Pinned chapter experience: desktop + motion-OK + JS ---- */
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  html.js .hm-hiw-track {
+    height: calc(4 * 90vh);
+  }
+
+  html.js .hm-hiw-stage {
+    position: sticky;
+    top: var(--hm-nav-h);
+    height: calc(100vh - var(--hm-nav-h));
+    height: calc(100svh - var(--hm-nav-h));
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+  }
+
+  html.js .hm-hiw-steps {
+    position: relative;
+    flex: 1;
+    max-width: var(--container-wide);
+    margin-inline: auto;
+    width: 100%;
+  }
+
+  html.js .hm-chapter {
+    position: absolute;
+    inset: 0;
+    padding: 0 var(--gutter) 0 calc(var(--gutter) + 5.5rem);
+    border-top: none;
+    display: grid;
+    grid-template-columns: minmax(0, 55fr) minmax(0, 40fr);
+    column-gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+    opacity: 0;
+    transform: translateY(30px);
+    pointer-events: none;
+    transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out);
+  }
+
+  html.js .hm-hiw-stage[data-step="0"] .hm-chapter[data-i="0"],
+  html.js .hm-hiw-stage[data-step="1"] .hm-chapter[data-i="1"],
+  html.js .hm-hiw-stage[data-step="2"] .hm-chapter[data-i="2"],
+  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"] {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* draw the active chapter's art */
+  html.js .hm-hiw-stage[data-step="0"] .hm-chapter[data-i="0"] .hm-draw,
+  html.js .hm-hiw-stage[data-step="1"] .hm-chapter[data-i="1"] .hm-draw,
+  html.js .hm-hiw-stage[data-step="2"] .hm-chapter[data-i="2"] .hm-draw,
+  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"] .hm-draw {
+    stroke-dashoffset: 0;
+  }
+
+  html.js .hm-chapter-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  html.js .hm-chapter-ghost {
+    top: 50%;
+    right: auto;
+    left: -0.06em;
+    transform: translateY(-58%);
+    font-size: clamp(14rem, 24vw, 21rem);
+    color: rgba(20, 33, 61, 0.055);
+    z-index: 0;
+  }
+
+  html.js .hm-chapter-art {
+    margin-top: 0;
+    max-width: none;
+    align-self: center;
+  }
+
+  html.js .hm-chapter-art svg {
+    max-height: 52vh;
+    margin-inline: auto;
+    max-width: min(30rem, 100%);
+  }
+
+  /* progress rail */
+  html.js .hm-hiw-rail {
+    display: block;
+    position: absolute;
+    left: var(--gutter);
+    top: 50%;
+    transform: translateY(-50%);
+    height: min(46vh, 380px);
+    z-index: 2;
+  }
+
+  html.js .hm-hiw-rail-line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(20, 33, 61, 0.12);
+  }
+
+  html.js .hm-hiw-rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--terracotta);
+    transform-origin: top;
+    transform: scaleY(var(--hiw-p, 0));
+  }
+
+  html.js .hm-hiw-ticks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    left: 1.1rem;
+    top: 0;
+    bottom: 0;
+  }
+
+  html.js .hm-hiw-ticks li {
+    position: absolute;
+    transform: translateY(-50%);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 0.85rem;
+    color: rgba(20, 33, 61, 0.35);
+    transition: color 0.3s ease;
+  }
+
+  html.js .hm-hiw-ticks li:nth-child(1) { top: 2%; }
+  html.js .hm-hiw-ticks li:nth-child(2) { top: 34%; }
+  html.js .hm-hiw-ticks li:nth-child(3) { top: 66%; }
+  html.js .hm-hiw-ticks li:nth-child(4) { top: 98%; }
+
+  html.js .hm-hiw-stage[data-step="0"] .hm-hiw-ticks li:nth-child(1),
+  html.js .hm-hiw-stage[data-step="1"] .hm-hiw-ticks li:nth-child(2),
+  html.js .hm-hiw-stage[data-step="2"] .hm-hiw-ticks li:nth-child(3),
+  html.js .hm-hiw-stage[data-step="3"] .hm-hiw-ticks li:nth-child(4) {
+    color: var(--terracotta);
+  }
+}
+
+/* ==================== 5. Safety index ==================== */
+
+.hm-safety {
+  padding-block: var(--section-pad);
+  background: var(--paper-dim);
+}
+
+.hm-safety-title {
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.1;
+  font-variation-settings: "opsz" 60;
+  max-width: 18ch;
+  margin-bottom: clamp(2.5rem, 6vh, 4rem);
+  text-wrap: balance;
+}
+
+.hm-safety-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.hm-safety-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hm-safety-row {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: var(--hairline);
+}
+
+.hm-safety-row:last-child {
+  border-bottom: var(--hairline);
+}
+
+.hm-safety-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(20, 33, 61, 0.4);
+  transition: color 0.3s ease;
+}
+
+.hm-safety-row:hover .hm-safety-num {
+  color: var(--terracotta);
+}
+
+.hm-safety-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 460;
+  line-height: 1.25;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+.hm-safety-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+  max-width: 32rem;
+}
+
+/* ==================== 6. Final CTA band ==================== */
+
+.hm-cta {
+  /* fuses with the .footer below it — same ink, hairline separation */
+  padding-block: clamp(6rem, 14vh, 11rem) clamp(5rem, 10vh, 8rem);
+}
+
+.hm-cta-line {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5.5vw, 4.75rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  color: var(--paper);
+  max-width: 16ch;
+  text-wrap: balance;
+  margin-bottom: clamp(2.25rem, 5vh, 3.5rem);
+}
+
+.hm-cta-line em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+.hm-cta-actions {
+  display: flex;
+  align-items: center;
+  gap: 2.25rem;
+  flex-wrap: wrap;
+}
+
+/* ==================== 7. Motion + responsive ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hm-scrollcue-line {
+    animation: none;
+  }
+
+  .hm-chapter-art .hm-draw {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hm-mission-body {
+    grid-column: 1 / span 12;
+  }
+
+  .hm-mission-values {
+    grid-column: 1 / span 12;
+    max-width: 30rem;
+  }
+
+  .hm-stakes-stat {
+    grid-column: 1 / span 12;
+  }
+
+  .hm-stakes-copy {
+    grid-column: 1 / span 12;
+    margin-top: 2.5rem;
+  }
+
+  .hm-safety-row {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+
+  .hm-safety-desc {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .hm-hero-meta {
+    flex-wrap: wrap;
+    gap: 0.9rem 1.5rem;
+    padding-right: max(var(--gutter), 88px); /* clear the chat launcher */
+  }
+
+  .hm-hero-meta-item {
+    white-space: normal;
+  }
+
+  .hm-hero-actions {
+    gap: 1.25rem;
+  }
+
+  .hm-hero-actions .hm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hm-chapter-ghost {
+    font-size: clamp(5.5rem, 26vw, 9rem);
+  }
+
+  .hm-hiw-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hm-cta-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}

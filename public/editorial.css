@@ -1,0 +1,1033 @@
+/* ============================================================
+   HavenLink — "Light Editorial" design system (shared)
+   Scoped to body.editorial. Pages opt in with:
+     <body class="editorial home">  /  <body class="editorial partner">
+   and load this sheet after styles.css, before their page sheet.
+
+   Contents:
+     1. Fonts (self-hosted — CSP forbids font CDNs)
+     2. Tokens + legacy variable re-map
+     3. Base refinements (selection, focus, headings)
+     4. Shared-component re-skin (nav, footer)
+     5. Primitives (container, grid, eyebrow, section head, buttons)
+     6. Reveals + reduced motion
+   ============================================================ */
+
+/* ==================== 1. Fonts ==================== */
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/fraunces-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("/fonts/fraunces-italic-var.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("/fonts/satoshi-var.woff2") format("woff2");
+}
+
+/* ==================== 2. Tokens + legacy re-map ==================== */
+
+/* Default nav height lives on html (not body) so the JS sync, which writes
+   an inline value on documentElement, is never masked by a body-level
+   declaration for body's descendants. */
+html {
+  --hm-nav-h: 68px;
+}
+
+body.editorial {
+  /* Design tokens */
+  --paper: #faf8f5;
+  --paper-dim: #f1ede6;
+  --ink: #14213d;
+  --ink-deep: #0d1830;
+  --terracotta: #b4551f;
+  --terracotta-deep: #93411a;
+  --muted: #4a5468;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Satoshi", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-hero: clamp(2.875rem, 7.5vw, 6.5rem);
+  --text-display: clamp(2.125rem, 4.5vw, 3.875rem);
+  --text-giant: clamp(5.5rem, 14vw, 12rem);
+  --text-lede: clamp(1.125rem, 1.5vw, 1.375rem);
+  --text-body: 1.0625rem;
+  --text-eyebrow: 0.8125rem;
+  --text-meta: 0.875rem;
+
+  --section-pad: clamp(5.5rem, 12vh, 10rem);
+  --container-wide: 1320px;
+  --container-editorial: 1120px;
+  --container-text: 46rem;
+  --gutter: clamp(1.25rem, 4.5vw, 4rem);
+
+  --hairline: 1px solid rgba(20, 33, 61, 0.14);
+  --hairline-strong: 1px solid rgba(20, 33, 61, 0.32);
+  --hairline-inv: 1px solid rgba(250, 248, 245, 0.16);
+  --ease-out: cubic-bezier(0.22, 0.61, 0.2, 1);
+
+  /* Legacy re-map: shared nav/footer/modal/newsletter components
+     (styled in styles.css, colored via these vars, plus the inline
+     var(--blue) that script.js/account.js write) re-skin themselves. */
+  --navy: #14213d;
+  --navy-dark: #0d1830;
+  --blue: #b4551f;
+  --blue-light: #c97a4a;
+  --blue-lighter: #e4b79a;
+  --indigo: #93411a;
+  --gray: #f1ede6;
+  --gray-light: rgba(20, 33, 61, 0.14);
+  --gray-dark: #4a5468;
+  --white: #faf8f5;
+  --text-dark: #14213d;
+  --text-light: #4a5468;
+
+  font-family: var(--font-body);
+  background-color: var(--paper);
+  color: var(--ink);
+  font-size: var(--text-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ==================== 3. Base refinements ==================== */
+
+body.editorial ::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+body.editorial :focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+body.editorial h1,
+body.editorial h2,
+body.editorial h3 {
+  font-family: var(--font-display);
+  font-weight: 430;
+  color: var(--ink);
+  letter-spacing: -0.015em;
+}
+
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 1rem);
+}
+
+/* ==================== 4. Shared-component re-skin ==================== */
+
+/* Nav: paper glass, hairline, editorial wordmark. The variable re-map
+   does the colors; these rules do the finish. */
+body.editorial .navbar {
+  background-color: rgba(250, 248, 245, 0.88);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: var(--hairline);
+  box-shadow: none !important; /* beats the inline shadow script.js writes on scroll */
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+body.editorial .navbar.is-scrolled {
+  background-color: rgba(250, 248, 245, 0.96);
+  border-bottom: var(--hairline-strong);
+}
+
+body.editorial .nav-container {
+  max-width: var(--container-wide);
+  padding: 1.05rem var(--gutter);
+}
+
+body.editorial .logo-text {
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-size: 1.35rem;
+  letter-spacing: -0.01em;
+}
+
+body.editorial .logo-haven {
+  color: var(--ink);
+}
+
+body.editorial .logo-link {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+body.editorial .nav-link,
+body.editorial .dropdown-toggle {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+body.editorial .nav-link::after,
+body.editorial .dropdown-toggle::after {
+  height: 1px;
+  bottom: -6px;
+  background-color: var(--terracotta);
+}
+
+body.editorial #navAuth {
+  min-width: 4.5rem; /* account.js injects Log In/Out async — avoid nav shift */
+  text-align: right;
+}
+
+body.editorial .dropdown-menu {
+  border-radius: 0;
+  border: var(--hairline);
+  box-shadow: 0 18px 40px -18px rgba(13, 24, 48, 0.25);
+}
+
+body.editorial .dropdown-item {
+  font-size: 0.9375rem;
+}
+
+/* Footer: ink via re-map; editorial finish here. Sits seamlessly
+   under an ink CTA band, separated only by a faint hairline. */
+body.editorial .footer {
+  background-color: var(--ink);
+  border-top: var(--hairline-inv);
+  padding: 5rem var(--gutter) 2.5rem;
+}
+
+body.editorial .footer-container {
+  max-width: var(--container-wide);
+  gap: 3rem 2.5rem;
+}
+
+body.editorial .footer-section h3 {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-size: 1.2rem;
+  color: var(--paper);
+}
+
+body.editorial .footer-section p,
+body.editorial .footer-section a {
+  color: rgba(250, 248, 245, 0.72);
+}
+
+body.editorial .footer-section a:hover {
+  color: var(--paper);
+}
+
+body.editorial .hotline-link {
+  color: #e4b79a;
+}
+
+body.editorial .footer-bottom {
+  max-width: var(--container-wide);
+  border-top: var(--hairline-inv);
+  padding-right: 84px; /* keep Privacy Policy clear of the chat launcher */
+}
+
+body.editorial .footer-bottom p {
+  color: rgba(250, 248, 245, 0.55);
+}
+
+/* ==================== 5. Primitives ==================== */
+
+.hm-container {
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.hm-container--editorial {
+  max-width: var(--container-editorial);
+}
+
+.hm-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.hm-eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+}
+
+/* Section head: eyebrow left, chapter index right, hairline below */
+.hm-secthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding-bottom: 1.1rem;
+  border-bottom: var(--hairline);
+  margin-bottom: clamp(2.5rem, 6vh, 4.5rem);
+}
+
+.hm-secthead .hm-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  letter-spacing: 0.04em;
+}
+
+.hm-on-ink .hm-eyebrow {
+  color: rgba(250, 248, 245, 0.6);
+}
+
+.hm-on-ink .hm-secthead {
+  border-bottom: var(--hairline-inv);
+}
+
+/* Buttons — deliberately NOT .btn (avoids ripple + legacy styles) */
+.hm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2.1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+.hm-btn .hm-btn-arrow {
+  display: inline-block;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.hm-btn:hover .hm-btn-arrow {
+  transform: translateX(5px);
+}
+
+.hm-btn--ink {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.hm-btn--ink:hover {
+  background-color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+.hm-btn--paper {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.hm-btn--paper:hover {
+  background-color: #e4b79a;
+  transform: translateY(-2px);
+}
+
+.hm-textlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.35);
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.hm-textlink:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+.hm-on-ink .hm-textlink {
+  color: rgba(250, 248, 245, 0.85);
+  border-bottom-color: rgba(250, 248, 245, 0.35);
+}
+
+.hm-on-ink .hm-textlink:hover {
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+}
+
+/* Ink band + film-grain texture (SVG data URI — CSP img-src allows data:) */
+.hm-on-ink {
+  position: relative;
+  background-color: var(--ink);
+  color: rgba(250, 248, 245, 0.85);
+}
+
+.hm-on-ink::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hm-on-ink > * {
+  position: relative; /* lift content above the grain layer */
+}
+
+.hm-on-ink h2,
+.hm-on-ink h3 {
+  color: var(--paper);
+}
+
+/* ==================== 6. Reveals + reduced motion ==================== */
+
+html.js body.editorial .hm-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.75s ease, transform 0.85s var(--ease-out);
+  transition-delay: var(--d, 0s);
+}
+
+html.js body.editorial .hm-reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js body.editorial .hm-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  body.editorial .nav-links {
+    /* mobile menu panel: solid paper (re-mapped --white is translucent-safe
+       here because styles.css uses the var directly) */
+    border-bottom: var(--hairline);
+  }
+
+  body.editorial .dropdown-toggle {
+    /* other menu items center; align the Adopt toggle with them */
+    justify-content: center;
+  }
+}
+
+/* ==================== 7. Adopt chaptered progress bar ====================
+   Redesign of the legacy .adopt-subnav step bar (shared by the 4 adopt pages).
+   Same markup/hooks (#adoptSubnav, .subnav-item[data-step].active, .subnav-step,
+   .subnav-label) — an editorial hairline strip that sticks under the nav. */
+
+body.editorial .adopt-subnav {
+  position: sticky;
+  top: var(--hm-nav-h);
+  z-index: 90;
+  background-color: rgba(250, 248, 245, 0.9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-top: none;
+  border-bottom: var(--hairline);
+  box-shadow: none;
+}
+
+body.editorial .adopt-subnav .subnav-container {
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: 0 var(--gutter);
+  display: flex;
+  gap: clamp(1rem, 4vw, 3.5rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+body.editorial .adopt-subnav .subnav-container::-webkit-scrollbar {
+  display: none;
+}
+
+body.editorial .adopt-subnav .subnav-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 1rem 0;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.editorial .adopt-subnav .subnav-item:hover {
+  color: var(--ink);
+}
+
+/* neutralize the legacy numbered "chip": becomes an italic serif ordinal */
+body.editorial .adopt-subnav .subnav-step {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  line-height: 1;
+  color: var(--terracotta);
+}
+
+body.editorial .adopt-subnav .subnav-label {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+body.editorial .adopt-subnav .subnav-item.active {
+  color: var(--ink);
+  border-bottom-color: var(--terracotta);
+}
+
+/* ==================== 8. Newsletter popup (editorial reskin) ====================
+   Markup built by account.js; base styles in styles.css. Here we override to a
+   flat paper card with a terracotta top rule, Fraunces title, hm-btn-style accept
+   (legacy .btn ripple neutralized), and an understated textlink decline. */
+
+body.editorial .newsletter-overlay {
+  background-color: rgba(13, 24, 48, 0.6);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+body.editorial .newsletter-card {
+  background-color: var(--paper);
+  border: var(--hairline);
+  border-top: 3px solid var(--terracotta);
+  border-radius: 0;
+  max-width: 30rem;
+  padding: clamp(2.25rem, 4vw, 3.25rem);
+  text-align: left;
+  box-shadow: 0 40px 90px -30px rgba(13, 24, 48, 0.55);
+}
+
+body.editorial .newsletter-title {
+  font-family: var(--font-display);
+  font-weight: 460;
+  font-size: clamp(1.65rem, 3vw, 2.1rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0 0 1rem;
+}
+
+body.editorial .newsletter-text {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+body.editorial .newsletter-actions {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* accept: styled like .hm-btn--ink (overrides legacy .btn), ripple hidden */
+body.editorial .newsletter-accept {
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 1rem 2rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  box-shadow: none;
+  overflow: hidden;
+  transition: background-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+body.editorial .newsletter-accept:hover {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+body.editorial .newsletter-accept .ripple {
+  display: none !important; /* kill the legacy script.js ripple span */
+}
+
+body.editorial .newsletter-decline {
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.3);
+  padding: 0 0 0.25rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.editorial .newsletter-decline:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+/* ==================== 9. Shared page hero ====================
+   Reusable hero shell for interior pages (matching + adopt/*). Same shape as the
+   homepage .hm-hero: full-height, right-fading visual, eyebrow → title → standfirst
+   → actions, bottom hairline meta strip. Pages supply the visual (canvas or SVG). */
+
+.ed-hero {
+  position: relative;
+  min-height: calc(100vh - var(--hm-nav-h));
+  min-height: calc(100svh - var(--hm-nav-h));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--paper);
+}
+
+.ed-hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(105deg, transparent 4%, rgba(0, 0, 0, 0.4) 30%, #000 58%);
+  mask-image: linear-gradient(105deg, transparent 4%, rgba(0, 0, 0, 0.4) 30%, #000 58%);
+}
+
+.ed-hero-art {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: clamp(1rem, 6vw, 7rem);
+  -webkit-mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.35) 32%, #000 60%);
+  mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.35) 32%, #000 60%);
+}
+
+.ed-hero-art svg {
+  width: min(44vw, 32rem);
+  height: auto;
+}
+
+.ed-hero-inner {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: clamp(3rem, 8vh, 6rem) var(--gutter) 0;
+}
+
+.ed-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(1.75rem, 4vh, 3rem);
+}
+
+.ed-hero-eyebrow::after {
+  content: "";
+  width: clamp(3rem, 8vw, 7rem);
+  height: 1px;
+  background: rgba(20, 33, 61, 0.3);
+}
+
+.ed-hero-title {
+  font-size: var(--text-hero);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: "opsz" 144;
+  max-width: 16ch;
+  text-wrap: balance;
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.ed-hero-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.ed-hero-standfirst {
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  font-weight: 420;
+  color: var(--muted);
+  max-width: 38rem;
+  margin-bottom: clamp(2rem, 5vh, 3.25rem);
+}
+
+.ed-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.ed-hero-meta {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: 1.4rem var(--gutter) 1.6rem;
+  border-top: var(--hairline);
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 4vw, 3rem);
+  margin-top: clamp(3rem, 7vh, 5rem);
+}
+
+.ed-hero-meta-item {
+  font-size: var(--text-meta);
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.ed-scrollcue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  order: -1;
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.ed-scrollcue-line {
+  display: inline-block;
+  width: 1px;
+  height: 26px;
+  background: var(--ink);
+  transform-origin: top;
+  animation: ed-cue 2.4s var(--ease-out) infinite;
+}
+
+@keyframes ed-cue {
+  0% { transform: scaleY(0); transform-origin: top; }
+  45% { transform: scaleY(1); transform-origin: top; }
+  55% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@media (max-width: 768px) {
+  .ed-hero-meta {
+    flex-wrap: wrap;
+    gap: 0.9rem 1.5rem;
+    padding-right: max(var(--gutter), 88px);
+  }
+
+  .ed-hero-meta-item {
+    white-space: normal;
+  }
+
+  .ed-hero-actions .hm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ed-hero-art {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-scrollcue-line {
+    animation: none;
+  }
+}
+
+/* ==================== 10. Shared section scaffold + SVG line-draw ==================== */
+
+.ed-section {
+  padding-block: var(--section-pad);
+}
+
+.ed-section--dim {
+  background: var(--paper-dim);
+}
+
+/* Self-drawing SVG line-art (paths carry pathLength="1"). Used by adopt hero
+   motifs and in-content diagrams — same look as the homepage HIW chapter art. */
+.ed-draw {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.ed-draw--accent {
+  stroke: var(--terracotta);
+}
+
+html:not(.js) .ed-draw {
+  stroke-dashoffset: 0;
+}
+
+@keyframes ed-draw-in {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* hero art draws itself on load */
+html.js body.editorial .ed-hero-art .ed-draw {
+  animation: ed-draw-in 1.4s var(--ease-out) forwards;
+}
+
+html.js body.editorial .ed-hero-art .ed-draw--accent {
+  animation-delay: 0.4s;
+}
+
+/* in-content art draws when its .hm-reveal wrapper enters the viewport */
+html.js body.editorial .hm-reveal.is-in .ed-draw {
+  animation: ed-draw-in 1.2s var(--ease-out) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ed-draw {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+}
+
+/* ==================== 11. Shared content primitives ====================
+   Reusable editorial blocks for interior pages (matching keeps its own mt-*;
+   agency-profiles / home-study / intake-form build from these). */
+
+/* grid placement helpers (use inside .hm-grid) */
+.ed-span-12 { grid-column: 1 / span 12; }
+.ed-col-left { grid-column: 1 / span 6; }
+.ed-col-right { grid-column: 8 / span 5; }
+
+/* big serif statement (mission-style) */
+.ed-statement {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+.ed-statement em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.ed-body {
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+/* italic-ordinal checklist / values list */
+.ed-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ed-checklist li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.9rem 0;
+  border-bottom: var(--hairline);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.ed-checklist li:first-child {
+  border-top: var(--hairline);
+}
+
+.ed-checklist .ed-tick {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--terracotta);
+  flex: none;
+}
+
+/* chaptered process steps (index + title | description) */
+.ed-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ed-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  padding: clamp(2.25rem, 5vh, 3.5rem) 0;
+  border-top: var(--hairline);
+}
+
+.ed-steps .ed-step:last-child {
+  border-bottom: var(--hairline);
+}
+
+.ed-step-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--terracotta);
+}
+
+.ed-step-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 460;
+  line-height: 1.12;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  margin: 0.4rem 0 0;
+  max-width: 18ch;
+}
+
+.ed-step-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+/* feature rows (num | name | description — like the safety index) */
+.ed-features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ed-feature {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(1rem, 3vw, 3rem);
+  align-items: baseline;
+  padding: 1.75rem 0;
+  border-top: var(--hairline);
+}
+
+.ed-features .ed-feature:last-child {
+  border-bottom: var(--hairline);
+}
+
+.ed-feature-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(20, 33, 61, 0.4);
+  transition: color 0.3s ease;
+}
+
+.ed-feature:hover .ed-feature-num {
+  color: var(--terracotta);
+}
+
+.ed-feature-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 460;
+  line-height: 1.25;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+.ed-feature-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+  max-width: 34rem;
+}
+
+/* closing CTA band line */
+.ed-cta {
+  padding-block: clamp(6rem, 14vh, 11rem);
+}
+
+.ed-cta-line {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  color: var(--paper);
+  max-width: 18ch;
+  text-wrap: balance;
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 clamp(2rem, 5vh, 3rem);
+}
+
+.ed-cta-line em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+@media (max-width: 860px) {
+  .ed-span-12,
+  .ed-col-left,
+  .ed-col-right {
+    grid-column: 1 / span 12;
+  }
+
+  .ed-step {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .ed-feature {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+
+  .ed-feature-desc {
+    grid-column: 2;
+  }
+}

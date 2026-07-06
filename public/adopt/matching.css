@@ -1,0 +1,368 @@
+/* ============================================================
+   HavenLink — Compatibility Matching (adopt step 4, "Light Editorial")
+   Requires editorial.css (tokens, primitives, shared hero) first.
+   Classes prefixed mt-.
+   ============================================================ */
+
+/* clear both the nav and the sticky adopt progress bar on anchor jumps */
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
+}
+
+/* ==================== Intro (statement + factors) ==================== */
+
+.mt-intro-statement {
+  grid-column: 1 / span 12;
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+.mt-intro-statement em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.mt-intro-body {
+  grid-column: 1 / span 6;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  color: var(--muted);
+  max-width: 34rem;
+}
+
+.mt-intro-factors {
+  grid-column: 8 / span 5;
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+  list-style: none;
+  padding: 0;
+}
+
+.mt-intro-factors li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.85rem 0;
+  border-bottom: var(--hairline);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.mt-intro-factors li:first-child {
+  border-top: var(--hairline);
+}
+
+.mt-intro-factors .mt-tick {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--terracotta);
+}
+
+/* ==================== Process steps ==================== */
+
+.mt-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mt-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  align-items: start;
+  padding: clamp(2.25rem, 5vh, 3.5rem) 0;
+  border-top: var(--hairline);
+}
+
+.mt-steps .mt-step:last-child {
+  border-bottom: var(--hairline);
+}
+
+.mt-step-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--terracotta);
+}
+
+.mt-step-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+  font-weight: 460;
+  line-height: 1.12;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  margin: 0.4rem 0 0;
+  max-width: 16ch;
+}
+
+.mt-step-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.75;
+  max-width: 40rem;
+}
+
+/* ==================== Signature score visual ==================== */
+
+.mt-score {
+  margin-top: clamp(2rem, 5vh, 3rem);
+  border: var(--hairline);
+  background: var(--paper);
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+
+.mt-score-head {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+  padding-bottom: clamp(1.5rem, 4vh, 2.5rem);
+  border-bottom: var(--hairline);
+}
+
+.mt-score-figure {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.mt-score-num {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 6rem);
+  font-weight: 360;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144;
+  color: var(--terracotta);
+}
+
+.mt-score-max {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: rgba(20, 33, 61, 0.4);
+}
+
+.mt-score-badge {
+  display: inline-block;
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 600;
+  color: var(--ink);
+  border: var(--hairline);
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+}
+
+.mt-score-note {
+  color: var(--muted);
+  margin: 0.75rem 0 0;
+  max-width: 32rem;
+}
+
+.mt-factors {
+  list-style: none;
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
+  padding: 0;
+}
+
+.mt-factor {
+  display: grid;
+  grid-template-columns: minmax(0, 13rem) minmax(0, 1fr) auto;
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  padding: 0.9rem 0;
+  border-top: var(--hairline);
+}
+
+.mt-factor:first-child {
+  border-top: none;
+}
+
+.mt-factor-name {
+  font-size: var(--text-meta);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.mt-factor-track {
+  position: relative;
+  height: 3px;
+  background: rgba(20, 33, 61, 0.12);
+  overflow: hidden;
+}
+
+.mt-factor-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  width: var(--w, 0);
+  background: var(--terracotta);
+}
+
+.mt-factor-pts {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+  justify-self: end;
+}
+
+/* fills grow when the visual scrolls into view */
+html.js body.editorial .mt-score .mt-factor-fill {
+  width: 0;
+  transition: width 1.1s var(--ease-out);
+}
+
+html.js body.editorial .mt-score.is-in .mt-factor-fill {
+  width: var(--w, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js body.editorial .mt-score .mt-factor-fill {
+    width: var(--w, 0);
+    transition: none;
+  }
+}
+
+/* ==================== Score tiers ==================== */
+
+.mt-tiers {
+  list-style: none;
+  margin: clamp(2rem, 5vh, 3rem) 0 0;
+  padding: 0;
+}
+
+.mt-tier {
+  display: grid;
+  grid-template-columns: 8rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: baseline;
+  padding: 1.5rem 0;
+  border-top: var(--hairline);
+}
+
+.mt-tiers .mt-tier:last-child {
+  border-bottom: var(--hairline);
+}
+
+.mt-tier-range {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 460;
+  color: var(--terracotta);
+  font-variation-settings: "opsz" 30;
+}
+
+.mt-tier-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 480;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+.mt-tier-desc {
+  color: var(--muted);
+  font-size: var(--text-body);
+}
+
+/* ==================== Notes ==================== */
+
+.mt-notes {
+  list-style: none;
+  margin: clamp(2rem, 5vh, 3rem) 0 0;
+  padding: 0;
+  max-width: 52rem;
+}
+
+.mt-note {
+  position: relative;
+  padding: 1.1rem 0 1.1rem 1.75rem;
+  border-top: var(--hairline);
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.mt-notes .mt-note:last-child {
+  border-bottom: var(--hairline);
+}
+
+.mt-note::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.mt-note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ==================== Closing CTA band ==================== */
+
+.mt-cta {
+  padding-block: clamp(6rem, 14vh, 11rem);
+}
+
+.mt-cta-line {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.8vw, 4rem);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 100;
+  color: var(--paper);
+  max-width: 18ch;
+  text-wrap: balance;
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 clamp(2rem, 5vh, 3rem);
+}
+
+.mt-cta-line em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 860px) {
+  .mt-intro-body,
+  .mt-intro-factors {
+    grid-column: 1 / span 12;
+  }
+
+  .mt-step {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .mt-score-head {
+    grid-template-columns: 1fr;
+  }
+
+  .mt-factor {
+    grid-template-columns: minmax(0, 1fr) auto;
+    row-gap: 0.5rem;
+  }
+
+  .mt-factor-track {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .mt-tier {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}

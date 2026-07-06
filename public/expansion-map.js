@@ -17,11 +17,11 @@
     countries: {
       // 'us' stays a partner so the United States is dyed fully on the world map
       // and remains the gateway to the states inset. Then: Brazil, Bulgaria,
-      // Haiti, China (covers Hong Kong), Hungary.
-      partner: ['us', 'br', 'bg', 'ht', 'cn', 'hu'],
-      // India, Philippines, Ukraine, Bulgaria, Romania, Uzbekistan, Canada.
-      // Bulgaria is also a partner; "partner" wins, so it renders navy.
-      negotiating: ['in', 'ph', 'ua', 'bg', 'ro', 'uz', 'ca']
+      // Haiti, China (covers Hong Kong), Hungary, India.
+      partner: ['us', 'br', 'bg', 'ht', 'cn', 'hu', 'in'],
+      // Philippines, Ukraine, Bulgaria, Romania, Uzbekistan, Canada, Nigeria,
+      // New Zealand. Bulgaria is also a partner; "partner" wins, so it renders navy.
+      negotiating: ['ph', 'ua', 'bg', 'ro', 'uz', 'ca', 'ng', 'nz']
     },
     states: {
       // Kansas, Pennsylvania, Georgia, Tennessee, Michigan, Florida

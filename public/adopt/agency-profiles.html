@@ -3,21 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../png/logo.png">
-  <title>Browse Adoption Agencies - HavenLink</title>
+  <link rel="icon" type="image/png" href="/png/logo.png">
+  <title>Agency-Managed Profiles - HavenLink</title>
+  <meta name="description" content="How licensed, verified agencies create and manage child profiles on HavenLink — with privacy and safety first.">
+  <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../editorial.css">
+  <link rel="stylesheet" href="agency-profiles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="editorial agency-profiles">
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
       <div class="nav-brand">
         <a href="/home" style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--navy);">
-          <img src="../png/logo.png" alt="HavenLink Logo" class="logo-icon">
+          <img src="/png/logo.png" alt="HavenLink Logo" class="logo-icon">
           <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
         </a>
       </div>
-      
+
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -49,180 +56,189 @@
   <nav class="adopt-subnav" id="adoptSubnav">
     <div class="subnav-container">
       <a href="/adopt/home-study" class="subnav-item" data-step="1">
-        <span class="subnav-step">1</span>
+        <span class="subnav-step">01</span>
         <span class="subnav-label">Home Study</span>
       </a>
       <a href="/adopt/intake-form" class="subnav-item" data-step="2">
-        <span class="subnav-step">2</span>
+        <span class="subnav-step">02</span>
         <span class="subnav-label">Intake Form</span>
       </a>
       <a href="/adopt/agency-profiles" class="subnav-item active" data-step="3">
-        <span class="subnav-step">3</span>
+        <span class="subnav-step">03</span>
         <span class="subnav-label">Agencies</span>
       </a>
       <a href="/adopt/matching" class="subnav-item" data-step="4">
-        <span class="subnav-step">4</span>
+        <span class="subnav-step">04</span>
         <span class="subnav-label">Matching</span>
       </a>
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="adopt-container">
-    <section class="adopt-hero">
-      <div class="container">
-        <h1>Agency-Managed Profiles</h1>
-        <p class="adopt-hero-subtitle">Step 3 of Your Adoption Journey</p>
+  <main class="ag-main">
+
+    <!-- Hero -->
+    <section class="ed-hero" id="top">
+      <div class="ed-hero-art ag-hero-art" aria-hidden="true">
+        <svg viewBox="0 0 300 300" role="img">
+          <path class="ed-draw" pathLength="1" d="M74 40 L236 40 L236 78"/>
+          <path class="ed-draw" pathLength="1" d="M52 58 L214 58 L214 244 L52 244 Z"/>
+          <path class="ed-draw" pathLength="1" d="M96 104 A18 18 0 1 1 132 104 A18 18 0 1 1 96 104"/>
+          <path class="ed-draw" pathLength="1" d="M82 152 C82 128 146 128 146 152"/>
+          <path class="ed-draw" pathLength="1" d="M84 178 L182 178 M84 198 L182 198 M84 218 L150 218"/>
+          <path class="ed-draw ed-draw--accent" pathLength="1" d="M198 150 L226 160 L226 196 C226 216 198 230 198 230 C198 230 170 216 170 196 L170 160 Z"/>
+          <path class="ed-draw ed-draw--accent" pathLength="1" d="M184 191 L195 202 L214 180"/>
+        </svg>
+      </div>
+      <div class="ed-hero-inner">
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 03 — Agency-Managed Profiles</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Profiles you can <em>trust,</em> from agencies we verify.</h1>
+        <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
+          Every child profile on HavenLink comes from a licensed, vetted agency — accountable organizations dedicated to child welfare. Rich, accurate, and privacy-protected from the first line.
+        </p>
+        <div class="ed-hero-actions hm-reveal" style="--d: .24s">
+          <a href="#profile-system" class="hm-btn hm-btn--ink">How profiles work <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/intake-form" class="hm-textlink">Back to the intake form</a>
+        </div>
+      </div>
+      <div class="ed-hero-meta">
+        <a href="#agency-verification" class="ed-scrollcue" aria-label="Scroll to agency verification"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <span class="ed-hero-meta-item">Licensed &amp; audited</span>
+        <span class="ed-hero-meta-item">Agency-mediated</span>
+        <span class="ed-hero-meta-item">Privacy-first</span>
       </div>
     </section>
 
-    <section class="adopt-content">
-      <div class="container">
-        <div class="content-grid">
-          <div class="content-main">
-            <h2 id="agency-verification">Licensed Agencies, Verified Profiles</h2>
-            <p>
-              Every licensed adoption agency on HavenLink is thoroughly verified and meets strict regulatory standards. This ensures that child profiles posted on our platform come from legitimate, accountable organizations dedicated to child welfare.
-            </p>
-
-            <h3 id="profile-system" style="margin-top: 2.5rem;">How Agency Profiles Work</h3>
-            <div class="process-list">
-              <div class="process-item">
-                <div class="process-icon">1</div>
-                <div class="process-content">
-                  <h4>Verified Agency Partners</h4>
-                  <p>Agencies undergo detailed vetting to confirm their licensure, safety record, and commitment to ethical practices in child placement.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">2</div>
-                <div class="process-content">
-                  <h4>Comprehensive Child Profiles</h4>
-                  <p>Agencies create detailed, accurate profiles that include a child's background, needs, personality, interests, and readiness for placement.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">3</div>
-                <div class="process-content">
-                  <h4>Profile Management Tools</h4>
-                  <p>Agencies use HavenLink's tools to update profiles, manage inquiries, and track agency-family communications securely.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">4</div>
-                <div class="process-content">
-                  <h4>Privacy & Safety First</h4>
-                  <p>Child profile information is protected. Direct contact between families and children does not occur on HavenLink—the agency manages all communication.</p>
-                </div>
-              </div>
-
-              <div class="process-item">
-                <div class="process-icon">5</div>
-                <div class="process-content">
-                  <h4>Ongoing Compliance</h4>
-                  <p>Agencies are regularly audited to ensure compliance with state laws and best practices in child welfare.</p>
-                </div>
-              </div>
-            </div>
-
-            <h3 id="profile-features" style="margin-top: 2.5rem;">What a Well-Curated Profile Includes</h3>
-            <div class="why-matters">
-              <div class="why-card">
-                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
-                  <circle cx="32" cy="20" r="8" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                  <path d="M 20 40 Q 20 32 32 32 Q 44 32 44 40 L 44 48 Q 32 52 32 52 Q 20 52 20 48 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                </svg>
-                <h4>Personal Background</h4>
-                <p>Age, birth siblings, ethnic and cultural background, family history, and prior placements if any.</p>
-              </div>
-
-              <div class="why-card">
-                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
-                  <rect x="16" y="16" width="32" height="32" rx="4" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                  <line x1="20" y1="24" x2="44" y2="24" stroke="#3b82f6" stroke-width="1.5"/>
-                  <line x1="20" y1="32" x2="44" y2="32" stroke="#3b82f6" stroke-width="1.5"/>
-                  <line x1="20" y1="40" x2="40" y2="40" stroke="#3b82f6" stroke-width="1.5"/>
-                </svg>
-                <h4>Health & Development</h4>
-                <p>Medical history, developmental milestones, special needs, and current health status.</p>
-              </div>
-
-              <div class="why-card">
-                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
-                  <path d="M 20 32 L 28 24 L 36 32 M 28 24 L 28 44" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M 40 25 L 44 25 L 44 45 Q 44 48 41 48 L 39 48" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round"/>
-                </svg>
-                <h4>Personality & Interests</h4>
-                <p>Temperament, hobbies, strengths, challenges, and social preferences.</p>
-              </div>
-
-              <div class="why-card">
-                <svg class="why-icon" viewBox="0 0 64 64" width="40" height="40">
-                  <path d="M 32 12 L 44 20 L 44 36 Q 32 48 32 48 Q 20 36 20 36 L 20 20 Z" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                  <path d="M 28 32 L 32 36 L 38 30" stroke="#3b82f6" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                <h4>Support Needs</h4>
-                <p>Recommendations for family structure, therapeutic support, school settings, and ongoing resources.</p>
-              </div>
-            </div>
-
-            <div class="readiness-callout">
-              <h3>Ready to Browse Profiles?</h3>
-              <p>
-                Before you explore child profiles, it's important to complete your family intake form. This helps us match you with children and agencies that align with your family's unique preferences and strengths.
-              </p>
-              <a href="intake-form.html" class="btn btn-primary" style="margin-top: 1.5rem;">
-                Go Back to Intake Form
-              </a>
-            </div>
-          </div>
-
-          <div class="content-sidebar">
-            <div class="sidebar-card">
-              <h3>Agency Verification</h3>
-              <p style="font-size: 0.95rem; margin: 0;">
-                Every agency on HavenLink has been verified for:
-              </p>
-              <ul class="quick-facts" style="margin-top: 1rem;">
-                <li>✓ Current licensing</li>
-                <li>✓ Regulatory compliance</li>
-                <li>✓ Child safety record</li>
-                <li>✓ Professional credentials</li>
-                <li>✓ Ethical practices</li>
-              </ul>
-            </div>
-
-            <div class="sidebar-card" id="privacy-protection">
-              <h3>Privacy Protection</h3>
-              <p style="font-size: 0.95rem; margin: 0;">
-                Child information on HavenLink is protected by strict privacy standards:
-              </p>
-              <ul class="quick-facts" style="margin-top: 1rem;">
-                <li>✓ Identifying data encrypted</li>
-                <li>✓ No direct family contact</li>
-                <li>✓ Agency-mediated inquiry</li>
-                <li>✓ Secure communication</li>
-              </ul>
-            </div>
-
-            <div class="sidebar-card info-card">
-              <svg class="info-icon" viewBox="0 0 64 64" width="32" height="32">
-                <circle cx="32" cy="32" r="28" fill="none" stroke="#3b82f6" stroke-width="2"/>
-                <circle cx="32" cy="20" r="2.5" fill="#3b82f6"/>
-                <line x1="32" y1="28" x2="32" y2="44" stroke="#3b82f6" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <p style="font-size: 0.9rem;">
-                Questions about an agency or profile? Contact HavenLink support for assistance.
-              </p>
-            </div>
+    <!-- Verified agencies -->
+    <section class="ed-section" id="agency-verification">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Verified agencies</span>
+          <span class="hm-index">01 — 04</span>
+        </header>
+        <div class="hm-grid">
+          <h2 class="ed-statement ed-span-12 hm-reveal">Licensed agencies. <em>Verified</em> profiles.</h2>
+          <p class="ed-body ed-col-left hm-reveal" style="--d: .1s; margin-top: clamp(2rem, 5vh, 3.5rem);">
+            Every licensed adoption agency on HavenLink is thoroughly verified and meets strict regulatory standards. That means the child profiles you see come only from legitimate, accountable organizations — never anonymous listings.
+          </p>
+          <div class="ed-col-right hm-reveal" style="--d: .18s; margin-top: clamp(2rem, 5vh, 3.5rem);">
+            <p class="ag-listlabel">Every agency is verified for</p>
+            <ul class="ed-checklist">
+              <li><span class="ed-tick">01</span>Current licensing</li>
+              <li><span class="ed-tick">02</span>Regulatory compliance</li>
+              <li><span class="ed-tick">03</span>Child safety record</li>
+              <li><span class="ed-tick">04</span>Professional credentials</li>
+              <li><span class="ed-tick">05</span>Ethical practices</li>
+            </ul>
           </div>
         </div>
       </div>
     </section>
-  </div>
+
+    <!-- How agency profiles work -->
+    <section class="ed-section ed-section--dim" id="profile-system">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">How agency profiles work</span>
+          <span class="hm-index">02 — 04</span>
+        </header>
+        <ol class="ed-steps">
+          <li class="ed-step hm-reveal">
+            <div><span class="ed-step-index">Step 01</span><h3 class="ed-step-title">Verified agency partners</h3></div>
+            <p class="ed-step-desc">Agencies undergo detailed vetting to confirm their licensure, safety record, and commitment to ethical practices in child placement.</p>
+          </li>
+          <li class="ed-step hm-reveal">
+            <div><span class="ed-step-index">Step 02</span><h3 class="ed-step-title">Comprehensive child profiles</h3></div>
+            <p class="ed-step-desc">Agencies create detailed, accurate profiles that include a child's background, needs, personality, interests, and readiness for placement.</p>
+          </li>
+          <li class="ed-step hm-reveal">
+            <div><span class="ed-step-index">Step 03</span><h3 class="ed-step-title">Profile management tools</h3></div>
+            <p class="ed-step-desc">Agencies use HavenLink's tools to update profiles, manage inquiries, and track agency-family communications securely.</p>
+          </li>
+          <li class="ed-step hm-reveal">
+            <div><span class="ed-step-index">Step 04</span><h3 class="ed-step-title">Privacy &amp; safety first</h3></div>
+            <p class="ed-step-desc">Child profile information is protected. Direct contact between families and children never occurs on HavenLink — the agency manages all communication.</p>
+          </li>
+          <li class="ed-step hm-reveal">
+            <div><span class="ed-step-index">Step 05</span><h3 class="ed-step-title">Ongoing compliance</h3></div>
+            <p class="ed-step-desc">Agencies are regularly audited to ensure continued compliance with state laws and best practices in child welfare.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- What a profile includes -->
+    <section class="ed-section" id="profile-features">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">What a profile includes</span>
+          <span class="hm-index">03 — 04</span>
+        </header>
+        <h2 class="ed-statement hm-reveal" style="margin-bottom: clamp(2.5rem, 6vh, 4rem);">A well-curated profile, <em>in full.</em></h2>
+        <ul class="ed-features">
+          <li class="ed-feature hm-reveal">
+            <span class="ed-feature-num">01</span>
+            <span class="ed-feature-name">Personal background</span>
+            <span class="ed-feature-desc">Age, birth siblings, ethnic and cultural background, family history, and prior placements if any.</span>
+          </li>
+          <li class="ed-feature hm-reveal" style="--d: .08s">
+            <span class="ed-feature-num">02</span>
+            <span class="ed-feature-name">Health &amp; development</span>
+            <span class="ed-feature-desc">Medical history, developmental milestones, special needs, and current health status.</span>
+          </li>
+          <li class="ed-feature hm-reveal" style="--d: .16s">
+            <span class="ed-feature-num">03</span>
+            <span class="ed-feature-name">Personality &amp; interests</span>
+            <span class="ed-feature-desc">Temperament, hobbies, strengths, challenges, and social preferences.</span>
+          </li>
+          <li class="ed-feature hm-reveal" style="--d: .24s">
+            <span class="ed-feature-num">04</span>
+            <span class="ed-feature-name">Support needs</span>
+            <span class="ed-feature-desc">Recommendations for family structure, therapeutic support, school settings, and ongoing resources.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Privacy protection -->
+    <section class="ed-section ed-section--dim" id="privacy-protection">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Privacy protection</span>
+          <span class="hm-index">04 — 04</span>
+        </header>
+        <div class="hm-grid">
+          <h2 class="ed-statement ed-span-12 hm-reveal">Privacy, by <em>default.</em></h2>
+          <p class="ed-body ed-col-left hm-reveal" style="--d: .1s; margin-top: clamp(2rem, 5vh, 3.5rem);">
+            Child information on HavenLink is guarded by strict privacy standards. Families never contact children directly — every inquiry is mediated by the responsible agency over secure channels.
+          </p>
+          <div class="ed-col-right hm-reveal" style="--d: .18s; margin-top: clamp(2rem, 5vh, 3.5rem);">
+            <p class="ag-listlabel">Built-in safeguards</p>
+            <ul class="ed-checklist">
+              <li><span class="ed-tick">01</span>Identifying data encrypted</li>
+              <li><span class="ed-tick">02</span>No direct family contact</li>
+              <li><span class="ed-tick">03</span>Agency-mediated inquiry</li>
+              <li><span class="ed-tick">04</span>Secure communication</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="ed-cta hm-on-ink">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Before you browse</span>
+        </header>
+        <p class="ed-cta-line hm-reveal" style="--d: .08s">Complete your intake form to <em>see the right profiles.</em></p>
+        <div class="ed-hero-actions hm-reveal" style="--d: .16s">
+          <a href="/adopt/intake-form" class="hm-btn hm-btn--paper">Go to the Family Intake Form <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/matching" class="hm-textlink">See how matching works</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -231,7 +247,7 @@
         <h3>About HavenLink</h3>
         <p>HavenLink is a civic technology platform dedicated to making adoption faster, clearer, and more human by connecting families with licensed agencies through a secure, structured platform.</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Navigation</h3>
         <ul>
@@ -241,7 +257,7 @@
           <li><a href="#profile-features">Profile Features</a></li>
         </ul>
       </div>
-      
+
       <div class="footer-section">
         <h3>Adoption Hotline</h3>
         <p>
@@ -249,7 +265,7 @@
         </p>
         <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Connect</h3>
         <div class="social-links">
@@ -269,7 +285,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
@@ -288,11 +304,11 @@
         <p><strong>Last updated: May 29, 2026</strong></p>
         <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
         <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the <a href="https://www.termsfeed.com/privacy-policy-generator/" target="_blank">Privacy Policy Generator</a>.</p>
-        
+
         <h2>Interpretation and Definitions</h2>
         <h3>Interpretation</h3>
         <p>The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-        
+
         <h3>Definitions</h3>
         <p>For the purposes of this Privacy Policy:</p>
         <ul>
@@ -309,10 +325,10 @@
           <li><strong>Website</strong> refers to HavenLink, accessible from <a href="https://havenlink.org/" target="_blank">https://havenlink.org/</a>.</li>
           <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
         </ul>
-        
+
         <h2>Collecting and Using Your Personal Data</h2>
         <h3>Types of Data Collected</h3>
-        
+
         <h4>Personal Data</h4>
         <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
         <ul>
@@ -321,13 +337,13 @@
           <li>Phone number</li>
           <li>Address, State, Province, ZIP/Postal code, City</li>
         </ul>
-        
+
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
         <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device's unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
         <p>We may also collect information that Your browser sends whenever You visit Our Service or when You access the Service by or through a mobile device.</p>
-        
+
         <h4>Tracking Technologies and Cookies</h4>
         <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies We use include beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
         <ul>
@@ -358,7 +374,7 @@
           </li>
         </ul>
         <p>For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of Our Privacy Policy.</p>
-        
+
         <h3>Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>
         <ul>
@@ -380,7 +396,7 @@
           <li><strong>With other users:</strong> If Our Service offers public areas, when You share Personal Data or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.</li>
           <li><strong>With Your consent</strong>: We may disclose Your Personal Data for any other purpose with Your consent.</li>
         </ul>
-        
+
         <h3>Retention of Your Personal Data</h3>
         <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if We are required to retain Your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
         <p>Where possible, We apply shorter retention periods and/or reduce identifiability by deleting, aggregating, or anonymizing data. Unless otherwise stated, the retention periods below are maximum periods ("up to") and We may delete or anonymize data sooner when it is no longer needed for the relevant purpose. We apply different retention periods to different categories of Personal Data based on the purpose of processing and legal obligations:</p>
@@ -421,24 +437,24 @@
           <li>Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.</li>
           <li>Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.</li>
         </ul>
-        
+
         <h3>Transfer of Your Personal Data</h3>
         <p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ from those from Your jurisdiction.</p>
         <p>Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
-        
+
         <h3>Delete Your Personal Data</h3>
         <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
         <p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
         <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any Personal Data that You have provided to Us.</p>
         <p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
-        
+
         <h3>Disclosure of Your Personal Data</h3>
         <h4>Business Transactions</h4>
         <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
-        
+
         <h4>Law enforcement</h4>
         <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
-        
+
         <h4>Other legal requirements</h4>
         <p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
@@ -448,23 +464,23 @@
           <li>Protect the personal safety of Users of the Service or the public</li>
           <li>Protect against legal liability</li>
         </ul>
-        
+
         <h3>Security of Your Personal Data</h3>
         <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
-        
+
         <h2>Children's Privacy</h2>
         <p>Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under the age of 16. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 16 without verification of parental consent, We take steps to remove that information from Our servers.</p>
         <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
-        
+
         <h2>Links to Other Websites</h2>
         <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-        
+
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
         <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-        
+
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
@@ -474,7 +490,9 @@
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="/script.js"></script>
   <script src="/account.js"></script>
+  <script src="/editorial.js" defer></script>
+  <script src="/chat-widget.js" defer></script>
 </body>
 </html>

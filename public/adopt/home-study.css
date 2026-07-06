@@ -1,0 +1,693 @@
+/* ============================================================
+   HavenLink — Home Study Service (adopt step 1, "Light Editorial")
+   Requires editorial.css first. Restyles the (preserved) legacy markup +
+   interactive two-path flow into the editorial system. All JS hooks — template
+   ids, #forkCompleted/#forkNotYet, #hsScreenHost, data-* attributes, radio
+   names/values, #preparation-resources checklists — are untouched.
+   ============================================================ */
+
+/* clear nav + sticky adopt progress bar on anchor jumps */
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
+}
+
+.hs-hero-art svg {
+  width: min(42vw, 29rem);
+}
+
+/* ==================== Layout ==================== */
+
+body.editorial .adopt-container {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
+body.editorial .adopt-content {
+  padding-block: var(--section-pad);
+}
+
+body.editorial .adopt-content .container {
+  max-width: var(--container-editorial);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+body.editorial .content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+@media (min-width: 981px) {
+  body.editorial .content-grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
+  }
+
+  body.editorial .content-sidebar {
+    position: sticky;
+    top: calc(var(--hm-nav-h) + 4.5rem);
+  }
+}
+
+/* ==================== Prose typography ==================== */
+
+body.editorial .content-main > h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.12;
+  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.25rem;
+  max-width: 20ch;
+}
+
+body.editorial .content-main > h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+  font-weight: 460;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 40;
+  margin: clamp(3rem, 7vh, 4.5rem) 0 1.5rem;
+  padding-top: clamp(2rem, 4vh, 2.75rem);
+  border-top: var(--hairline);
+}
+
+body.editorial .content-main > p,
+body.editorial .prep-body p {
+  font-size: var(--text-body);
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: var(--container-text);
+}
+
+body.editorial .content-main h4 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 620;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  margin: 1.75rem 0 0.75rem;
+}
+
+/* ==================== Process list → editorial rows ==================== */
+
+body.editorial .process-list {
+  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
+  display: block;
+}
+
+body.editorial .process-item {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
+  padding: 1.6rem 0;
+  border-top: var(--hairline);
+  background: none;
+  box-shadow: none;
+}
+
+body.editorial .process-item:last-child {
+  border-bottom: var(--hairline);
+}
+
+body.editorial .process-icon {
+  width: auto;
+  height: auto;
+  min-width: 0;
+  background: none;
+  border-radius: 0;
+  color: var(--terracotta);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.4rem;
+  font-weight: 400;
+  display: block;
+  line-height: 1;
+}
+
+body.editorial .process-content h4 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+}
+
+body.editorial .process-content p {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 44rem;
+}
+
+/* ==================== Why-matters → hairline feature rows ==================== */
+
+body.editorial .why-matters {
+  display: block;
+  margin-top: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+body.editorial .why-card {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  padding: 1.5rem 0;
+  border-top: var(--hairline);
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  text-align: left;
+}
+
+body.editorial .why-matters .why-card:last-child {
+  border-bottom: var(--hairline);
+}
+
+body.editorial .why-icon {
+  width: 30px;
+  height: 30px;
+}
+
+body.editorial .why-icon [stroke] {
+  stroke: var(--terracotta);
+}
+
+body.editorial .why-card h4 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  font-weight: 460;
+  color: var(--ink);
+  margin: 0;
+  grid-column: 2;
+}
+
+body.editorial .why-card p {
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+  grid-column: 2;
+  max-width: 40rem;
+}
+
+/* ==================== Readiness callout + end cards ==================== */
+
+body.editorial .readiness-callout,
+body.editorial .hs-end-card {
+  background: var(--paper-dim);
+  border: var(--hairline);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0;
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+  color: var(--muted);
+}
+
+body.editorial .hs-end-card {
+  margin-top: 0;
+  background: var(--paper);
+}
+
+body.editorial .readiness-callout h3,
+body.editorial .hs-end-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 460;
+  color: var(--ink);
+  margin: 0 0 0.85rem;
+  border: none;
+  padding: 0;
+}
+
+body.editorial .hs-end-card h4 {
+  color: var(--ink);
+  margin-top: 1.5rem;
+}
+
+/* ==================== Buttons (fork + flow actions) ==================== */
+
+body.editorial .fork-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+body.editorial .adopt-content .btn,
+body.editorial .hs-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.95rem 1.9rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  box-shadow: none;
+  overflow: hidden;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+body.editorial .adopt-content .btn-primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+body.editorial .adopt-content .btn-primary:hover {
+  background: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+body.editorial .adopt-content .btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border-color: rgba(20, 33, 61, 0.32);
+}
+
+body.editorial .adopt-content .btn-secondary:hover {
+  border-color: var(--terracotta);
+  color: var(--terracotta);
+  transform: translateY(-2px);
+}
+
+body.editorial .adopt-content .btn .ripple {
+  display: none !important;
+}
+
+body.editorial .btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.3);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.editorial .btn-link:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+/* ==================== Interactive flow ==================== */
+
+body.editorial #home-study-flow {
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+body.editorial .hs-flow-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: var(--hairline);
+  margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+body.editorial .hs-step-indicator {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 560;
+  color: var(--terracotta);
+}
+
+body.editorial .hs-screen {
+  animation: hs-fade 0.5s var(--ease-out);
+}
+
+@keyframes hs-fade {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+body.editorial .q-block,
+body.editorial .q-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+body.editorial .q-legend {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 440;
+  line-height: 1.16;
+  font-variation-settings: "opsz" 40;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  margin-bottom: 0.85rem;
+  max-width: 26ch;
+}
+
+body.editorial .q-help {
+  display: block;
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  margin-bottom: 1.75rem;
+  max-width: 40rem;
+}
+
+/* underline form fields */
+body.editorial .hs-field,
+body.editorial #home-study-flow .form-group {
+  margin: 0 0 0.5rem;
+}
+
+body.editorial #home-study-flow .form-group label {
+  display: block;
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 560;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+body.editorial #home-study-flow select,
+body.editorial #home-study-flow input[type="text"] {
+  width: 100%;
+  max-width: 30rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.28);
+  border-radius: 0;
+  padding: 0.75rem 0.25rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--ink);
+  transition: border-color 0.3s ease;
+}
+
+body.editorial #home-study-flow select:focus,
+body.editorial #home-study-flow input[type="text"]:focus {
+  outline: none;
+  border-bottom-color: var(--terracotta);
+}
+
+body.editorial .hs-date-selects {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+body.editorial .hs-date-selects .form-group {
+  flex: 1;
+  min-width: 8rem;
+}
+
+/* options (radios + checklist checkboxes) */
+body.editorial .option-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+}
+
+body.editorial .option {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.15rem;
+  border: var(--hairline);
+  border-radius: 0;
+  cursor: pointer;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+body.editorial .option:hover {
+  border-color: rgba(20, 33, 61, 0.4);
+}
+
+body.editorial .option:has(input:checked) {
+  border-color: var(--terracotta);
+  background: rgba(180, 85, 31, 0.05);
+}
+
+body.editorial .option input[type="radio"],
+body.editorial .option input[type="checkbox"] {
+  width: 1.05rem;
+  height: 1.05rem;
+  accent-color: var(--terracotta);
+  flex: none;
+}
+
+body.editorial .option-text {
+  font-size: var(--text-body);
+  color: var(--ink);
+}
+
+body.editorial .field-error {
+  color: var(--terracotta);
+  font-size: var(--text-meta);
+  margin: 0.85rem 0 0;
+  display: none;
+}
+
+body.editorial .field-error.show {
+  display: block;
+}
+
+body.editorial .hs-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+
+body.editorial .hs-next-steps {
+  margin: 1rem 0 0;
+  padding-left: 1.25rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+body.editorial .hs-submit-status {
+  font-size: var(--text-meta);
+  color: var(--muted);
+  margin: 1.25rem 0 0;
+}
+
+body.editorial .hs-status-sent {
+  color: var(--terracotta-deep);
+  font-weight: 500;
+}
+
+body.editorial .hs-status-error {
+  color: #9a2b2b;
+}
+
+/* ==================== Alerts ==================== */
+
+body.editorial .alert-banner {
+  border: var(--hairline);
+  border-left: 3px solid var(--terracotta);
+  border-radius: 0;
+  background: var(--paper-dim);
+  padding: 1.1rem 1.35rem;
+  margin: 1.75rem 0;
+}
+
+body.editorial .alert-body {
+  color: var(--muted);
+  font-size: var(--text-meta);
+  line-height: 1.6;
+}
+
+body.editorial .alert-body strong {
+  display: block;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* ==================== Preparation accordions ==================== */
+
+body.editorial #preparation-resources {
+  margin-top: clamp(2rem, 5vh, 3rem);
+}
+
+body.editorial .prep-accordion {
+  border-top: var(--hairline);
+  padding: 0.5rem 0;
+}
+
+body.editorial #preparation-resources > .prep-accordion:last-of-type {
+  border-bottom: var(--hairline);
+}
+
+body.editorial .prep-accordion summary {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 460;
+  color: var(--ink);
+  font-variation-settings: "opsz" 30;
+}
+
+body.editorial .prep-accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+body.editorial .prep-summary-title {
+  position: relative;
+  padding-right: 2rem;
+}
+
+body.editorial .prep-summary-title::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  color: var(--terracotta);
+  font-family: var(--font-body);
+  font-weight: 400;
+  transition: transform 0.3s var(--ease-out);
+}
+
+body.editorial .prep-accordion[open] .prep-summary-title::after {
+  content: "–";
+}
+
+body.editorial .prep-progress {
+  font-size: var(--text-meta);
+  color: var(--terracotta);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+body.editorial .prep-body {
+  padding-bottom: 1.75rem;
+}
+
+body.editorial .prep-body h4 {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: var(--text-eyebrow);
+  font-weight: 620;
+  color: var(--muted);
+  margin: 1.75rem 0 0.85rem;
+}
+
+body.editorial .prep-body > ul:not(.prep-checklist) {
+  color: var(--muted);
+  line-height: 1.8;
+  padding-left: 1.25rem;
+  max-width: var(--container-text);
+}
+
+body.editorial .prep-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+body.editorial .prep-checklist .option {
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+}
+
+/* ==================== Sidebar ==================== */
+
+body.editorial .sidebar-card {
+  background: var(--paper-dim);
+  border: var(--hairline);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.5rem 1.6rem;
+  margin-bottom: 1.5rem;
+}
+
+body.editorial .sidebar-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 480;
+  color: var(--ink);
+  margin: 0 0 1rem;
+}
+
+body.editorial .quick-facts,
+body.editorial .next-steps {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  font-size: var(--text-meta);
+  line-height: 1.7;
+}
+
+body.editorial .quick-facts {
+  list-style: none;
+  padding-left: 0;
+}
+
+body.editorial .quick-facts li {
+  padding: 0.6rem 0;
+  border-bottom: var(--hairline);
+}
+
+body.editorial .quick-facts li:last-child {
+  border-bottom: none;
+}
+
+body.editorial .quick-facts strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+body.editorial .info-card {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+}
+
+body.editorial .info-icon [stroke],
+body.editorial .info-icon [fill] {
+  stroke: var(--terracotta);
+}
+
+body.editorial .info-icon circle[fill] {
+  fill: var(--terracotta);
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 720px) {
+  body.editorial .process-item {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+
+  body.editorial .hs-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.editorial .hs-actions .btn {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,429 @@
+/* ============================================================
+   HavenLink — auth pages (login / signup), "The Threshold"
+   Scoped to body.editorial.auth, prefix au-*.
+   Loads after styles.css + editorial.css.
+
+   Layout: full-viewport split. Left, an ink scene — generative
+   loom canvas (auth.js) where vertical threads part around a
+   ring of light. Right, a paper pane holding the form as a
+   quiet editorial column: underline fields, hairline Google
+   pill, ink submit.
+   ============================================================ */
+
+/* ==================== Shell ==================== */
+
+.au-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 11fr) minmax(0, 13fr);
+  min-height: 100vh;
+}
+
+/* ==================== Scene (ink panel) ==================== */
+
+.au-scene {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 2.25rem;
+  padding: clamp(1.75rem, 3.5vw, 3.25rem);
+  overflow: hidden;
+  /* depth behind the loom: faint light where the ring sits */
+  background-image: radial-gradient(
+    circle at 50% 42%,
+    rgba(58, 76, 116, 0.55) 0%,
+    rgba(13, 24, 48, 0) 62%
+  );
+}
+
+/* Layering, bottom to top: canvas backdrop → hm-on-ink film grain
+   (cinematic, over the loom) → brand / statement / meta text */
+.au-scene > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.au-scene::before {
+  z-index: 1;
+}
+
+.au-scene > :not(canvas) {
+  z-index: 2;
+}
+
+.au-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  width: fit-content;
+  margin-bottom: auto; /* statement + meta settle at the panel's foot */
+}
+
+.au-brand .logo-icon {
+  height: 34px;
+  width: 34px;
+  border-radius: 9px; /* the PNG is a white tile — round it into a chip */
+}
+
+/* body.auth to outrank editorial.css's body.editorial .logo-haven */
+body.auth .au-scene .logo-haven {
+  color: var(--paper);
+}
+
+body.auth .au-scene .logo-link {
+  color: #e4b79a;
+}
+
+.au-statement {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 52;
+  font-weight: 400;
+  font-size: clamp(2.1rem, 3.4vw, 3.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--paper);
+  max-width: 12ch;
+  margin: 0;
+}
+
+.au-statement em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+.au-scene-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 530;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(250, 248, 245, 0.5);
+}
+
+/* Entrance: statement drifts up once fonts settle */
+html.js .au-statement {
+  animation: au-rise 0.95s var(--ease-out, cubic-bezier(0.22, 0.61, 0.2, 1)) 0.15s backwards;
+}
+
+@keyframes au-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+}
+
+/* ==================== Pane (paper form column) ==================== */
+
+.au-pane {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(4.5rem, 9vh, 6.5rem) var(--gutter) clamp(3rem, 7vh, 5rem);
+}
+
+.au-back {
+  position: absolute;
+  top: clamp(1.4rem, 3vw, 2.2rem);
+  right: clamp(1.4rem, 3.5vw, 3rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  text-decoration: none;
+  padding-bottom: 0.2rem;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.25);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.au-back:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+.au-form-wrap {
+  width: 100%;
+  max-width: 26rem;
+}
+
+.au-eyebrow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: var(--hairline);
+  margin-bottom: 2rem;
+}
+
+.au-eyebrow .hm-index {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--terracotta);
+  letter-spacing: 0.04em;
+}
+
+.au-title {
+  font-variation-settings: "opsz" 38;
+  font-size: clamp(2rem, 3.1vw, 2.8rem);
+  line-height: 1.08;
+  margin: 0 0 0.6rem;
+}
+
+.au-sub {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: 0 0 2.1rem;
+}
+
+/* ==================== Status message ==================== */
+/* Styled by id: account.js rewrites className to
+   "form-message form-message-<type>" and sets display:block. */
+
+#formMessage {
+  display: none;
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.55;
+  border: var(--hairline);
+  border-left: 2px solid var(--ink);
+  border-radius: 0;
+  background: var(--paper-dim);
+  color: var(--ink);
+  animation: none;
+}
+
+#formMessage.form-message-error {
+  border-left-color: #a03123;
+  background: #f6e9e5;
+  color: #7c2418;
+}
+
+#formMessage.form-message-success {
+  border-left-color: #2f6b52;
+  background: #e9f0ea;
+  color: #1f513f;
+}
+
+/* ==================== Google + divider ==================== */
+
+.au-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  padding: 0.95rem 1.5rem;
+  border: 1px solid rgba(20, 33, 61, 0.28);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  background: transparent;
+  transition: border-color 0.3s ease, background-color 0.3s ease,
+    transform 0.3s var(--ease-out);
+}
+
+.au-google:hover {
+  border-color: var(--ink);
+  background: rgba(20, 33, 61, 0.04);
+  transform: translateY(-1px);
+}
+
+.au-divider {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  margin: 1.7rem 0;
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+.au-divider::before,
+.au-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(20, 33, 61, 0.14);
+}
+
+/* ==================== Fields ==================== */
+/* Deliberately NOT .form-group — those are the boxed legacy
+   inputs; these are open underline fields. */
+
+.au-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-bottom: var(--hairline);
+  margin-bottom: 1.9rem;
+  transition: border-color 0.3s ease;
+}
+
+/* focus line: draws left→right in terracotta */
+.au-field::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.au-field:focus-within::after {
+  transform: scaleX(1);
+}
+
+.au-field label {
+  font-size: 0.8125rem;
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  transition: color 0.3s ease;
+}
+
+.au-field:focus-within label {
+  color: var(--terracotta);
+}
+
+.au-field input {
+  border: none;
+  background: transparent;
+  padding: 0.5rem 0 0.8rem;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  color: var(--ink);
+  border-radius: 0;
+}
+
+/* the animated underline is the focus indicator here */
+.au-field input:focus,
+.au-field input:focus-visible {
+  outline: none;
+}
+
+.au-field input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 60px var(--paper) inset;
+  -webkit-text-fill-color: var(--ink);
+  caret-color: var(--ink);
+}
+
+.au-hint {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  margin: -1.35rem 0 1.9rem;
+}
+
+/* ==================== Submit + foot ==================== */
+
+.au-submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.au-submit[disabled] {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
+.au-foot {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  margin: 2.2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: var(--hairline);
+}
+
+.au-foot a {
+  color: var(--terracotta);
+  font-weight: 530;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(180, 85, 31, 0.35);
+  padding-bottom: 0.1rem;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.au-foot a:hover {
+  color: var(--terracotta-deep);
+  border-bottom-color: var(--terracotta-deep);
+}
+
+/* ==================== Responsive ==================== */
+
+@media (max-width: 880px) {
+  .au-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .au-scene {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 38vh;
+    min-height: 38svh;
+    justify-content: space-between;
+  }
+
+  .au-statement {
+    font-size: clamp(1.9rem, 7.5vw, 2.6rem);
+    max-width: 14ch;
+  }
+
+  .au-scene-meta {
+    display: none;
+  }
+
+  .au-pane {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .au-back {
+    top: 1.1rem;
+    right: var(--gutter);
+  }
+}
+
+/* ==================== Reduced motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .au-statement {
+    animation: none;
+  }
+
+  .au-field::after {
+    transition: none;
+  }
+
+  .au-google:hover,
+  .au-submit:hover {
+    transform: none;
+  }
+}

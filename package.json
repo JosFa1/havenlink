@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/acid701/havenlink#readme",
   "dependencies": {
+    "@google/genai": "^2.10.0",
     "argon2": "^0.41.1",
     "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.7",

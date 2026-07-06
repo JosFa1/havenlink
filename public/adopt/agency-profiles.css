@@ -1,0 +1,26 @@
+/* ============================================================
+   HavenLink — Agency-Managed Profiles (adopt step 3, "Light Editorial")
+   Requires editorial.css (tokens, primitives, shared hero + content blocks).
+   Nearly everything is built from ed-* / hm-* primitives; page-specific bits only.
+   ============================================================ */
+
+/* clear both the nav and the sticky adopt progress bar on anchor jumps */
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
+}
+
+/* small label above a right-column checklist */
+.ag-listlabel {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 560;
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+/* the verified profile hero motif holds its ink strokes a touch softer */
+.ag-hero-art svg {
+  width: min(40vw, 27rem);
+}

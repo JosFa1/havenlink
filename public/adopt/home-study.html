@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../png/logo.png">
+  <link rel="icon" type="image/png" href="/png/logo.png">
   <title>Home Study Service - HavenLink</title>
+  <meta name="description" content="What a home study is, what to expect, and an interactive readiness check — Step 1 of your HavenLink adoption journey.">
+  <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../editorial.css">
+  <link rel="stylesheet" href="home-study.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="editorial home-study">
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
@@ -49,33 +56,57 @@
   <nav class="adopt-subnav" id="adoptSubnav">
     <div class="subnav-container">
       <a href="/adopt/home-study" class="subnav-item active" data-step="1">
-        <span class="subnav-step">1</span>
+        <span class="subnav-step">01</span>
         <span class="subnav-label">Home Study</span>
       </a>
       <a href="/adopt/intake-form" class="subnav-item" data-step="2">
-        <span class="subnav-step">2</span>
+        <span class="subnav-step">02</span>
         <span class="subnav-label">Intake Form</span>
       </a>
       <a href="/adopt/agency-profiles" class="subnav-item" data-step="3">
-        <span class="subnav-step">3</span>
+        <span class="subnav-step">03</span>
         <span class="subnav-label">Agencies</span>
       </a>
       <a href="/adopt/matching" class="subnav-item" data-step="4">
-        <span class="subnav-step">4</span>
+        <span class="subnav-step">04</span>
         <span class="subnav-label">Matching</span>
       </a>
     </div>
   </nav>
 
+  <!-- Hero -->
+  <section class="ed-hero" id="top">
+    <div class="ed-hero-art hs-hero-art" aria-hidden="true">
+      <svg viewBox="0 0 300 300" role="img">
+        <path class="ed-draw" pathLength="1" d="M40 252 L260 252"/>
+        <path class="ed-draw" pathLength="1" d="M70 252 L70 140 L150 78 L230 140 L230 252"/>
+        <path class="ed-draw" pathLength="1" d="M104 252 L104 194 L136 194 L136 252"/>
+        <path class="ed-draw" pathLength="1" d="M168 168 L206 168 L206 206 L168 206 Z M187 168 L187 206 M168 187 L206 187"/>
+        <path class="ed-draw ed-draw--accent" pathLength="1" d="M150 78 L150 56"/>
+        <path class="ed-draw ed-draw--accent" pathLength="1" d="M129 223 a3 3 0 1 1 0.1 0"/>
+      </svg>
+    </div>
+    <div class="ed-hero-inner">
+      <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 01 — Home Study Service</p>
+      <h1 class="ed-hero-title hm-reveal" style="--d: .08s">The assessment that <em>opens the door.</em></h1>
+      <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
+        A home study is a licensed social worker's evaluation of your family's readiness to adopt — required in every state. We'll explain exactly what to expect, then check where you stand.
+      </p>
+      <div class="ed-hero-actions hm-reveal" style="--d: .24s">
+        <a href="#get-started" class="hm-btn hm-btn--ink">Check your readiness <span class="hm-btn-arrow">→</span></a>
+        <a href="#home-study" class="hm-textlink">What is a home study?</a>
+      </div>
+    </div>
+    <div class="ed-hero-meta">
+      <a href="#home-study" class="ed-scrollcue" aria-label="Scroll to home study overview"><span class="ed-scrollcue-line"></span>Scroll</a>
+      <span class="ed-hero-meta-item">Required in all 50 states</span>
+      <span class="ed-hero-meta-item">Licensed social worker</span>
+      <span class="ed-hero-meta-item">Interactive readiness check</span>
+    </div>
+  </section>
+
   <!-- Main Content -->
   <div class="adopt-container">
-    <section class="adopt-hero">
-      <div class="container">
-        <h1>Home Study Service</h1>
-        <p class="adopt-hero-subtitle">Step 1 of Your Adoption Journey</p>
-      </div>
-    </section>
-
     <section class="adopt-content">
       <div class="container">
         <div class="content-grid">
@@ -827,8 +858,10 @@
     </div>
   </div>
 
-  <script src="../script.js"></script>
+  <script src="/script.js"></script>
   <script src="/account.js"></script>
+  <script src="/editorial.js" defer></script>
   <script src="/adopt/home-study.js"></script>
+  <script src="/chat-widget.js" defer></script>
 </body>
 </html>
