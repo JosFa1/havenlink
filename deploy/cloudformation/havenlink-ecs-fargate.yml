@@ -282,7 +282,10 @@ Resources:
       TaskDefinition: !Ref TaskDefinition
       DesiredCount: !Ref DesiredCount
       LaunchType: FARGATE
-      HealthCheckGracePeriodSeconds: 60
+      # Startup runs `migrate:prod` first, which waits up to ~90s for the
+      # database (see src/db/migrate.ts) before the app begins listening. Give
+      # the task room to finish that before ELB health checks count against it.
+      HealthCheckGracePeriodSeconds: 180
       DeploymentConfiguration:
         DeploymentCircuitBreaker:
           Enable: true

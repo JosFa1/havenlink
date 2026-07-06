@@ -5,9 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="../png/logo.png">
   <title>Family Intake Form - HavenLink</title>
+  <meta name="description" content="HavenLink's family intake form — tell us about your household, values, and hopes so licensed agencies can find the right match.">
+  <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../editorial.css">
+  <link rel="stylesheet" href="intake-form.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
-<body>
+<body class="editorial intake-form">
   <!-- Navigation Bar -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
@@ -69,10 +76,47 @@
 
   <!-- Main Content -->
   <div class="adopt-container">
-    <section class="adopt-hero">
-      <div class="container">
-        <h1>Family Intake Form</h1>
-        <p class="adopt-hero-subtitle">Step 2 of Your Adoption Journey</p>
+    <!-- Cinematic hero -->
+    <section class="ed-hero" id="top">
+      <canvas id="ikThreads" class="ed-hero-canvas" aria-hidden="true"></canvas>
+      <div class="ed-hero-inner">
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 02 — Family Intake</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d:.08s">Tell us who your family <em>is.</em></h1>
+        <p class="ed-hero-standfirst hm-reveal" style="--d:.16s">
+          Thirty-five short questions about your household, your values, and the child you hope to welcome. Answer honestly — it's how we find the family a child will one day call home.
+        </p>
+        <div class="ed-hero-actions hm-reveal" style="--d:.24s">
+          <a href="#intake-form" class="hm-btn hm-btn--ink">Begin the form <span class="hm-btn-arrow">→</span></a>
+          <a href="#before-you-begin" class="hm-textlink">What to expect</a>
+        </div>
+      </div>
+      <div class="ed-hero-meta">
+        <a href="#before-you-begin" class="ed-scrollcue" aria-label="Scroll to what to expect"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <span class="ed-hero-meta-item">About ten minutes</span>
+        <span class="ed-hero-meta-item">Saves as you go</span>
+        <span class="ed-hero-meta-item">Shared only with agencies you choose</span>
+      </div>
+    </section>
+
+    <!-- Before you begin (guided intro) -->
+    <section class="ed-section ed-section--dim" id="before-you-begin">
+      <div class="hm-container hm-container--editorial">
+        <div class="hm-secthead hm-reveal">
+          <p class="hm-eyebrow">Before you begin</p>
+          <span class="hm-index">01 — 05</span>
+        </div>
+        <div class="hm-grid">
+          <div class="ed-col-left">
+            <p class="ed-statement hm-reveal">A few honest answers help us find the family a child will call <em>home.</em></p>
+          </div>
+          <div class="ed-col-right">
+            <ul class="ed-checklist hm-reveal" style="--d:.08s">
+              <li><span class="ed-tick">01</span> Takes about ten minutes — there are no wrong answers, only your family's truth.</li>
+              <li><span class="ed-tick">02</span> Your progress saves automatically, so you can step away and return whenever you like.</li>
+              <li><span class="ed-tick">03</span> Nothing is shared until you choose an agency — your story stays yours.</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1019,9 +1063,23 @@
     </div>
   </div>
 
+  <!-- Cinematic completion moment (revealed by adopt.js on successful submit) -->
+  <div id="intakeComplete" class="ik-complete" role="dialog" aria-modal="true" aria-labelledby="ikCompleteTitle">
+    <div class="ik-complete-inner">
+      <p class="ik-complete-eyebrow hm-eyebrow">Family Intake · Complete</p>
+      <h2 id="ikCompleteTitle" class="ik-complete-title">Received. Your family's story is <em>with us.</em></h2>
+      <p class="ik-complete-body">Thank you for trusting HavenLink with the details of your home and your hopes. From here, the licensed agencies you choose can review your profile and reach out — you are never contacted without your say.</p>
+      <div class="ik-complete-actions">
+        <a href="/adopt/agency-profiles" class="hm-btn hm-btn--paper">See agencies <span class="hm-btn-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
   <script src="../script.js"></script>
   <script src="adopt.js"></script>
   <script src="/account.js"></script>
+  <script src="../editorial.js" defer></script>
+  <script src="intake-hero.js" defer></script>
   <script src="/chat-widget.js" defer></script>
 </body>
 </html>

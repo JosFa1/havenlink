@@ -645,13 +645,27 @@ class IntakeFormState {
       });
       if (!res.ok) throw new Error(`Submission failed (${res.status})`);
 
-      this.showNotification('Intake form submitted successfully! Redirecting…', 'success');
-      setTimeout(() => { window.location.href = '/adopt/agency-profiles'; }, 2000);
+      this.showCompletion();
     } catch (e) {
       console.error('Intake submission failed:', e);
       this.showNotification('Submission failed. Please try again.', 'error');
       if (nextBtn) nextBtn.disabled = false;
     }
+  }
+
+  // Reveal the cinematic completion overlay (the "expensive" finish). The overlay's
+  // "See agencies" button links to /adopt/agency-profiles, so the family proceeds on
+  // their own beat. Falls back to the prior toast + redirect if the markup is absent.
+  showCompletion() {
+    const overlay = document.getElementById('intakeComplete');
+    if (!overlay) {
+      this.showNotification('Intake form submitted successfully! Redirecting…', 'success');
+      setTimeout(() => { window.location.href = '/adopt/agency-profiles'; }, 2000);
+      return;
+    }
+    overlay.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    overlay.querySelector('a, button')?.focus();
   }
 
   /* ---------- Accessibility ---------- */

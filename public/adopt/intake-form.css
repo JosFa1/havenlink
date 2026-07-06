@@ -531,3 +531,137 @@ body.editorial #cpsAckOverlay .cps-ack-card {
     justify-content: center;
   }
 }
+
+/* ==================== Smooth section transitions ==================== */
+/* adopt.js swaps display then toggles .active (setTimeout ~10ms), so each
+   section eases in as you move through the form. */
+body.editorial .form-section.active {
+  animation: ik-section-in 0.5s var(--ease-out) both;
+}
+
+@keyframes ik-section-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== Cinematic completion overlay ==================== */
+body.editorial .ik-complete {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 6vw, 5rem);
+  background: var(--ink-deep);
+  color: var(--paper);
+  overflow: hidden;
+}
+
+body.editorial .ik-complete.is-open {
+  display: flex;
+  animation: ik-complete-in 0.7s var(--ease-out) both;
+}
+
+/* soft terracotta wash, echoing the .hm-on-ink bands */
+body.editorial .ik-complete::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(1100px 620px at 74% 18%, rgba(180, 85, 31, 0.18), transparent 60%);
+}
+
+@keyframes ik-complete-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+body.editorial .ik-complete-inner {
+  position: relative;
+  width: 100%;
+  max-width: 40rem;
+}
+
+body.editorial .ik-complete .ik-complete-eyebrow {
+  color: rgba(250, 248, 245, 0.6);
+  margin-bottom: clamp(1.25rem, 3vh, 2rem);
+  animation: ik-rise 0.8s var(--ease-out) 0.08s both;
+}
+
+body.editorial .ik-complete-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 60;
+  color: var(--paper);
+  margin: 0 0 1.25rem;
+  text-wrap: balance;
+  animation: ik-rise 0.8s var(--ease-out) 0.16s both;
+}
+
+body.editorial .ik-complete-title em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+body.editorial .ik-complete-body {
+  color: rgba(250, 248, 245, 0.78);
+  font-size: var(--text-lede);
+  line-height: 1.7;
+  max-width: 34rem;
+  margin: 0 0 clamp(2rem, 5vh, 3rem);
+  animation: ik-rise 0.8s var(--ease-out) 0.24s both;
+}
+
+body.editorial .ik-complete-actions {
+  animation: ik-rise 0.8s var(--ease-out) 0.32s both;
+}
+
+@keyframes ik-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==================== Toast notifications (errors / save) ==================== */
+body.editorial .notification {
+  position: fixed;
+  bottom: clamp(1.25rem, 4vh, 2rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4200;
+  max-width: min(90vw, 32rem);
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  box-shadow: 0 12px 30px rgba(20, 33, 61, 0.22);
+  border: none;
+  opacity: 1;
+  transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+body.editorial .notification-error {
+  background: var(--terracotta-deep);
+}
+
+body.editorial .notification.fade-out {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.editorial .form-section.active,
+  body.editorial .ik-complete.is-open,
+  body.editorial .ik-complete .ik-complete-eyebrow,
+  body.editorial .ik-complete-title,
+  body.editorial .ik-complete-body,
+  body.editorial .ik-complete-actions {
+    animation: none;
+  }
+}
