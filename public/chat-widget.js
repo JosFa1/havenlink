@@ -28,8 +28,8 @@
   .hl-chat-panel{position:fixed;bottom:92px;right:20px;z-index:9999;width:376px;max-width:calc(100vw - 32px);height:540px;max-height:calc(100vh - 128px);background:#faf8f5;border:1px solid rgba(20,33,61,.14);border-radius:14px;box-shadow:0 24px 60px -20px rgba(13,24,48,.4);display:none;flex-direction:column;overflow:hidden;font-family:inherit}
   .hl-chat-panel.hl-open{display:flex}
   .hl-chat-head{background:#14213d;color:#faf8f5;padding:16px 18px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-  .hl-chat-head h3{margin:0;font-family:"Fraunces",Georgia,"Times New Roman",serif;font-size:19px;font-weight:500;letter-spacing:-.01em}
-  .hl-chat-head p{margin:3px 0 0;font-size:12px;letter-spacing:.02em;color:rgba(250,248,245,.62)}
+  .hl-chat-panel .hl-chat-head h3{margin:0;color:#faf8f5;font-family:"Fraunces",Georgia,"Times New Roman",serif;font-size:19px;font-weight:500;letter-spacing:-.01em}
+  .hl-chat-panel .hl-chat-head p{margin:3px 0 0;font-size:12px;letter-spacing:.02em;color:rgba(250,248,245,.62)}
   .hl-chat-close{background:none;border:none;color:rgba(250,248,245,.7);font-size:24px;line-height:1;cursor:pointer;padding:0 2px;transition:color .2s ease}
   .hl-chat-close:hover{color:#faf8f5}
   .hl-chat-log{flex:1;overflow-y:auto;padding:18px;background:#f1ede6;display:flex;flex-direction:column;gap:12px}

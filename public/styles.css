@@ -1737,7 +1737,7 @@ p {
   z-index: 2001;
 }
 
-.privacy-modal-header h2 {
+.privacy-modal-content .privacy-modal-header h2 {
   color: var(--white);
   margin: 0;
   font-size: 1.75rem;
