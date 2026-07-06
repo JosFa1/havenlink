@@ -1,18 +1,15 @@
 /* ============================================================
    HavenLink — Home Study Service (adopt step 1, "Light Editorial")
-   Requires editorial.css first. Restyles the (preserved) legacy markup +
-   interactive two-path flow into the editorial system. All JS hooks — template
-   ids, #forkCompleted/#forkNotYet, #hsScreenHost, data-* attributes, radio
+   Requires editorial.css first. Page structure: paper hero (blueprint canvas)
+   → paper intro (#what-it-is) → dark ink chamber (#readiness: fork + two-path
+   flow) → paper dossier (#preparation-resources). All JS hooks — template ids,
+   #forkCompleted/#forkNotYet, #hsScreenHost, data-* attributes, radio
    names/values, #preparation-resources checklists — are untouched.
    ============================================================ */
 
 /* clear nav + sticky adopt progress bar on anchor jumps */
 body.editorial section[id] {
   scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
-}
-
-.hs-hero-art svg {
-  width: min(42vw, 29rem);
 }
 
 /* ==================== Layout ==================== */
@@ -24,285 +21,136 @@ body.editorial .adopt-container {
   background: none;
 }
 
-body.editorial .adopt-content {
-  padding-block: var(--section-pad);
+/* ==================== Intro — the universals (#what-it-is) ==================== */
+
+body.editorial #what-it-is .ed-statement {
+  margin: 0 0 1.5rem;
 }
 
-body.editorial .adopt-content .container {
-  max-width: var(--container-editorial);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
-
-body.editorial .content-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(2.5rem, 6vw, 5rem);
-  align-items: start;
-}
-
-@media (min-width: 981px) {
-  body.editorial .content-grid {
-    grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
-  }
-
-  body.editorial .content-sidebar {
-    position: sticky;
-    top: calc(var(--hm-nav-h) + 4.5rem);
-  }
-}
-
-/* ==================== Prose typography ==================== */
-
-body.editorial .content-main > h2 {
-  font-family: var(--font-display);
-  font-size: var(--text-display);
-  font-weight: 420;
-  line-height: 1.12;
-  font-variation-settings: "opsz" 60;
-  letter-spacing: -0.015em;
-  margin: 0 0 1.25rem;
-  max-width: 20ch;
-}
-
-body.editorial .content-main > h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-  font-weight: 460;
-  line-height: 1.15;
-  font-variation-settings: "opsz" 40;
-  margin: clamp(3rem, 7vh, 4.5rem) 0 1.5rem;
-  padding-top: clamp(2rem, 4vh, 2.75rem);
-  border-top: var(--hairline);
-}
-
-body.editorial .content-main > p,
-body.editorial .prep-body p {
+body.editorial .hs-intro-body {
   font-size: var(--text-body);
-  line-height: 1.8;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.hs-hedge {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.7;
   color: var(--muted);
+  border-left: 2px solid rgba(180, 85, 31, 0.45);
+  padding-left: 1.1rem;
+  margin: 2rem 0 0;
+  max-width: 34rem;
+}
+
+.hs-hedge--intro {
+  margin: 0 0 clamp(2.5rem, 6vh, 3.5rem);
   max-width: var(--container-text);
 }
 
-body.editorial .content-main h4 {
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 620;
-  letter-spacing: 0.01em;
-  color: var(--ink);
-  margin: 1.75rem 0 0.75rem;
-}
-
-/* ==================== Process list → editorial rows ==================== */
-
-body.editorial .process-list {
-  margin: clamp(1.5rem, 4vh, 2.5rem) 0 0;
-  display: block;
-}
-
-body.editorial .process-item {
+/* the universal sequence strip */
+.hs-seq {
+  list-style: none;
+  margin: clamp(3.5rem, 8vh, 5.5rem) 0 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr);
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: start;
-  padding: 1.6rem 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.hs-seq-step {
   border-top: var(--hairline);
-  background: none;
-  box-shadow: none;
+  padding-top: 1.25rem;
 }
 
-body.editorial .process-item:last-child {
-  border-bottom: var(--hairline);
-}
-
-body.editorial .process-icon {
-  width: auto;
-  height: auto;
-  min-width: 0;
-  background: none;
-  border-radius: 0;
-  color: var(--terracotta);
+.hs-seq-num {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 1.4rem;
-  font-weight: 400;
-  display: block;
-  line-height: 1;
+  font-size: 0.95rem;
+  color: var(--terracotta);
 }
 
-body.editorial .process-content h4 {
+.hs-seq-name {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
   font-weight: 460;
+  line-height: 1.2;
   font-variation-settings: "opsz" 30;
   color: var(--ink);
-  margin: 0 0 0.4rem;
+  margin: 0.35rem 0 0.5rem;
 }
 
-body.editorial .process-content p {
+.hs-seq-desc {
   color: var(--muted);
+  font-size: var(--text-meta);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ==================== The readiness check — ink chamber ==================== */
+
+body.editorial .hs-chamber {
+  background-color: var(--ink-deep);
+  /* hearth wash baked into the background — NOT a ::after overlay
+     (.hm-on-ink::before owns the grain and content isn't z-indexed) */
+  background-image: radial-gradient(900px 560px at 68% 18%, rgba(180, 85, 31, 0.13), transparent 62%);
+  padding-block: var(--section-pad);
+}
+
+body.editorial .hs-chamber .hm-index {
+  color: #e4b79a;
+}
+
+body.editorial .hs-stage {
+  max-width: 46rem;
+}
+
+body.editorial .hs-chamber #hsScreenHost {
+  min-height: 22rem;
+}
+
+/* resume-from-storage: keep the fork truly hidden
+   (styles.css only guards #home-study-flow[hidden], not this sibling) */
+body.editorial #get-started[hidden] {
+  display: none !important;
+}
+
+/* fork */
+body.editorial .hs-fork-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.6rem);
+  font-weight: 440;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  color: var(--paper);
+  margin: 0 0 1rem;
+  max-width: 20ch;
+}
+
+body.editorial .hs-fork-title em {
+  font-style: italic;
+  color: #e4b79a;
+}
+
+body.editorial .hs-fork-lede {
+  color: rgba(250, 248, 245, 0.72);
   font-size: var(--text-body);
-  line-height: 1.7;
+  line-height: 1.75;
+  max-width: 36rem;
   margin: 0;
-  max-width: 44rem;
 }
-
-/* ==================== Why-matters → hairline feature rows ==================== */
-
-body.editorial .why-matters {
-  display: block;
-  margin-top: clamp(1.5rem, 4vh, 2.5rem);
-}
-
-body.editorial .why-card {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  gap: clamp(1rem, 3vw, 2rem);
-  align-items: center;
-  padding: 1.5rem 0;
-  border-top: var(--hairline);
-  background: none;
-  box-shadow: none;
-  border-radius: 0;
-  text-align: left;
-}
-
-body.editorial .why-matters .why-card:last-child {
-  border-bottom: var(--hairline);
-}
-
-body.editorial .why-icon {
-  width: 30px;
-  height: 30px;
-}
-
-body.editorial .why-icon [stroke] {
-  stroke: var(--terracotta);
-}
-
-body.editorial .why-card h4 {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.8vw, 1.4rem);
-  font-weight: 460;
-  color: var(--ink);
-  margin: 0;
-  grid-column: 2;
-}
-
-body.editorial .why-card p {
-  color: var(--muted);
-  margin: 0.25rem 0 0;
-  grid-column: 2;
-  max-width: 40rem;
-}
-
-/* ==================== Readiness callout + end cards ==================== */
-
-body.editorial .readiness-callout,
-body.editorial .hs-end-card {
-  background: var(--paper-dim);
-  border: var(--hairline);
-  border-left: 3px solid var(--terracotta);
-  border-radius: 0;
-  padding: clamp(1.75rem, 4vw, 2.75rem);
-  margin-top: clamp(2.5rem, 6vh, 4rem);
-  color: var(--muted);
-}
-
-body.editorial .hs-end-card {
-  margin-top: 0;
-  background: var(--paper);
-}
-
-body.editorial .readiness-callout h3,
-body.editorial .hs-end-card h3 {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  font-weight: 460;
-  color: var(--ink);
-  margin: 0 0 0.85rem;
-  border: none;
-  padding: 0;
-}
-
-body.editorial .hs-end-card h4 {
-  color: var(--ink);
-  margin-top: 1.5rem;
-}
-
-/* ==================== Buttons (fork + flow actions) ==================== */
 
 body.editorial .fork-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 1.75rem;
+  margin-top: 2rem;
 }
 
-body.editorial .adopt-content .btn,
-body.editorial .hs-actions .btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  border-radius: 999px;
-  padding: 0.95rem 1.9rem;
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
-  font-weight: 530;
-  letter-spacing: 0.02em;
-  border: 1px solid transparent;
-  box-shadow: none;
-  overflow: hidden;
-  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
-    border-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
-}
-
-body.editorial .adopt-content .btn-primary {
-  background: var(--ink);
-  color: var(--paper);
-}
-
-body.editorial .adopt-content .btn-primary:hover {
-  background: var(--terracotta);
-  transform: translateY(-2px);
-}
-
-body.editorial .adopt-content .btn-secondary {
-  background: transparent;
-  color: var(--ink);
-  border-color: rgba(20, 33, 61, 0.32);
-}
-
-body.editorial .adopt-content .btn-secondary:hover {
-  border-color: var(--terracotta);
-  color: var(--terracotta);
-  transform: translateY(-2px);
-}
-
-body.editorial .adopt-content .btn .ripple {
-  display: none !important;
-}
-
-body.editorial .btn-link {
-  background: none;
-  border: none;
-  padding: 0;
-  color: var(--muted);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  cursor: pointer;
-  border-bottom: 1px solid rgba(20, 33, 61, 0.3);
-  transition: color 0.3s ease, border-color 0.3s ease;
-}
-
-body.editorial .btn-link:hover {
-  color: var(--terracotta);
-  border-bottom-color: var(--terracotta);
-}
-
-/* ==================== Interactive flow ==================== */
+/* ==================== Interactive flow (inside the chamber) ==================== */
 
 body.editorial #home-study-flow {
   margin-top: clamp(2.5rem, 6vh, 4rem);
@@ -314,7 +162,7 @@ body.editorial .hs-flow-header {
   justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1rem;
-  border-bottom: var(--hairline);
+  border-bottom: var(--hairline-inv);
   margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
 }
 
@@ -324,10 +172,15 @@ body.editorial .hs-step-indicator {
   text-transform: uppercase;
   letter-spacing: 0.16em;
   font-weight: 560;
-  color: var(--terracotta);
+  color: #e4b79a;
 }
 
-body.editorial .hs-screen {
+/* styles.css paints .hs-screen as an opaque white card — strip it for the ink stage */
+body.editorial .hs-chamber .hs-screen {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
   animation: hs-fade 0.5s var(--ease-out);
 }
 
@@ -336,33 +189,37 @@ body.editorial .hs-screen {
   to { opacity: 1; transform: none; }
 }
 
-body.editorial .q-block,
-body.editorial .q-fieldset {
+body.editorial .hs-chamber .q-block,
+body.editorial .hs-chamber .q-fieldset {
   border: none;
   margin: 0;
   padding: 0;
 }
 
-body.editorial .q-legend {
+body.editorial .hs-chamber .q-legend {
   display: block;
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 440;
   line-height: 1.16;
   font-variation-settings: "opsz" 40;
-  color: var(--ink);
+  color: var(--paper);
   letter-spacing: -0.01em;
   margin-bottom: 0.85rem;
   max-width: 26ch;
 }
 
-body.editorial .q-help {
+body.editorial .hs-chamber .q-help {
   display: block;
-  color: var(--muted);
+  color: rgba(250, 248, 245, 0.62);
   font-size: var(--text-body);
   line-height: 1.65;
   margin-bottom: 1.75rem;
   max-width: 40rem;
+}
+
+body.editorial .hs-chamber .q-help strong {
+  color: rgba(250, 248, 245, 0.9);
 }
 
 /* underline form fields */
@@ -377,7 +234,7 @@ body.editorial #home-study-flow .form-group label {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-weight: 560;
-  color: var(--muted);
+  color: rgba(250, 248, 245, 0.55);
   margin-bottom: 0.5rem;
 }
 
@@ -387,19 +244,31 @@ body.editorial #home-study-flow input[type="text"] {
   max-width: 30rem;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(20, 33, 61, 0.28);
+  border-bottom: 1px solid rgba(250, 248, 245, 0.32);
   border-radius: 0;
   padding: 0.75rem 0.25rem;
   font-family: var(--font-body);
   font-size: 1.05rem;
-  color: var(--ink);
+  color: var(--paper);
+  caret-color: #e4b79a;
+  color-scheme: dark;
   transition: border-color 0.3s ease;
+}
+
+body.editorial #home-study-flow input[type="text"]::placeholder {
+  color: rgba(250, 248, 245, 0.35);
 }
 
 body.editorial #home-study-flow select:focus,
 body.editorial #home-study-flow input[type="text"]:focus {
   outline: none;
   border-bottom-color: var(--terracotta);
+}
+
+/* the native dropdown popup inherits colors on Windows — keep it readable */
+body.editorial #home-study-flow select option {
+  color: var(--ink);
+  background: var(--paper);
 }
 
 body.editorial .hs-date-selects {
@@ -413,55 +282,57 @@ body.editorial .hs-date-selects .form-group {
   min-width: 8rem;
 }
 
-/* options (radios + checklist checkboxes) */
-body.editorial .option-group {
+/* options (screener radios) */
+body.editorial .hs-chamber .option-group {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
   margin: 1.5rem 0 0;
 }
 
-body.editorial .option {
+body.editorial .hs-chamber .option {
   display: flex;
   align-items: center;
   gap: 0.85rem;
   padding: 1rem 1.15rem;
-  border: var(--hairline);
+  border: 1px solid rgba(250, 248, 245, 0.22);
   border-radius: 0;
+  background: none;
   cursor: pointer;
   transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
-body.editorial .option:hover {
-  border-color: rgba(20, 33, 61, 0.4);
+body.editorial .hs-chamber .option:hover {
+  border-color: rgba(250, 248, 245, 0.5);
 }
 
-body.editorial .option:has(input:checked) {
-  border-color: var(--terracotta);
-  background: rgba(180, 85, 31, 0.05);
+body.editorial .hs-chamber .option:has(input:checked) {
+  border-color: #e4b79a;
+  background: rgba(180, 85, 31, 0.16);
 }
 
-body.editorial .option input[type="radio"],
-body.editorial .option input[type="checkbox"] {
+body.editorial .hs-chamber .option input[type="radio"],
+body.editorial .hs-chamber .option input[type="checkbox"] {
   width: 1.05rem;
   height: 1.05rem;
-  accent-color: var(--terracotta);
+  accent-color: #e4b79a;
   flex: none;
 }
 
-body.editorial .option-text {
+body.editorial .hs-chamber .option-text {
   font-size: var(--text-body);
-  color: var(--ink);
+  color: rgba(250, 248, 245, 0.9);
 }
 
-body.editorial .field-error {
-  color: var(--terracotta);
+/* validation + statuses */
+body.editorial .hs-chamber .field-error {
+  color: #e8a480;
   font-size: var(--text-meta);
   margin: 0.85rem 0 0;
   display: none;
 }
 
-body.editorial .field-error.show {
+body.editorial .hs-chamber .field-error.show {
   display: block;
 }
 
@@ -473,114 +344,269 @@ body.editorial .hs-actions {
   margin-top: clamp(1.75rem, 4vh, 2.5rem);
 }
 
+body.editorial .hs-chamber h4 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 620;
+  letter-spacing: 0.01em;
+  color: var(--paper);
+  margin: 1.5rem 0 0.5rem;
+}
+
 body.editorial .hs-next-steps {
   margin: 1rem 0 0;
   padding-left: 1.25rem;
-  color: var(--muted);
+  color: rgba(250, 248, 245, 0.8);
   line-height: 1.7;
 }
 
 body.editorial .hs-submit-status {
   font-size: var(--text-meta);
-  color: var(--muted);
+  color: rgba(250, 248, 245, 0.6);
   margin: 1.25rem 0 0;
 }
 
 body.editorial .hs-status-sent {
-  color: var(--terracotta-deep);
+  color: #e4b79a;
   font-weight: 500;
 }
 
 body.editorial .hs-status-error {
-  color: #9a2b2b;
+  color: #e8a480;
 }
 
-/* ==================== Alerts ==================== */
+/* buttons — legacy .btn markup re-skinned for ink (ripple neutralized) */
+body.editorial .hs-chamber .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  padding: 0.95rem 1.9rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  box-shadow: none;
+  overflow: hidden;
+  text-decoration: none;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+}
 
-body.editorial .alert-banner {
-  border: var(--hairline);
+body.editorial .hs-chamber .btn-primary {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body.editorial .hs-chamber .btn-primary:hover {
+  background: #e4b79a;
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+body.editorial .hs-chamber .btn-secondary {
+  background: transparent;
+  color: var(--paper);
+  border-color: rgba(250, 248, 245, 0.35);
+}
+
+body.editorial .hs-chamber .btn-secondary:hover {
+  border-color: #e4b79a;
+  color: #e4b79a;
+  transform: translateY(-2px);
+  box-shadow: none;
+}
+
+body.editorial .hs-chamber .btn .ripple {
+  display: none !important;
+}
+
+/* covers #hsStartOver, template start-over links, and the JS-created retry button */
+body.editorial .hs-chamber .btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: rgba(250, 248, 245, 0.7);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(250, 248, 245, 0.3);
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.editorial .hs-chamber .btn-link:hover {
+  color: #e4b79a;
+  border-bottom-color: #e4b79a;
+}
+
+/* end cards */
+body.editorial .hs-chamber .readiness-callout,
+body.editorial .hs-chamber .hs-end-card {
+  background: rgba(250, 248, 245, 0.03);
+  border: var(--hairline-inv);
   border-left: 3px solid var(--terracotta);
   border-radius: 0;
-  background: var(--paper-dim);
+  padding: clamp(1.75rem, 4vw, 2.75rem);
+  margin: 0;
+  color: rgba(250, 248, 245, 0.78);
+}
+
+body.editorial .hs-chamber .readiness-callout h3,
+body.editorial .hs-chamber .hs-end-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 460;
+  color: var(--paper);
+  margin: 0 0 0.85rem;
+  border: none;
+  padding: 0;
+}
+
+/* styles.css colors .readiness-callout p directly — restate for ink */
+body.editorial .hs-chamber .readiness-callout p,
+body.editorial .hs-chamber .hs-end-card p {
+  color: rgba(250, 248, 245, 0.78);
+}
+
+body.editorial .hs-chamber .hs-end-card a:not(.btn),
+body.editorial .hs-chamber .readiness-callout a:not(.btn) {
+  color: #e4b79a;
+}
+
+/* expired-study note inside the Path A end card */
+body.editorial .hs-chamber .alert-banner {
+  border: var(--hairline-inv);
+  border-left: 3px solid #e4b79a;
+  border-radius: 0;
+  background: transparent;
   padding: 1.1rem 1.35rem;
   margin: 1.75rem 0;
 }
 
-body.editorial .alert-body {
-  color: var(--muted);
+body.editorial .hs-chamber .alert-body {
+  color: rgba(250, 248, 245, 0.72);
   font-size: var(--text-meta);
   line-height: 1.6;
 }
 
-body.editorial .alert-body strong {
+body.editorial .hs-chamber .alert-body strong {
   display: block;
-  color: var(--ink);
+  color: var(--paper);
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
-/* ==================== Preparation accordions ==================== */
+/* ==================== Preparation dossier (#preparation-resources) ==================== */
 
-body.editorial #preparation-resources {
-  margin-top: clamp(2rem, 5vh, 3rem);
-}
-
-body.editorial .prep-accordion {
+body.editorial #preparation-resources .prep-accordion {
+  border: none;
   border-top: var(--hairline);
-  padding: 0.5rem 0;
+  border-radius: 0;
+  background: none;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
 }
 
-body.editorial #preparation-resources > .prep-accordion:last-of-type {
+body.editorial #preparation-resources .prep-accordion:last-of-type {
   border-bottom: var(--hairline);
 }
 
-body.editorial .prep-accordion summary {
-  display: flex;
+body.editorial #preparation-resources .prep-accordion summary {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto 1.5rem;
   align-items: baseline;
-  justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem 0;
+  padding: clamp(1.5rem, 3.5vh, 2.25rem) 0;
   cursor: pointer;
   list-style: none;
-  font-family: var(--font-display);
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
-  font-weight: 460;
-  color: var(--ink);
-  font-variation-settings: "opsz" 30;
+  background: none;
 }
 
-body.editorial .prep-accordion summary::-webkit-details-marker {
+body.editorial #preparation-resources .prep-accordion summary::-webkit-details-marker {
   display: none;
 }
 
-body.editorial .prep-summary-title {
-  position: relative;
-  padding-right: 2rem;
-}
-
-body.editorial .prep-summary-title::after {
+body.editorial #preparation-resources .prep-accordion summary::after {
   content: "+";
-  position: absolute;
-  right: 0;
+  grid-column: 4;
+  justify-self: end;
   color: var(--terracotta);
   font-family: var(--font-body);
-  font-weight: 400;
-  transition: transform 0.3s var(--ease-out);
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
 }
 
-body.editorial .prep-accordion[open] .prep-summary-title::after {
+body.editorial #preparation-resources .prep-accordion[open] summary::after {
   content: "–";
 }
 
-body.editorial .prep-progress {
-  font-size: var(--text-meta);
+body.editorial .hs-chap-num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
   color: var(--terracotta);
-  font-family: var(--font-body);
-  white-space: nowrap;
 }
 
-body.editorial .prep-body {
-  padding-bottom: 1.75rem;
+body.editorial #preparation-resources .prep-summary-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  font-weight: 460;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+/* typographic progress meter (JS writes plain text into it) */
+body.editorial #preparation-resources .prep-progress {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  grid-column: 3;
+  justify-self: end;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 560;
+  color: var(--terracotta);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+body.editorial #preparation-resources .prep-progress:not(:empty)::before {
+  content: "";
+  width: 2.25rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+body.editorial #preparation-resources .prep-body {
+  border: none;
+  padding: 0 0 clamp(2rem, 5vh, 3rem);
+}
+
+@media (min-width: 720px) {
+  body.editorial #preparation-resources .prep-body {
+    /* align under the title column (3.5rem ordinal + 1rem gap) */
+    padding-left: 4.5rem;
+    padding-right: 2rem;
+  }
+}
+
+body.editorial .prep-body p {
+  font-size: var(--text-body);
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: var(--container-text);
 }
 
 body.editorial .prep-body h4 {
@@ -600,88 +626,111 @@ body.editorial .prep-body > ul:not(.prep-checklist) {
   max-width: var(--container-text);
 }
 
-body.editorial .prep-checklist {
+/* checklist as hairline ledger rows with custom square checks */
+body.editorial #preparation-resources .prep-checklist {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.5rem;
+  gap: 0;
 }
 
-body.editorial .prep-checklist .option {
-  padding: 0.75rem 1rem;
-  align-items: flex-start;
-}
-
-/* ==================== Sidebar ==================== */
-
-body.editorial .sidebar-card {
-  background: var(--paper-dim);
-  border: var(--hairline);
-  border-radius: 0;
-  box-shadow: none;
-  padding: 1.5rem 1.6rem;
-  margin-bottom: 1.5rem;
-}
-
-body.editorial .sidebar-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 480;
-  color: var(--ink);
-  margin: 0 0 1rem;
-}
-
-body.editorial .quick-facts,
-body.editorial .next-steps {
-  margin: 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-  font-size: var(--text-meta);
-  line-height: 1.7;
-}
-
-body.editorial .quick-facts {
-  list-style: none;
-  padding-left: 0;
-}
-
-body.editorial .quick-facts li {
-  padding: 0.6rem 0;
-  border-bottom: var(--hairline);
-}
-
-body.editorial .quick-facts li:last-child {
-  border-bottom: none;
-}
-
-body.editorial .quick-facts strong {
-  color: var(--ink);
-  font-weight: 600;
-}
-
-body.editorial .info-card {
+body.editorial #preparation-resources .prep-checklist .option {
   display: flex;
-  gap: 0.9rem;
   align-items: flex-start;
+  gap: 0.95rem;
+  padding: 0.85rem 0.25rem;
+  border: none;
+  border-bottom: var(--hairline);
+  border-radius: 0;
+  background: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
 }
 
-body.editorial .info-icon [stroke],
-body.editorial .info-icon [fill] {
-  stroke: var(--terracotta);
+body.editorial #preparation-resources .prep-checklist .option:hover {
+  background: rgba(20, 33, 61, 0.03);
 }
 
-body.editorial .info-icon circle[fill] {
-  fill: var(--terracotta);
+body.editorial #preparation-resources .option input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.25rem;
+  border: 1px solid rgba(20, 33, 61, 0.45);
+  border-radius: 0;
+  background: transparent;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  flex: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+body.editorial #preparation-resources .option input[type="checkbox"]::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.3rem;
+  border-left: 1.5px solid var(--paper);
+  border-bottom: 1.5px solid var(--paper);
+  transform: rotate(-45deg) scale(0);
+  transform-origin: center;
+  transition: transform 0.2s var(--ease-out);
+}
+
+body.editorial #preparation-resources .option input[type="checkbox"]:checked {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+body.editorial #preparation-resources .option input[type="checkbox"]:checked::before {
+  transform: rotate(-45deg) scale(1);
+}
+
+body.editorial #preparation-resources .option-text {
+  font-size: var(--text-body);
+  color: var(--ink);
+  transition: color 0.25s ease;
+}
+
+body.editorial #preparation-resources .prep-checklist .option:has(input:checked) .option-text {
+  color: rgba(20, 33, 61, 0.45);
+  text-decoration: line-through;
+  text-decoration-color: rgba(180, 85, 31, 0.5);
+}
+
+/* ==================== Reduced motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  body.editorial .hs-screen {
+    animation: none;
+  }
+
+  body.editorial #preparation-resources .option input[type="checkbox"]::before {
+    transition: none;
+  }
+
+  body.editorial .hs-chamber .btn,
+  body.editorial .hs-chamber .btn:hover {
+    transform: none;
+    transition: none;
+  }
 }
 
 /* ==================== Responsive ==================== */
 
-@media (max-width: 720px) {
-  body.editorial .process-item {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
+@media (max-width: 860px) {
+  body.editorial #what-it-is .ed-col-right {
+    margin-top: 1.5rem;
   }
 
+  .hs-seq {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
   body.editorial .hs-actions {
     flex-direction: column;
     align-items: stretch;
@@ -689,5 +738,37 @@ body.editorial .info-icon circle[fill] {
 
   body.editorial .hs-actions .btn {
     justify-content: center;
+  }
+
+  body.editorial .fork-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.editorial .fork-buttons .btn {
+    justify-content: center;
+  }
+
+  body.editorial #preparation-resources .prep-accordion summary {
+    grid-template-columns: 2.25rem minmax(0, 1fr) 1.25rem;
+    gap: 0.75rem;
+  }
+
+  body.editorial #preparation-resources .prep-accordion summary::after {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  body.editorial #preparation-resources .prep-progress {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: start;
+    margin-top: 0.35rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .hs-seq {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

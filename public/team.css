@@ -276,6 +276,7 @@
 .tm-social .social-icon {
   width: 20px;
   height: 20px;
+  color: inherit;
 }
 
 /* ==================== 4. Ledger lists ==================== */
