@@ -7,6 +7,10 @@ COPY package*.json ./
 RUN npm ci
 COPY tsconfig.json ./
 COPY src ./src
+COPY public ./public
+COPY knowledge-tools/buildKnowledge.js ./knowledge-tools/buildKnowledge.js
+RUN mkdir -p knowledge-tools/output
+RUN node knowledge-tools/buildKnowledge.js
 RUN npm run build
 
 FROM node:20-slim AS runtime
@@ -25,7 +29,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/dist ./dist
 COPY public ./public
 # The chatbot reads knowledge-tools/output/site.json at runtime.
-COPY knowledge-tools/output ./knowledge-tools/output
+COPY --from=builder /app/knowledge-tools/output ./knowledge-tools/output
 # tsc does not emit .sql; place the schema next to the compiled migrator.
 COPY src/db/schema.sql ./dist/db/schema.sql
 RUN npm prune --omit=dev
