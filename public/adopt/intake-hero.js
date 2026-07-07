@@ -1,8 +1,8 @@
 /**
- * HavenLink — Family Intake hero visual ("home from threads").
+ * HavenLink - Family Intake hero visual ("home from threads").
  *
- * A drifting field of points slowly gathers along the outline of a house — walls,
- * roof, a door — then relaxes and dissolves before re-forming, on a slow cinematic
+ * A drifting field of points slowly gathers along the outline of a house - walls,
+ * roof, a door - then relaxes and dissolves before re-forming, on a slow cinematic
  * loop. Near points link with faint ink threads that strengthen as the home takes
  * shape; a few terracotta threads pulse, and a soft hearth glow warms the doorway.
  * Self-contained 2D canvas (no CDN), DPR-aware, pauses off-screen / when hidden, and

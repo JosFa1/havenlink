@@ -1,9 +1,9 @@
 /* ============================================================
-   HavenLink — auth pages (login / signup), "The Threshold"
+   HavenLink - auth pages (login / signup), "The Threshold"
    Scoped to body.editorial.auth, prefix au-*.
    Loads after styles.css + editorial.css.
 
-   Layout: full-viewport split. Left, an ink scene — generative
+   Layout: full-viewport split. Left, an ink scene - generative
    loom canvas (auth.js) where vertical threads part around a
    ring of light. Right, a paper pane holding the form as a
    quiet editorial column: underline fields, hairline Google
@@ -68,7 +68,7 @@
 .au-brand .logo-icon {
   height: 34px;
   width: 34px;
-  border-radius: 9px; /* the PNG is a white tile — round it into a chip */
+  border-radius: 9px; /* the PNG is a white tile - round it into a chip */
 }
 
 /* body.auth to outrank editorial.css's body.editorial .logo-haven */
@@ -265,7 +265,7 @@ html.js .au-statement {
 }
 
 /* ==================== Fields ==================== */
-/* Deliberately NOT .form-group — those are the boxed legacy
+/* Deliberately NOT .form-group - those are the boxed legacy
    inputs; these are open underline fields. */
 
 .au-field {

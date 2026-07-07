@@ -1,8 +1,8 @@
-/* HavenLink editorial pages — shared behavior: nav height sync, nav scroll
+/* HavenLink editorial pages - shared behavior: nav height sync, nav scroll
    state, reveal-on-scroll, stat count-up. Loaded (defer) by every page that
    uses the editorial design system. Page-specific behavior (homepage threads
    canvas, partner form logic, …) lives in per-page scripts. Everything is
-   null-checked — the SPA fallback can serve pages on unexpected routes. */
+   null-checked - the SPA fallback can serve pages on unexpected routes. */
 (function () {
   "use strict";
 

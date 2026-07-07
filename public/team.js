@@ -1,8 +1,8 @@
 /**
- * HavenLink — Team page hero visual.
+ * HavenLink - Team page hero visual.
  *
  * A generative "network of places": drifting nodes joined by hairline threads,
- * with a handful of hubs that gather toward a terracotta knot on the right —
+ * with a handful of hubs that gather toward a terracotta knot on the right -
  * echoing the global-reach map further down the page. Self-contained 2D canvas
  * (no CDN), DPR-aware, pauses off-screen / when the tab is hidden, and renders a
  * single static frame when the visitor prefers reduced motion.

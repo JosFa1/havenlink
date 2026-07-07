@@ -3099,7 +3099,7 @@ body.newsletter-open {
   outline-offset: 2px;
 }
 
-/* US states inset — "expands" open over the world map */
+/* US states inset - "expands" open over the world map */
 .map-inset {
   position: absolute;
   top: 50%;

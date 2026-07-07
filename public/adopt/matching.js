@@ -1,7 +1,7 @@
 /**
- * HavenLink — Compatibility Matching hero visual.
+ * HavenLink - Compatibility Matching hero visual.
  *
- * Two point-fields — families on one side, children on the other — drift toward a
+ * Two point-fields - families on one side, children on the other - drift toward a
  * central seam and resonate into alignment: matched pairs link across the seam with
  * a pulsing terracotta thread. Self-contained 2D canvas (no CDN), DPR-aware, pauses
  * off-screen / when hidden, and renders one static frame under reduced motion.

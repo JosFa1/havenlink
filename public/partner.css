@@ -1,5 +1,5 @@
 /* ============================================================
-   HavenLink — Partner page ("Light Editorial")
+   HavenLink - Partner page ("Light Editorial")
    Requires editorial.css (tokens, primitives, nav/footer re-skin)
    loaded before this sheet. All partner-specific classes are pt-*.
 
@@ -26,7 +26,7 @@
   margin-bottom: clamp(1.5rem, 3.5vh, 2.5rem);
 }
 
-/* dashed terracotta rule — foreshadows the form's stitch seam */
+/* dashed terracotta rule - foreshadows the form's stitch seam */
 .pt-opening-eyebrow::after {
   content: "";
   width: clamp(3rem, 8vw, 7rem);

@@ -1,4 +1,4 @@
-/* HavenLink auth pages — "loom" scene: vertical threads drift down the ink
+/* HavenLink auth pages - "loom" scene: vertical threads drift down the ink
    panel and part around a ring of light (the threshold). Companion to the
    homepage threads hero, rotated into a doorway. Everything is null-checked
    and the loop pauses when hidden or off-screen. */
@@ -72,7 +72,7 @@
     canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ringX = W * 0.5;
-    ringY = H * 0.38; /* statement sits at the panel foot — keep the ring clear */
+    ringY = H * 0.38; /* statement sits at the panel foot - keep the ring clear */
     ringR = Math.min(W, H) * 0.15;
     buildThreads();
     if (prefersReduced || rafId === null) drawFrame(elapsed || 8.2);

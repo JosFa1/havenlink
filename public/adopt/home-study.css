@@ -1,10 +1,10 @@
 /* ============================================================
-   HavenLink — Home Study Service (adopt step 1, "Light Editorial")
+   HavenLink - Home Study Service (adopt step 1, "Light Editorial")
    Requires editorial.css first. Page structure: paper hero (blueprint canvas)
    → paper intro (#what-it-is) → dark ink chamber (#readiness: fork + two-path
-   flow) → paper dossier (#preparation-resources). All JS hooks — template ids,
+   flow) → paper dossier (#preparation-resources). All JS hooks - template ids,
    #forkCompleted/#forkNotYet, #hsScreenHost, data-* attributes, radio
-   names/values, #preparation-resources checklists — are untouched.
+   names/values, #preparation-resources checklists - are untouched.
    ============================================================ */
 
 /* clear nav + sticky adopt progress bar on anchor jumps */
@@ -21,7 +21,7 @@ body.editorial .adopt-container {
   background: none;
 }
 
-/* ==================== Intro — the universals (#what-it-is) ==================== */
+/* ==================== Intro - the universals (#what-it-is) ==================== */
 
 body.editorial #what-it-is .ed-statement {
   margin: 0 0 1.5rem;
@@ -89,11 +89,11 @@ body.editorial .hs-intro-body {
   margin: 0;
 }
 
-/* ==================== The readiness check — ink chamber ==================== */
+/* ==================== The readiness check - ink chamber ==================== */
 
 body.editorial .hs-chamber {
   background-color: var(--ink-deep);
-  /* hearth wash baked into the background — NOT a ::after overlay
+  /* hearth wash baked into the background - NOT a ::after overlay
      (.hm-on-ink::before owns the grain and content isn't z-indexed) */
   background-image: radial-gradient(900px 560px at 68% 18%, rgba(180, 85, 31, 0.13), transparent 62%);
   padding-block: var(--section-pad);
@@ -175,7 +175,7 @@ body.editorial .hs-step-indicator {
   color: #e4b79a;
 }
 
-/* styles.css paints .hs-screen as an opaque white card — strip it for the ink stage */
+/* styles.css paints .hs-screen as an opaque white card - strip it for the ink stage */
 body.editorial .hs-chamber .hs-screen {
   background: none;
   border: none;
@@ -265,7 +265,7 @@ body.editorial #home-study-flow input[type="text"]:focus {
   border-bottom-color: var(--terracotta);
 }
 
-/* the native dropdown popup inherits colors on Windows — keep it readable */
+/* the native dropdown popup inherits colors on Windows - keep it readable */
 body.editorial #home-study-flow select option {
   color: var(--ink);
   background: var(--paper);
@@ -375,7 +375,7 @@ body.editorial .hs-status-error {
   color: #e8a480;
 }
 
-/* buttons — legacy .btn markup re-skinned for ink (ripple neutralized) */
+/* buttons - legacy .btn markup re-skinned for ink (ripple neutralized) */
 body.editorial .hs-chamber .btn {
   display: inline-flex;
   align-items: center;
@@ -466,7 +466,7 @@ body.editorial .hs-chamber .hs-end-card h3 {
   padding: 0;
 }
 
-/* styles.css colors .readiness-callout p directly — restate for ink */
+/* styles.css colors .readiness-callout p directly - restate for ink */
 body.editorial .hs-chamber .readiness-callout p,
 body.editorial .hs-chamber .hs-end-card p {
   color: rgba(250, 248, 245, 0.78);

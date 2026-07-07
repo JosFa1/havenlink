@@ -1,5 +1,5 @@
 /* ============================================================
-   HavenLink — Homepage sections ("Light Editorial")
+   HavenLink - Homepage sections ("Light Editorial")
    Requires editorial.css (tokens, primitives, nav/footer re-skin)
    loaded before this sheet. Scoped to the homepage's hm-* markup.
 
@@ -7,7 +7,7 @@
      1. Hero + threads canvas
      2. Mission
      3. Stakes (ink band)
-     4. How It Works — stacked default + pinned chapters
+     4. How It Works - stacked default + pinned chapters
      5. Safety index
      6. Final CTA band
      7. Motion + responsive
@@ -31,7 +31,7 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  /* keep the text zone clean — threads fade in from the right */
+  /* keep the text zone clean - threads fade in from the right */
   -webkit-mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.45) 32%, #000 58%);
   mask-image: linear-gradient(105deg, transparent 6%, rgba(0, 0, 0, 0.45) 32%, #000 58%);
 }
@@ -94,7 +94,7 @@
   flex-wrap: wrap;
 }
 
-/* Bottom meta strip: hairline + assurances + scroll cue (kept LEFT —
+/* Bottom meta strip: hairline + assurances + scroll cue (kept LEFT -
    bottom-right belongs to the chat launcher) */
 .hm-hero-meta {
   position: relative;
@@ -607,7 +607,7 @@ html:not(.js) .hm-chapter .hm-draw {
 /* ==================== 6. Final CTA band ==================== */
 
 .hm-cta {
-  /* fuses with the .footer below it — same ink, hairline separation */
+  /* fuses with the .footer below it - same ink, hairline separation */
   padding-block: clamp(6rem, 14vh, 11rem) clamp(5rem, 10vh, 8rem);
 }
 

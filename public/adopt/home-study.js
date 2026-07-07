@@ -1,21 +1,21 @@
 /**
  * HavenLink Home Study Flow
  * Two-path interactive flow on the Home Study page:
- *   Path A ("completed")  — collects state / agency / completion date, then routes
+ *   Path A ("completed")  - collects state / agency / completion date, then routes
  *                           the family to the Family Intake Form (Step 2).
- *   Path B ("screener")   — all-states readiness screener: state selection, 7
+ *   Path B ("screener")   - all-states readiness screener: state selection, 7
  *                           universal questions, then state-specific questions
  *                           injected from /adopt/home-study-config.json. Ends at
  *                           the preparation resources section.
  * Both paths email HavenLink via POST /api/home-study-submission (the account id
  * is attached server-side from the session, same as the intake form).
  *
- * State rules are NOT hardcoded here — they live in home-study-config.json so
+ * State rules are NOT hardcoded here - they live in home-study-config.json so
  * they can be updated without touching this file. The 7 universal questions are
  * fixed by spec for every state, so they live here.
  */
 
-/* US states + DC (same list as adopt.js — no bundler, each page keeps its own copy). */
+/* US states + DC (same list as adopt.js - no bundler, each page keeps its own copy). */
 const HS_US_STATES = [
   ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
   ['CA', 'California'], ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'],
@@ -105,7 +105,7 @@ const HS_UNIVERSAL_QUESTIONS = [
   {
     id: 'u6_space',
     question: 'Does your home have adequate space to provide a child with a safe, appropriate sleeping area?',
-    why: 'A child is not required to have their own bedroom in most states, but must have a designated, appropriate sleeping space that is not a couch, hallway, or shared adult bed.',
+    why: 'Most states allow a child to share a bedroom when the sleeping space is designated and appropriate. A couch, hallway, or shared adult bed does not qualify.',
     inputType: 'yes_no',
     disqualifyOn: 'no',
     disqualifyMessage: 'Your home must have adequate space for a child, including a proper sleeping area. Review our home preparation guide for details on what social workers look for during a home visit in [State].',
@@ -146,7 +146,7 @@ class HomeStudyFlow {
     this.initPrepChecklists();
 
     // Resume an unsubmitted in-progress run (localStorage is per-browser, not
-    // per-account — same accepted trade-off as the intake form).
+    // per-account - same accepted trade-off as the intake form).
     if (this.state.path && !this.state.submitted) {
       this.enterFlow();
     }
@@ -593,7 +593,7 @@ class HomeStudyFlow {
     let saved = {};
     try {
       saved = JSON.parse(localStorage.getItem(HS_STORAGE_PREP)) || {};
-    } catch (e) { /* corrupted storage — start fresh */ }
+    } catch (e) { /* corrupted storage - start fresh */ }
 
     section.querySelectorAll('input[data-checklist]').forEach(box => {
       const group = saved[box.dataset.checklist] || {};
@@ -613,7 +613,7 @@ class HomeStudyFlow {
       store[box.dataset.checklist] = group;
       try {
         localStorage.setItem(HS_STORAGE_PREP, JSON.stringify(store));
-      } catch (err) { /* storage full/blocked — checkbox state still shows in-page */ }
+      } catch (err) { /* storage full/blocked - checkbox state still shows in-page */ }
       this.updateChecklistProgress(box.dataset.checklist);
     });
 

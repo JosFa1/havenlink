@@ -1,7 +1,7 @@
 /* HavenLink partner page behavior: the agency/organization form variant
    switch and the stitched-seam progress indicator. Shared behavior (nav
    state, reveals) lives in editorial.js. script.js owns the actual form
-   submission — this file never touches the submit flow. */
+   submission - this file never touches the submit flow. */
 (function () {
   "use strict";
 
@@ -22,7 +22,7 @@
 
   /* Visibility (CSS keys off data-variant) and exclusion (fieldset disabled
      removes fields from both FormData and constraint validation) must always
-     travel together — a hidden field may never block submission. */
+     travel together - a hidden field may never block submission. */
   function applyVariant() {
     var v = currentVariant();
     form.setAttribute("data-variant", v);
@@ -110,7 +110,7 @@
   form.addEventListener("change", scheduleUpdate);
 
   // layout shifts (fonts settling, viewport resizes, variant swaps handled
-  // above) move the field rows — keep tick positions honest
+  // above) move the field rows - keep tick positions honest
   var rebuildQueued = false;
   function scheduleRebuild() {
     if (rebuildQueued) return;

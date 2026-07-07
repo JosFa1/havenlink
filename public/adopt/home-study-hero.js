@@ -1,9 +1,9 @@
 /**
- * HavenLink — Home Study hero visual ("the blueprint draws itself").
+ * HavenLink - Home Study hero visual ("the blueprint draws itself").
  *
  * A top-down floor plan drafts itself in fine ink lines over a faint drafting
- * grid — outer walls with an entry gap, interior partitions with doorways, a
- * swinging entry door, window ticks, a terracotta hearth — then dwells while a
+ * grid - outer walls with an entry gap, interior partitions with doorways, a
+ * swinging entry door, window ticks, a terracotta hearth - then dwells while a
  * warm hearth glow breathes, fades out, and begins again. Self-contained 2D
  * canvas (no CDN), DPR-aware, pauses off-screen / when hidden, and renders one
  * static fully-drawn frame under reduced motion. Sits on the right of the
@@ -45,7 +45,7 @@
     return out;
   }
 
-  // Build the floor plan as an ordered list of polyline strokes — the order is
+  // Build the floor plan as an ordered list of polyline strokes - the order is
   // the order the pen drafts them: walls, partitions, windows, door, dimension
   // lines, and the hearth as the warm finish.
   function buildPlan() {
@@ -78,7 +78,7 @@
     addStroke([[L, py], [gxC - gxW / 2, py]], "ink", 1, 0.45);
     addStroke([[gxC + gxW / 2, py], [px, py]], "ink", 1, 0.45);
 
-    // window ticks — double parallel lines set into the walls
+    // window ticks - double parallel lines set into the walls
     function windowTicks(x0, y0, x1, y1) {
       var nx = y1 - y0, ny = -(x1 - x0);
       var nl = Math.hypot(nx, ny) || 1;
@@ -112,7 +112,7 @@
     addStroke([[dx, T], [dx, B]], "ink", 1, 0.22);
     addStroke([[dx - 5, B], [dx + 5, B]], "ink", 1, 0.28);
 
-    // the hearth, notched into the east wall — drawn last
+    // the hearth, notched into the east wall - drawn last
     hearthX = R - s * 0.05;
     hearthY = T + (B - T) * 0.3;
     var hz = s * 0.055;

@@ -1,11 +1,11 @@
 /* ============================================================
-   HavenLink — "Light Editorial" design system (shared)
+   HavenLink - "Light Editorial" design system (shared)
    Scoped to body.editorial. Pages opt in with:
      <body class="editorial home">  /  <body class="editorial partner">
    and load this sheet after styles.css, before their page sheet.
 
    Contents:
-     1. Fonts (self-hosted — CSP forbids font CDNs)
+     1. Fonts (self-hosted - CSP forbids font CDNs)
      2. Tokens + legacy variable re-map
      3. Base refinements (selection, focus, headings)
      4. Shared-component re-skin (nav, footer)
@@ -187,7 +187,7 @@ body.editorial .dropdown-toggle::after {
 }
 
 body.editorial #navAuth {
-  min-width: 4.5rem; /* account.js injects Log In/Out async — avoid nav shift */
+  min-width: 4.5rem; /* account.js injects Log In/Out async - avoid nav shift */
   text-align: right;
 }
 
@@ -201,7 +201,7 @@ body.editorial .dropdown-item {
   font-size: 0.9375rem;
 }
 
-/* Footer: ink via re-map; editorial finish here. Sits seamlessly
+/* Footer: ink via re-map; editorial finish here. Sits cleanly
    under an ink CTA band, separated only by a faint hairline. */
 body.editorial .footer {
   background-color: var(--ink);
@@ -298,7 +298,7 @@ body.editorial .footer-bottom p {
   border-bottom: var(--hairline-inv);
 }
 
-/* Buttons — deliberately NOT .btn (avoids ripple + legacy styles) */
+/* Buttons - deliberately NOT .btn (avoids ripple + legacy styles) */
 .hm-btn {
   display: inline-flex;
   align-items: center;
@@ -375,7 +375,7 @@ body.editorial .footer-bottom p {
   border-bottom-color: var(--paper);
 }
 
-/* Ink band + film-grain texture (SVG data URI — CSP img-src allows data:) */
+/* Ink band + film-grain texture (SVG data URI - CSP img-src allows data:) */
 .hm-on-ink {
   position: relative;
   background-color: var(--ink);
@@ -438,7 +438,7 @@ html.js body.editorial .hm-reveal.is-in {
 /* ==================== 7. Adopt chaptered progress bar ====================
    Redesign of the legacy .adopt-subnav step bar (shared by the 4 adopt pages).
    Same markup/hooks (#adoptSubnav, .subnav-item[data-step].active, .subnav-step,
-   .subnav-label) — an editorial hairline strip that sticks under the nav. */
+   .subnav-label) - an editorial hairline strip that sticks under the nav. */
 
 body.editorial .adopt-subnav {
   position: sticky;
@@ -791,7 +791,7 @@ body.editorial .newsletter-decline:hover {
 }
 
 /* Self-drawing SVG line-art (paths carry pathLength="1"). Used by adopt hero
-   motifs and in-content diagrams — same look as the homepage HIW chapter art. */
+   motifs and in-content diagrams - same look as the homepage HIW chapter art. */
 .ed-draw {
   fill: none;
   stroke: var(--ink);
@@ -941,7 +941,7 @@ html.js body.editorial .hm-reveal.is-in .ed-draw {
   max-width: 40rem;
 }
 
-/* feature rows (num | name | description — like the safety index) */
+/* feature rows (num | name | description - like the safety index) */
 .ed-features {
   list-style: none;
   margin: 0;

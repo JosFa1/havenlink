@@ -3,7 +3,7 @@
  * Handles form navigation, state persistence, branching, validation, and progress.
  *
  * Persistence model: answers live in memory and are written to localStorage only on
- * explicit "Save & Continue" or when a section is completed (advancing) — never on
+ * explicit "Save & Continue" or when a section is completed (advancing) - never on
  * every keystroke. Conditional logic reads the live DOM so branches react instantly,
  * but nothing is persisted until a section boundary.
  */
@@ -611,10 +611,10 @@ class IntakeFormState {
     // PRIVACY: submission emails the answer set to HavenLink only. The account id
     // (the signed-in user's email) is attached server-side from the session. Family
     // intake data is still only shared with an AGENCY on an explicit, separate
-    // inquiry action — not on form submit.
+    // inquiry action - not on form submit.
     //
     // TODO: scoring + routing
-    //   - deterministic match-score (0–100), age-range recommendation, agency routing,
+    //   - deterministic match-score (0-100), age-range recommendation, agency routing,
     //     readiness-stage classification, flags. These are downstream of the form and
     //     should run server-side against the collected `this.formData` keyed answers.
 

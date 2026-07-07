@@ -6,7 +6,7 @@
  * tapped. Everything is same-origin (no CDN) to satisfy the site CSP.
  *
  * Region codes are lowercase: ISO 3166-1 alpha-2 for countries, USPS 2-letter
- * for states. To update the real footprint, edit EXPANSION_DATA below — that is
+ * for states. To update the real footprint, edit EXPANSION_DATA below - that is
  * the only thing that needs to change. "partner" always wins over "negotiating"
  * when a region appears in both lists.
  */

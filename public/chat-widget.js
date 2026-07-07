@@ -17,7 +17,7 @@
   var sending = false;
 
   // ---- Styles ----------------------------------------------------------------
-  // "Light Editorial" palette — self-contained (this <style> is injected into
+  // "Light Editorial" palette - self-contained (this <style> is injected into
   // <head>, not scoped to body.editorial, so all values are inline hexes):
   // paper #faf8f5 / paper-dim #f1ede6 / ink #14213d / terracotta #b4551f /
   // muted #4a5468 / hairline rgba(20,33,61,.14).

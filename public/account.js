@@ -5,7 +5,7 @@
  *  - All state-changing requests fetch a fresh CSRF token from /auth/csrf and send
  *    it in the `x-csrf-token` header (double-submit; the cookie half is httpOnly).
  *  - Requests use `credentials: "same-origin"` so the session cookie is sent.
- *  - The "Continue with Google" control is a plain link (full-page GET) — the OAuth
+ *  - The "Continue with Google" control is a plain link (full-page GET) - the OAuth
  *    round-trip is CSRF-protected by the server via the `state` parameter.
  */
 (function () {
@@ -44,7 +44,7 @@
   /* ---- Post-login redirect target (?next=) --------------------------------- */
   // Pages that live behind the login gate. Kept in sync with the server-side
   // allowlist in src/middleware/pageGuard.ts. Anything not on this list falls
-  // back to /home, so a crafted ?next can never redirect off-site.
+  // back to /home, so a forged ?next can never redirect off-site.
   const PROTECTED_PAGES = [
     "/adopt/home-study",
     "/adopt/intake-form",
@@ -265,7 +265,7 @@
     try {
       if (sessionStorage.getItem(NEWSLETTER_DISMISS_KEY)) return;
     } catch {
-      /* sessionStorage unavailable — fall through and show once */
+      /* sessionStorage unavailable - fall through and show once */
     }
     if (document.getElementById("newsletterModal")) return;
     buildNewsletterPopup();

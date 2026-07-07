@@ -1,6 +1,6 @@
 /* HavenLink homepage-only behavior: threads hero canvas and the pinned
    "How It Works" chapter driver. Shared behavior (nav state, reveals,
-   count-up) lives in editorial.js. Everything is null-checked — the SPA
+   count-up) lives in editorial.js. Everything is null-checked - the SPA
    fallback can serve index.html on unexpected routes. */
 (function () {
   "use strict";
