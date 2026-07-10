@@ -15,7 +15,7 @@
  * fixed by spec for every state, so they live here.
  */
 
-/* US states + DC (same list as adopt.js - no bundler, each page keeps its own copy). */
+/* US states + DC (same list as intake.js - no bundler, each page keeps its own copy). */
 const HS_US_STATES = [
   ['AL', 'Alabama'], ['AK', 'Alaska'], ['AZ', 'Arizona'], ['AR', 'Arkansas'],
   ['CA', 'California'], ['CO', 'Colorado'], ['CT', 'Connecticut'], ['DE', 'Delaware'],
@@ -672,7 +672,7 @@ class HomeStudyFlow {
     this.submitting = true;
     this.renderSubmitStatus('sending');
     try {
-      // Same double-submit CSRF pattern as adopt.js/account.js: fetch the token,
+      // Same double-submit CSRF pattern as intake.js/account.js: fetch the token,
       // echo it in the x-csrf-token header (the cookie half is httpOnly).
       const csrfRes = await fetch('/auth/csrf', { credentials: 'same-origin', cache: 'no-store' });
       if (!csrfRes.ok) throw new Error('Could not get CSRF token');

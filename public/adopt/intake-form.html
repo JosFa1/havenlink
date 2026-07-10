@@ -24,7 +24,7 @@
           <span class="logo-text"><span class="logo-haven">Haven</span><span class="logo-link">Link</span></span>
         </a>
       </div>
-      
+
       <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -74,739 +74,1021 @@
     </div>
   </nav>
 
-  <!-- Main Content -->
-  <div class="adopt-container">
-    <!-- Cinematic hero -->
-    <section class="ed-hero" id="top">
-      <canvas id="ikThreads" class="ed-hero-canvas" aria-hidden="true"></canvas>
-      <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 02 - Family Intake Form</p>
-        <h1 class="ed-hero-title hm-reveal" style="--d:.08s">The portrait an agency can <em>act on.</em></h1>
-        <p class="ed-hero-standfirst hm-reveal" style="--d:.16s">
-          Thirty-five questions about your household, daily life, experience, and adoption preferences. Your answers help licensed agencies understand the home a child would enter.
-        </p>
-        <div class="ed-hero-actions hm-reveal" style="--d:.24s">
-          <a href="#intake-form" class="hm-btn hm-btn--ink">Begin the form <span class="hm-btn-arrow">→</span></a>
-          <a href="#before-you-begin" class="hm-textlink">What to expect</a>
-        </div>
-      </div>
-      <div class="ed-hero-meta">
-        <a href="#before-you-begin" class="ed-scrollcue" aria-label="Scroll to what to expect"><span class="ed-scrollcue-line"></span>Scroll</a>
-        <span class="ed-hero-meta-item">About 10 minutes</span>
-        <span class="ed-hero-meta-item">Saves as you go</span>
-        <span class="ed-hero-meta-item">Shared only with agencies you choose</span>
-      </div>
-    </section>
+  <main class="ik-main">
 
-    <!-- Before you begin (guided intro) -->
-    <section class="ed-section ed-section--dim" id="before-you-begin">
+    <!-- ============ The Dossier cover ============ -->
+    <header class="ik-cover" id="top" aria-labelledby="ikCoverTitle">
+      <div class="ik-cover-rules" aria-hidden="true"></div>
+      <div class="ik-cover-inner">
+        <p class="ik-cover-eyebrow hm-eyebrow hm-reveal">HavenLink Registry — Form HL-02</p>
+        <h1 class="ik-cover-title" id="ikCoverTitle">
+          <span class="ik-title-line hm-reveal">The Family</span>
+          <span class="ik-title-line hm-reveal" style="--d:.08s"><em>Dossier.</em></span>
+        </h1>
+        <p class="ik-cover-standfirst hm-reveal" style="--d:.16s">
+          Thirty-five entries across five chapters — your household, your daily life, your experience, and the child you are ready to welcome. Written once, read with care by licensed agencies.
+        </p>
+        <dl class="ik-ledger hm-reveal" style="--d:.24s">
+          <div class="ik-ledger-row">
+            <dt>Applicant</dt>
+            <dd id="ikApplicant">&hellip;</dd>
+          </div>
+          <div class="ik-ledger-row">
+            <dt>Contents</dt>
+            <dd>Five chapters · thirty-five entries</dd>
+          </div>
+          <div class="ik-ledger-row">
+            <dt>Opened</dt>
+            <dd id="ikOpened">Today</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="ik-stamp" aria-hidden="true">
+        <svg viewBox="0 0 170 170" width="170" height="170" focusable="false">
+          <defs>
+            <path id="ikArcTop" d="M 19,85 A 66,66 0 0 1 151,85"/>
+            <path id="ikArcBottom" d="M 13,85 A 72,72 0 0 0 157,85"/>
+            <filter id="ikStampInk" x="-15%" y="-15%" width="130%" height="130%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="noise"/>
+              <feComponentTransfer in="noise" result="grain">
+                <feFuncA type="linear" slope="3.2" intercept="-0.55"/>
+              </feComponentTransfer>
+              <feComposite in="SourceGraphic" in2="grain" operator="in"/>
+            </filter>
+          </defs>
+          <g class="ik-stamp-art" filter="url(#ikStampInk)">
+            <circle cx="85" cy="85" r="76" fill="none" stroke-width="2.5"/>
+            <circle cx="85" cy="85" r="60" fill="none" stroke-width="1"/>
+            <text class="ik-stamp-arc"><textPath href="#ikArcTop" startOffset="50%" text-anchor="middle">HAVENLINK FAMILY REGISTRY</textPath></text>
+            <text class="ik-stamp-arc"><textPath href="#ikArcBottom" startOffset="50%" text-anchor="middle">FORM HL-02 · INTAKE</textPath></text>
+            <text class="ik-stamp-center" x="85" y="82" text-anchor="middle">RECEIVED</text>
+            <text class="ik-stamp-date" x="85" y="100" text-anchor="middle" id="ikStampDate"></text>
+            <line x1="60" y1="66" x2="110" y2="66" stroke-width="1"/>
+            <line x1="60" y1="108" x2="110" y2="108" stroke-width="1"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="ik-cover-foot">
+        <a href="#intake-form" class="ed-scrollcue" aria-label="Scroll to the intake form"><span class="ed-scrollcue-line"></span>Open the dossier</a>
+        <span class="ik-cover-meta-item">About 10 minutes</span>
+        <span class="ik-cover-meta-item">Saves as you type</span>
+        <span class="ik-cover-meta-item">Confidential</span>
+      </div>
+    </header>
+
+    <!-- ============ Before you begin (ink brief) ============ -->
+    <section class="ik-brief hm-on-ink" id="before-you-begin">
       <div class="hm-container hm-container--editorial">
         <div class="hm-secthead hm-reveal">
           <p class="hm-eyebrow">Before you begin</p>
-          <span class="hm-index">01 - 03</span>
+          <span class="hm-index">Notes for the applicant</span>
         </div>
-        <div class="hm-grid">
-          <div class="ed-col-left">
-            <p class="ed-statement hm-reveal">Tell us how your household actually <em>works.</em></p>
-          </div>
-          <div class="ed-col-right">
-            <ul class="ed-checklist hm-reveal" style="--d:.08s">
-              <li><span class="ed-tick">01</span> Plan for about 10 minutes. Answer in the way that best reflects your household.</li>
-              <li><span class="ed-tick">02</span> Progress saves on this device when you continue to the next section.</li>
-              <li><span class="ed-tick">03</span> Your intake is sent to HavenLink and handled as confidential account information.</li>
-            </ul>
-          </div>
-        </div>
+        <ul class="ik-brief-list">
+          <li class="hm-reveal" style="--d:.06s"><span class="ik-brief-num">01</span> Answer as the household you are — not the one you think an agency wants to read about.</li>
+          <li class="hm-reveal" style="--d:.12s"><span class="ik-brief-num">02</span> Every answer saves to this device as you type. Leave and return whenever you like.</li>
+          <li class="hm-reveal" style="--d:.18s"><span class="ik-brief-num">03</span> When you file, the dossier is sent to HavenLink and tied to your account. Nothing is published.</li>
+        </ul>
       </div>
     </section>
 
-    <!-- Form Section -->
-    <section class="form-container hm-on-ink" id="intake-form">
-      <div class="container">
-        <div class="intake-anchor-copy hm-reveal">
-          <p class="hm-eyebrow">The intake</p>
-          <h2>Your family, in the details that matter.</h2>
-          <p>Move through the sections at your own pace. The form keeps the interface quiet so the answers stay easy to review.</p>
+    <!-- ============ The document ============ -->
+    <div class="ik-doc" id="intake-form">
+
+      <!-- Sticky chapter rail -->
+      <aside class="ik-rail" id="ikRail" aria-label="Dossier contents">
+        <p class="ik-rail-eyebrow">Contents</p>
+        <ol class="ik-rail-list">
+          <li>
+            <a href="#chapter-household" class="ik-rail-item" data-section="household">
+              <span class="ik-rail-num" aria-hidden="true">I</span>
+              <span class="ik-rail-name">Household Profile</span>
+              <span class="ik-rail-count" data-count="household">0/8</span>
+            </a>
+          </li>
+          <li>
+            <a href="#chapter-lifestyle" class="ik-rail-item" data-section="lifestyle">
+              <span class="ik-rail-num" aria-hidden="true">II</span>
+              <span class="ik-rail-name">Lifestyle &amp; Values</span>
+              <span class="ik-rail-count" data-count="lifestyle">0/6</span>
+            </a>
+          </li>
+          <li>
+            <a href="#chapter-experience" class="ik-rail-item" data-section="experience">
+              <span class="ik-rail-num" aria-hidden="true">III</span>
+              <span class="ik-rail-name">Experience &amp; Background</span>
+              <span class="ik-rail-count" data-count="experience">0/5</span>
+            </a>
+          </li>
+          <li>
+            <a href="#chapter-preferences" class="ik-rail-item" data-section="preferences">
+              <span class="ik-rail-num" aria-hidden="true">IV</span>
+              <span class="ik-rail-name">Adoption Preferences</span>
+              <span class="ik-rail-count" data-count="preferences">0/8</span>
+            </a>
+          </li>
+          <li>
+            <a href="#chapter-legal" class="ik-rail-item" data-section="legal">
+              <span class="ik-rail-num" aria-hidden="true">V</span>
+              <span class="ik-rail-name">Legal Readiness</span>
+              <span class="ik-rail-count" data-count="legal">0/6</span>
+            </a>
+          </li>
+        </ol>
+        <div class="ik-rail-progress">
+          <span class="ik-rail-percent"><span id="ikPercent">0</span>%</span>
+          <span class="ik-rail-meter" aria-hidden="true"><i id="ikMeterFill"></i></span>
+          <span class="ik-rail-progress-label">of the dossier complete</span>
         </div>
-        <!-- Progress Indicator -->
-        <div class="form-progress">
-          <div class="progress-header">
-            <h2>Progress</h2>
-            <div class="progress-percentage">
-              <span id="percentComplete">0</span>% complete
+      </aside>
+
+      <!-- The paper -->
+      <form id="intakeForm" class="ik-paper" novalidate>
+
+        <!-- ======== Chapter I · Household Profile ======== -->
+        <section class="ik-chapter" id="chapter-household" data-section="household">
+          <header class="ik-chapter-head hm-reveal">
+            <span class="ik-chapter-ghost" aria-hidden="true">01</span>
+            <p class="ik-chapter-kicker">Chapter One — Entries 1&ndash;9</p>
+            <h2 class="ik-chapter-title">Household Profile</h2>
+            <p class="ik-chapter-desc">Who lives with you, and how your home is set up.</p>
+          </header>
+
+          <!-- Q1 -->
+          <div class="q-entry" data-q="q01">
+            <div class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 1</span>
+              <label class="q-prompt" for="q01_adults">How many adults (18+) will be living in the home?</label>
+              <span class="q-req">required</span>
             </div>
-          </div>
-          
-          <div class="progress-steps">
-            <div class="progress-step" data-section="household">
-              <div class="progress-step-circle">
-                <span class="progress-step-number">1</span>
-                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+            <div class="q-body">
+              <div class="q-main">
+                <input type="number" id="q01_adults" name="q01_adults" class="q-writein q-writein--xs" min="1" max="10" step="1" inputmode="numeric" required aria-required="true" aria-describedby="q01_error" placeholder="0">
+                <p class="q-error" id="q01_error" role="alert">Please enter the number of adults (1&ndash;10).</p>
               </div>
-              <span class="progress-step-label">Household</span>
-            </div>
-
-            <div class="progress-connector"></div>
-
-            <div class="progress-step" data-section="lifestyle">
-              <div class="progress-step-circle">
-                <span class="progress-step-number">2</span>
-                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="progress-step-label">Lifestyle</span>
-            </div>
-
-            <div class="progress-connector"></div>
-
-            <div class="progress-step" data-section="experience">
-              <div class="progress-step-circle">
-                <span class="progress-step-number">3</span>
-                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="progress-step-label">Experience</span>
-            </div>
-
-            <div class="progress-connector"></div>
-
-            <div class="progress-step" data-section="preferences">
-              <div class="progress-step-circle">
-                <span class="progress-step-number">4</span>
-                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="progress-step-label">Preferences</span>
-            </div>
-
-            <div class="progress-connector"></div>
-
-            <div class="progress-step" data-section="legal">
-              <div class="progress-step-circle">
-                <span class="progress-step-number">5</span>
-                <svg class="progress-step-check" viewBox="0 0 24 24" width="16" height="16">
-                  <path d="M 5 12 L 10 17 L 19 8" stroke="white" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="progress-step-label">Legal</span>
+              <p class="q-note">Include yourself and any other adults aged 18 or older.</p>
             </div>
           </div>
 
-          <div class="progress-bar">
-            <div class="progress-bar-fill" style="width: 0%"></div>
-          </div>
-        </div>
-
-        <!-- Form Content -->
-        <form id="intakeForm" class="form-content">
-          <!-- Section 1: Household Profile -->
-          <section class="form-section active" id="section-household" data-section="household">
-            <div class="section-header">
-              <div class="section-number">1</div>
-              <div class="section-title-group">
-                <h2 class="section-title">Household Profile</h2>
-                <p class="section-description">Who lives with you and how your home is set up.</p>
+          <!-- Q2 -->
+          <fieldset class="q-entry" data-q="q02">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 2</span>
+              <span class="q-prompt">What is the relationship between household adults?</span>
+              <span class="q-req">required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup" aria-required="true" aria-describedby="q02_error">
+                  <label class="q-opt"><input type="radio" name="q02_relationship" value="single_adult"><span class="q-opt-text">Single adult</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q02_relationship" value="married_couple"><span class="q-opt-text">Married couple</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q02_relationship" value="domestic_partners"><span class="q-opt-text">Domestic partners</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q02_relationship" value="coparents_unmarried"><span class="q-opt-text">Co-parents (unmarried)</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q02_relationship" value="other"><span class="q-opt-text">Other</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+                <p class="q-error" id="q02_error" role="alert">Please select a relationship type.</p>
               </div>
             </div>
+          </fieldset>
 
-            <div class="section-content has-questions">
-              <!-- Q1 -->
-              <div class="q-block" data-question="q1">
-                <label class="q-label" for="q01_adults">How many adults (18+) will be living in the home?<span class="required-star" aria-hidden="true">*</span></label>
-                <span class="q-help" id="q01_help">Include yourself and any other adults aged 18 or older.</span>
-                <input type="number" id="q01_adults" name="q01_adults" class="q-inline-field q-number" min="1" max="10" step="1" inputmode="numeric" required aria-required="true" aria-describedby="q01_help q01_error">
-                <p class="field-error" id="q01_error" role="alert" aria-live="assertive">Please enter the number of adults (1-10).</p>
+          <!-- Q3 -->
+          <fieldset class="q-entry" data-q="q03">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 3</span>
+              <span class="q-prompt">Do you currently have children living in your home?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q03_has_children" value="yes"><span class="q-opt-text">Yes</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q03_has_children" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- Q4 · unfolds when Q3 = Yes -->
+                <div class="q-branch" id="br-q4">
+                  <div class="q-branch-inner">
+                    <div class="q-followup">
+                      <div class="q-sub-head">
+                        <span class="q-ordinal" aria-hidden="true">No. 4</span>
+                        <label class="q-sub-prompt" for="q04_child_count">How many children, and what are their ages?</label>
+                      </div>
+                      <div class="q-inline-row">
+                        <span class="q-inline-label">Children now at home</span>
+                        <input type="number" id="q04_child_count" name="q04_child_count" class="q-writein q-writein--xs" min="0" max="12" step="1" inputmode="numeric" placeholder="0">
+                      </div>
+                      <div class="q-repeater" id="q04_age_rows" aria-live="polite"></div>
+                      <p class="q-branch-note">An age for each child helps agencies think carefully about fit between siblings.</p>
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
+          </fieldset>
 
-              <!-- Q2 -->
-              <fieldset class="q-block q-fieldset" data-question="q2">
-                <legend class="q-legend">What is the relationship between household adults?<span class="required-star" aria-hidden="true">*</span></legend>
-                <div class="option-group" role="radiogroup" aria-required="true" aria-describedby="q02_error">
-                  <label class="option"><input type="radio" name="q02_relationship" value="single_adult"><span class="option-text">Single adult</span></label>
-                  <label class="option"><input type="radio" name="q02_relationship" value="married_couple"><span class="option-text">Married couple</span></label>
-                  <label class="option"><input type="radio" name="q02_relationship" value="domestic_partners"><span class="option-text">Domestic partners</span></label>
-                  <label class="option"><input type="radio" name="q02_relationship" value="coparents_unmarried"><span class="option-text">Co-parents (unmarried)</span></label>
-                  <label class="option"><input type="radio" name="q02_relationship" value="other"><span class="option-text">Other</span></label>
+          <!-- Q5 -->
+          <fieldset class="q-entry" data-q="q05">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 5</span>
+              <span class="q-prompt">What type of home do you live in?</span>
+              <span class="q-req">required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup" aria-required="true" aria-describedby="q05_error">
+                  <label class="q-opt"><input type="radio" name="q05_home_type" value="single_family"><span class="q-opt-text">Single-family house</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q05_home_type" value="townhouse"><span class="q-opt-text">Townhouse</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q05_home_type" value="apartment_condo"><span class="q-opt-text">Apartment / Condo</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q05_home_type" value="mobile_home"><span class="q-opt-text">Mobile home</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q05_home_type" value="other"><span class="q-opt-text">Other</span><span class="q-mark" aria-hidden="true"></span></label>
                 </div>
-                <p class="field-error" id="q02_error" role="alert" aria-live="assertive">Please select a relationship type.</p>
-              </fieldset>
+                <p class="q-error" id="q05_error" role="alert">Please select a home type.</p>
+              </div>
+              <p class="q-note">There is no wrong answer here — agencies care about stability, not square footage.</p>
+            </div>
+          </fieldset>
 
-              <!-- Q3 -->
-              <fieldset class="q-block q-fieldset" data-question="q3">
-                <legend class="q-legend">Do you currently have children living in your home?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q03_has_children" value="yes" data-branch="q3"><span class="option-text">Yes</span></label>
-                  <label class="option"><input type="radio" name="q03_has_children" value="no" data-branch="q3"><span class="option-text">No</span></label>
+          <!-- Q6 -->
+          <fieldset class="q-entry" data-q="q06">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 6</span>
+              <span class="q-prompt">Do you own or rent your home?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q06_own_rent" value="own"><span class="q-opt-text">Own</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q06_own_rent" value="rent"><span class="q-opt-text">Rent</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q06_own_rent" value="other"><span class="q-opt-text">Other arrangement</span><span class="q-mark" aria-hidden="true"></span></label>
                 </div>
+              </div>
+            </div>
+          </fieldset>
 
-                <!-- Q4 (conditional on Q3 = Yes) -->
-                <div class="conditional q-followup" id="cond-q4">
-                  <label class="q-label" for="q04_child_count">How many children, and what are their ages?</label>
-                  <span class="q-help" id="q04_help">Enter a count, then provide an age for each child.</span>
-                  <input type="number" id="q04_child_count" name="q04_child_count" class="q-inline-field q-number" min="0" max="12" step="1" inputmode="numeric" aria-describedby="q04_help">
-                  <div class="repeater-rows" id="q04_age_rows" aria-live="polite"></div>
+          <!-- Q7 -->
+          <fieldset class="q-entry" data-q="q07">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 7</span>
+              <span class="q-prompt">How many bedrooms are available for an adopted child?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q07_bedrooms" value="shared"><span class="q-opt-text">Shared room available</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q07_bedrooms" value="one_private"><span class="q-opt-text">1 private room</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q07_bedrooms" value="two_plus"><span class="q-opt-text">2+ rooms available</span><span class="q-mark" aria-hidden="true"></span></label>
                 </div>
-              </fieldset>
+              </div>
+            </div>
+          </fieldset>
 
-              <!-- Q5 -->
-              <fieldset class="q-block q-fieldset" data-question="q5">
-                <legend class="q-legend">What type of home do you live in?<span class="required-star" aria-hidden="true">*</span></legend>
-                <div class="option-group" role="radiogroup" aria-required="true" aria-describedby="q05_error">
-                  <label class="option"><input type="radio" name="q05_home_type" value="single_family"><span class="option-text">Single-family house</span></label>
-                  <label class="option"><input type="radio" name="q05_home_type" value="townhouse"><span class="option-text">Townhouse</span></label>
-                  <label class="option"><input type="radio" name="q05_home_type" value="apartment_condo"><span class="option-text">Apartment / Condo</span></label>
-                  <label class="option"><input type="radio" name="q05_home_type" value="mobile_home"><span class="option-text">Mobile home</span></label>
-                  <label class="option"><input type="radio" name="q05_home_type" value="other"><span class="option-text">Other</span></label>
-                </div>
-                <p class="field-error" id="q05_error" role="alert" aria-live="assertive">Please select a home type.</p>
-              </fieldset>
-
-              <!-- Q6 -->
-              <fieldset class="q-block q-fieldset" data-question="q6">
-                <legend class="q-legend">Do you own or rent your home?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q06_own_rent" value="own"><span class="option-text">Own</span></label>
-                  <label class="option"><input type="radio" name="q06_own_rent" value="rent"><span class="option-text">Rent</span></label>
-                  <label class="option"><input type="radio" name="q06_own_rent" value="other"><span class="option-text">Other arrangement</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q7 -->
-              <fieldset class="q-block q-fieldset" data-question="q7">
-                <legend class="q-legend">How many bedrooms are available for an adopted child?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q07_bedrooms" value="shared"><span class="option-text">Shared room available</span></label>
-                  <label class="option"><input type="radio" name="q07_bedrooms" value="one_private"><span class="option-text">1 private room</span></label>
-                  <label class="option"><input type="radio" name="q07_bedrooms" value="two_plus"><span class="option-text">2+ rooms available</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q8 -->
-              <div class="q-block" data-question="q8">
-                <label class="q-label" for="q08_state">What state do you reside in?<span class="required-star" aria-hidden="true">*</span></label>
-                <span class="q-help" id="q08_help">This determines agency routing and jurisdiction, so it is always required.</span>
-                <select id="q08_state" name="q08_state" class="q-inline-field" required aria-required="true" aria-describedby="q08_help q08_error">
-                  <option value="">Select a state…</option>
+          <!-- Q8 -->
+          <div class="q-entry" data-q="q08">
+            <div class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 8</span>
+              <label class="q-prompt" for="q08_state">What state do you reside in?</label>
+              <span class="q-req">required</span>
+            </div>
+            <div class="q-body">
+              <div class="q-main">
+                <select id="q08_state" name="q08_state" class="q-writein q-select" required aria-required="true" aria-describedby="q08_error">
+                  <option value="">Select a state&hellip;</option>
                 </select>
-                <p class="field-error" id="q08_error" role="alert" aria-live="assertive">Please select your state of residence.</p>
+                <p class="q-error" id="q08_error" role="alert">Please select your state of residence.</p>
               </div>
-
-              <!-- Q9 -->
-              <fieldset class="q-block q-fieldset" data-question="q9">
-                <legend class="q-legend">What is your approximate combined household income?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q09_income" value="under_30k"><span class="option-text">Under $30,000</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="30k_50k"><span class="option-text">$30k - $50k</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="50k_75k"><span class="option-text">$50k - $75k</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="75k_100k"><span class="option-text">$75k - $100k</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="100k_plus"><span class="option-text">$100k+</span></label>
-                  <label class="option"><input type="radio" name="q09_income" value="prefer_not"><span class="option-text">Prefer not to say</span></label>
-                </div>
-              </fieldset>
+              <p class="q-note">Your state drives agency routing and legal jurisdiction — the one entry we can never skip.</p>
             </div>
-          </section>
+          </div>
 
-          <!-- Section 2: Lifestyle & Values -->
-          <section class="form-section" id="section-lifestyle" data-section="lifestyle" style="display: none;">
-            <div class="section-header">
-              <div class="section-number">2</div>
-              <div class="section-title-group">
-                <h2 class="section-title">Lifestyle & Values</h2>
-                <p class="section-description">The routines, values, and interests that shape daily life.</p>
+          <!-- Q9 -->
+          <fieldset class="q-entry" data-q="q09">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 9</span>
+              <span class="q-prompt">What is your approximate combined household income?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q09_income" value="under_30k"><span class="q-opt-text">Under $30,000</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q09_income" value="30k_50k"><span class="q-opt-text">$30k &ndash; $50k</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q09_income" value="50k_75k"><span class="q-opt-text">$50k &ndash; $75k</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q09_income" value="75k_100k"><span class="q-opt-text">$75k &ndash; $100k</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q09_income" value="100k_plus"><span class="q-opt-text">$100k+</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q09_income" value="prefer_not"><span class="q-opt-text">Prefer not to say</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
               </div>
+              <p class="q-note">Used only to surface assistance programs — never to screen a family out.</p>
             </div>
+          </fieldset>
+        </section>
 
-            <div class="section-content has-questions">
-              <!-- Q10 -->
-              <fieldset class="q-block q-fieldset" data-question="q10">
-                <legend class="q-legend">How active is your household?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q10_activity" value="very_active"><span class="option-text">Very active / outdoorsy</span></label>
-                  <label class="option"><input type="radio" name="q10_activity" value="moderately_active"><span class="option-text">Moderately active</span></label>
-                  <label class="option"><input type="radio" name="q10_activity" value="relaxed"><span class="option-text">Relaxed / home-oriented</span></label>
-                  <label class="option"><input type="radio" name="q10_activity" value="varies"><span class="option-text">Varies</span></label>
-                </div>
-              </fieldset>
+        <div class="ik-divider" aria-hidden="true"><span>&sect;</span></div>
 
-              <!-- Q11 -->
-              <fieldset class="q-block q-fieldset" data-question="q11">
-                <legend class="q-legend">Do you have a religious affiliation?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q11_religion" value="yes" data-branch="q11"><span class="option-text">Yes (optional to specify)</span></label>
-                  <label class="option"><input type="radio" name="q11_religion" value="no" data-branch="q11"><span class="option-text">No</span></label>
-                  <label class="option"><input type="radio" name="q11_religion" value="spiritual" data-branch="q11"><span class="option-text">Spiritual but not religious</span></label>
-                  <label class="option"><input type="radio" name="q11_religion" value="prefer_not" data-branch="q11"><span class="option-text">Prefer not to say</span></label>
-                </div>
-                <!-- Conditional on Q11 = Yes -->
-                <div class="conditional q-followup" id="cond-q11">
-                  <label class="q-label" for="q11_affiliation">What is your affiliation?<span class="optional-tag">(optional)</span></label>
-                  <input type="text" id="q11_affiliation" name="q11_affiliation" class="q-inline-field" placeholder="e.g., Catholic, Jewish, Muslim…">
-                </div>
-              </fieldset>
+        <!-- ======== Chapter II · Lifestyle & Values ======== -->
+        <section class="ik-chapter" id="chapter-lifestyle" data-section="lifestyle">
+          <header class="ik-chapter-head hm-reveal">
+            <span class="ik-chapter-ghost" aria-hidden="true">02</span>
+            <p class="ik-chapter-kicker">Chapter Two — Entries 10&ndash;15</p>
+            <h2 class="ik-chapter-title">Lifestyle &amp; Values</h2>
+            <p class="ik-chapter-desc">The routines, values, and rhythms that shape daily life.</p>
+          </header>
 
-              <!-- Q12 -->
-              <fieldset class="q-block q-fieldset" data-question="q12">
-                <legend class="q-legend">Are you open to a child of a different cultural or ethnic background?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q12_cultural_openness" value="fully_open"><span class="option-text">Yes, fully open</span></label>
-                  <label class="option"><input type="radio" name="q12_cultural_openness" value="prefer_same"><span class="option-text">Prefer same background</span></label>
-                  <label class="option"><input type="radio" name="q12_cultural_openness" value="open_with_support"><span class="option-text">Open with support resources</span></label>
-                  <label class="option"><input type="radio" name="q12_cultural_openness" value="unsure"><span class="option-text">Unsure</span></label>
+          <!-- Q10 -->
+          <fieldset class="q-entry" data-q="q10">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 10</span>
+              <span class="q-prompt">How would you describe your household's activity level?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q10_activity" value="very_active"><span class="q-opt-text">Very active / outdoorsy</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q10_activity" value="moderately_active"><span class="q-opt-text">Moderately active</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q10_activity" value="relaxed"><span class="q-opt-text">Relaxed / home-oriented</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q10_activity" value="varies"><span class="q-opt-text">Varies</span><span class="q-mark" aria-hidden="true"></span></label>
                 </div>
-              </fieldset>
-
-              <!-- Q13 -->
-              <fieldset class="q-block q-fieldset" data-question="q13">
-                <legend class="q-legend">Do you have pets in the home?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q13_has_pets" value="yes" data-branch="q13"><span class="option-text">Yes</span></label>
-                  <label class="option"><input type="radio" name="q13_has_pets" value="no" data-branch="q13"><span class="option-text">No</span></label>
-                </div>
-                <!-- Conditional on Q13 = Yes -->
-                <fieldset class="conditional q-followup q-fieldset" id="cond-q13">
-                  <legend class="q-label">What types of pets? <span class="optional-tag">(select all that apply)</span></legend>
-                  <div class="option-group option-grid">
-                    <label class="option"><input type="checkbox" name="q13_pet_types" value="dogs"><span class="option-text">Dogs</span></label>
-                    <label class="option"><input type="checkbox" name="q13_pet_types" value="cats"><span class="option-text">Cats</span></label>
-                    <label class="option"><input type="checkbox" name="q13_pet_types" value="birds"><span class="option-text">Birds</span></label>
-                    <label class="option"><input type="checkbox" name="q13_pet_types" value="other"><span class="option-text">Other</span></label>
-                  </div>
-                </fieldset>
-              </fieldset>
-
-              <!-- Q14 -->
-              <fieldset class="q-block q-fieldset" data-question="q14">
-                <legend class="q-legend">Describe your typical weekday structure.</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q14_weekday" value="both_full_time"><span class="option-text">Both parents work full-time</span></label>
-                  <label class="option"><input type="radio" name="q14_weekday" value="one_home"><span class="option-text">One works / one stays home</span></label>
-                  <label class="option"><input type="radio" name="q14_weekday" value="work_from_home"><span class="option-text">Work from home</span></label>
-                  <label class="option"><input type="radio" name="q14_weekday" value="retired_flexible"><span class="option-text">Retired / flexible</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q15 -->
-              <fieldset class="q-block q-fieldset" data-question="q15">
-                <legend class="q-legend">What languages are spoken in your home? <span class="optional-tag">(select all that apply)</span></legend>
-                <div class="option-group option-grid">
-                  <label class="option"><input type="checkbox" name="q15_languages" value="english"><span class="option-text">English</span></label>
-                  <label class="option"><input type="checkbox" name="q15_languages" value="spanish"><span class="option-text">Spanish</span></label>
-                  <label class="option"><input type="checkbox" name="q15_languages" value="other" data-branch="q15"><span class="option-text">Other</span></label>
-                </div>
-                <div class="conditional q-followup" id="cond-q15">
-                  <label class="q-label" for="q15_other_language">Which other language(s)?<span class="optional-tag">(optional)</span></label>
-                  <input type="text" id="q15_other_language" name="q15_other_language" class="q-inline-field" placeholder="e.g., Mandarin, Tagalog…">
-                </div>
-              </fieldset>
-            </div>
-          </section>
-
-          <!-- Section 3: Experience & Background -->
-          <section class="form-section" id="section-experience" data-section="experience" style="display: none;">
-            <div class="section-header">
-              <div class="section-number">3</div>
-              <div class="section-title-group">
-                <h2 class="section-title">Experience & Background</h2>
-                <p class="section-description">Your experience caring for children and your background with adoption.</p>
               </div>
             </div>
+          </fieldset>
 
-            <div class="section-content has-questions">
-              <!-- Q16 -->
-              <fieldset class="q-block q-fieldset" data-question="q16">
-                <legend class="q-legend">Have you previously fostered or adopted?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q16_prior_experience" value="foster" data-branch="q16"><span class="option-text">Yes, foster care</span></label>
-                  <label class="option"><input type="radio" name="q16_prior_experience" value="adoption" data-branch="q16"><span class="option-text">Yes, adoption</span></label>
-                  <label class="option"><input type="radio" name="q16_prior_experience" value="both" data-branch="q16"><span class="option-text">Yes, both</span></label>
-                  <label class="option"><input type="radio" name="q16_prior_experience" value="no" data-branch="q16"><span class="option-text">No</span></label>
+          <!-- Q11 -->
+          <fieldset class="q-entry" data-q="q11">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 11</span>
+              <span class="q-prompt">Do you have a religious affiliation?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q11_religion" value="yes"><span class="q-opt-text">Yes (optional to specify)</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q11_religion" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q11_religion" value="spiritual"><span class="q-opt-text">Spiritual but not religious</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q11_religion" value="prefer_not"><span class="q-opt-text">Prefer not to say</span><span class="q-mark" aria-hidden="true"></span></label>
                 </div>
 
-                <!-- Q17 (conditional on any "Yes") -->
-                <fieldset class="conditional q-followup q-fieldset" id="cond-q17">
-                  <legend class="q-label">How many placements, and what age ranges?</legend>
-                  <div class="repeater-row" style="margin-bottom:1rem;">
-                    <label for="q17_placement_count">Placements</label>
-                    <input type="number" id="q17_placement_count" name="q17_placement_count" min="0" max="50" step="1" inputmode="numeric">
-                  </div>
-                  <span class="q-help">Age ranges of those placements (select all that apply):</span>
-                  <div class="option-group option-grid">
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="infant"><span class="option-text">Infant (0-1)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="toddler"><span class="option-text">Toddler (2-4)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="school_age"><span class="option-text">School age (5-9)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="preteen"><span class="option-text">Preteen (10-12)</span></label>
-                    <label class="option"><input type="checkbox" name="q17_age_ranges" value="teen"><span class="option-text">Teen (13-17)</span></label>
-                  </div>
-                </fieldset>
-              </fieldset>
-
-              <!-- Q18 -->
-              <fieldset class="q-block q-fieldset" data-question="q18">
-                <legend class="q-legend">Do you have professional childcare experience?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="teacher"><span class="option-text">Teacher / educator</span></label>
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="social_worker"><span class="option-text">Social worker</span></label>
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="therapist"><span class="option-text">Therapist / counselor</span></label>
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="healthcare"><span class="option-text">Healthcare (pediatric)</span></label>
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="none"><span class="option-text">None</span></label>
-                  <label class="option"><input type="radio" name="q18_professional_exp" value="other"><span class="option-text">Other</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q19 -->
-              <fieldset class="q-block q-fieldset" data-question="q19">
-                <legend class="q-legend">Have any adults completed adoption or foster training?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q19_training" value="pride"><span class="option-text">Yes, PRIDE or equivalent</span></label>
-                  <label class="option"><input type="radio" name="q19_training" value="other_training"><span class="option-text">Yes, other training</span></label>
-                  <label class="option"><input type="radio" name="q19_training" value="in_progress"><span class="option-text">In progress</span></label>
-                  <label class="option"><input type="radio" name="q19_training" value="no"><span class="option-text">No</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q20 (sensitive) -->
-              <fieldset class="q-block q-fieldset" data-question="q20">
-                <legend class="q-legend">Has your household ever had a CPS report?</legend>
-                <span class="q-help">This does <strong>not</strong> disqualify your family. We use the answer to identify relevant support and keep it confidential.</span>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q20_cps_report" value="yes" data-branch="q20"><span class="option-text">Yes</span></label>
-                  <label class="option"><input type="radio" name="q20_cps_report" value="no" data-branch="q20"><span class="option-text">No</span></label>
-                </div>
-                <!-- Conditional explanation, revealed only after the acknowledgment dialog -->
-                <div class="conditional q-followup" id="cond-q20">
-                  <label class="q-label" for="q20_explanation">In a few words, please share what happened.</label>
-                  <span class="q-help" id="q20_help">This note is confidential. Only your assigned agency representative can view it.</span>
-                  <textarea id="q20_explanation" name="q20_explanation" rows="4" class="q-inline-field" style="max-width:100%; width:100%;" aria-describedby="q20_help"></textarea>
-                </div>
-              </fieldset>
-
-              <!-- Q21 -->
-              <fieldset class="q-block q-fieldset" data-question="q21">
-                <legend class="q-legend">Can you provide non-family references?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q21_references" value="two_plus"><span class="option-text">Yes, 2 or more</span></label>
-                  <label class="option"><input type="radio" name="q21_references" value="one"><span class="option-text">Yes, 1</span></label>
-                  <label class="option"><input type="radio" name="q21_references" value="working_on_it"><span class="option-text">Working on it</span></label>
-                  <label class="option"><input type="radio" name="q21_references" value="no"><span class="option-text">No</span></label>
-                </div>
-              </fieldset>
-            </div>
-          </section>
-
-          <!-- Section 4: Adoption Preferences -->
-          <section class="form-section" id="section-preferences" data-section="preferences" style="display: none;">
-            <div class="section-header">
-              <div class="section-number">4</div>
-              <div class="section-title-group">
-                <h2 class="section-title">Adoption Preferences</h2>
-                <p class="section-description">The ages, needs, and family relationships you feel prepared to support.</p>
-              </div>
-            </div>
-
-            <div class="section-content has-questions">
-              <!-- Q22 (age range - accessible multi-select) -->
-              <fieldset class="q-block q-fieldset" data-question="q22">
-                <legend class="q-legend">Preferred age range of child?<span class="required-star" aria-hidden="true">*</span></legend>
-                <span class="q-help" id="q22_help">Select every age band you are open to. Choosing “Open to any age” covers all bands.</span>
-                <div class="option-group option-grid" aria-required="true" aria-describedby="q22_help q22_error">
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="infant"><span class="option-text">Infant (0-1)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="toddler"><span class="option-text">Toddler (2-4)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="school_age"><span class="option-text">School age (5-9)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="preteen"><span class="option-text">Preteen (10-12)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="teen" data-branch="q22"><span class="option-text">Teen (13-17)</span></label>
-                  <label class="option"><input type="checkbox" name="q22_age_range" value="any"><span class="option-text">Open to any age</span></label>
-                </div>
-                <p class="field-error" id="q22_error" role="alert" aria-live="assertive">Please select at least one age range.</p>
-              </fieldset>
-
-              <!-- Q23 -->
-              <fieldset class="q-block q-fieldset" data-question="q23">
-                <legend class="q-legend">Are you open to adopting siblings together?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q23_siblings" value="any_size"><span class="option-text">Yes, any group size</span></label>
-                  <label class="option"><input type="radio" name="q23_siblings" value="up_to_2"><span class="option-text">Yes, up to 2 siblings</span></label>
-                  <label class="option"><input type="radio" name="q23_siblings" value="single"><span class="option-text">Prefer single child</span></label>
-                  <label class="option"><input type="radio" name="q23_siblings" value="unsure"><span class="option-text">Unsure</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q24 -->
-              <fieldset class="q-block q-fieldset" data-question="q24">
-                <legend class="q-legend">Preference for the child's gender?<span class="optional-tag">(optional)</span></legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q24_gender_pref" value="no_preference"><span class="option-text">No preference</span></label>
-                  <label class="option"><input type="radio" name="q24_gender_pref" value="boy"><span class="option-text">Boy</span></label>
-                  <label class="option"><input type="radio" name="q24_gender_pref" value="girl"><span class="option-text">Girl</span></label>
-                  <label class="option"><input type="radio" name="q24_gender_pref" value="nonbinary_open"><span class="option-text">Non-binary / open</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q25 -->
-              <fieldset class="q-block q-fieldset" data-question="q25">
-                <legend class="q-legend">Open to a child with a diagnosed medical condition? <span class="optional-tag">(select all that apply)</span></legend>
-                <div class="option-group option-grid">
-                  <label class="option"><input type="checkbox" name="q25_medical" value="none_preferred" data-branch="q25"><span class="option-text">No medical needs preferred</span></label>
-                  <label class="option"><input type="checkbox" name="q25_medical" value="minor" data-branch="q25"><span class="option-text">Minor / manageable</span></label>
-                  <label class="option"><input type="checkbox" name="q25_medical" value="moderate" data-branch="q25"><span class="option-text">Moderate ongoing</span></label>
-                  <label class="option"><input type="checkbox" name="q25_medical" value="significant" data-branch="q25"><span class="option-text">Significant medical needs</span></label>
-                  <label class="option"><input type="checkbox" name="q25_medical" value="any" data-branch="q25"><span class="option-text">Open to any</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q26 -->
-              <fieldset class="q-block q-fieldset" data-question="q26">
-                <legend class="q-legend">Open to a behavioral / developmental diagnosis? <span class="optional-tag">(select all that apply)</span></legend>
-                <div class="option-group option-grid">
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="none_preferred" data-branch="q26"><span class="option-text">No behavioral needs preferred</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="adhd" data-branch="q26"><span class="option-text">ADHD / attention</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="anxiety_mood" data-branch="q26"><span class="option-text">Anxiety / mood disorders</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="developmental_delays" data-branch="q26"><span class="option-text">Developmental delays</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="autism" data-branch="q26"><span class="option-text">Autism spectrum</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="trauma_ptsd" data-branch="q26"><span class="option-text">Trauma history (PTSD)</span></label>
-                  <label class="option"><input type="checkbox" name="q26_behavioral" value="any" data-branch="q26"><span class="option-text">Open to any</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q27 (conditionally required) -->
-              <fieldset class="q-block q-fieldset" data-question="q27">
-                <legend class="q-legend">Access to therapeutic / specialized support services?<span class="required-star" id="q27_star" aria-hidden="true" style="display:none;">*</span></legend>
-                <span class="q-help" id="q27_help">Based on your earlier answers, this may be required so we can match you with adequate support.</span>
-                <div class="option-group" role="radiogroup" aria-describedby="q27_help q27_error">
-                  <label class="option"><input type="radio" name="q27_support_access" value="actively_connected" data-branch="q27"><span class="option-text">Yes, actively connected</span></label>
-                  <label class="option"><input type="radio" name="q27_support_access" value="could_access" data-branch="q27"><span class="option-text">Yes, could access if needed</span></label>
-                  <label class="option"><input type="radio" name="q27_support_access" value="limited" data-branch="q27"><span class="option-text">Limited access in our area</span></label>
-                  <label class="option"><input type="radio" name="q27_support_access" value="unsure" data-branch="q27"><span class="option-text">Unsure</span></label>
-                </div>
-                <p class="field-error" id="q27_error" role="alert" aria-live="assertive">Because of the support needs you selected, please tell us about your access to services.</p>
-
-                <!-- Therapist-locator widget + support alert (Q27 = Limited under high needs) -->
-                <div class="conditional" id="card-therapist-locator">
-                  <div class="alert-banner alert-warning" role="status">
-                    <span class="alert-icon" aria-hidden="true">!</span>
-                    <div class="alert-body">
-                      <strong>Let's connect you with support</strong>
-                      You indicated openness to higher support needs with limited local access. Many specialized services are available remotely.
-                      <p style="margin:0.6rem 0 0;"><a href="https://www.psychologytoday.com/us/therapists/child" target="_blank" rel="noopener noreferrer">Find a child &amp; family therapist near you →</a></p>
+                <!-- unfolds when Q11 = Yes -->
+                <div class="q-branch" id="br-q11">
+                  <div class="q-branch-inner">
+                    <div class="q-followup">
+                      <div class="q-inline-row">
+                        <label class="q-inline-label" for="q11_affiliation">What is your affiliation? <em>(optional)</em></label>
+                        <input type="text" id="q11_affiliation" name="q11_affiliation" class="q-writein q-writein--md" placeholder="e.g., Catholic, Jewish, Muslim&hellip;">
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <!-- Trauma-informed care directory (Q26 includes PTSD AND Q27 = Limited) -->
-                <div class="conditional" id="card-trauma">
-                  <div class="info-card">
-                    <h4>Trauma-informed care resources</h4>
-                    <p>Children with a trauma history thrive with caregivers connected to trauma-informed support. These directories can help, including remote options:</p>
-                    <ul>
-                      <li><a href="https://www.nctsn.org/" target="_blank" rel="noopener noreferrer">National Child Traumatic Stress Network (NCTSN)</a></li>
-                      <li><a href="https://www.psychologytoday.com/us/therapists/trauma-and-ptsd" target="_blank" rel="noopener noreferrer">Trauma &amp; PTSD therapist directory</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </fieldset>
-
-              <!-- Q28 -->
-              <fieldset class="q-block q-fieldset" data-question="q28">
-                <legend class="q-legend">Are you open to a child with a history of trauma or abuse?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q28_trauma_openness" value="trained" data-branch="q28"><span class="option-text">Yes, we have training / experience</span></label>
-                  <label class="option"><input type="radio" name="q28_trauma_openness" value="willing" data-branch="q28"><span class="option-text">Yes, willing to learn</span></label>
-                  <label class="option"><input type="radio" name="q28_trauma_openness" value="prefer_not" data-branch="q28"><span class="option-text">Prefer not</span></label>
-                  <label class="option"><input type="radio" name="q28_trauma_openness" value="unsure" data-branch="q28"><span class="option-text">Unsure</span></label>
-                </div>
-
-                <!-- Soft advisory: Q22 includes Teen AND Q28 = Prefer not -->
-                <div class="conditional" id="banner-teen">
-                  <div class="alert-banner alert-info" role="status">
-                    <span class="alert-icon" aria-hidden="true">i</span>
-                    <div class="alert-body">
-                      <strong>A note about teens in care</strong>
-                      Many teenagers awaiting adoption have experienced trauma. This context does not affect your eligibility, and you can continue either way.
-                    </div>
-                    <button type="button" class="alert-dismiss" data-dismiss="banner-teen" aria-label="Dismiss this notice">&times;</button>
-                  </div>
-                </div>
-              </fieldset>
-
-              <!-- Q29 -->
-              <fieldset class="q-block q-fieldset" data-question="q29">
-                <legend class="q-legend">Open to maintaining contact with the birth family?<span class="optional-tag">(optional)</span></legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q29_birth_family_contact" value="open_adoption"><span class="option-text">Yes, open adoption</span></label>
-                  <label class="option"><input type="radio" name="q29_birth_family_contact" value="occasional"><span class="option-text">Yes, occasional contact</span></label>
-                  <label class="option"><input type="radio" name="q29_birth_family_contact" value="closed"><span class="option-text">Prefer closed adoption</span></label>
-                  <label class="option"><input type="radio" name="q29_birth_family_contact" value="agency_guidance"><span class="option-text">Open to agency guidance</span></label>
-                </div>
-              </fieldset>
+              </div>
+              <p class="q-note">Optional, and used only for cultural matching when you want it considered.</p>
             </div>
-          </section>
+          </fieldset>
 
-          <!-- Section 5: Legal Readiness -->
-          <section class="form-section" id="section-legal" data-section="legal" style="display: none;">
-            <div class="section-header">
-              <div class="section-number">5</div>
-              <div class="section-title-group">
-                <h2 class="section-title">Legal Readiness</h2>
-                <p class="section-description">Where you are in the legal, financial, and home-study process.</p>
+          <!-- Q12 -->
+          <fieldset class="q-entry" data-q="q12">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 12</span>
+              <span class="q-prompt">Are you open to a child of a different cultural or ethnic background than your own?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q12_cultural_openness" value="fully_open"><span class="q-opt-text">Yes, fully open</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q12_cultural_openness" value="prefer_same"><span class="q-opt-text">Prefer same background</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q12_cultural_openness" value="open_with_support"><span class="q-opt-text">Open with support resources</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q12_cultural_openness" value="unsure"><span class="q-opt-text">Unsure</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
               </div>
             </div>
+          </fieldset>
 
-            <div class="section-content has-questions">
-              <!-- Q30 -->
-              <div class="q-block" data-question="q30">
-                <label class="q-label" for="q30_adoption_state">What state will the adoption take place in?<span class="required-star" aria-hidden="true">*</span></label>
-                <span class="q-help" id="q30_help">This uses your state of residence. Change it if the adoption will occur elsewhere.</span>
-                <select id="q30_adoption_state" name="q30_adoption_state" class="q-inline-field" required aria-required="true" aria-describedby="q30_help q30_error">
-                  <option value="">Select a state…</option>
+          <!-- Q13 -->
+          <fieldset class="q-entry" data-q="q13">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 13</span>
+              <span class="q-prompt">Do you have pets in the home?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q13_has_pets" value="yes"><span class="q-opt-text">Yes</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q13_has_pets" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- unfolds when Q13 = Yes -->
+                <div class="q-branch" id="br-q13">
+                  <div class="q-branch-inner">
+                    <fieldset class="q-followup">
+                      <legend class="q-sub-prompt">What types of pets? <em>(select all that apply)</em></legend>
+                      <div class="q-options q-options--marks">
+                        <label class="q-opt"><input type="checkbox" name="q13_pet_types" value="dogs"><span class="q-opt-text">Dogs</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q13_pet_types" value="cats"><span class="q-opt-text">Cats</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q13_pet_types" value="birds"><span class="q-opt-text">Birds</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q13_pet_types" value="other"><span class="q-opt-text">Other</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Some children have allergies or fears — agencies simply like to know.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q14 -->
+          <fieldset class="q-entry" data-q="q14">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 14</span>
+              <span class="q-prompt">Describe your typical weekday structure.</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q14_weekday" value="both_full_time"><span class="q-opt-text">Both parents work full-time</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q14_weekday" value="one_home"><span class="q-opt-text">One works / one stays home</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q14_weekday" value="work_from_home"><span class="q-opt-text">Work from home</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q14_weekday" value="retired_flexible"><span class="q-opt-text">Retired / flexible schedule</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q15 -->
+          <fieldset class="q-entry" data-q="q15">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 15</span>
+              <span class="q-prompt">What languages are spoken in your home? <em class="q-prompt-aside">(select all that apply)</em></span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options q-options--marks">
+                  <label class="q-opt"><input type="checkbox" name="q15_languages" value="english"><span class="q-opt-text">English</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q15_languages" value="spanish"><span class="q-opt-text">Spanish</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q15_languages" value="other"><span class="q-opt-text">Other</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- unfolds when Q15 includes Other -->
+                <div class="q-branch" id="br-q15">
+                  <div class="q-branch-inner">
+                    <div class="q-followup">
+                      <div class="q-inline-row">
+                        <label class="q-inline-label" for="q15_other_language">Which other language(s)?</label>
+                        <input type="text" id="q15_other_language" name="q15_other_language" class="q-writein q-writein--md" placeholder="e.g., Mandarin, Tagalog&hellip;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Multilingual homes are a gift — children who share your language surface first.</p>
+            </div>
+          </fieldset>
+        </section>
+
+        <div class="ik-divider" aria-hidden="true"><span>&sect;</span></div>
+
+        <!-- ======== Chapter III · Experience & Background ======== -->
+        <section class="ik-chapter" id="chapter-experience" data-section="experience">
+          <header class="ik-chapter-head hm-reveal">
+            <span class="ik-chapter-ghost" aria-hidden="true">03</span>
+            <p class="ik-chapter-kicker">Chapter Three — Entries 16&ndash;21</p>
+            <h2 class="ik-chapter-title">Experience &amp; Background</h2>
+            <p class="ik-chapter-desc">Your history caring for children, told plainly.</p>
+          </header>
+
+          <!-- Q16 -->
+          <fieldset class="q-entry" data-q="q16">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 16</span>
+              <span class="q-prompt">Have you previously fostered or adopted a child?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q16_prior_experience" value="foster"><span class="q-opt-text">Yes, foster care</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q16_prior_experience" value="adoption"><span class="q-opt-text">Yes, adoption</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q16_prior_experience" value="both"><span class="q-opt-text">Yes, both</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q16_prior_experience" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- Q17 · unfolds when Q16 = any yes -->
+                <div class="q-branch" id="br-q17">
+                  <div class="q-branch-inner">
+                    <fieldset class="q-followup">
+                      <legend class="q-sub-prompt"><span class="q-ordinal" aria-hidden="true">No. 17</span> How many placements have you had, and what age ranges?</legend>
+                      <div class="q-inline-row">
+                        <label class="q-inline-label" for="q17_placement_count">Placements</label>
+                        <input type="number" id="q17_placement_count" name="q17_placement_count" class="q-writein q-writein--xs" min="0" max="50" step="1" inputmode="numeric" placeholder="0">
+                      </div>
+                      <div class="q-options q-options--marks">
+                        <label class="q-opt"><input type="checkbox" name="q17_age_ranges" value="infant"><span class="q-opt-text">Infant (0&ndash;1)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q17_age_ranges" value="toddler"><span class="q-opt-text">Toddler (2&ndash;4)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q17_age_ranges" value="school_age"><span class="q-opt-text">School age (5&ndash;9)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q17_age_ranges" value="preteen"><span class="q-opt-text">Preteen (10&ndash;12)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                        <label class="q-opt"><input type="checkbox" name="q17_age_ranges" value="teen"><span class="q-opt-text">Teen (13&ndash;17)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                      </div>
+                    </fieldset>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Experienced families are often shown a wider range of matches.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q18 -->
+          <fieldset class="q-entry" data-q="q18">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 18</span>
+              <span class="q-prompt">Do you have professional childcare experience?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="teacher"><span class="q-opt-text">Teacher / educator</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="social_worker"><span class="q-opt-text">Social worker</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="therapist"><span class="q-opt-text">Therapist / counselor</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="healthcare"><span class="q-opt-text">Healthcare (pediatric)</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="none"><span class="q-opt-text">None</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q18_professional_exp" value="other"><span class="q-opt-text">Other</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q19 -->
+          <fieldset class="q-entry" data-q="q19">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 19</span>
+              <span class="q-prompt">Have any adults in the home completed adoption or foster training?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q19_training" value="pride"><span class="q-opt-text">Yes, PRIDE or equivalent</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q19_training" value="other_training"><span class="q-opt-text">Yes, other training</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q19_training" value="in_progress"><span class="q-opt-text">In progress</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q19_training" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q20 (sensitive) -->
+          <fieldset class="q-entry" data-q="q20">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 20</span>
+              <span class="q-prompt">Has your household ever had a Child Protective Services (CPS) report?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q20_cps_report" value="yes"><span class="q-opt-text">Yes</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q20_cps_report" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- unfolds when Q20 = Yes -->
+                <div class="q-branch" id="br-q20">
+                  <div class="q-branch-inner">
+                    <div class="q-followup">
+                      <aside class="ik-note ik-note--gentle">
+                        <p class="ik-note-eyebrow">Thank you for your honesty</p>
+                        <p>We know this can be difficult to answer. A past report does <strong>not</strong> disqualify your family — it only routes your dossier to an agency with the right review process, and it stays confidential.</p>
+                      </aside>
+                      <label class="q-sub-prompt q-sub-prompt--label" for="q20_explanation">In a few words, please share what happened.<span class="q-req">required</span></label>
+                      <textarea id="q20_explanation" name="q20_explanation" rows="4" class="q-longhand" aria-describedby="q20_explanation_error"></textarea>
+                      <p class="q-error" id="q20_explanation_error" role="alert">Please add a brief note — a sentence or two is enough.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Seen only by your assigned agency representative. Never public.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q21 -->
+          <fieldset class="q-entry" data-q="q21">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 21</span>
+              <span class="q-prompt">Do you have references available (non-family)?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q21_references" value="two_plus"><span class="q-opt-text">Yes, 2 or more</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q21_references" value="one"><span class="q-opt-text">Yes, 1</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q21_references" value="working_on_it"><span class="q-opt-text">Working on it</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q21_references" value="no"><span class="q-opt-text">No</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <div class="ik-divider" aria-hidden="true"><span>&sect;</span></div>
+
+        <!-- ======== Chapter IV · Adoption Preferences ======== -->
+        <section class="ik-chapter" id="chapter-preferences" data-section="preferences">
+          <header class="ik-chapter-head hm-reveal">
+            <span class="ik-chapter-ghost" aria-hidden="true">04</span>
+            <p class="ik-chapter-kicker">Chapter Four — Entries 22&ndash;29</p>
+            <h2 class="ik-chapter-title">Adoption Preferences</h2>
+            <p class="ik-chapter-desc">The ages, needs, and relationships you feel prepared to support.</p>
+          </header>
+
+          <!-- Q22 -->
+          <fieldset class="q-entry" data-q="q22">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 22</span>
+              <span class="q-prompt">What age range of child are you hoping to adopt? <em class="q-prompt-aside">(select all that apply)</em></span>
+              <span class="q-req">required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options q-options--marks" aria-describedby="q22_error">
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="infant"><span class="q-opt-text">Infant (0&ndash;1)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="toddler"><span class="q-opt-text">Toddler (2&ndash;4)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="school_age"><span class="q-opt-text">School age (5&ndash;9)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="preteen"><span class="q-opt-text">Preteen (10&ndash;12)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="teen"><span class="q-opt-text">Teen (13&ndash;17)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q22_age_range" value="any"><span class="q-opt-text">Open to any age</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                </div>
+                <p class="q-error" id="q22_error" role="alert">Please select at least one age range.</p>
+              </div>
+              <p class="q-note">Select every band you are open to — &ldquo;any age&rdquo; covers all of them.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q23 -->
+          <fieldset class="q-entry" data-q="q23">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 23</span>
+              <span class="q-prompt">Are you open to adopting siblings together?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q23_siblings" value="any_size"><span class="q-opt-text">Yes, open to any group size</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q23_siblings" value="up_to_2"><span class="q-opt-text">Yes, up to 2 siblings</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q23_siblings" value="single"><span class="q-opt-text">Prefer single child</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q23_siblings" value="unsure"><span class="q-opt-text">Unsure</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+              <p class="q-note">Keeping siblings together is one of the kindest things a family can offer.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q24 -->
+          <fieldset class="q-entry" data-q="q24">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 24</span>
+              <span class="q-prompt">Do you have a preference for the child's gender?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q24_gender_pref" value="no_preference"><span class="q-opt-text">No preference</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q24_gender_pref" value="boy"><span class="q-opt-text">Boy</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q24_gender_pref" value="girl"><span class="q-opt-text">Girl</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q24_gender_pref" value="nonbinary_open"><span class="q-opt-text">Non-binary / open</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q25 -->
+          <fieldset class="q-entry" data-q="q25">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 25</span>
+              <span class="q-prompt">Are you open to a child with a diagnosed medical condition? <em class="q-prompt-aside">(select all that apply)</em></span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options q-options--marks">
+                  <label class="q-opt"><input type="checkbox" name="q25_medical" value="none_preferred"><span class="q-opt-text">No medical needs preferred</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q25_medical" value="minor"><span class="q-opt-text">Minor / manageable conditions</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q25_medical" value="moderate"><span class="q-opt-text">Moderate ongoing needs</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q25_medical" value="significant"><span class="q-opt-text">Significant medical needs</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q25_medical" value="any"><span class="q-opt-text">Open to any</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q26 -->
+          <fieldset class="q-entry" data-q="q26">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 26</span>
+              <span class="q-prompt">Are you open to a child with a behavioral or developmental diagnosis? <em class="q-prompt-aside">(select all that apply)</em></span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options q-options--marks">
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="none_preferred"><span class="q-opt-text">No behavioral needs preferred</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="adhd"><span class="q-opt-text">ADHD / attention needs</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="anxiety_mood"><span class="q-opt-text">Anxiety / mood disorders</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="developmental_delays"><span class="q-opt-text">Developmental delays</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="autism"><span class="q-opt-text">Autism spectrum</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="trauma_ptsd"><span class="q-opt-text">Trauma history (PTSD)</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="checkbox" name="q26_behavioral" value="any"><span class="q-opt-text">Open to any</span><span class="q-mark q-mark--box" aria-hidden="true"></span></label>
+                </div>
+              </div>
+              <p class="q-note">Openness here changes what support we help you line up — it is never a test.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q27 (conditionally required) -->
+          <fieldset class="q-entry" data-q="q27">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 27</span>
+              <span class="q-prompt">Do you have access to therapeutic or specialized support services in your area?</span>
+              <span class="q-req" id="q27_req" hidden>required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup" aria-describedby="q27_error">
+                  <label class="q-opt"><input type="radio" name="q27_support_access" value="actively_connected"><span class="q-opt-text">Yes, actively connected</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q27_support_access" value="could_access"><span class="q-opt-text">Yes, could access if needed</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q27_support_access" value="limited"><span class="q-opt-text">Limited access in our area</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q27_support_access" value="unsure"><span class="q-opt-text">Unsure</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+                <p class="q-error" id="q27_error" role="alert">Because of the support needs you selected above, please tell us about your access to services.</p>
+
+                <!-- therapist locator · high needs + limited access -->
+                <div class="q-branch" id="note-locator">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — support services</p>
+                      <p>You indicated openness to higher support needs with limited local access. Many specialized services are available remotely.</p>
+                      <p><a class="hm-textlink" href="https://www.psychologytoday.com/us/therapists/child" target="_blank" rel="noopener noreferrer">Find a child &amp; family therapist near you</a></p>
+                    </aside>
+                  </div>
+                </div>
+
+                <!-- trauma-informed care · PTSD + limited access -->
+                <div class="q-branch" id="note-trauma">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — trauma-informed care</p>
+                      <p>Children with a trauma history thrive with caregivers connected to trauma-informed support, including remote options:</p>
+                      <p><a class="hm-textlink" href="https://www.nctsn.org/" target="_blank" rel="noopener noreferrer">National Child Traumatic Stress Network</a></p>
+                      <p><a class="hm-textlink" href="https://www.psychologytoday.com/us/therapists/trauma-and-ptsd" target="_blank" rel="noopener noreferrer">Trauma &amp; PTSD therapist directory</a></p>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">May become required, depending on the needs you selected above.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q28 -->
+          <fieldset class="q-entry" data-q="q28">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 28</span>
+              <span class="q-prompt">Are you open to a child with a history of trauma or abuse?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q28_trauma_openness" value="trained"><span class="q-opt-text">Yes, we have training / experience</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q28_trauma_openness" value="willing"><span class="q-opt-text">Yes, willing to learn</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q28_trauma_openness" value="prefer_not"><span class="q-opt-text">Prefer not</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q28_trauma_openness" value="unsure"><span class="q-opt-text">Unsure</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- soft advisory · teens + prefer not -->
+                <div class="q-branch" id="note-teen">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note ik-note--advisory" role="status">
+                      <p class="ik-note-eyebrow">A note about teens in care</p>
+                      <p>Many teenagers awaiting adoption have experienced trauma. We recommend a conversation with an agency counselor before finalizing this preference — it does not affect your eligibility, and you can continue either way.</p>
+                      <button type="button" class="ik-note-dismiss" data-dismiss="note-teen">Noted — dismiss</button>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q29 -->
+          <fieldset class="q-entry" data-q="q29">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 29</span>
+              <span class="q-prompt">Are you open to maintaining contact with the birth family?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q29_birth_family_contact" value="open_adoption"><span class="q-opt-text">Yes, open adoption</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q29_birth_family_contact" value="occasional"><span class="q-opt-text">Yes, occasional contact</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q29_birth_family_contact" value="closed"><span class="q-opt-text">Prefer closed adoption</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q29_birth_family_contact" value="agency_guidance"><span class="q-opt-text">Open to agency guidance</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <div class="ik-divider" aria-hidden="true"><span>&sect;</span></div>
+
+        <!-- ======== Chapter V · Legal Readiness ======== -->
+        <section class="ik-chapter" id="chapter-legal" data-section="legal">
+          <header class="ik-chapter-head hm-reveal">
+            <span class="ik-chapter-ghost" aria-hidden="true">05</span>
+            <p class="ik-chapter-kicker">Chapter Five — Entries 30&ndash;35</p>
+            <h2 class="ik-chapter-title">Legal Readiness</h2>
+            <p class="ik-chapter-desc">Where you stand in the legal, financial, and home-study process.</p>
+          </header>
+
+          <!-- Q30 -->
+          <div class="q-entry" data-q="q30">
+            <div class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 30</span>
+              <label class="q-prompt" for="q30_adoption_state">What state will the adoption take place in?</label>
+              <span class="q-req">required</span>
+            </div>
+            <div class="q-body">
+              <div class="q-main">
+                <select id="q30_adoption_state" name="q30_adoption_state" class="q-writein q-select" required aria-required="true" aria-describedby="q30_error">
+                  <option value="">Select a state&hellip;</option>
                 </select>
-                <p class="field-error" id="q30_error" role="alert" aria-live="assertive">Please select the state where the adoption will take place.</p>
+                <p class="q-error" id="q30_error" role="alert">Please select the state where the adoption will take place.</p>
 
-                <!-- ICPC notice (Q8 != Q30) -->
-                <div class="conditional" id="banner-icpc">
-                  <div class="alert-banner alert-info" role="status">
-                    <span class="alert-icon" aria-hidden="true">i</span>
-                    <div class="alert-body">
-                      <strong>Interstate adoption (ICPC) applies</strong>
-                      Your residence and adoption state differ, so the Interstate Compact on the Placement of Children (ICPC) applies. Your agency will guide the review between both states.
-                    </div>
-                  </div>
-                  <div class="info-card">
-                    <h4>What is the ICPC?</h4>
-                    <p>The ICPC is an agreement among all 50 states, DC, and the U.S. Virgin Islands that protects children placed across state lines. Both the sending and receiving state must approve the placement before the child can move, which typically adds a few weeks to the timeline.</p>
-                    <p><a href="https://aphsa.org/AAICPC/AAICPC/About_ICPC.aspx" target="_blank" rel="noopener noreferrer">Learn more about the ICPC →</a></p>
+                <!-- ICPC · Q8 differs from Q30 -->
+                <div class="q-branch" id="note-icpc">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — interstate adoption</p>
+                      <p>Your residence and adoption state differ, so the Interstate Compact on the Placement of Children (ICPC) applies. Both states must approve the placement before a child can move — routine, but it typically adds a few weeks. Your agency will guide the review.</p>
+                      <p><a class="hm-textlink" href="https://aphsa.org/AAICPC/AAICPC/About_ICPC.aspx" target="_blank" rel="noopener noreferrer">Learn more about the ICPC</a></p>
+                    </aside>
                   </div>
                 </div>
               </div>
-
-              <!-- Q31 -->
-              <fieldset class="q-block q-fieldset" data-question="q31">
-                <legend class="q-legend">Have you started a home study yet?<span class="required-star" aria-hidden="true">*</span></legend>
-                <div class="option-group" role="radiogroup" aria-required="true" aria-describedby="q31_error">
-                  <label class="option"><input type="radio" name="q31_home_study" value="completed" data-branch="q31"><span class="option-text">Yes, completed</span></label>
-                  <label class="option"><input type="radio" name="q31_home_study" value="in_progress" data-branch="q31"><span class="option-text">Yes, in progress</span></label>
-                  <label class="option"><input type="radio" name="q31_home_study" value="not_started" data-branch="q31"><span class="option-text">No, not yet started</span></label>
-                  <label class="option"><input type="radio" name="q31_home_study" value="unsure" data-branch="q31"><span class="option-text">Unsure what this is</span></label>
-                </div>
-                <p class="field-error" id="q31_error" role="alert" aria-live="assertive">Please tell us about your home study status.</p>
-
-                <!-- Home-study explainer (Q31 = Unsure) -->
-                <div class="conditional" id="card-homestudy">
-                  <div class="info-card">
-                    <h4>What is a home study?</h4>
-                    <p>A home study is a written assessment by a licensed social worker confirming your home is a safe, stable place for a child. It usually includes interviews, background checks, a home visit, and reference checks.</p>
-                    <ul>
-                      <li><strong>Estimated cost:</strong> typically $1,000-$3,000 (often reduced or waived in foster-to-adopt cases).</li>
-                      <li><strong>Typical timeline:</strong> about 2-6 months from start to approval.</li>
-                    </ul>
-                    <p>You don't need this completed to continue. <a href="/adopt/home-study">Visit our Home Study service →</a></p>
-                  </div>
-                </div>
-              </fieldset>
-
-              <!-- Q32 -->
-              <fieldset class="q-block q-fieldset" data-question="q32">
-                <legend class="q-legend">Have you engaged an adoption attorney or agency?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q32_attorney_agency" value="attorney"><span class="option-text">Yes, attorney retained</span></label>
-                  <label class="option"><input type="radio" name="q32_attorney_agency" value="agency"><span class="option-text">Yes, working with an agency</span></label>
-                  <label class="option"><input type="radio" name="q32_attorney_agency" value="both"><span class="option-text">Both</span></label>
-                  <label class="option"><input type="radio" name="q32_attorney_agency" value="just_starting"><span class="option-text">No, just starting</span></label>
-                </div>
-              </fieldset>
-
-              <!-- Q33 -->
-              <fieldset class="q-block q-fieldset" data-question="q33">
-                <legend class="q-legend">Are you prepared for adoption costs?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q33_costs" value="budgeted" data-branch="q33"><span class="option-text">Yes, we have budgeted</span></label>
-                  <label class="option"><input type="radio" name="q33_costs" value="partially" data-branch="q33"><span class="option-text">Partially - exploring options</span></label>
-                  <label class="option"><input type="radio" name="q33_costs" value="seeking_assistance" data-branch="q33"><span class="option-text">No, seeking financial assistance</span></label>
-                  <label class="option"><input type="radio" name="q33_costs" value="not_sure" data-branch="q33"><span class="option-text">Not sure of the costs yet</span></label>
-                </div>
-
-                <!-- Financial resources card (Q33 = seeking assistance) -->
-                <div class="conditional" id="card-financial">
-                  <div class="info-card">
-                    <h4>Financial assistance for adoption</h4>
-                    <p>Adoption is more affordable than many families expect. These programs can substantially reduce costs:</p>
-                    <ul>
-                      <li><a href="https://www.irs.gov/taxtopics/tc607" target="_blank" rel="noopener noreferrer">Federal Adoption Tax Credit</a>, a per-child credit for qualified expenses.</li>
-                      <li><a href="https://www.childwelfare.gov/topics/adoption/adopt-assistance/" target="_blank" rel="noopener noreferrer">State adoption subsidy programs</a>, with ongoing support for eligible families.</li>
-                      <li><a href="https://adoptionnetwork.com/adoption-grants/" target="_blank" rel="noopener noreferrer">Nonprofit grant directory</a>, including grants and low-interest loans.</li>
-                    </ul>
-                  </div>
-                </div>
-              </fieldset>
-
-              <!-- Q34 -->
-              <fieldset class="q-block q-fieldset" data-question="q34">
-                <legend class="q-legend">Have all adults completed background checks?<span class="required-star" aria-hidden="true">*</span></legend>
-                <div class="option-group" role="radiogroup" aria-required="true" aria-describedby="q34_error">
-                  <label class="option"><input type="radio" name="q34_background_checks" value="all_complete"><span class="option-text">Yes, all complete</span></label>
-                  <label class="option"><input type="radio" name="q34_background_checks" value="in_progress"><span class="option-text">In progress</span></label>
-                  <label class="option"><input type="radio" name="q34_background_checks" value="not_started"><span class="option-text">Not yet started</span></label>
-                </div>
-                <p class="field-error" id="q34_error" role="alert" aria-live="assertive">Please tell us about your background check status.</p>
-              </fieldset>
-
-              <!-- Q35 -->
-              <fieldset class="q-block q-fieldset" data-question="q35">
-                <legend class="q-legend">Do you have legal representation or a plan to seek it?</legend>
-                <div class="option-group" role="radiogroup">
-                  <label class="option"><input type="radio" name="q35_legal_rep" value="attorney" data-branch="q35"><span class="option-text">Yes, attorney retained</span></label>
-                  <label class="option"><input type="radio" name="q35_legal_rep" value="planning" data-branch="q35"><span class="option-text">Planning to find one</span></label>
-                  <label class="option"><input type="radio" name="q35_legal_rep" value="agency_counsel" data-branch="q35"><span class="option-text">Will use agency counsel</span></label>
-                  <label class="option"><input type="radio" name="q35_legal_rep" value="unsure" data-branch="q35"><span class="option-text">Unsure if needed</span></label>
-                </div>
-
-                <!-- Legal-aid explainer (Q35 = Unsure) -->
-                <div class="conditional" id="card-legalaid">
-                  <div class="info-card">
-                    <h4>Do I need legal representation?</h4>
-                    <p>Most adoptions require a court finalization, and an attorney (or your agency's counsel) ensures the legal steps are handled correctly. If cost is a concern, legal aid and pro bono services may be available.</p>
-                    <ul>
-                      <li><a href="https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help" target="_blank" rel="noopener noreferrer">Find legal aid near you (Legal Services Corporation)</a></li>
-                      <li><a href="https://www.americanbar.org/groups/legal_services/flh-home/" target="_blank" rel="noopener noreferrer">ABA Free Legal Answers directory</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </fieldset>
+              <p class="q-note">Pre-filled from your residence. Families sometimes adopt through another state — that is routine.</p>
             </div>
-          </section>
-
-          <!-- Form Actions -->
-          <div class="form-actions">
-            <button type="button" class="btn btn-secondary" id="backBtn" aria-label="Go to previous section" style="display: none;">
-              ← Back
-            </button>
-
-            <button type="button" class="btn btn-secondary" id="saveBtn">
-              Save & Continue
-            </button>
-
-            <button type="button" class="btn btn-primary" id="nextBtn">
-              Next Section →
-            </button>
           </div>
 
-          <!-- Privacy Notice -->
-          <div class="privacy-notice">
-            <svg viewBox="0 0 24 24" width="20" height="20">
-              <path d="M 12 2 L 24 8 L 24 14 Q 12 22 12 22 Q 0 14 0 14 L 0 8 Z" fill="none" stroke="currentColor" stroke-width="1.5"/>
-              <circle cx="12" cy="12" r="2" fill="currentColor"/>
-            </svg>
-            <p>
-              Your answers are confidential and tied to your HavenLink account. We do not publish intake responses.
-            </p>
+          <!-- Q31 -->
+          <fieldset class="q-entry" data-q="q31">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 31</span>
+              <span class="q-prompt">Have you started a home study yet?</span>
+              <span class="q-req">required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup" aria-required="true" aria-describedby="q31_error">
+                  <label class="q-opt"><input type="radio" name="q31_home_study" value="completed"><span class="q-opt-text">Yes, completed</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q31_home_study" value="in_progress"><span class="q-opt-text">Yes, in progress</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q31_home_study" value="not_started"><span class="q-opt-text">No, not yet started</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q31_home_study" value="unsure"><span class="q-opt-text">Unsure what this is</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+                <p class="q-error" id="q31_error" role="alert">Please tell us about your home study status.</p>
+
+                <!-- home study explainer · Q31 = unsure -->
+                <div class="q-branch" id="note-homestudy">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — what is a home study?</p>
+                      <p>A written assessment by a licensed social worker confirming your home is a safe, stable place for a child — interviews, background checks, a home visit, and references. Typically <strong>$1,000&ndash;$3,000</strong> and <strong>2&ndash;6 months</strong>, often reduced in foster-to-adopt cases.</p>
+                      <p>You do not need one to continue this form. <a class="hm-textlink" href="/adopt/home-study">Visit our Home Study service</a></p>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Not sure what this is? Choose &ldquo;Unsure&rdquo; and we will explain right here.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q32 -->
+          <fieldset class="q-entry" data-q="q32">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 32</span>
+              <span class="q-prompt">Have you engaged an adoption attorney or agency?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q32_attorney_agency" value="attorney"><span class="q-opt-text">Yes, attorney retained</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q32_attorney_agency" value="agency"><span class="q-opt-text">Yes, working with an agency</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q32_attorney_agency" value="both"><span class="q-opt-text">Both</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q32_attorney_agency" value="just_starting"><span class="q-opt-text">No, just starting</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q33 -->
+          <fieldset class="q-entry" data-q="q33">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 33</span>
+              <span class="q-prompt">Are you prepared for the costs associated with adoption?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q33_costs" value="budgeted"><span class="q-opt-text">Yes, we have budgeted</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q33_costs" value="partially"><span class="q-opt-text">Partially — exploring options</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q33_costs" value="seeking_assistance"><span class="q-opt-text">No, seeking financial assistance</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q33_costs" value="not_sure"><span class="q-opt-text">Not sure of the costs yet</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- financial resources · Q33 = seeking assistance -->
+                <div class="q-branch" id="note-financial">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — financial assistance</p>
+                      <p>Adoption is more affordable than many families expect. These programs can substantially reduce costs:</p>
+                      <p><a class="hm-textlink" href="https://www.irs.gov/taxtopics/tc607" target="_blank" rel="noopener noreferrer">Federal Adoption Tax Credit</a></p>
+                      <p><a class="hm-textlink" href="https://www.childwelfare.gov/topics/adoption/adopt-assistance/" target="_blank" rel="noopener noreferrer">State adoption subsidy programs</a></p>
+                      <p><a class="hm-textlink" href="https://adoptionnetwork.com/adoption-grants/" target="_blank" rel="noopener noreferrer">Nonprofit grant directory</a></p>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+              <p class="q-note">Grants, subsidies, and the federal tax credit exist for exactly this.</p>
+            </div>
+          </fieldset>
+
+          <!-- Q34 -->
+          <fieldset class="q-entry" data-q="q34">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 34</span>
+              <span class="q-prompt">Have all adults in the home completed background checks?</span>
+              <span class="q-req">required</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup" aria-required="true" aria-describedby="q34_error">
+                  <label class="q-opt"><input type="radio" name="q34_background_checks" value="all_complete"><span class="q-opt-text">Yes, all complete</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q34_background_checks" value="in_progress"><span class="q-opt-text">In progress</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q34_background_checks" value="not_started"><span class="q-opt-text">Not yet started</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+                <p class="q-error" id="q34_error" role="alert">Please tell us about your background check status.</p>
+
+                <!-- getting started · Q34 = not started -->
+                <div class="q-branch" id="note-bgcheck">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — starting your checks</p>
+                      <p>Background checks are required before a formal agency application. Your home study provider walks you through state-specific fingerprinting — it is simpler than it sounds.</p>
+                      <p><a class="hm-textlink" href="/adopt/home-study">See our Home Study service</a></p>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Q35 -->
+          <fieldset class="q-entry" data-q="q35">
+            <legend class="q-head">
+              <span class="q-ordinal" aria-hidden="true">No. 35</span>
+              <span class="q-prompt">Do you have legal representation, or a plan to seek it?</span>
+            </legend>
+            <div class="q-body">
+              <div class="q-main">
+                <div class="q-options" role="radiogroup">
+                  <label class="q-opt"><input type="radio" name="q35_legal_rep" value="attorney"><span class="q-opt-text">Yes, attorney retained</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q35_legal_rep" value="planning"><span class="q-opt-text">Planning to find one</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q35_legal_rep" value="agency_counsel"><span class="q-opt-text">Will use agency counsel</span><span class="q-mark" aria-hidden="true"></span></label>
+                  <label class="q-opt"><input type="radio" name="q35_legal_rep" value="unsure"><span class="q-opt-text">Unsure if needed</span><span class="q-mark" aria-hidden="true"></span></label>
+                </div>
+
+                <!-- legal aid · Q35 = unsure -->
+                <div class="q-branch" id="note-legalaid">
+                  <div class="q-branch-inner">
+                    <aside class="ik-note" role="status">
+                      <p class="ik-note-eyebrow">Registry note — do I need an attorney?</p>
+                      <p>Most adoptions end with a court finalization, and counsel (yours or your agency's) is strongly recommended so the legal steps are handled correctly. If cost is a concern, legal aid and pro bono services may be available:</p>
+                      <p><a class="hm-textlink" href="https://www.lsc.gov/about-lsc/what-legal-aid/get-legal-help" target="_blank" rel="noopener noreferrer">Find legal aid near you (LSC)</a></p>
+                      <p><a class="hm-textlink" href="https://www.americanbar.org/groups/legal_services/flh-home/" target="_blank" rel="noopener noreferrer">ABA Free Legal Answers</a></p>
+                    </aside>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- ======== Certification & filing ======== -->
+        <section class="ik-sign" aria-labelledby="ikSignTitle">
+          <h2 class="ik-sign-title" id="ikSignTitle">Certification &amp; filing</h2>
+          <dl class="ik-ledger ik-ledger--sign">
+            <div class="ik-ledger-row">
+              <dt>Certified accurate by</dt>
+              <dd id="ikSignEmail">your account</dd>
+            </div>
+            <div class="ik-ledger-row">
+              <dt>Delivered to</dt>
+              <dd>HavenLink Registry — confidential</dd>
+            </div>
+          </dl>
+          <p class="ik-sign-privacy">Your answers are tied to your HavenLink account and sent to HavenLink only. Nothing is published, and nothing is shared with an agency until you choose to inquire.</p>
+          <div class="ik-sign-actions">
+            <button type="submit" class="hm-btn hm-btn--ink ik-file-btn" id="ikFileBtn">File the dossier <span class="hm-btn-arrow">→</span></button>
           </div>
-        </form>
-      </div>
-    </section>
-  </div>
+          <p class="ik-submit-error" id="ikSubmitError" role="alert" hidden>The registry could not receive your dossier just now. Your answers are safe on this device — please try again in a moment.</p>
+        </section>
+      </form>
+    </div>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -815,14 +1097,14 @@
         <h3>About HavenLink</h3>
         <p>HavenLink connects prospective adoptive families with licensed agencies, practical resources, and a structured intake process.</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Navigation</h3>
         <ul>
           <li><a href="#intake-form">Intake Form</a></li>
         </ul>
       </div>
-      
+
       <div class="footer-section">
         <h3>Adoption Hotline</h3>
         <p>
@@ -830,7 +1112,7 @@
         </p>
         <p class="hotline-desc">24/7 support for adoption inquiries and resources</p>
       </div>
-      
+
       <div class="footer-section">
         <h3>Connect</h3>
         <div class="social-links">
@@ -850,7 +1132,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
@@ -869,11 +1151,11 @@
         <p><strong>Last updated: May 29, 2026</strong></p>
         <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
         <p>We use Your Personal Data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.</p>
-        
+
         <h2>Interpretation and Definitions</h2>
         <h3>Interpretation</h3>
         <p>The words whose initial letters are capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
-        
+
         <h3>Definitions</h3>
         <p>For the purposes of this Privacy Policy:</p>
         <ul>
@@ -890,10 +1172,10 @@
           <li><strong>Website</strong> refers to HavenLink, accessible from <a href="https://havenlink.org/" target="_blank">https://havenlink.org/</a>.</li>
           <li><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
         </ul>
-        
+
         <h2>Collecting and Using Your Personal Data</h2>
         <h3>Types of Data Collected</h3>
-        
+
         <h4>Personal Data</h4>
         <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
         <ul>
@@ -902,13 +1184,13 @@
           <li>Phone number</li>
           <li>Address, State, Province, ZIP/Postal code, City</li>
         </ul>
-        
+
         <h4>Usage Data</h4>
         <p>Usage Data is collected automatically when using the Service.</p>
         <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
         <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device's unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
         <p>We may also collect information that Your browser sends whenever You visit Our Service or when You access the Service by or through a mobile device.</p>
-        
+
         <h4>Tracking Technologies and Cookies</h4>
         <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies We use include beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
         <ul>
@@ -939,7 +1221,7 @@
           </li>
         </ul>
         <p>For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of Our Privacy Policy.</p>
-        
+
         <h3>Use of Your Personal Data</h3>
         <p>The Company may use Personal Data for the following purposes:</p>
         <ul>
@@ -961,7 +1243,7 @@
           <li><strong>With other users:</strong> If Our Service offers public areas, when You share Personal Data or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside.</li>
           <li><strong>With Your consent</strong>: We may disclose Your Personal Data for any other purpose with Your consent.</li>
         </ul>
-        
+
         <h3>Retention of Your Personal Data</h3>
         <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if We are required to retain Your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
         <p>Where possible, We apply shorter retention periods and/or reduce identifiability by deleting, aggregating, or anonymizing data. Unless otherwise stated, the retention periods below are maximum periods ("up to") and We may delete or anonymize data sooner when it is no longer needed for the relevant purpose. We apply different retention periods to different categories of Personal Data based on the purpose of processing and legal obligations:</p>
@@ -1002,24 +1284,24 @@
           <li>Backup retention: Residual copies may remain in encrypted backups for a limited period consistent with our backup retention schedule and are not restored except where necessary for security, disaster recovery, or legal compliance.</li>
           <li>Anonymization: In some cases, We convert Personal Data into anonymous statistical data that cannot be linked back to You. This anonymized data may be retained indefinitely for research and analytics.</li>
         </ul>
-        
+
         <h3>Transfer of Your Personal Data</h3>
         <p>Your information, including Personal Data, is processed at the Company's operating offices and in other places where the parties involved in processing are located. This information may be transferred to and maintained on computers outside Your state, province, country, or other governmental jurisdiction, where data protection laws may differ.</p>
         <p>Where required by applicable law, We will ensure that international transfers of Your Personal Data are subject to appropriate safeguards and supplementary measures where appropriate. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
-        
+
         <h3>Delete Your Personal Data</h3>
         <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
         <p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
         <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any Personal Data that You have provided to Us.</p>
         <p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
-        
+
         <h3>Disclosure of Your Personal Data</h3>
         <h4>Business Transactions</h4>
         <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
-        
+
         <h4>Law enforcement</h4>
         <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
-        
+
         <h4>Other legal requirements</h4>
         <p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
         <ul>
@@ -1029,23 +1311,23 @@
           <li>Protect the personal safety of Users of the Service or the public</li>
           <li>Protect against legal liability</li>
         </ul>
-        
+
         <h3>Security of Your Personal Data</h3>
         <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially reasonable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
-        
+
         <h2>Children's Privacy</h2>
         <p>Our Service does not address anyone under the age of 16. We do not knowingly collect personally identifiable information from anyone under the age of 16. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 16 without verification of parental consent, We take steps to remove that information from Our servers.</p>
         <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
-        
+
         <h2>Links to Other Websites</h2>
         <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
         <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
-        
+
         <h2>Changes to this Privacy Policy</h2>
         <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
         <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
         <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
-        
+
         <h2>Contact Us</h2>
         <p>If you have any questions about this Privacy Policy, You can contact us:</p>
         <ul>
@@ -1055,36 +1337,41 @@
     </div>
   </div>
 
-  <!-- Sensitive acknowledgment dialog (Q20 CPS history) -->
-  <div id="cpsAckOverlay" class="ack-overlay" role="dialog" aria-modal="true" aria-labelledby="cpsAckTitle" aria-describedby="cpsAckBody">
-    <div class="ack-dialog">
-      <h3 id="cpsAckTitle">Thank you for your honesty</h3>
-      <p id="cpsAckBody">We know this can be difficult to answer. A past CPS report does <strong>not</strong> automatically disqualify your family. Agencies review the circumstances and any changes made since the report.</p>
-      <p>If you're comfortable, the next field lets you share a brief note. It is stored securely and seen only by your assigned agency representative. You can also leave it blank.</p>
-      <div class="ack-actions">
-        <button type="button" class="btn btn-secondary" id="cpsAckBack">Go back</button>
-        <button type="button" class="btn btn-primary" id="cpsAckContinue">I understand, continue</button>
+  <!-- FILED overlay (revealed by intake.js on successful submit) -->
+  <div id="intakeComplete" class="ik-filed hm-on-ink" role="dialog" aria-modal="true" aria-labelledby="ikFiledTitle">
+    <div class="ik-filed-inner">
+      <p class="hm-eyebrow">HavenLink Registry</p>
+      <h2 id="ikFiledTitle" class="ik-filed-title">Your dossier is <em>filed.</em></h2>
+      <p class="ik-filed-date">Received <span id="ikFiledDate">today</span> &middot; five chapters &middot; thirty-five entries</p>
+      <p class="ik-filed-body">Thank you for the care in these answers. HavenLink has received your intake and will use it to support the next step with licensed agencies.</p>
+      <div class="ik-filed-actions">
+        <a href="/adopt/agency-profiles" class="hm-btn hm-btn--paper">Continue to agencies <span class="hm-btn-arrow">→</span></a>
       </div>
     </div>
-  </div>
-
-  <!-- Cinematic completion moment (revealed by adopt.js on successful submit) -->
-  <div id="intakeComplete" class="ik-complete" role="dialog" aria-modal="true" aria-labelledby="ikCompleteTitle">
-    <div class="ik-complete-inner">
-      <p class="ik-complete-eyebrow hm-eyebrow">Family Intake · Complete</p>
-      <h2 id="ikCompleteTitle" class="ik-complete-title">Received. Your family's story is <em>with us.</em></h2>
-      <p class="ik-complete-body">Thank you for sharing these details. HavenLink has received your intake and will use it to support the next step with licensed agencies.</p>
-      <div class="ik-complete-actions">
-        <a href="/adopt/agency-profiles" class="hm-btn hm-btn--paper">See agencies <span class="hm-btn-arrow">→</span></a>
-      </div>
+    <div class="ik-filed-stamp" aria-hidden="true">
+      <svg viewBox="0 0 300 130" width="300" height="130" focusable="false">
+        <defs>
+          <filter id="ikFiledInk" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="11" result="noise"/>
+            <feComponentTransfer in="noise" result="grain">
+              <feFuncA type="linear" slope="3.2" intercept="-0.55"/>
+            </feComponentTransfer>
+            <feComposite in="SourceGraphic" in2="grain" operator="in"/>
+          </filter>
+        </defs>
+        <g class="ik-filed-stamp-art" filter="url(#ikFiledInk)">
+          <rect x="8" y="8" width="284" height="114" fill="none" stroke-width="3"/>
+          <rect x="18" y="18" width="264" height="94" fill="none" stroke-width="1.5"/>
+          <text x="150" y="86" text-anchor="middle" class="ik-filed-word">FILED</text>
+        </g>
+      </svg>
     </div>
   </div>
 
   <script src="../script.js"></script>
-  <script src="adopt.js"></script>
+  <script src="intake.js"></script>
   <script src="/account.js"></script>
   <script src="../editorial.js" defer></script>
-  <script src="intake-hero.js" defer></script>
   <script src="/chat-widget.js" defer></script>
 </body>
 </html>

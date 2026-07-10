@@ -510,42 +510,161 @@ body.editorial .adopt-subnav .subnav-item.active {
   border-bottom-color: var(--terracotta);
 }
 
-/* ==================== 8. Newsletter popup (editorial reskin) ====================
-   Markup built by account.js; base styles in styles.css. Here we override to a
-   flat paper card with a terracotta top rule, Fraunces title, hm-btn-style accept
-   (legacy .btn ripple neutralized), and an understated textlink decline. */
+/* ==================== 8. Newsletter popup — "The Dispatch" =======================
+   Split-panel editorial modal built by account.js: a cinematic ink hero panel
+   carrying the woven-thread canvas (signature visual) beside a paper content pane
+   with Fraunces headline hierarchy. Accept plays an in-modal confirmation beat
+   (the canvas ties its knot while the pane crossfades) before it closes.
+   All markup is .newsletter-*; base fallback styles live in styles.css. */
 
 body.editorial .newsletter-overlay {
-  background-color: rgba(13, 24, 48, 0.6);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background-color: rgba(13, 24, 48, 0.62);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
 }
 
 body.editorial .newsletter-card {
+  display: grid;
+  grid-template-columns: 1.02fr 1fr;
+  width: min(900px, 94vw);
+  max-width: none;
+  max-height: 92vh;
+  padding: 0;
   background-color: var(--paper);
   border: var(--hairline);
-  border-top: 3px solid var(--terracotta);
   border-radius: 0;
-  max-width: 30rem;
-  padding: clamp(2.25rem, 4vw, 3.25rem);
-  text-align: left;
+  overflow: hidden;
   box-shadow: 0 40px 90px -30px rgba(13, 24, 48, 0.55);
+  animation: nlCardIn 0.6s var(--ease-out) both;
+}
+
+@keyframes nlCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- Left: ink hero panel + signature canvas ---- */
+body.editorial .newsletter-hero {
+  position: relative;
+  min-height: 300px;
+  overflow: hidden;
+  background-color: var(--ink);
+  background-image: radial-gradient(
+    120% 85% at 72% 50%,
+    rgba(180, 85, 31, 0.22),
+    transparent 62%
+  );
+}
+
+/* film-grain texture (same SVG data URI as .hm-on-ink) */
+body.editorial .newsletter-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+body.editorial .newsletter-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+body.editorial .newsletter-index {
+  position: absolute;
+  z-index: 3;
+  left: clamp(1.5rem, 2.5vw, 2.25rem);
+  bottom: clamp(1.35rem, 2.5vw, 2rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: rgba(250, 248, 245, 0.55);
+}
+
+/* ---- Right: paper content pane (body + confirm stacked in one cell) ---- */
+body.editorial .newsletter-content {
+  position: relative;
+  display: grid;
+  grid-template-areas: "stack";
+  align-content: center;
+  padding: clamp(2.25rem, 4vw, 3.25rem);
+  text-align: left; /* override base .newsletter-card text-align: center */
+}
+
+body.editorial .newsletter-body,
+body.editorial .newsletter-confirm {
+  grid-area: stack;
+  align-self: center;
+}
+
+body.editorial .newsletter-body {
+  transition: opacity 0.45s var(--ease-out), transform 0.55s var(--ease-out);
+}
+
+body.editorial .newsletter-confirm {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease-out) 0.15s,
+    transform 0.6s var(--ease-out) 0.15s;
+}
+
+body.editorial .newsletter-card.is-accepted .newsletter-body {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+}
+
+body.editorial .newsletter-card.is-accepted .newsletter-confirm {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.editorial .newsletter-eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--terracotta);
+  margin: 0 0 1.1rem;
 }
 
 body.editorial .newsletter-title {
   font-family: var(--font-display);
+  font-variation-settings: "opsz" 40;
   font-weight: 460;
-  font-size: clamp(1.65rem, 3vw, 2.1rem);
-  line-height: 1.12;
+  font-size: clamp(1.75rem, 2.6vw, 2.4rem);
+  line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--ink);
-  margin: 0 0 1rem;
+  margin: 0 0 1.1rem;
+}
+
+body.editorial .newsletter-title em {
+  font-style: italic;
+  color: var(--terracotta);
 }
 
 body.editorial .newsletter-text {
   color: var(--muted);
   font-size: var(--text-body);
-  line-height: 1.7;
+  line-height: 1.65;
   margin: 0 0 2rem;
 }
 
@@ -557,7 +676,7 @@ body.editorial .newsletter-actions {
   flex-wrap: wrap;
 }
 
-/* accept: styled like .hm-btn--ink (overrides legacy .btn), ripple hidden */
+/* accept: full pill styled like .hm-btn--ink (no legacy .btn / ripple) */
 body.editorial .newsletter-accept {
   width: auto;
   display: inline-flex;
@@ -573,17 +692,14 @@ body.editorial .newsletter-accept {
   font-weight: 530;
   letter-spacing: 0.02em;
   box-shadow: none;
-  overflow: hidden;
-  transition: background-color 0.35s var(--ease-out), transform 0.35s var(--ease-out);
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
 }
 
 body.editorial .newsletter-accept:hover {
   background: var(--terracotta);
   transform: translateY(-2px);
-}
-
-body.editorial .newsletter-accept .ripple {
-  display: none !important; /* kill the legacy script.js ripple span */
 }
 
 body.editorial .newsletter-decline {
@@ -601,6 +717,101 @@ body.editorial .newsletter-decline {
 body.editorial .newsletter-decline:hover {
   color: var(--terracotta);
   border-bottom-color: var(--terracotta);
+}
+
+body.editorial .newsletter-accept:focus-visible,
+body.editorial .newsletter-decline:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+/* ---- Confirmation copy ---- */
+body.editorial .newsletter-confirm-title {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 36;
+  font-weight: 460;
+  font-size: clamp(1.5rem, 2.2vw, 2rem);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+}
+
+body.editorial .newsletter-confirm-title::after {
+  content: "";
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  margin-top: 1.1rem;
+  background: var(--terracotta);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.6s var(--ease-out) 0.45s;
+}
+
+body.editorial .newsletter-card.is-accepted .newsletter-confirm-title::after {
+  transform: scaleX(1);
+}
+
+body.editorial .newsletter-confirm-text {
+  color: var(--muted);
+  font-size: var(--text-body);
+  line-height: 1.65;
+  margin: 1.25rem 0 0;
+}
+
+/* ---- Entry: staggered reveal of the content pane ---- */
+body.editorial .newsletter-body > * {
+  animation: nlItemIn 0.6s var(--ease-out) both;
+}
+body.editorial .newsletter-body > .newsletter-eyebrow {
+  animation-delay: 0.14s;
+}
+body.editorial .newsletter-body > .newsletter-title {
+  animation-delay: 0.22s;
+}
+body.editorial .newsletter-body > .newsletter-text {
+  animation-delay: 0.3s;
+}
+body.editorial .newsletter-body > .newsletter-actions {
+  animation-delay: 0.38s;
+}
+
+@keyframes nlItemIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---- Mobile: stack to a single column, hero becomes a top band ---- */
+@media (max-width: 620px) {
+  body.editorial .newsletter-card {
+    grid-template-columns: 1fr;
+    width: min(440px, 94vw);
+  }
+  body.editorial .newsletter-hero {
+    min-height: 150px;
+  }
+}
+
+/* ---- Reduced motion: no entry/confirm/canvas motion (canvas is JS-gated too) ---- */
+@media (prefers-reduced-motion: reduce) {
+  body.editorial .newsletter-card,
+  body.editorial .newsletter-body > * {
+    animation: none;
+  }
+  body.editorial .newsletter-body,
+  body.editorial .newsletter-confirm,
+  body.editorial .newsletter-accept,
+  body.editorial .newsletter-decline,
+  body.editorial .newsletter-confirm-title::after {
+    transition: none;
+  }
 }
 
 /* ==================== 9. Shared page hero ====================

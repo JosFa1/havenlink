@@ -282,19 +282,48 @@
     const card = document.createElement("div");
     card.className = "newsletter-card";
 
+    // --- Left: cinematic ink hero panel carrying the woven-thread canvas ---
+    const hero = document.createElement("div");
+    hero.className = "newsletter-hero";
+
+    const canvas = document.createElement("canvas");
+    canvas.className = "newsletter-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+
+    const index = document.createElement("span");
+    index.className = "newsletter-index";
+    index.textContent = "No. 01";
+
+    hero.appendChild(canvas);
+    hero.appendChild(index);
+
+    // --- Right: paper content pane ---
+    const content = document.createElement("div");
+    content.className = "newsletter-content";
+
+    const body = document.createElement("div");
+    body.className = "newsletter-body";
+
+    const eyebrow = document.createElement("span");
+    eyebrow.className = "newsletter-eyebrow";
+    eyebrow.textContent = "The Dispatch";
+
     const title = document.createElement("h2");
     title.id = "newsletterTitle";
     title.className = "newsletter-title";
-    title.textContent = "Join the HavenLink Newsletter";
+    title.appendChild(document.createTextNode("Stay on the thread "));
+    const titleEm = document.createElement("em");
+    titleEm.textContent = "home.";
+    title.appendChild(titleEm);
 
     const text = document.createElement("p");
     text.className = "newsletter-text";
     text.textContent =
-      "Learn what to expect at each stage of adoption, how to prepare, and which resources can help your family move forward. Helpful updates, no spam.";
+      "Notes for each stage of the journey — what to prepare, and who can help. No spam.";
 
     const accept = document.createElement("button");
     accept.type = "button";
-    accept.className = "btn btn-primary newsletter-accept";
+    accept.className = "newsletter-accept";
     accept.textContent = "Yes, sign me up";
 
     const decline = document.createElement("button");
@@ -307,45 +336,292 @@
     actions.appendChild(accept);
     actions.appendChild(decline);
 
-    card.appendChild(title);
-    card.appendChild(text);
-    card.appendChild(actions);
+    body.appendChild(eyebrow);
+    body.appendChild(title);
+    body.appendChild(text);
+    body.appendChild(actions);
+
+    // --- Confirmation state: crossfades in over the body on accept ---
+    const confirm = document.createElement("div");
+    confirm.className = "newsletter-confirm";
+    confirm.setAttribute("aria-live", "polite");
+
+    const confirmEyebrow = document.createElement("span");
+    confirmEyebrow.className = "newsletter-eyebrow";
+    confirmEyebrow.textContent = "The Dispatch";
+
+    const confirmTitle = document.createElement("p");
+    confirmTitle.className = "newsletter-confirm-title";
+    confirmTitle.textContent = "You're on the list.";
+
+    const confirmText = document.createElement("p");
+    confirmText.className = "newsletter-confirm-text";
+    confirmText.textContent = "The first dispatch is on its way.";
+
+    confirm.appendChild(confirmEyebrow);
+    confirm.appendChild(confirmTitle);
+    confirm.appendChild(confirmText);
+
+    content.appendChild(body);
+    content.appendChild(confirm);
+
+    card.appendChild(hero);
+    card.appendChild(content);
     overlay.appendChild(card);
     document.body.appendChild(overlay);
     document.body.classList.add("newsletter-open");
 
+    // Signature visual: start once the panel is laid out with real dimensions.
+    overlay._threads = startNewsletterThreads(canvas, hero);
+
     function onKeydown(e) {
       if (e.key === "Escape") closeNewsletter(overlay, false);
     }
-    accept.addEventListener("click", () => closeNewsletter(overlay, true));
+    accept.addEventListener("click", () => acceptNewsletter(overlay));
     decline.addEventListener("click", () => closeNewsletter(overlay, false));
     overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closeNewsletter(overlay, false); // backdrop = decline
     });
     document.addEventListener("keydown", onKeydown);
-    overlay._onKeydown = onKeydown; // so closeNewsletter can detach it
+    overlay._onKeydown = onKeydown; // so teardown can detach it
 
     accept.focus();
   }
 
-  async function closeNewsletter(overlay, subscribe) {
+  // Removes the popup and all of its listeners/animation. Idempotent.
+  function teardownNewsletter(overlay) {
+    if (overlay._closeTimer) {
+      clearTimeout(overlay._closeTimer);
+      overlay._closeTimer = null;
+    }
     if (overlay._onKeydown) {
       document.removeEventListener("keydown", overlay._onKeydown);
+      overlay._onKeydown = null;
+    }
+    if (overlay._threads) {
+      overlay._threads.stop();
+      overlay._threads = null;
     }
     overlay.remove();
     document.body.classList.remove("newsletter-open");
+  }
+
+  // Records the choice locally + on the server. Best-effort: if the POST fails,
+  // the server-side pending flag stays set and we ask again in a future session.
+  function recordNewsletterChoice(subscribe) {
     try {
       sessionStorage.setItem(NEWSLETTER_DISMISS_KEY, "1");
     } catch {
       /* ignore */
     }
-    try {
-      // Records the choice and clears the server-side pending flag. If it fails,
-      // the flag stays set and we'll ask again in a future session.
-      await postJson("/auth/newsletter", { subscribe: !!subscribe });
-    } catch {
+    postJson("/auth/newsletter", { subscribe: !!subscribe }).catch(() => {
       /* best-effort */
+    });
+  }
+
+  // Decline / Escape / backdrop: record the choice and remove immediately.
+  function closeNewsletter(overlay, subscribe) {
+    recordNewsletterChoice(!!subscribe);
+    teardownNewsletter(overlay);
+  }
+
+  // Accept: record immediately, then play the in-modal confirmation moment
+  // (threads tie into the knot + confirm crossfade) before removing.
+  function acceptNewsletter(overlay) {
+    if (overlay._accepted) return; // guard against a double click
+    overlay._accepted = true;
+    recordNewsletterChoice(true);
+
+    const card = overlay.querySelector(".newsletter-card");
+    if (card) card.classList.add("is-accepted");
+    if (overlay._threads) overlay._threads.accept();
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    // Escape still exits during the beat via the existing keydown handler.
+    overlay._closeTimer = setTimeout(
+      () => teardownNewsletter(overlay),
+      prefersReduced ? 600 : 1150
+    );
+  }
+
+  // Compact adaptation of the homepage threads hero (public/home.js): light-on-ink
+  // woven threads that converge on a terracotta knot. Returns a controller with
+  // stop() (teardown) and accept() (tighten the weave into the knot).
+  function startNewsletterThreads(canvas, host) {
+    const ctx = canvas.getContext && canvas.getContext("2d");
+    if (!ctx) return { stop() {}, accept() {} };
+
+    const reduceMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const LIGHT = "245, 241, 235";
+    const TERRA = "201, 122, 74";
+    const KNOT = "228, 183, 154";
+    const SAMPLES = 40;
+
+    let threads = [];
+    let W = 0;
+    let H = 0;
+    let rafId = null;
+    let lastTs = 0;
+    let elapsed = 0;
+    let converge = 0; // eased 0..1 "tie the knot" progress after accept
+    let convergeTarget = 0;
+
+    function rand(min, max) {
+      return min + Math.random() * (max - min);
     }
+
+    function smoothstep(a, b, x) {
+      const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+      return t * t * (3 - 2 * t);
+    }
+
+    function build() {
+      threads = [];
+      const count = W <= 360 ? 8 : 12;
+      for (let i = 0; i < count; i++) {
+        const isTerra = i % 4 === 1;
+        threads.push({
+          lane: 0.12 + (i / (count - 1)) * 0.76 + rand(-0.02, 0.02),
+          phase: rand(0, Math.PI * 2),
+          amp1: rand(8, 20),
+          amp2: rand(4, 12),
+          f1: rand(0.004, 0.008),
+          f2: rand(0.01, 0.016),
+          s1: rand(0.1, 0.22) * (i % 2 ? 1 : -1),
+          s2: rand(0.14, 0.3),
+          color: isTerra ? TERRA : LIGHT,
+          alpha: isTerra ? rand(0.5, 0.85) : rand(0.16, 0.4),
+          width: isTerra ? 1.5 : rand(0.6, 1.1),
+        });
+      }
+    }
+
+    function resize() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = host.clientWidth;
+      H = host.clientHeight;
+      if (!W || !H) return;
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      build();
+      if (reduceMq.matches) draw(13.7); // static frame; no loop under reduced motion
+    }
+
+    function draw(t) {
+      if (!W || !H) return;
+      ctx.clearRect(0, 0, W, H);
+      const anchorX = W * 0.72;
+      const anchorY = H * 0.5;
+      const step = W / (SAMPLES - 1);
+
+      for (let i = 0; i < threads.length; i++) {
+        const th = threads[i];
+        const laneY = th.lane * H;
+        const pts = [];
+        for (let s = 0; s < SAMPLES; s++) {
+          const x = s * step;
+          const noise =
+            th.amp1 * Math.sin(x * th.f1 + t * th.s1 + th.phase) +
+            th.amp2 * Math.sin(x * th.f2 + t * th.s2 + th.phase * 1.7);
+          const braid = 9 * Math.sin(x * 0.02 + t * 0.22 + th.phase);
+          // weave toward the anchor as x grows across the panel
+          const w = smoothstep(0.3, 0.92, x / W) * 0.9;
+          let y = (laneY + noise + braid) * (1 - w) + anchorY * w;
+          // on accept, pull the whole line into the knot
+          y += (anchorY - y) * converge * 0.9;
+          pts.push(y);
+        }
+        ctx.beginPath();
+        ctx.strokeStyle =
+          "rgba(" + th.color + ", " + (th.alpha + converge * 0.15) + ")";
+        ctx.lineWidth = th.width;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.moveTo(0, pts[0]);
+        for (let k = 1; k < SAMPLES - 1; k++) {
+          const xc = (k * step + (k + 1) * step) / 2;
+          const yc = (pts[k] + pts[k + 1]) / 2;
+          ctx.quadraticCurveTo(k * step, pts[k], xc, yc);
+        }
+        ctx.lineTo(W, pts[SAMPLES - 1]);
+        ctx.stroke();
+      }
+
+      // convergence knot: a woven ring that tightens + fills as it ties on accept
+      const pulse = reduceMq.matches ? 0 : 1;
+      const knotR =
+        (5.5 + 1.4 * Math.sin(t * 0.6) * pulse) * (1 - converge * 0.35);
+      ctx.beginPath();
+      ctx.strokeStyle = "rgba(" + KNOT + ", " + (0.55 + 0.3 * converge) + ")";
+      ctx.lineWidth = 1.4;
+      ctx.arc(anchorX, anchorY, Math.max(1.5, knotR), 0, Math.PI * 2);
+      ctx.stroke();
+      if (converge > 0.01) {
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(" + KNOT + ", " + 0.5 * converge + ")";
+        ctx.arc(anchorX, anchorY, Math.max(1, knotR * 0.55), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function loop(ts) {
+      if (!lastTs) lastTs = ts;
+      const dt = Math.min(ts - lastTs, 50) / 1000;
+      lastTs = ts;
+      elapsed += dt;
+      converge += (convergeTarget - converge) * 0.08;
+      draw(elapsed);
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function start() {
+      if (rafId !== null || reduceMq.matches || document.hidden) return;
+      lastTs = 0;
+      rafId = requestAnimationFrame(loop);
+    }
+
+    function stopLoop() {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    function onVisibility() {
+      if (document.hidden) stopLoop();
+      else start();
+    }
+
+    let ro = null;
+    if ("ResizeObserver" in window) {
+      ro = new ResizeObserver(() => resize());
+      ro.observe(host);
+    } else {
+      window.addEventListener("resize", resize);
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+
+    resize();
+    start();
+
+    return {
+      stop() {
+        stopLoop();
+        if (ro) ro.disconnect();
+        else window.removeEventListener("resize", resize);
+        document.removeEventListener("visibilitychange", onVisibility);
+      },
+      accept() {
+        convergeTarget = 1;
+        if (reduceMq.matches) {
+          converge = 1;
+          draw(elapsed || 13.7);
+        }
+      },
+    };
   }
 
   document.addEventListener("DOMContentLoaded", async () => {
