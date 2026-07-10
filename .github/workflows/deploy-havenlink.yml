@@ -78,7 +78,62 @@ jobs:
               GoogleCloudProject="havenlink-500500" \
               GeminiLocation="us-central1"
 
+      - name: Diagnose environment (read-only)
+        if: always()
+        run: |
+          set +e
+          R="$AWS_REGION"
+          echo "########## CLOUDFORMATION STACK STATUS ##########"
+          aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$R" \
+            --query 'Stacks[0].[StackName,StackStatus,StackStatusReason]' --output text
+          echo
+          echo "########## STACK EVENTS: FAILURES (most recent first) ##########"
+          aws cloudformation describe-stack-events --stack-name "$STACK_NAME" --region "$R" \
+            --query "StackEvents[?contains(ResourceStatus,'FAILED')].[Timestamp,LogicalResourceId,ResourceType,ResourceStatus,ResourceStatusReason]" \
+            --output text | head -60
+          echo
+          echo "########## STACK EVENTS: latest 30 (all) ##########"
+          aws cloudformation describe-stack-events --stack-name "$STACK_NAME" --region "$R" \
+            --query "StackEvents[0:30].[Timestamp,LogicalResourceId,ResourceStatus]" --output text
+          echo
+          echo "########## RDS INSTANCES ##########"
+          aws rds describe-db-instances --region "$R" \
+            --query "DBInstances[].[DBInstanceIdentifier,DBInstanceStatus,Engine,Endpoint.Address]" --output text
+          echo
+          echo "########## ECS CLUSTERS / SERVICES ##########"
+          for c in $(aws ecs list-clusters --region "$R" --query 'clusterArns' --output text); do
+            echo "cluster: $c"
+            aws ecs describe-services --cluster "$c" --services "${APP_NAME}-service" --region "$R" \
+              --query 'services[0].[status,desiredCount,runningCount,pendingCount]' --output text 2>/dev/null
+            aws ecs describe-services --cluster "$c" --services "${APP_NAME}-service" --region "$R" \
+              --query 'services[0].events[0:8].message' --output text 2>/dev/null
+          done
+          echo
+          echo "########## STOPPED TASK REASONS ##########"
+          CL="${APP_NAME}-cluster"
+          for t in $(aws ecs list-tasks --cluster "$CL" --desired-status STOPPED --region "$R" --query 'taskArns' --output text 2>/dev/null); do
+            aws ecs describe-tasks --cluster "$CL" --tasks "$t" --region "$R" \
+              --query 'tasks[0].[stoppedReason,containers[0].reason,containers[0].exitCode]' --output text
+          done
+          echo
+          echo "########## APP RUNNER SERVICES ##########"
+          aws apprunner list-services --region "$R" --query 'ServiceSummaryList[].[ServiceName,Status,ServiceUrl]' --output text 2>/dev/null
+          echo
+          echo "########## LOAD BALANCERS ##########"
+          aws elbv2 describe-load-balancers --region "$R" --query 'LoadBalancers[].[LoadBalancerName,State.Code,DNSName]' --output text 2>/dev/null
+          echo
+          echo "########## ROUTE53: havenlink records ##########"
+          for z in $(aws route53 list-hosted-zones --query 'HostedZones[].Id' --output text 2>/dev/null); do
+            aws route53 list-resource-record-sets --hosted-zone-id "$z" \
+              --query "ResourceRecordSets[?contains(Name,'havenlink')].[Name,Type,AliasTarget.DNSName,ResourceRecords[0].Value]" --output text 2>/dev/null
+          done
+          echo
+          echo "########## RECENT APP LOGS (/ecs/${APP_NAME}) ##########"
+          aws logs tail "/ecs/${APP_NAME}" --since 30m --region "$R" --format short 2>/dev/null | tail -60
+          true
+
       - name: Print stack outputs
+        if: success()
         run: |
           aws cloudformation describe-stacks \
             --stack-name "$STACK_NAME" \
