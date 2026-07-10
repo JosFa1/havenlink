@@ -79,10 +79,30 @@ jobs:
               GeminiLocation="us-central1"
 
       - name: Diagnose environment (read-only)
-        if: failure()
+        if: always()
         run: |
           set +e
           R="$AWS_REGION"
+          echo "########## TASK DEF REVISION HISTORY (did any prod task carry GEMINI_SA_KEY?) ##########"
+          for td in $(aws ecs list-task-definitions --family-prefix havenlink-task --sort DESC --region "$R" --query 'taskDefinitionArns[0:30]' --output text); do
+            rev="${td##*/}"
+            reg=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.registeredAt' --output text 2>/dev/null)
+            secs=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.containerDefinitions[0].secrets[].name' --output text 2>/dev/null)
+            vtx=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query "taskDefinition.containerDefinitions[0].environment[?name=='GEMINI_USE_VERTEX'].value | [0]" --output text 2>/dev/null)
+            img=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.containerDefinitions[0].image' --output text 2>/dev/null)
+            gem="no"; echo "$secs" | grep -q GEMINI_SA_KEY && gem="YES"
+            echo "$rev | registered=$reg | GEMINI_SA_KEY=$gem | VERTEX=$vtx | img=${img##*:} | secrets=[$secs]"
+          done
+          echo
+          echo "########## APP RUNNER (all regions) ##########"
+          for rr in us-east-1 us-east-2 us-west-2 us-west-1; do
+            echo "region $rr:"; aws apprunner list-services --region "$rr" --query 'ServiceSummaryList[].[ServiceName,Status,ServiceUrl]' --output text 2>&1 | head -5
+          done
+          echo
+          echo "########## ECS SERVICE DEPLOYMENT HISTORY ##########"
+          aws ecs describe-services --cluster "${APP_NAME}-cluster" --services "${APP_NAME}-service" --region "$R" \
+            --query 'services[0].deployments[].[status,rolloutState,createdAt,taskDefinition]' --output text 2>/dev/null
+          echo
           echo "########## CLOUDFORMATION STACK STATUS ##########"
           aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$R" \
             --query 'Stacks[0].[StackName,StackStatus,StackStatusReason]' --output text
