@@ -83,15 +83,15 @@ jobs:
         run: |
           set +e
           R="$AWS_REGION"
-          echo "########## TASK DEF REVISION HISTORY (did any prod task carry GEMINI_SA_KEY?) ##########"
-          for td in $(aws ecs list-task-definitions --family-prefix havenlink-task --sort DESC --region "$R" --query 'taskDefinitionArns[0:30]' --output text); do
-            rev="${td##*/}"
-            reg=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.registeredAt' --output text 2>/dev/null)
-            secs=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.containerDefinitions[0].secrets[].name' --output text 2>/dev/null)
-            vtx=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query "taskDefinition.containerDefinitions[0].environment[?name=='GEMINI_USE_VERTEX'].value | [0]" --output text 2>/dev/null)
-            img=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.containerDefinitions[0].image' --output text 2>/dev/null)
-            gem="no"; echo "$secs" | grep -q GEMINI_SA_KEY && gem="YES"
-            echo "$rev | registered=$reg | GEMINI_SA_KEY=$gem | VERTEX=$vtx | img=${img##*:} | secrets=[$secs]"
+          echo "########## TASK DEF REVISION HISTORY incl INACTIVE (did any prod task carry GEMINI_SA_KEY? what ARN?) ##########"
+          for status in ACTIVE INACTIVE; do
+            echo "=== status=$status ==="
+            for td in $(aws ecs list-task-definitions --family-prefix havenlink-task --status $status --sort DESC --region "$R" --query 'taskDefinitionArns[0:40]' --output text); do
+              rev="${td##*/}"
+              reg=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query 'taskDefinition.registeredAt' --output text 2>/dev/null)
+              gemarn=$(aws ecs describe-task-definition --task-definition "$td" --region "$R" --query "taskDefinition.containerDefinitions[0].secrets[?name=='GEMINI_SA_KEY'].valueFrom | [0]" --output text 2>/dev/null)
+              echo "$rev | registered=$reg | GEMINI_SA_KEY_ARN=$gemarn"
+            done
           done
           echo
           echo "########## APP RUNNER (all regions) ##########"
