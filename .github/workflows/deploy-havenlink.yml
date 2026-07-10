@@ -79,25 +79,10 @@ jobs:
               GeminiLocation="us-central1"
 
       - name: Diagnose environment (read-only)
-        if: always()
+        if: failure()
         run: |
           set +e
           R="$AWS_REGION"
-          echo "########## SECRETS MANAGER (names + ARNs) ##########"
-          aws secretsmanager list-secrets --region "$R" \
-            --query 'SecretList[].[Name,ARN]' --output text 2>&1 | head -40
-          echo
-          echo "########## RUNNING TASK DEFINITION: secrets + gemini env ##########"
-          TD=$(aws ecs describe-services --cluster "${APP_NAME}-cluster" --services "${APP_NAME}-service" --region "$R" --query 'services[0].taskDefinition' --output text 2>/dev/null)
-          echo "current taskDefinition: $TD"
-          aws ecs describe-task-definition --task-definition "$TD" --region "$R" \
-            --query 'taskDefinition.containerDefinitions[0].secrets[].name' --output text 2>/dev/null
-          aws ecs describe-task-definition --task-definition "$TD" --region "$R" \
-            --query "taskDefinition.containerDefinitions[0].environment[?starts_with(name,'GEMINI') || starts_with(name,'GOOGLE_CLOUD')].[name,value]" --output text 2>/dev/null
-          echo
-          echo "########## APP LOGS: last 15m (chat/vertex errors) ##########"
-          aws logs tail "/ecs/${APP_NAME}" --since 15m --region "$R" --format short 2>&1 | grep -iE "chat|vertex|gemini|credential|permission|denied|error|auth" | tail -40
-          echo
           echo "########## CLOUDFORMATION STACK STATUS ##########"
           aws cloudformation describe-stacks --stack-name "$STACK_NAME" --region "$R" \
             --query 'Stacks[0].[StackName,StackStatus,StackStatusReason]' --output text
