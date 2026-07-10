@@ -72,6 +72,10 @@ Parameters:
 
 Conditions:
   HasCertificate: !Not [!Equals [!Ref CertificateArn, '']]
+  # The Gemini service-account secret is optional. When its ARN is empty the
+  # chatbot simply returns 503 at runtime (see src/chat/routes.ts) instead of
+  # breaking the deploy with an empty IAM Resource / task-definition secret.
+  HasGeminiSaKey: !Not [!Equals [!Ref GeminiSaKeySecretArn, '']]
 
 Resources:
   LogGroup:
@@ -181,12 +185,17 @@ Resources:
               - Effect: Allow
                 Action:
                   - secretsmanager:GetSecretValue
-                Resource:
-                  - !Ref DatabaseUrlSecretArn
-                  - !Ref SessionSecretSecretArn
-                  - !Ref GoogleClientSecretSecretArn
-                  - !Ref SmtpPasswordSecretArn
-                  - !Ref GeminiSaKeySecretArn
+                Resource: !If
+                  - HasGeminiSaKey
+                  - - !Ref DatabaseUrlSecretArn
+                    - !Ref SessionSecretSecretArn
+                    - !Ref GoogleClientSecretSecretArn
+                    - !Ref SmtpPasswordSecretArn
+                    - !Ref GeminiSaKeySecretArn
+                  - - !Ref DatabaseUrlSecretArn
+                    - !Ref SessionSecretSecretArn
+                    - !Ref GoogleClientSecretSecretArn
+                    - !Ref SmtpPasswordSecretArn
               - Effect: Allow
                 Action:
                   - kms:Decrypt
@@ -262,8 +271,11 @@ Resources:
               ValueFrom: !Ref GoogleClientSecretSecretArn
             - Name: SMTP_PASSWORD
               ValueFrom: !Ref SmtpPasswordSecretArn
-            - Name: GEMINI_SA_KEY
-              ValueFrom: !Ref GeminiSaKeySecretArn
+            - !If
+              - HasGeminiSaKey
+              - Name: GEMINI_SA_KEY
+                ValueFrom: !Ref GeminiSaKeySecretArn
+              - !Ref AWS::NoValue
           LogConfiguration:
             LogDriver: awslogs
             Options:

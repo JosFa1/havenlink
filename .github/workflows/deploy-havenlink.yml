@@ -79,7 +79,7 @@ jobs:
               GeminiLocation="us-central1"
 
       - name: Diagnose environment (read-only)
-        if: always()
+        if: failure()
         run: |
           set +e
           R="$AWS_REGION"
