@@ -161,43 +161,6 @@ havenlink.org@gmail.com
   }
 });
 
-// TEMPORARY email diagnostics — remove after use. Token-gated; verifies the SMTP
-// connection/auth and attempts one test send to the team inbox, returning the exact
-// SES/nodemailer error so we can diagnose why prod email is failing.
-app.get("/api/_debug/mail", async (req, res) => {
-  if (req.query.token !== "mailcheck-7f3a9c2e5b") return res.status(404).end();
-  const out: Record<string, unknown> = {
-    smtp: {
-      host: config.SMTP_HOST,
-      port: config.SMTP_PORT,
-      secure: config.SMTP_SECURE,
-      from: config.EMAIL_FROM,
-      user_len: config.SMTP_USER.length,
-      pass_len: config.SMTP_PASSWORD.length,
-    },
-  };
-  try {
-    await transporter.verify();
-    out.verify = "ok";
-  } catch (e) {
-    const err = e as { message?: string; code?: string; responseCode?: number; response?: string };
-    out.verify_error = { message: err.message, code: err.code, responseCode: err.responseCode, response: err.response };
-  }
-  try {
-    const info = await transporter.sendMail({
-      from: config.EMAIL_FROM,
-      to: "havenlink.org@gmail.com",
-      subject: "HavenLink SMTP diagnostic",
-      text: "Diagnostic test send from the prod /api/_debug/mail endpoint.",
-    });
-    out.send = { messageId: info.messageId, response: info.response, accepted: info.accepted, rejected: info.rejected };
-  } catch (e) {
-    const err = e as { message?: string; code?: string; responseCode?: number; response?: string };
-    out.send_error = { message: err.message, code: err.code, responseCode: err.responseCode, response: err.response };
-  }
-  res.json(out);
-});
-
 // Intake form submission endpoint. The intake pages sit behind pageGuard, so the
 // account id (the signed-in user's email) is taken from the session — never from
 // the request body, where it could be spoofed.
