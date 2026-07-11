@@ -492,6 +492,9 @@
       // Answers inside closed branches never leave the device.
       const payload = { startedAt: draft.startedAt };
       SECTIONS.forEach(function (s) { payload[s] = collectSection(s, true); });
+      // Residence state (Q8) is also sent top-level so the backend can persist it
+      // as the account's canonical state (auto-fills the home-study form too).
+      payload.state = getValue('q08_state');
 
       const res = await fetch('/api/intake-submission', {
         method: 'POST',
@@ -548,6 +551,22 @@
     if (el) el.textContent = text;
   }
 
+  /* Pre-fill the residence state (Q8) from the account's saved state, so a state
+     entered on the home-study form auto-fills here. Only fills when Q8 is empty —
+     never overwrites a value already restored from the draft or typed by the user. */
+  function prefillStateFromAccount(state) {
+    if (!state) return;
+    const q8 = document.getElementById('q08_state');
+    if (!q8 || q8.value) return;
+    const known = Array.prototype.some.call(q8.options, function (o) { return o.value === state; });
+    if (!known) return;
+    q8.value = state;
+    syncAdoptionState(); // Q30 mirrors Q8 until the user edits it
+    applyRules();
+    updateProgress();
+    saveDraftSoon();
+  }
+
   function bootCover() {
     const now = new Date();
     setText('ikOpened', longDate(now));
@@ -556,9 +575,11 @@
     fetch('/auth/me', { credentials: 'same-origin', cache: 'no-store' })
       .then(function (res) { return res.ok ? res.json() : null; })
       .then(function (data) {
-        const email = data && data.user && data.user.email;
+        const user = data && data.user;
+        const email = user && user.email;
         setText('ikApplicant', email || 'Your account');
         setText('ikSignEmail', email || 'your account');
+        prefillStateFromAccount(user && user.state);
       })
       .catch(function () {
         setText('ikApplicant', 'Your account');

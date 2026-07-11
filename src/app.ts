@@ -7,7 +7,13 @@ import { transporter } from "./auth/email";
 import { sessionMiddleware } from "./middleware/session";
 import { securityHeaders } from "./middleware/security";
 import { doubleCsrfProtection, invalidCsrfTokenError } from "./middleware/security";
-import type { User } from "./db/users";
+import {
+  recordIntakeCompletion,
+  recordHomeStudyCompletion,
+  type User,
+  type HomeStudyPath,
+  type HomeStudyResult,
+} from "./db/users";
 import { passport, configurePassport } from "./auth/passport";
 import { authRouter } from "./auth/routes";
 import { chatRouter } from "./chat/routes";
@@ -172,6 +178,12 @@ const INTAKE_SECTIONS = [
   ["legal", "Legal Readiness"],
 ] as const;
 
+/** A body-supplied US state, normalized to a 2-letter code, or null if invalid. */
+function parseState(value: unknown): string | null {
+  const state = String(value ?? "").toUpperCase();
+  return /^[A-Z]{2}$/.test(state) ? state : null;
+}
+
 function renderIntakeAnswers(section: unknown): string {
   if (typeof section !== "object" || section === null) return "- (no answers)";
   const entries = Object.entries(section as Record<string, unknown>).filter(
@@ -228,6 +240,18 @@ ${sectionsText}
       subject: `Family Intake Form Submission: ${user.email}`,
       text: emailContent,
     });
+
+    // Best-effort: record completion + residence state on the account. The team
+    // has already been emailed above, so a storage hiccup must not fail the
+    // submission — log and move on.
+    try {
+      await recordIntakeCompletion(user.id, parseState(body.state));
+    } catch (dbErr) {
+      console.error(
+        "Intake completion not recorded (submission still sent):",
+        dbErr instanceof Error ? dbErr.message : String(dbErr)
+      );
+    }
 
     res.json({ success: true, message: "Intake form submitted successfully!" });
   } catch (error) {
@@ -365,6 +389,11 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
 
     const body = req.body ?? {};
     let email: { subject: string; text: string };
+    let completion: {
+      path: HomeStudyPath;
+      result: HomeStudyResult | null;
+      state: string | null;
+    };
 
     if (body.path === "completed") {
       const state = String(body.state ?? "");
@@ -378,6 +407,7 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
         agency: cleanLine(body.agency, 200),
         completedMonth,
       });
+      completion = { path: "completed", result: null, state: parseState(state) };
     } else if (body.path === "screener") {
       const result = String(body.result ?? "");
       const rawAnswers = body.answers;
@@ -410,6 +440,12 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
             ? cleanLine((stopping as Record<string, unknown>).question, 300)
             : null,
       });
+      // `result` is validated against HS_RESULTS above (the three result values).
+      completion = {
+        path: "screener",
+        result: result as HomeStudyResult,
+        state: parseState(body.state),
+      };
     } else {
       return res.status(400).json({ error: "Invalid submission data" });
     }
@@ -422,6 +458,18 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
       subject: email.subject,
       text: email.text,
     });
+
+    // Best-effort: record which home-study path was completed (and its screener
+    // result) plus the state. The team is already notified, so a storage failure
+    // must not fail the submission — log and continue.
+    try {
+      await recordHomeStudyCompletion(user.id, completion);
+    } catch (dbErr) {
+      console.error(
+        "Home study completion not recorded (submission still sent):",
+        dbErr instanceof Error ? dbErr.message : String(dbErr)
+      );
+    }
 
     res.json({ success: true, message: "Submission sent successfully!" });
   } catch (error) {

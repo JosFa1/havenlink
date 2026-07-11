@@ -141,6 +141,9 @@ class HomeStudyFlow {
     this.config = null;
     this.submitting = false;
     this.state = this.loadState();
+    // The account's saved residence state (from a prior intake/home-study
+    // submission), used to pre-fill the state select. Loaded async below.
+    this.savedState = '';
 
     this.setupEventListeners();
     this.initPrepChecklists();
@@ -150,6 +153,34 @@ class HomeStudyFlow {
     if (this.state.path && !this.state.submitted) {
       this.enterFlow();
     }
+
+    this.loadSavedState();
+  }
+
+  /* Fetch the account's saved state so the state step auto-fills from a value
+     entered on the intake form (or a prior home-study submission). Convenience
+     only - failures are silent. Re-applies to the state screen if it's already
+     mounted when the fetch resolves. */
+  async loadSavedState() {
+    try {
+      const res = await fetch('/auth/me', { credentials: 'same-origin', cache: 'no-store' });
+      if (!res.ok) return;
+      const data = await res.json();
+      const state = data && data.user && data.user.state;
+      if (!state) return;
+      this.savedState = state;
+      this.applySavedStateToCurrentScreen();
+    } catch (e) {
+      /* prefill is a convenience; ignore network/parse errors */
+    }
+  }
+
+  /* If a state select is on screen and still empty, fill it with the saved
+     state. The value is committed to flow state when the user hits Continue. */
+  applySavedStateToCurrentScreen() {
+    if (!this.savedState || !this.host) return;
+    const select = this.host.querySelector('#aState, #bState');
+    if (select && !select.value) select.value = this.savedState;
   }
 
   /* ---------- Setup ---------- */
@@ -292,7 +323,7 @@ class HomeStudyFlow {
     this.mount('tpl-a-state');
     const select = this.host.querySelector('#aState');
     this.populateStateSelect(select, false);
-    select.value = this.state.a.state;
+    select.value = this.state.a.state || this.savedState || '';
     this.wireContinue(() => {
       if (!select.value) return this.showFieldError();
       this.state.a.state = select.value;
@@ -352,7 +383,7 @@ class HomeStudyFlow {
     this.mount('tpl-b-state');
     const select = this.host.querySelector('#bState');
     this.populateStateSelect(select, true);
-    select.value = this.state.b.stateCode;
+    select.value = this.state.b.stateCode || this.savedState || '';
     this.wireContinue(() => {
       if (!select.value) return this.showFieldError();
       this.selectScreenerState(select.value);

@@ -5,6 +5,9 @@
  */
 import { query } from "./pool";
 
+export type HomeStudyPath = "completed" | "screener";
+export type HomeStudyResult = "PASSED" | "NOT_YET_ELIGIBLE" | "INTERNATIONAL";
+
 export interface User {
   id: string;
   email: string;
@@ -13,6 +16,13 @@ export interface User {
   google_sub: string | null;
   newsletter_prompt_pending: boolean;
   newsletter_subscribed: boolean;
+  // Adoption-application state, captured on intake / home-study submission.
+  state: string | null;
+  intake_completed: boolean;
+  intake_completed_at: Date | null;
+  home_study_path: HomeStudyPath | null;
+  home_study_result: HomeStudyResult | null;
+  home_study_completed_at: Date | null;
   created_at: Date;
   updated_at: Date;
 }
@@ -99,5 +109,51 @@ export async function resolveNewsletterPrompt(
             updated_at = now()
       WHERE id = $1`,
     [userId, subscribe]
+  );
+}
+
+/**
+ * Mark the intake form as completed for this account. `state` is the canonical
+ * residence/home state (2-letter code) or null; COALESCE means a submission that
+ * arrives without a valid state never wipes a previously saved one.
+ */
+export async function recordIntakeCompletion(
+  userId: string,
+  state: string | null
+): Promise<void> {
+  await query(
+    `UPDATE users
+        SET intake_completed = true,
+            intake_completed_at = now(),
+            state = COALESCE($2, state),
+            updated_at = now()
+      WHERE id = $1`,
+    [userId, state]
+  );
+}
+
+/**
+ * Record which home-study flow the account completed. `path` distinguishes the
+ * "already have a completed home study" flow from the readiness "screener";
+ * `result` holds the screener outcome (null for the completed path). `state` is
+ * COALESCEd like the intake writer so a missing value never clears a saved one.
+ */
+export async function recordHomeStudyCompletion(
+  userId: string,
+  data: {
+    path: HomeStudyPath;
+    result: HomeStudyResult | null;
+    state: string | null;
+  }
+): Promise<void> {
+  await query(
+    `UPDATE users
+        SET home_study_path = $2,
+            home_study_result = $3,
+            home_study_completed_at = now(),
+            state = COALESCE($4, state),
+            updated_at = now()
+      WHERE id = $1`,
+    [userId, data.path, data.result, data.state]
   );
 }

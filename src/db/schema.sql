@@ -28,6 +28,27 @@ ALTER TABLE users
 ALTER TABLE users
   ADD COLUMN IF NOT EXISTS newsletter_subscribed boolean NOT NULL DEFAULT false;
 
+-- Adoption-application state (added post-launch; ALTERs are idempotent). Captured
+-- when a family submits the intake and/or home-study forms. `state` is the
+-- canonical residence/home state (2-letter code) and is shared/auto-filled across
+-- both forms. `home_study_path` records WHICH home-study flow they completed:
+-- 'completed' (already has a home study) or 'screener' (readiness check); for the
+-- screener, `home_study_result` holds the outcome. All are self-reported.
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS state text;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS intake_completed boolean NOT NULL DEFAULT false;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS intake_completed_at timestamptz;
+-- 'completed' | 'screener'
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS home_study_path text;
+-- Screener outcome (screener path only): 'PASSED' | 'NOT_YET_ELIGIBLE' | 'INTERNATIONAL'
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS home_study_result text;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS home_study_completed_at timestamptz;
+
 CREATE TABLE IF NOT EXISTS email_verification_tokens (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id     uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,

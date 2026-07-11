@@ -46,6 +46,13 @@ function publicUser(user: User) {
     emailVerified: user.email_verified,
     // Drives the one-time "Join the newsletter" popup on the client.
     newsletterPromptPending: user.newsletter_prompt_pending,
+    // Saved adoption-application state. `state` auto-fills the state field on the
+    // intake + home-study forms; the completion flags let the client reflect prior
+    // progress. Served only to the logged-in owner (this endpoint is no-store).
+    state: user.state,
+    intakeCompleted: user.intake_completed,
+    homeStudyPath: user.home_study_path,
+    homeStudyResult: user.home_study_result,
   };
 }
 
