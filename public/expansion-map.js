@@ -70,8 +70,13 @@
     var w = tooltip.offsetWidth || 0;
     var left = x + pad;
     if (left + w + 8 > window.innerWidth) left = x - w - pad; // flip near right edge
-    tooltip.style.left = left + 'px';
-    tooltip.style.top = (y + pad) + 'px';
+    // The tooltip is absolutely positioned inside #expansionMap: a fixed-position
+    // tooltip breaks when any ancestor carries a transform (e.g. the .hm-reveal
+    // wrapper on the Team page), because the transform becomes its containing
+    // block and viewport coordinates land far from the cursor.
+    var ref = root.getBoundingClientRect();
+    tooltip.style.left = (left - ref.left) + 'px';
+    tooltip.style.top = (y + pad - ref.top) + 'px';
   }
   function onMove(e) {
     if (!tooltip) return;

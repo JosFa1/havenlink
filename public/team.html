@@ -54,25 +54,66 @@
 
   <main class="tm-main">
 
-    <!-- Hero -->
-    <section class="tm-hero" id="top">
+    <!-- Hero — ink constellation -->
+    <section class="tm-hero hm-on-ink" id="top">
       <canvas id="tmNetwork" class="tm-hero-canvas" aria-hidden="true"></canvas>
       <div class="tm-hero-inner">
-        <p class="tm-hero-eyebrow hm-eyebrow hm-reveal">The people behind HavenLink</p>
-        <h1 class="tm-hero-title hm-reveal" style="--d: .08s">The team building adoption's <em>connective tissue.</em></h1>
-        <p class="tm-hero-standfirst hm-reveal" style="--d: .16s">
+        <p class="tm-hero-eyebrow hm-reveal">
+          <span class="hm-eyebrow">The people behind HavenLink</span>
+          <span class="tm-hero-rule" aria-hidden="true"></span>
+          <span class="tm-hero-vol">№ 01 — The Team</span>
+        </p>
+        <h1 class="tm-hero-title hm-reveal" style="--d: .05s">
+          <span class="tm-mask"><span class="tm-mask-in" style="--d: .1s">The team building</span></span>
+          <span class="tm-mask"><span class="tm-mask-in" style="--d: .22s">adoption's</span></span>
+          <span class="tm-mask"><span class="tm-mask-in" style="--d: .34s"><em>connective tissue.</em></span></span>
+        </h1>
+        <p class="tm-hero-standfirst hm-reveal" style="--d: .45s">
           Meet the founders, licensed agencies, and civic partners responsible for building and supporting HavenLink.
         </p>
-        <div class="tm-hero-actions hm-reveal" style="--d: .24s">
-          <a href="#founders" class="hm-btn hm-btn--ink">Meet the founders <span class="hm-btn-arrow">→</span></a>
-          <a href="#expansion" class="hm-textlink">See our global reach</a>
+        <div class="tm-hero-actions hm-reveal" style="--d: .55s">
+          <a href="#founders" class="hm-btn hm-btn--paper">Meet the founders <span class="hm-btn-arrow">→</span></a>
+          <a href="#expansion" class="hm-textlink">Trace our global reach</a>
         </div>
       </div>
-      <div class="tm-hero-meta">
-        <a href="#founders" class="tm-scrollcue" aria-label="Scroll to founders"><span class="tm-scrollcue-line"></span>Scroll</a>
-        <span class="tm-hero-meta-item">Founder-led</span>
-        <span class="tm-hero-meta-item">Licensed agency network</span>
-        <span class="tm-hero-meta-item">Global footprint</span>
+      <div class="tm-hero-foot hm-reveal" style="--d: .65s">
+        <a href="#manifesto" class="tm-scrollcue" aria-label="Scroll to our conviction"><span class="tm-scrollcue-line"></span>Scroll</a>
+        <dl class="tm-hero-stats">
+          <div class="tm-stat">
+            <dt class="tm-stat-label">Founders</dt>
+            <dd class="tm-stat-num" data-tmcount="3">03</dd>
+          </div>
+          <div class="tm-stat">
+            <dt class="tm-stat-label">Licensed agencies</dt>
+            <dd class="tm-stat-num" data-tmcount="7">07</dd>
+          </div>
+          <div class="tm-stat">
+            <dt class="tm-stat-label">Civic partners</dt>
+            <dd class="tm-stat-num" data-tmcount="7">07</dd>
+          </div>
+          <div class="tm-stat">
+            <dt class="tm-stat-label">Countries</dt>
+            <dd class="tm-stat-num" data-tmcount="7">07</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Manifesto -->
+    <section class="tm-section tm-manifesto" id="manifesto">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">Our conviction</span>
+          <span class="hm-index">01 — 05</span>
+        </header>
+        <div class="hm-grid">
+          <p class="ed-statement tm-manifesto-statement hm-reveal">No child should wait because the adults around them couldn't find <em>one another.</em></p>
+          <div class="tm-manifesto-aside hm-reveal" style="--d: .12s">
+            <span class="tm-manifesto-rule" aria-hidden="true"></span>
+            <p>HavenLink exists to close the distance between families, licensed agencies, and the institutions that safeguard children — one accountable network instead of a thousand disconnected phone calls.</p>
+            <a href="/home" class="hm-textlink">See how the platform works</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -81,15 +122,22 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Founders</span>
-          <span class="hm-index">01 - 04</span>
+          <span class="hm-index">02 — 05</span>
         </header>
         <ul class="tm-people">
           <li class="tm-person hm-reveal">
-            <div class="tm-person-portrait"><img src="/png/asadsadikov.png" alt="Asad Sadikov"></div>
-            <div class="tm-person-body">
-              <span class="tm-person-index">01</span>
-              <h3 class="tm-person-name">Asad Sadikov</h3>
-              <p class="tm-person-role">Co-Founder</p>
+            <span class="tm-person-ghost" aria-hidden="true">01</span>
+            <div class="tm-person-head">
+              <span class="tm-person-index">№ 01</span>
+              <h3 class="tm-person-name">Asad <em>Sadikov</em></h3>
+              <p class="tm-person-role">Co-Founder · Data &amp; Matching</p>
+            </div>
+            <div class="tm-person-plate">
+              <figure class="tm-person-portrait">
+                <img src="/png/asadsadikov.png" alt="Asad Sadikov">
+                <span class="tm-veil" aria-hidden="true"></span>
+              </figure>
+              <div class="tm-person-body">
               <p class="tm-person-bio">Asad Sadikov is a Co-Founder and lead technologist at HavenLink with strong expertise in data analysis, machine learning, and scalable system design. He builds the analytics and matching infrastructure that powers fair and privacy-preserving adoption workflows, turning complex datasets into actionable insights. Asad is passionately committed to children's equality and uses technical rigor to ensure the platform improves safety, access, and equitable outcomes for families and children.</p>
               <div class="tm-social">
                 <a href="https://www.instagram.com/asadsadikov10/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
@@ -106,15 +154,23 @@
                   </svg>
                 </a>
               </div>
+              </div>
             </div>
           </li>
 
           <li class="tm-person hm-reveal">
-            <div class="tm-person-portrait"><img src="/png/aaravgupta.png" alt="Aarav Gupta"></div>
-            <div class="tm-person-body">
-              <span class="tm-person-index">02</span>
-              <h3 class="tm-person-name">Aarav Gupta</h3>
-              <p class="tm-person-role">Co-Founder</p>
+            <span class="tm-person-ghost" aria-hidden="true">02</span>
+            <div class="tm-person-head">
+              <span class="tm-person-index">№ 02</span>
+              <h3 class="tm-person-name">Aarav <em>Gupta</em></h3>
+              <p class="tm-person-role">Co-Founder · Product</p>
+            </div>
+            <div class="tm-person-plate">
+              <figure class="tm-person-portrait">
+                <img src="/png/aaravgupta.png" alt="Aarav Gupta">
+                <span class="tm-veil" aria-hidden="true"></span>
+              </figure>
+              <div class="tm-person-body">
               <p class="tm-person-bio">Aarav Gupta is the Co-Founder of HavenLink. He leads product work focused on practical adoption resources and better communication between families and licensed agencies. Outside HavenLink, Aarav enjoys trying new restaurants, spending time with friends, and competing in debate at the state and national level.</p>
               <div class="tm-social">
                 <a href="https://www.instagram.com/aaravgupta7041/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
@@ -131,15 +187,23 @@
                   </svg>
                 </a>
               </div>
+              </div>
             </div>
           </li>
 
           <li class="tm-person hm-reveal">
-            <div class="tm-person-portrait"><img src="/png/joeborgman.png" alt="Joe Borgman"></div>
-            <div class="tm-person-body">
-              <span class="tm-person-index">03</span>
-              <h3 class="tm-person-name">Joe Borgman</h3>
-              <p class="tm-person-role">Co-Founder</p>
+            <span class="tm-person-ghost" aria-hidden="true">03</span>
+            <div class="tm-person-head">
+              <span class="tm-person-index">№ 03</span>
+              <h3 class="tm-person-name">Joe <em>Borgman</em></h3>
+              <p class="tm-person-role">Co-Founder · Infrastructure</p>
+            </div>
+            <div class="tm-person-plate">
+              <figure class="tm-person-portrait">
+                <img src="/png/joeborgman.png" alt="Joe Borgman">
+                <span class="tm-veil" aria-hidden="true"></span>
+              </figure>
+              <div class="tm-person-body">
               <p class="tm-person-bio">Joe Borgman builds HavenLink's server systems and data infrastructure. His work focuses on backend reliability, secure handling of sensitive information, and the technical foundation used by families and agencies.</p>
               <div class="tm-social">
                 <a href="https://www.instagram.com/joe.borgman/" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
@@ -156,6 +220,7 @@
                   </svg>
                 </a>
               </div>
+              </div>
             </div>
           </li>
         </ul>
@@ -167,7 +232,7 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Partner adoption agencies</span>
-          <span class="hm-index">02 - 04</span>
+          <span class="hm-index">03 — 05</span>
         </header>
         <p class="tm-lede hm-reveal">Every agency in the HavenLink network is licensed, reviewed, and accountable for the families it serves.</p>
         <ul class="tm-ledger">
@@ -257,7 +322,7 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Partner organizations</span>
-          <span class="hm-index">03 - 04</span>
+          <span class="hm-index">04 — 05</span>
         </header>
         <p class="tm-lede hm-reveal">International bodies, state agencies, and local governments that share our commitment to children and families.</p>
         <ul class="tm-ledger">
@@ -354,18 +419,28 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Global reach</span>
-          <span class="hm-index">04 - 04</span>
+          <span class="hm-index">05 — 05</span>
         </header>
         <p class="tm-lede hm-reveal">See where HavenLink works with partner agencies and where coverage is growing. Hover over the map to explore each state.</p>
         <div class="tm-map hm-reveal">
-          <div class="expansion-map" id="expansionMap" role="group" aria-label="Interactive map of HavenLink partner and prospective regions">
-            <div class="map-viewport" id="mapWorld"><!-- world.svg injected by expansion-map.js --></div>
-            <div class="map-inset" id="usInset" hidden>
-              <button type="button" class="map-inset-close" aria-label="Close United States detail">&times;</button>
-              <div class="map-inset-title">United States</div>
-              <div class="map-inset-svg" id="mapUS"><!-- us-states.svg injected by expansion-map.js --></div>
+          <div class="tm-map-frame">
+            <span class="tm-corner tm-corner--tl" aria-hidden="true"></span>
+            <span class="tm-corner tm-corner--tr" aria-hidden="true"></span>
+            <span class="tm-corner tm-corner--bl" aria-hidden="true"></span>
+            <span class="tm-corner tm-corner--br" aria-hidden="true"></span>
+            <div class="expansion-map" id="expansionMap" role="group" aria-label="Interactive map of HavenLink partner and prospective regions">
+              <div class="map-viewport" id="mapWorld"><!-- world.svg injected by expansion-map.js --></div>
+              <div class="map-inset" id="usInset" hidden>
+                <button type="button" class="map-inset-close" aria-label="Close United States detail">&times;</button>
+                <div class="map-inset-title">United States</div>
+                <div class="map-inset-svg" id="mapUS"><!-- us-states.svg injected by expansion-map.js --></div>
+              </div>
+              <div class="map-tooltip" id="mapTooltip" aria-hidden="true" hidden></div>
             </div>
-            <div class="map-tooltip" id="mapTooltip" aria-hidden="true" hidden></div>
+          </div>
+          <div class="tm-map-caption">
+            <span>Fig. 05 — Partner &amp; prospective regions</span>
+            <span>Hover a region to explore</span>
           </div>
           <ul class="map-legend">
             <li><span class="legend-swatch legend-partner"></span> Partner region</li>
@@ -380,8 +455,17 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Our belief</span>
+          <span class="hm-index">Coda</span>
         </header>
-        <p class="tm-belief-quote hm-reveal" style="--d: .08s">Every child deserves a home. Every family deserves a <em>path to find them.</em></p>
+        <p class="tm-belief-quote hm-reveal" style="--d: .05s">
+          <span class="tm-mask"><span class="tm-mask-in" style="--d: .1s">Every child deserves a home.</span></span>
+          <span class="tm-mask"><span class="tm-mask-in" style="--d: .24s">Every family deserves a <em>path to find them.</em></span></span>
+        </p>
+        <p class="tm-belief-sig hm-reveal" style="--d: .32s">— Asad, Aarav &amp; Joe · Founders, HavenLink</p>
+        <div class="tm-belief-actions hm-reveal" style="--d: .4s">
+          <a href="/partner" class="hm-btn hm-btn--paper">Partner with HavenLink <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/intake-form" class="hm-textlink">Begin the family intake</a>
+        </div>
       </div>
     </section>
 
