@@ -523,7 +523,7 @@
   function showFiled() {
     const overlay = document.getElementById('intakeComplete');
     if (!overlay) {
-      window.location.href = '/adopt/agency-profiles';
+      window.location.href = '/adopt/matching';
       return;
     }
     const dateEl = document.getElementById('ikFiledDate');

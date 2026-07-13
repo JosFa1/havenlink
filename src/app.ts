@@ -17,6 +17,7 @@ import {
 import { passport, configurePassport } from "./auth/passport";
 import { authRouter } from "./auth/routes";
 import { chatRouter } from "./chat/routes";
+import { matchRouter } from "./match/routes";
 import { pageGuard } from "./middleware/pageGuard";
 
 const app = express();
@@ -54,6 +55,9 @@ app.use("/auth", authRouter);
 
 // ----- AI chatbot -------------------------------------------------------------
 app.use("/api/chat", chatRouter);
+
+// ----- Compatibility matching ---------------------------------------------------
+app.use("/api/match", matchRouter);
 
 // Partnership form submission endpoint
 app.post("/api/partnership-request", async (req, res) => {

@@ -49,6 +49,18 @@ ALTER TABLE users
 ALTER TABLE users
   ADD COLUMN IF NOT EXISTS home_study_completed_at timestamptz;
 
+-- Compatibility match (added post-launch; ALTERs are idempotent). Set exactly
+-- once when the family confirms an agency match on /adopt/matching.
+-- `matched_agency_id` references the hardcoded dataset in src/match/agencies.ts
+-- (not a DB foreign key); NULL means not yet matched. `match_score` is the
+-- audit copy of the deterministic score shown at confirmation time.
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS matched_agency_id text;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS match_score integer;
+ALTER TABLE users
+  ADD COLUMN IF NOT EXISTS matched_at timestamptz;
+
 CREATE TABLE IF NOT EXISTS email_verification_tokens (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id     uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,

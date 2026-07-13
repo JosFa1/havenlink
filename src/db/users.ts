@@ -23,6 +23,11 @@ export interface User {
   home_study_path: HomeStudyPath | null;
   home_study_result: HomeStudyResult | null;
   home_study_completed_at: Date | null;
+  // Confirmed agency match (see src/match/). `matched_agency_id` points into
+  // the hardcoded dataset in src/match/agencies.ts; NULL means not matched.
+  matched_agency_id: string | null;
+  match_score: number | null;
+  matched_at: Date | null;
   created_at: Date;
   updated_at: Date;
 }
@@ -138,6 +143,29 @@ export async function recordIntakeCompletion(
  * `result` holds the screener outcome (null for the completed path). `state` is
  * COALESCEd like the intake writer so a missing value never clears a saved one.
  */
+/**
+ * Record the confirmed agency match exactly once. The `matched_agency_id IS
+ * NULL` guard makes the write atomic: a second confirm (double-click, second
+ * tab) updates zero rows and returns null instead of overwriting the match.
+ */
+export async function recordMatch(
+  userId: string,
+  agencyId: string,
+  score: number
+): Promise<User | null> {
+  const { rows } = await query<User>(
+    `UPDATE users
+        SET matched_agency_id = $2,
+            match_score = $3,
+            matched_at = now(),
+            updated_at = now()
+      WHERE id = $1 AND matched_agency_id IS NULL
+      RETURNING *`,
+    [userId, agencyId, score]
+  );
+  return rows[0] ?? null;
+}
+
 export async function recordHomeStudyCompletion(
   userId: string,
   data: {

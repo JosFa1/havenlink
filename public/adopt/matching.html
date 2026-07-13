@@ -41,8 +41,8 @@
           <ul class="dropdown-menu" id="adoptMenu" role="menu">
             <li role="none"><a href="/adopt/home-study" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
             <li role="none"><a href="/adopt/intake-form" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
-            <li role="none"><a href="/adopt/agency-profiles" class="dropdown-item" role="menuitem">3. Agency-Managed Profiles</a></li>
-            <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">4. Compatibility Matching</a></li>
+            <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">3. Compatibility Matching</a></li>
+            <li role="none"><a href="/adopt/agency-profiles" class="dropdown-item" role="menuitem">4. Agency-Managed Profiles</a></li>
           </ul>
         </li>
         <li><a href="/team" class="nav-link">Team</a></li>
@@ -63,200 +63,80 @@
         <span class="subnav-step">02</span>
         <span class="subnav-label">Intake Form</span>
       </a>
-      <a href="/adopt/agency-profiles" class="subnav-item" data-step="3">
+      <a href="/adopt/matching" class="subnav-item active" data-step="3">
         <span class="subnav-step">03</span>
-        <span class="subnav-label">Agencies</span>
-      </a>
-      <a href="/adopt/matching" class="subnav-item active" data-step="4">
-        <span class="subnav-step">04</span>
         <span class="subnav-label">Matching</span>
+      </a>
+      <a href="/adopt/agency-profiles" class="subnav-item" data-step="4">
+        <span class="subnav-step">04</span>
+        <span class="subnav-label">Agencies</span>
       </a>
     </div>
   </nav>
 
   <main class="mt-main">
 
-    <!-- Hero -->
-    <section class="ed-hero" id="top">
+    <!-- Hero: the convergence -->
+    <section class="ed-hero mt-hero hm-on-ink" id="top">
       <canvas id="mtResonance" class="ed-hero-canvas" aria-hidden="true"></canvas>
       <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 04 - Compatibility Matching</p>
-        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">The match, and the <em>reasoning</em> behind it.</h1>
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 03 - Compatibility Matching</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Where your story <em>meets theirs.</em></h1>
         <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
-          HavenLink uses a fixed scoring model to suggest compatible placements. Each suggestion shows its score and the factors behind it, while the responsible agency makes every placement decision.
+          One click pairs your family with a licensed agency in your state. Scored in the open, explained factor by factor — and confirmed only by you.
         </p>
         <div class="ed-hero-actions hm-reveal" style="--d: .24s">
-          <a href="#process" class="hm-btn hm-btn--ink">See how scoring works <span class="hm-btn-arrow">→</span></a>
-          <a href="/adopt/intake-form" class="hm-textlink">Go to the intake form</a>
+          <a href="#your-match" class="hm-btn hm-btn--paper">Find your match <span class="hm-btn-arrow">→</span></a>
+          <a href="#how-it-works" class="hm-textlink">How scoring works</a>
         </div>
       </div>
       <div class="ed-hero-meta">
-        <a href="#match-system" class="ed-scrollcue" aria-label="Scroll to how matching works"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <a href="#your-match" class="ed-scrollcue" aria-label="Scroll to your match"><span class="ed-scrollcue-line"></span>Scroll</a>
         <span class="ed-hero-meta-item">Deterministic scoring</span>
         <span class="ed-hero-meta-item">0-100 compatibility</span>
         <span class="ed-hero-meta-item">You decide</span>
       </div>
     </section>
 
-    <!-- Intro -->
-    <section class="ed-section" id="match-system">
+    <!-- The match desk (live flow, rendered by match-flow.js) -->
+    <section class="ed-section" id="your-match">
       <div class="hm-container hm-container--editorial">
-        <header class="hm-secthead hm-reveal">
-          <span class="hm-eyebrow">How matching works</span>
-          <span class="hm-index">01 - 04</span>
-        </header>
-        <div class="hm-grid">
-          <h2 class="mt-intro-statement hm-reveal">Matching you can <em>see the reasoning</em> behind.</h2>
-          <p class="mt-intro-body hm-reveal" style="--d: .1s">
-            HavenLink uses a fixed scoring model to compare family preferences with agency-managed child profiles. Each suggestion includes the factors that shaped its score, and agencies make the placement decisions.
-          </p>
-          <ul class="mt-intro-factors">
-            <li class="hm-reveal" style="--d: .12s"><span class="mt-tick">01</span>Age &amp; development</li>
-            <li class="hm-reveal" style="--d: .17s"><span class="mt-tick">02</span>Special-needs fit</li>
-            <li class="hm-reveal" style="--d: .22s"><span class="mt-tick">03</span>Sibling groups</li>
-            <li class="hm-reveal" style="--d: .27s"><span class="mt-tick">04</span>Trauma readiness</li>
-            <li class="hm-reveal" style="--d: .32s"><span class="mt-tick">05</span>Household fit</li>
-            <li class="hm-reveal" style="--d: .37s"><span class="mt-tick">06</span>Experience bonus</li>
-            <li class="hm-reveal" style="--d: .42s"><span class="mt-tick">07</span>Geographic routing</li>
-          </ul>
+        <div id="mtApp" class="mtf" data-view="loading" aria-live="polite">
+          <p class="mtf-loading">Checking your matching status&hellip;</p>
         </div>
       </div>
     </section>
 
-    <!-- Process -->
-    <section class="ed-section ed-section--dim" id="process">
+    <!-- How it works (condensed system) -->
+    <section class="ed-section ed-section--dim" id="how-it-works">
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
-          <span class="hm-eyebrow">The matching process</span>
-          <span class="hm-index">02 - 04</span>
+          <span class="hm-eyebrow">The system</span>
+          <span class="hm-index">Fixed rules - no black box</span>
         </header>
-        <ol class="mt-steps">
-          <li class="mt-step hm-reveal">
-            <div class="mt-step-head">
-              <span class="mt-step-index">Step 01</span>
-              <h3 class="mt-step-title">Your family profile</h3>
-            </div>
-            <p class="mt-step-desc">From your intake form, we understand your household, values, experience, and preferences for a child's age, needs, and background.</p>
+        <h2 class="mt-intro-statement hm-reveal">Matching you can <em>see the reasoning</em> behind.</h2>
+        <ol class="mt-system">
+          <li class="mt-system-row hm-reveal">
+            <span class="mt-system-num">01</span>
+            <h3 class="mt-system-title">Your profile is the input</h3>
+            <p class="mt-system-desc">The intake form and home study establish your household, experience, preferences — and the state we match within.</p>
           </li>
-          <li class="mt-step hm-reveal">
-            <div class="mt-step-head">
-              <span class="mt-step-index">Step 02</span>
-              <h3 class="mt-step-title">Child profile data</h3>
-            </div>
-            <p class="mt-step-desc">Licensed agencies provide rich, detailed information about each child: age, developmental stage, health, personality, interests, and support needs.</p>
+          <li class="mt-system-row hm-reveal" style="--d: .06s">
+            <span class="mt-system-num">02</span>
+            <h3 class="mt-system-title">A fixed model scores the fit</h3>
+            <p class="mt-system-desc">Explicit rules — age alignment, special-needs openness, sibling fit, trauma readiness, experience — produce a 0-100 score you can read line by line.</p>
           </li>
-          <li class="mt-step hm-reveal">
-            <div class="mt-step-head">
-              <span class="mt-step-index">Step 03</span>
-              <h3 class="mt-step-title">Algorithmic scoring</h3>
-            </div>
-            <p class="mt-step-desc">Our deterministic algorithm calculates a compatibility score (0-100) by analyzing alignment on age preference, special-needs openness, sibling placement, trauma readiness, and other key factors.</p>
+          <li class="mt-system-row hm-reveal" style="--d: .12s">
+            <span class="mt-system-num">03</span>
+            <h3 class="mt-system-title">You review, you decide</h3>
+            <p class="mt-system-desc">Explore the agency's site at your pace. Nothing is sent until you confirm — and outside partner states you can ask for another agency.</p>
           </li>
-          <li class="mt-step hm-reveal">
-            <div class="mt-step-head">
-              <span class="mt-step-index">Step 04</span>
-              <h3 class="mt-step-title">Transparent results</h3>
-            </div>
-            <p class="mt-step-desc">We show you the match score, the scoring breakdown, and the agency responsible for the child's profile. You can then reach out to the agency to explore the match further.</p>
-          </li>
-          <li class="mt-step hm-reveal">
-            <div class="mt-step-head">
-              <span class="mt-step-index">Step 05</span>
-              <h3 class="mt-step-title">Agency communication</h3>
-            </div>
-            <p class="mt-step-desc">Once you've expressed interest, HavenLink facilitates communication between you and the agency. The agency manages all next steps, including visits and legal processes.</p>
+          <li class="mt-system-row hm-reveal" style="--d: .18s">
+            <span class="mt-system-num">04</span>
+            <h3 class="mt-system-title">The agency leads from there</h3>
+            <p class="mt-system-desc">Once confirmed, HavenLink makes the introduction. The licensed agency owns every placement decision, visit, and legal step.</p>
           </li>
         </ol>
-      </div>
-    </section>
-
-    <!-- Sample score -->
-    <section class="ed-section" id="sample-score">
-      <div class="hm-container hm-container--editorial">
-        <header class="hm-secthead hm-reveal">
-          <span class="hm-eyebrow">A score you can read</span>
-          <span class="hm-index">03 - 04</span>
-        </header>
-        <h2 class="mt-intro-statement hm-reveal">Every match, fully <em>itemized.</em></h2>
-        <p class="mt-intro-body hm-reveal" style="--d: .1s; grid-column: auto; max-width: 46rem;">
-          This example shows how a match score is presented. Your actual scores use your family profile and the children available through participating agencies.
-        </p>
-
-        <div class="mt-score hm-reveal">
-          <div class="mt-score-head">
-            <div class="mt-score-figure">
-              <span class="mt-score-num" data-countup="78">78</span>
-              <span class="mt-score-max">/ 100</span>
-            </div>
-            <div class="mt-score-meta">
-              <span class="mt-score-badge">Good match</span>
-              <p class="mt-score-note">This family and child have strong alignment on age range and family structure.</p>
-            </div>
-          </div>
-          <ul class="mt-factors">
-            <li class="mt-factor">
-              <span class="mt-factor-name">Age range alignment</span>
-              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 95%;"></span></span>
-              <span class="mt-factor-pts">+18</span>
-            </li>
-            <li class="mt-factor">
-              <span class="mt-factor-name">Special-needs openness</span>
-              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 75%;"></span></span>
-              <span class="mt-factor-pts">+15</span>
-            </li>
-            <li class="mt-factor">
-              <span class="mt-factor-name">Sibling placement fit</span>
-              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 100%;"></span></span>
-              <span class="mt-factor-pts">+20</span>
-            </li>
-            <li class="mt-factor">
-              <span class="mt-factor-name">Trauma readiness</span>
-              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 70%;"></span></span>
-              <span class="mt-factor-pts">+14</span>
-            </li>
-            <li class="mt-factor">
-              <span class="mt-factor-name">Prior adoption experience</span>
-              <span class="mt-factor-track"><span class="mt-factor-fill" style="--w: 100%;"></span></span>
-              <span class="mt-factor-pts">+11</span>
-            </li>
-          </ul>
-        </div>
-
-        <ul class="mt-tiers" id="score-meaning">
-          <li class="mt-tier hm-reveal">
-            <span class="mt-tier-range">85-100</span>
-            <span><span class="mt-tier-name">Excellent match</span><span class="mt-tier-desc">Strong alignment across most factors. High potential for a successful placement.</span></span>
-          </li>
-          <li class="mt-tier hm-reveal">
-            <span class="mt-tier-range">70-84</span>
-            <span><span class="mt-tier-name">Good match</span><span class="mt-tier-desc">Solid compatibility with clear areas of alignment. Worth exploring further.</span></span>
-          </li>
-          <li class="mt-tier hm-reveal">
-            <span class="mt-tier-range">50-69</span>
-            <span><span class="mt-tier-name">Potential match</span><span class="mt-tier-desc">Mixed alignment. May benefit from deeper conversations with the agency.</span></span>
-          </li>
-          <li class="mt-tier hm-reveal">
-            <span class="mt-tier-range">&lt; 50</span>
-            <span><span class="mt-tier-name">Limited fit</span><span class="mt-tier-desc">Lower compatibility on key factors. Consider exploring other options.</span></span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Notes -->
-    <section class="ed-section ed-section--dim" id="match-notes">
-      <div class="hm-container hm-container--editorial">
-        <header class="hm-secthead hm-reveal">
-          <span class="hm-eyebrow">Important notes on matching</span>
-          <span class="hm-index">04 - 04</span>
-        </header>
-        <ul class="mt-notes">
-          <li class="mt-note hm-reveal"><strong>Fixed scoring.</strong> The model uses explicit rules rather than machine learning, so each factor can be reviewed.</li>
-          <li class="mt-note hm-reveal"><strong>Agency decision.</strong> A high score suggests compatibility, while final placement decisions include agency assessment and legal considerations.</li>
-          <li class="mt-note hm-reveal"><strong>You choose.</strong> You see all match suggestions and decide which to pursue. There's no automatic assignment.</li>
-          <li class="mt-note hm-reveal"><strong>Agency led.</strong> Once you express interest, the licensed agency takes the lead in assessing fit and guiding the placement process.</li>
-          <li class="mt-note hm-reveal"><strong>Ongoing support.</strong> Successful adoption continues after placement. We recommend post-adoption support resources for all families.</li>
-        </ul>
       </div>
     </section>
 
@@ -268,8 +148,8 @@
         </header>
         <p class="mt-cta-line hm-reveal" style="--d: .08s">Your profile is what makes the <em>match possible.</em></p>
         <div class="ed-hero-actions hm-reveal" style="--d: .16s">
-          <a href="/adopt/intake-form" class="hm-btn hm-btn--paper">Go to the Family Intake Form <span class="hm-btn-arrow">→</span></a>
-          <a href="/adopt/home-study" class="hm-textlink">Start with the home study</a>
+          <a href="/adopt/agency-profiles" class="hm-btn hm-btn--paper">Continue to agency profiles <span class="hm-btn-arrow">→</span></a>
+          <a href="/adopt/intake-form" class="hm-textlink">Go to the intake form</a>
         </div>
       </div>
     </section>
@@ -531,6 +411,7 @@
   <script src="/account.js"></script>
   <script src="/editorial.js" defer></script>
   <script src="matching.js" defer></script>
+  <script src="match-flow.js" defer></script>
   <script src="/chat-widget.js" defer></script>
 </body>
 </html>
