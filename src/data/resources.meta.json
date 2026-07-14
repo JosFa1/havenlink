@@ -1,0 +1,21 @@
+{
+  "version": "2026-07-14+r48493+z40998",
+  "generatedAt": "2026-07-14T01:35:02.632Z",
+  "counts": {
+    "zip_centroids": 40998,
+    "resources": 48493,
+    "byCategory": {
+      "medical": 18801,
+      "counseling": 13956,
+      "trauma": 8259,
+      "support_group": 7467,
+      "financial": 6,
+      "educational": 4
+    }
+  },
+  "sources": {
+    "geonames": "https://download.geonames.org/export/zip/US.zip",
+    "hrsa": "https://data.hrsa.gov/DataDownload/DD_Files/Health_Center_Service_Delivery_and_LookAlike_Sites.csv",
+    "samhsa": "https://www.samhsa.gov/data/sites/default/files/reports/rpt57010/2025_MH_Facilities_for_All_City_All.xlsx"
+  }
+}

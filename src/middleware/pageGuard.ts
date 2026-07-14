@@ -18,8 +18,8 @@ import type { Request, Response, NextFunction } from "express";
 export const PROTECTED_PAGES = [
   "/adopt/home-study",
   "/adopt/intake-form",
-  "/adopt/agency-profiles",
   "/adopt/matching",
+  "/adopt/resources",
 ] as const;
 
 const PROTECTED = new Set<string>(PROTECTED_PAGES);

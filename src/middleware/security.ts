@@ -18,15 +18,31 @@ import { config } from "../config";
 export function securityHeaders() {
   return helmet({
     contentSecurityPolicy: {
+      // The Google Maps JS API (Post-Adoption Resource Finder) is the only allowed
+      // third-party origin: its script comes from maps.googleapis.com, tiles/markers
+      // from the gstatic/google image hosts, tile/telemetry XHRs to maps.googleapis
+      // .com, its font stylesheet from fonts.googleapis.com + fonts from
+      // fonts.gstatic.com, and it spins up blob: web workers. Everything else stays
+      // same-origin. See Google's "Content Security Policy" guidance for Maps JS.
       directives: {
         defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'"],
+        scriptSrc: ["'self'", "'unsafe-inline'", "https://maps.googleapis.com"],
         // Existing pages use inline on* handlers; helmet's default blocks these
         // via script-src-attr 'none', so explicitly allow them.
         scriptSrcAttr: ["'unsafe-inline'"],
-        styleSrc: ["'self'", "'unsafe-inline'"],
-        imgSrc: ["'self'", "data:"],
-        connectSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        imgSrc: [
+          "'self'",
+          "data:",
+          "https://maps.gstatic.com",
+          "https://*.googleapis.com",
+          "https://*.gstatic.com",
+          "https://*.google.com",
+          "https://*.googleusercontent.com",
+        ],
+        connectSrc: ["'self'", "https://maps.googleapis.com", "https://maps.gstatic.com"],
+        fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
+        workerSrc: ["'self'", "blob:"],
         formAction: ["'self'", "https://accounts.google.com"],
         frameAncestors: ["'none'"],
         objectSrc: ["'none'"],

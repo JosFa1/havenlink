@@ -76,7 +76,8 @@ jobs:
               GeminiSaKeySecretArn="${{ secrets.GEMINI_SA_KEY_SECRET_ARN || 'arn:aws:secretsmanager:us-east-1:930218373857:secret:havenlink/gemini-sa-key-IMpmoT' }}" \
               GeminiUseVertex="true" \
               GoogleCloudProject="havenlink-500500" \
-              GeminiLocation="us-central1"
+              GeminiLocation="us-central1" \
+              GoogleMapsApiKey="${{ vars.GOOGLE_MAPS_API_KEY }}"
 
       - name: Diagnose stack failure (read-only)
         if: failure()

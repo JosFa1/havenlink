@@ -73,6 +73,17 @@ const schema = z.object({
     (v) => (v === "" ? undefined : v),
     z.string().min(1).optional()
   ),
+
+  // ---- Google Maps (Post-Adoption Resource Finder) --------------------------
+  // Browser Maps JavaScript API key for the resource-finder map. Optional: the app
+  // boots without it and the finder reports the map as unconfigured. Served to the
+  // authenticated client via GET /api/resources/maps-config (never hardcoded in HTML).
+  // Public-by-design (it ships in the browser) and protected by an HTTP-referrer
+  // restriction in prod, so it is a plain env var, not a Secrets Manager secret.
+  GOOGLE_MAPS_API_KEY: z.preprocess(
+    (v) => (v === "" ? undefined : v),
+    z.string().min(1).optional()
+  ),
 });
 
 const parsed = schema.safeParse(process.env);

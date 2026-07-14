@@ -61,6 +61,57 @@ ALTER TABLE users
 ALTER TABLE users
   ADD COLUMN IF NOT EXISTS matched_at timestamptz;
 
+-- ===== Post-Adoption Resource Finder (Step 4) ================================
+-- Added post-launch; all statements are idempotent so `npm run migrate` stays safe
+-- to re-run. Data is loaded separately by `npm run seed` (src/db/seedResources.ts)
+-- from committed, gzipped artifacts in src/data/ — schema here, rows there.
+
+-- ZIP centroid lookup table (public-domain GeoNames postal codes). Turns a typed
+-- ZIP into an origin lat/lng with no geocoding API. ~41k rows.
+CREATE TABLE IF NOT EXISTS zip_centroids (
+  zip    char(5) PRIMARY KEY,
+  lat    double precision NOT NULL,
+  lng    double precision NOT NULL,
+  city   text,
+  state  char(2)
+);
+
+-- Curated + ingested local resources (SAMHSA, HRSA, small curated set). `category`
+-- is one of the six finder buckets; a facility offering several is stored as one
+-- row per category. `(source, source_id)` is the natural upsert key so re-seeding
+-- refreshes in place. `lat/lng` are exact where the source ships coordinates
+-- (HRSA) and ZIP-centroid approximations otherwise (SAMHSA/curated).
+CREATE TABLE IF NOT EXISTS resources (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  source      text NOT NULL,
+  source_id   text NOT NULL,
+  name        text NOT NULL,
+  category    text NOT NULL,
+  phone       text,
+  email       text,
+  website     text,
+  address     text,
+  city        text,
+  state       char(2),
+  zip         char(5),
+  lat         double precision NOT NULL,
+  lng         double precision NOT NULL,
+  created_at  timestamptz NOT NULL DEFAULT now(),
+  UNIQUE (source, source_id)
+);
+
+-- Bounding-box proximity scans filter on lat/lng then category; these back both.
+CREATE INDEX IF NOT EXISTS idx_resources_lat_lng ON resources (lat, lng);
+CREATE INDEX IF NOT EXISTS idx_resources_category ON resources (category);
+
+-- Single-row marker gating the seed: the seed no-ops unless the committed
+-- DATA_VERSION differs from what was last loaded, keeping every deploy boot fast.
+CREATE TABLE IF NOT EXISTS resource_data_meta (
+  singleton   boolean PRIMARY KEY DEFAULT true CHECK (singleton),
+  version     text NOT NULL,
+  loaded_at   timestamptz NOT NULL DEFAULT now()
+);
+
 CREATE TABLE IF NOT EXISTS email_verification_tokens (
   id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id     uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,

@@ -32,9 +32,13 @@ COPY public ./public
 COPY --from=builder /app/knowledge-tools/output ./knowledge-tools/output
 # tsc does not emit .sql; place the schema next to the compiled migrator.
 COPY src/db/schema.sql ./dist/db/schema.sql
+# Committed resource-finder data artifacts (read by dist/db/seedResources.js at boot).
+# tsc does not copy src/data into dist, so ship the source-tree copy the seed resolves.
+COPY src/data ./src/data
 RUN npm prune --omit=dev
 
 EXPOSE 3000
 USER node
-# Apply the (idempotent) schema, then start. Runs inside the VPC so it can reach RDS.
-CMD ["sh", "-c", "npm run migrate:prod && node dist/app.js"]
+# Apply the (idempotent) schema, load the (change-gated) resource data, then start.
+# Runs inside the VPC so it can reach RDS.
+CMD ["sh", "-c", "npm run migrate:prod && npm run seed:prod && node dist/app.js"]

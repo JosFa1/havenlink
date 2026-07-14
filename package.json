@@ -7,9 +7,12 @@
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts",
     "build": "tsc",
     "start": "node dist/app.js",
-    "start:migrate": "npm run migrate:prod && npm start",
+    "start:migrate": "npm run migrate:prod && npm run seed:prod && npm start",
     "migrate": "node -r ts-node/register src/db/migrate.ts",
-    "migrate:prod": "node dist/db/migrate.js"
+    "migrate:prod": "node dist/db/migrate.js",
+    "seed": "node -r ts-node/register src/db/seedResources.ts",
+    "seed:prod": "node dist/db/seedResources.js",
+    "etl:resources": "node scripts/etl-resources.mjs"
   },
   "repository": {
     "type": "git",
@@ -50,6 +53,7 @@
     "@types/passport-google-oauth20": "^2.0.16",
     "@types/pg": "^8.11.10",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "xlsx": "^0.18.5"
   }
 }

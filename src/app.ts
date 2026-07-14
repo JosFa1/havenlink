@@ -18,6 +18,7 @@ import { passport, configurePassport } from "./auth/passport";
 import { authRouter } from "./auth/routes";
 import { chatRouter } from "./chat/routes";
 import { matchRouter } from "./match/routes";
+import { resourcesRouter } from "./resources/routes";
 import { pageGuard } from "./middleware/pageGuard";
 
 const app = express();
@@ -58,6 +59,9 @@ app.use("/api/chat", chatRouter);
 
 // ----- Compatibility matching ---------------------------------------------------
 app.use("/api/match", matchRouter);
+
+// ----- Post-Adoption Resource Finder (Step 4) ------------------------------------
+app.use("/api/resources", resourcesRouter);
 
 // Partnership form submission endpoint
 app.post("/api/partnership-request", async (req, res) => {
@@ -520,12 +524,18 @@ app.get("/adopt/intake-form", (req, res) => {
 });
 
 
-app.get("/adopt/agency-profiles", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/adopt/agency-profiles.html"));
-});
-
 app.get("/adopt/matching", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/adopt/matching.html"));
+});
+
+// Step 4: Post-Adoption Resource Finder (replaced the former Agency-Managed Profiles).
+app.get("/adopt/resources", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/adopt/resources.html"));
+});
+
+// Old Step 4 URL -> permanently redirect to the resource finder that replaced it.
+app.get("/adopt/agency-profiles", (req, res) => {
+  res.redirect(301, "/adopt/resources");
 });
 
 

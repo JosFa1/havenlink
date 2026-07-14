@@ -69,6 +69,13 @@ Parameters:
   GeminiLocation:
     Type: String
     Default: us-central1
+  # Browser Google Maps JS API key for the Post-Adoption Resource Finder. Optional:
+  # when empty the finder shows the list without the map. Public-by-design (ships in
+  # the browser) and protected by an HTTP-referrer restriction, so it is passed as a
+  # plain env var, not a Secrets Manager secret.
+  GoogleMapsApiKey:
+    Type: String
+    Default: ''
 
 Conditions:
   HasCertificate: !Not [!Equals [!Ref CertificateArn, '']]
@@ -262,6 +269,8 @@ Resources:
               Value: !Ref GoogleCloudProject
             - Name: GEMINI_LOCATION
               Value: !Ref GeminiLocation
+            - Name: GOOGLE_MAPS_API_KEY
+              Value: !Ref GoogleMapsApiKey
           Secrets:
             - Name: DATABASE_URL
               ValueFrom: !Ref DatabaseUrlSecretArn

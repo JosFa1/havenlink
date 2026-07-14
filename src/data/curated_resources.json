@@ -1,0 +1,105 @@
+{
+  "_comment": "Small hand-curated starter set for the federally-thin categories (financial assistance, educational services). These are real national nonprofits; coordinates are derived from each entry's ZIP centroid at ETL time (approximate, like SAMHSA). Phone is left null unless independently verified. The authoritative educational feed (NCES public-school geocodes) is the planned fast-follow; extend/replace these as real per-state directories are ingested. Do NOT present these as an exhaustive local list.",
+  "resources": [
+    {
+      "name": "Gift of Adoption Fund",
+      "category": "financial",
+      "website": "https://giftofadoption.org",
+      "phone": null,
+      "address": null,
+      "city": "Wilmette",
+      "state": "IL",
+      "zip": "60091"
+    },
+    {
+      "name": "HelpUsAdopt.org (National Adoption Grants)",
+      "category": "financial",
+      "website": "https://www.helpusadopt.org",
+      "phone": null,
+      "address": null,
+      "city": "New York",
+      "state": "NY",
+      "zip": "10018"
+    },
+    {
+      "name": "A Child Waits Foundation (Adoption Grants & Loans)",
+      "category": "financial",
+      "website": "https://www.achildwaits.org",
+      "phone": null,
+      "address": null,
+      "city": "Pittsfield",
+      "state": "MA",
+      "zip": "01201"
+    },
+    {
+      "name": "Show Hope (Adoption Aid Grants)",
+      "category": "financial",
+      "website": "https://showhope.org",
+      "phone": null,
+      "address": null,
+      "city": "Franklin",
+      "state": "TN",
+      "zip": "37067"
+    },
+    {
+      "name": "Brittany's Hope (Matching Adoption Grants)",
+      "category": "financial",
+      "website": "https://www.brittanyshope.org",
+      "phone": null,
+      "address": null,
+      "city": "Elizabethtown",
+      "state": "PA",
+      "zip": "17022"
+    },
+    {
+      "name": "Lifesong for Orphans (Adoption Grants & Interest-Free Loans)",
+      "category": "financial",
+      "website": "https://lifesongfororphans.org",
+      "phone": null,
+      "address": null,
+      "city": "Gridley",
+      "state": "IL",
+      "zip": "61744"
+    },
+    {
+      "name": "Center for Parent Information and Resources",
+      "category": "educational",
+      "website": "https://www.parentcenterhub.org",
+      "phone": null,
+      "address": null,
+      "city": "Newark",
+      "state": "NJ",
+      "zip": "07102"
+    },
+    {
+      "name": "Council for Exceptional Children",
+      "category": "educational",
+      "website": "https://exceptionalchildren.org",
+      "phone": null,
+      "address": null,
+      "city": "Arlington",
+      "state": "VA",
+      "zip": "22202"
+    },
+    {
+      "name": "Understood (Learning & Attention Support)",
+      "category": "educational",
+      "website": "https://www.understood.org",
+      "phone": null,
+      "address": null,
+      "city": "New York",
+      "state": "NY",
+      "zip": "10004"
+    },
+    {
+      "name": "National Center for Learning Disabilities",
+      "category": "educational",
+      "website": "https://www.ncld.org",
+      "phone": null,
+      "address": null,
+      "city": "New York",
+      "state": "NY",
+      "zip": "10004"
+    }
+  ]
+}
