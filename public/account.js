@@ -267,8 +267,65 @@
     } catch {
       /* sessionStorage unavailable - fall through and show once */
     }
+    showNewsletterPopup();
+  }
+
+  function showNewsletterPopup() {
     if (document.getElementById("newsletterModal")) return;
     buildNewsletterPopup();
+  }
+
+  /* ---- Footer "Newsletter" sign-up trigger ---- */
+  // Signed in: open the popup on the spot. Signed out: remember the request in
+  // sessionStorage (survives the full-page login round-trip, including the
+  // Google OAuth redirect) and send them to /login; consumeNewsletterRequest()
+  // then opens the popup on whichever page they land on after signing in.
+  const NEWSLETTER_REQUEST_KEY = "hl_newsletter_requested";
+
+  function wireFooterNewsletter(state) {
+    const buttons = document.querySelectorAll(".footer-newsletter-btn");
+    for (const btn of buttons) {
+      btn.addEventListener("click", () => {
+        if (state && state.authenticated) {
+          showNewsletterPopup();
+          return;
+        }
+        try {
+          sessionStorage.setItem(NEWSLETTER_REQUEST_KEY, "1");
+        } catch {
+          /* worst case: they sign in and no popup follows */
+        }
+        // Come back to this page after login when it's on the allowlist.
+        const dest = sanitizeNext(window.location.pathname);
+        window.location.href = dest
+          ? "/login?next=" + encodeURIComponent(dest)
+          : "/login";
+      });
+    }
+  }
+
+  // Returns true when a pending footer request was fulfilled. An explicit
+  // request bypasses both the pending-prompt flag and the session dismiss key,
+  // so it works for first-time and returning users alike.
+  function consumeNewsletterRequest(state) {
+    const path = window.location.pathname;
+    // Keep the flag alive across the auth pages; it's consumed after redirect.
+    if (path === "/login" || path === "/signup") return false;
+    let requested = false;
+    try {
+      requested = sessionStorage.getItem(NEWSLETTER_REQUEST_KEY) === "1";
+    } catch {
+      return false;
+    }
+    if (!requested) return false;
+    if (!state || !state.authenticated) return false;
+    try {
+      sessionStorage.removeItem(NEWSLETTER_REQUEST_KEY);
+    } catch {
+      /* ignore */
+    }
+    showNewsletterPopup();
+    return true;
   }
 
   function buildNewsletterPopup() {
@@ -306,7 +363,7 @@
 
     const eyebrow = document.createElement("span");
     eyebrow.className = "newsletter-eyebrow";
-    eyebrow.textContent = "The Dispatch";
+    eyebrow.textContent = "The Dispatch — Newsletter";
 
     const title = document.createElement("h2");
     title.id = "newsletterTitle";
@@ -319,7 +376,7 @@
     const text = document.createElement("p");
     text.className = "newsletter-text";
     text.textContent =
-      "Notes for each stage of the journey — what to prepare, and who can help. No spam.";
+      "Our newsletter brings notes for each stage of the journey — what to prepare, and who can help. No spam.";
 
     const accept = document.createElement("button");
     accept.type = "button";
@@ -348,7 +405,7 @@
 
     const confirmEyebrow = document.createElement("span");
     confirmEyebrow.className = "newsletter-eyebrow";
-    confirmEyebrow.textContent = "The Dispatch";
+    confirmEyebrow.textContent = "The Dispatch — Newsletter";
 
     const confirmTitle = document.createElement("p");
     confirmTitle.className = "newsletter-confirm-title";
@@ -632,6 +689,7 @@
     wireGoogleNext();
     const state = await fetchAuthState();
     renderNavAuth(state);
-    maybeShowNewsletterPopup(state);
+    wireFooterNewsletter(state);
+    if (!consumeNewsletterRequest(state)) maybeShowNewsletterPopup(state);
   });
 })();

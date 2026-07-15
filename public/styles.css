@@ -732,9 +732,16 @@ p {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 2rem;
   margin-bottom: 2rem;
+}
+
+/* Five columns get cramped before the 768px two-column switch kicks in. */
+@media (max-width: 1100px) and (min-width: 769px) {
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .footer-section h3 {
@@ -825,12 +832,29 @@ p {
   font-size: 0.9rem;
 }
 
+.footer-newsletter-btn {
+  margin-top: 1rem;
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.footer-newsletter-btn:hover {
+  border-color: var(--blue-lighter);
+  color: var(--blue-lighter);
+}
+
 /* ==================== Adopt Section ==================== */
 
 .adopt-subnav {
   background-color: var(--white);
   border-bottom: 2px solid var(--gray-light);
-  sticky top: 64px;
   z-index: 999;
   position: sticky;
   top: 64px;

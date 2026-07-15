@@ -234,6 +234,27 @@ body.editorial .hotline-link {
   color: #e4b79a;
 }
 
+body.editorial .footer-newsletter-btn {
+  margin-top: 1.25rem;
+  border: 1px solid rgba(250, 248, 245, 0.35);
+  color: rgba(250, 248, 245, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+body.editorial .footer-newsletter-btn:hover {
+  border-color: #e4b79a;
+  color: #e4b79a;
+}
+
+body.editorial .footer-newsletter-btn:focus-visible {
+  outline: 2px solid #e4b79a;
+  outline-offset: 3px;
+}
+
 body.editorial .footer-bottom {
   max-width: var(--container-wide);
   border-top: var(--hairline-inv);

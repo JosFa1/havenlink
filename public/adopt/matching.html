@@ -76,31 +76,36 @@
 
   <main class="mt-main">
 
-    <!-- Hero: the convergence -->
-    <section class="ed-hero mt-hero hm-on-ink" id="top">
-      <canvas id="mtResonance" class="ed-hero-canvas" aria-hidden="true"></canvas>
+    <!-- Hero: the constellation atlas -->
+    <section class="ed-hero mt-hero" id="top">
+      <canvas id="mtAtlasHero" class="ed-hero-canvas" aria-hidden="true"></canvas>
       <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">Step 03 - Compatibility Matching</p>
-        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Where your story <em>meets theirs.</em></h1>
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">HavenLink Registry &mdash; Compatibility Matching HL-03</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Every agency, a star. <em>One is yours.</em></h1>
         <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
           One click pairs your family with a licensed agency in your state. Scored in the open, explained factor by factor — and confirmed only by you.
         </p>
         <div class="ed-hero-actions hm-reveal" style="--d: .24s">
-          <a href="#your-match" class="hm-btn hm-btn--paper">Find your match <span class="hm-btn-arrow">→</span></a>
+          <a href="#match-chamber" class="hm-btn hm-btn--ink">Enter the match chamber <span class="hm-btn-arrow">→</span></a>
           <a href="#how-it-works" class="hm-textlink">How scoring works</a>
         </div>
       </div>
       <div class="ed-hero-meta">
-        <a href="#your-match" class="ed-scrollcue" aria-label="Scroll to your match"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <a href="#match-chamber" class="ed-scrollcue" aria-label="Scroll to your match"><span class="ed-scrollcue-line"></span>Scroll</a>
         <span class="ed-hero-meta-item">Deterministic scoring</span>
         <span class="ed-hero-meta-item">0-100 compatibility</span>
         <span class="ed-hero-meta-item">You decide</span>
       </div>
     </section>
 
-    <!-- The match desk (live flow, rendered by match-flow.js) -->
-    <section class="ed-section" id="your-match">
+    <!-- The match chamber (live flow, rendered by match-flow.js) -->
+    <section class="mt-chamber hm-on-ink" id="match-chamber" aria-labelledby="mtChamberEyebrow">
+      <canvas id="mtAtlasChamber" class="mt-chamber-canvas" aria-hidden="true"></canvas>
       <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow" id="mtChamberEyebrow">The match chamber</span>
+          <span class="hm-index">Live — your registry record</span>
+        </header>
         <div id="mtApp" class="mtf" data-view="loading" aria-live="polite">
           <p class="mtf-loading">Checking your matching status&hellip;</p>
         </div>
@@ -146,7 +151,7 @@
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">Ready to start</span>
         </header>
-        <p class="mt-cta-line hm-reveal" style="--d: .08s">Your profile is what makes the <em>match possible.</em></p>
+        <p class="mt-cta-line hm-reveal" style="--d: .08s">The atlas is drawn. <em>Your star is waiting.</em></p>
         <div class="ed-hero-actions hm-reveal" style="--d: .16s">
           <a href="/adopt/resources" class="hm-btn hm-btn--paper">Continue to resources <span class="hm-btn-arrow">→</span></a>
           <a href="/adopt/intake-form" class="hm-textlink">Go to the intake form</a>
@@ -167,11 +172,11 @@
       <div class="footer-section">
         <h3>Navigation</h3>
         <ul>
-          <li><a href="#match-system">How Matching Works</a></li>
-          <li><a href="#process">The Process</a></li>
-          <li><a href="#sample-score">Sample Score</a></li>
-          <li><a href="#score-meaning">Score Meaning</a></li>
-          <li><a href="#match-notes">Match Notes</a></li>
+          <li><a href="#match-chamber">Your Match</a></li>
+          <li><a href="#how-it-works">How Matching Works</a></li>
+          <li><a href="/adopt/intake-form">Family Intake Form</a></li>
+          <li><a href="/adopt/home-study">Home Study</a></li>
+          <li><a href="/adopt/resources">Resource Finder</a></li>
         </ul>
       </div>
 
@@ -200,6 +205,12 @@
             </svg>
           </a>
         </div>
+      </div>
+
+      <div class="footer-section">
+        <h3>Newsletter</h3>
+        <p>Notes for each stage of the adoption journey, delivered to your inbox.</p>
+        <button type="button" class="footer-newsletter-btn">Sign up for the newsletter</button>
       </div>
     </div>
 
