@@ -1,0 +1,759 @@
+/* ============================================================
+   HavenLink - Post-Adoption Resource Finder (adopt step 4, "The Cartography")
+   Requires editorial.css (tokens, primitives, shared hero) first.
+   Classes prefixed rf- ; resources.js renders into #rf-map / #rf-results and
+   emits .rf-item / .rf-tag / .rf-msg states — those class names are contract.
+
+   Page structure: paper hero (survey canvas draws contours + range rings) ->
+   the instrument (console form + framed Google map "plate" + field-notes
+   ledger) -> legend (six-category key) -> provenance + crisis note ->
+   closing ink CTA.
+   ============================================================ */
+
+/* clear both the nav and the sticky adopt progress bar on anchor jumps */
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
+}
+
+/* ==================== 1. Hero: the survey ==================== */
+
+.rf-hero {
+  /* faint terracotta bloom under the survey's home point */
+  background-image: radial-gradient(
+    38rem 26rem at 74% 44%,
+    rgba(180, 85, 31, 0.05),
+    transparent 70%
+  );
+}
+
+/* ==================== 2. Shared statement ==================== */
+
+.rf-statement {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  text-wrap: balance;
+  max-width: 22ch;
+}
+
+.rf-statement em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.rf-instrument-lede {
+  margin-top: 1.25rem;
+}
+
+/* ==================== 3. The survey console (form) ==================== */
+
+.rf-console {
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
+  display: grid;
+  grid-template-columns: minmax(9rem, 12rem) minmax(9rem, 12rem) minmax(0, 1fr) auto;
+  align-items: stretch;
+  border: var(--hairline);
+  border-top: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+.rf-field {
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1.1rem, 2.2vw, 1.6rem);
+}
+
+.rf-field + .rf-field {
+  border-left: var(--hairline);
+}
+
+.rf-field--submit {
+  display: flex;
+  align-items: center;
+}
+
+.rf-label {
+  display: block;
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+}
+
+#rf-zip {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 40;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(20, 33, 61, 0.32);
+  border-radius: 0;
+  padding: 0.1rem 0 0.3rem;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+#rf-zip::placeholder {
+  color: rgba(20, 33, 61, 0.22);
+}
+
+#rf-zip:focus {
+  outline: none;
+  border-bottom-color: var(--terracotta);
+}
+
+.rf-select {
+  position: relative;
+  display: block;
+}
+
+.rf-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(20, 33, 61, 0.32);
+  border-radius: 0;
+  padding: 0.35rem 1.5rem 0.5rem 0;
+  cursor: pointer;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+.rf-select select:focus {
+  outline: none;
+  border-bottom-color: var(--terracotta);
+}
+
+.rf-select::after {
+  content: "";
+  position: absolute;
+  right: 0.3rem;
+  top: 50%;
+  width: 0.5em;
+  height: 0.5em;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* ---- category keys: the legend, togglable ---- */
+
+.rf-cats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(1rem, 2.5vw, 2rem);
+}
+
+.rf-cat {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 2.75rem;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  transition: opacity 0.25s var(--ease-out);
+}
+
+.rf-cat input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* survey-station diamond: hollow when off, terracotta when charted */
+.rf-cat::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid rgba(20, 33, 61, 0.4);
+  transform: rotate(45deg);
+  transition: background-color 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.rf-cat:has(input:checked)::before {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.rf-cat-key {
+  flex: none;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(20, 33, 61, 0.4);
+  transition: color 0.25s var(--ease-out);
+}
+
+.rf-cat:has(input:checked) .rf-cat-key {
+  color: var(--terracotta);
+}
+
+.rf-cat-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.25s var(--ease-out);
+}
+
+.rf-cat:has(input:checked) .rf-cat-name {
+  color: var(--ink);
+}
+
+.rf-cat:hover .rf-cat-name {
+  color: var(--ink);
+}
+
+.rf-cat:has(input:focus-visible) {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+.rf-submit:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+/* ==================== 4. Field annotation (status message) ==================== */
+
+.rf-msg {
+  display: none;
+  margin-top: 1.5rem;
+  padding-left: 1.1rem;
+  border-left: 2px solid rgba(20, 33, 61, 0.32);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.rf-msg.show {
+  display: block;
+}
+
+.rf-msg.error {
+  border-left-color: var(--terracotta);
+  color: var(--terracotta-deep);
+}
+
+/* ==================== 5. The plate (framed map + ledger) ==================== */
+
+.rf-plate {
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+/* survey-plate frame with registration marks (team-page map recipe) */
+.rf-frame {
+  position: relative;
+  padding: clamp(0.75rem, 2vw, 1.25rem);
+  border: var(--hairline);
+}
+
+.rf-corner {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border: 0 solid var(--terracotta);
+  pointer-events: none;
+}
+
+.rf-corner--tl { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+.rf-corner--tr { top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+.rf-corner--bl { bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+.rf-corner--br { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
+
+#rf-map {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 60vh, 620px);
+  background: var(--paper-dim);
+}
+
+/* pre-search state: a waiting sheet of graticule (Maps init replaces it) */
+.rf-map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 47px, rgba(20, 33, 61, 0.055) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, rgba(20, 33, 61, 0.055) 47px 48px);
+}
+
+/* crosshair: ring + hairline cross + terracotta center dot, one element */
+.rf-map-empty-mark {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(20, 33, 61, 0.35);
+  border-radius: 50%;
+  background-image:
+    radial-gradient(circle, var(--terracotta) 2.5px, transparent 3.5px),
+    linear-gradient(to right, transparent calc(50% - 0.5px), rgba(20, 33, 61, 0.35) calc(50% - 0.5px), rgba(20, 33, 61, 0.35) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom, transparent calc(50% - 0.5px), rgba(20, 33, 61, 0.35) calc(50% - 0.5px), rgba(20, 33, 61, 0.35) calc(50% + 0.5px), transparent calc(50% + 0.5px));
+}
+
+.rf-map-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1.5rem;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.rf-figcap {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.1rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ==================== 6. Field notes (results ledger) ==================== */
+
+/* JS toggles the hidden attribute — it must always win */
+.rf-results[hidden] {
+  display: none !important;
+}
+
+.rf-results {
+  border: var(--hairline);
+  border-top: 2px solid var(--ink);
+  max-height: clamp(440px, 64vh, 660px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 33, 61, 0.3) transparent;
+}
+
+.rf-count {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 0.9rem 1.1rem;
+  background: var(--paper);
+  border-bottom: var(--hairline-strong);
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+}
+
+.rf-item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.9rem;
+  align-items: start;
+  padding: 1.05rem 1.1rem;
+  border-bottom: var(--hairline);
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+.rf-item:hover {
+  background: rgba(20, 33, 61, 0.03);
+}
+
+.rf-item.active {
+  background: var(--paper-dim);
+  box-shadow: inset 2px 0 0 var(--terracotta);
+}
+
+.rf-item-idx {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--terracotta);
+  padding-top: 0.2rem;
+}
+
+.rf-item-name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 480;
+  line-height: 1.22;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+.rf-item-tags {
+  margin-top: 0.4rem;
+}
+
+.rf-tag {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  border: var(--hairline);
+  padding: 0.15rem 0.5rem;
+  margin: 0 0.35rem 0.3rem 0;
+}
+
+.rf-item-meta {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.rf-item a {
+  color: var(--terracotta-deep);
+  font-weight: 500;
+}
+
+.rf-item-dist {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--terracotta);
+  padding-top: 0.15rem;
+  justify-self: end;
+}
+
+.rf-fieldnote {
+  margin: 0;
+  padding: 0.9rem 1.1rem 1.05rem;
+  border-top: var(--hairline);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* pre-search ledger placeholder; retires once results exist */
+.rf-results:not([hidden]) + .rf-ledger-empty {
+  display: none;
+}
+
+.rf-ledger-empty {
+  border: var(--hairline);
+  border-top: 2px solid var(--ink);
+  padding: 1.4rem 1.3rem 1.6rem;
+}
+
+.rf-ledger-empty-head {
+  display: block;
+  font-size: var(--text-eyebrow);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--ink);
+  margin-bottom: 0.7rem;
+}
+
+.rf-ledger-empty p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ==================== 7. Plate 02: the legend ==================== */
+
+.rf-key {
+  margin-top: clamp(2.5rem, 6vh, 4rem);
+}
+
+/* ==================== 8. Plate 03: provenance + crisis ==================== */
+
+.rf-prov {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+
+.rf-prov-main .ed-body {
+  margin-top: 1.25rem;
+}
+
+.rf-sources {
+  list-style: none;
+  margin: clamp(2rem, 4vh, 2.75rem) 0 0;
+  padding: 0;
+}
+
+.rf-source {
+  display: grid;
+  grid-template-columns: minmax(0, 8rem) minmax(0, 1fr) auto;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  align-items: baseline;
+  padding: 1.1rem 0;
+  border-top: var(--hairline);
+}
+
+.rf-source:last-child {
+  border-bottom: var(--hairline);
+}
+
+.rf-source--total {
+  border-top: 2px solid var(--ink);
+}
+
+.rf-source-name {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 480;
+  font-variation-settings: "opsz" 30;
+  color: var(--ink);
+}
+
+.rf-source-desc {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.rf-source-count {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: var(--terracotta);
+  justify-self: end;
+}
+
+.rf-prov-note {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.rf-crisis {
+  border-top: 2px solid var(--terracotta);
+  padding-top: 1.5rem;
+}
+
+.rf-crisis-head {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 460;
+  font-variation-settings: "opsz" 40;
+  margin: 0 0 1rem;
+}
+
+.rf-crisis-line {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.rf-crisis-line a {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(20, 33, 61, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.3s ease, text-decoration-color 0.3s ease;
+}
+
+.rf-crisis-line a:hover {
+  color: var(--terracotta);
+  text-decoration-color: var(--terracotta);
+}
+
+.rf-crisis-note {
+  margin: 1.25rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ==================== 9. Closing CTA band ==================== */
+
+.rf-cta {
+  padding-block: clamp(6rem, 14vh, 11rem);
+}
+
+/* ==================== 10. Google Maps chrome (InfoWindow) ==================== */
+
+.gm-iw {
+  font-family: var(--font-body);
+  color: var(--ink);
+  max-width: 260px;
+  padding: 0.2rem 0.2rem 0.3rem;
+}
+
+.gm-iw h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--ink);
+  margin: 0 0 0.4rem;
+}
+
+.gm-iw p {
+  margin: 0.2rem 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.gm-iw a {
+  color: var(--terracotta-deep);
+  font-weight: 500;
+}
+
+.gm-iw .rf-tag {
+  font-size: 0.6rem;
+}
+
+.gm-iw-dist {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+/* square the InfoWindow shell to match the hard-edged system (defensive:
+   Google's internals are undocumented — keep these minimal) */
+.gm-style .gm-style-iw-c {
+  border-radius: 0;
+  box-shadow: 0 12px 32px rgba(20, 33, 61, 0.18);
+}
+
+/* ==================== 11. Responsive ==================== */
+
+@media (max-width: 1080px) {
+  .rf-console {
+    grid-template-columns: minmax(9rem, 1fr) minmax(9rem, 1fr);
+  }
+
+  .rf-field + .rf-field {
+    border-left: none;
+  }
+
+  .rf-field--range {
+    border-left: var(--hairline) !important;
+  }
+
+  .rf-field--cats,
+  .rf-field--submit {
+    border-top: var(--hairline);
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 860px) {
+  /* the sticky adopt subnav is taller on mobile */
+  body.editorial section[id] {
+    scroll-margin-top: calc(var(--hm-nav-h) + 6.5rem);
+  }
+
+  .rf-console {
+    grid-template-columns: 1fr;
+  }
+
+  .rf-field--range {
+    border-left: none !important;
+    border-top: var(--hairline);
+  }
+
+  .rf-cats {
+    grid-template-columns: 1fr;
+  }
+
+  .rf-field--submit .hm-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .rf-plate {
+    grid-template-columns: 1fr;
+  }
+
+  #rf-map {
+    height: clamp(340px, 48vh, 480px);
+  }
+
+  .rf-results {
+    max-height: 50vh;
+  }
+
+  .rf-prov {
+    grid-template-columns: 1fr;
+  }
+
+  .rf-source {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .rf-source-count {
+    grid-row: 1;
+    grid-column: 2;
+  }
+
+  .rf-source-desc {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  /* calm the survey canvas behind stacked hero copy */
+  .rf-hero .ed-hero-canvas {
+    opacity: 0.55;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rf-cat,
+  .rf-cat::before,
+  .rf-cat-key,
+  .rf-cat-name,
+  .rf-item,
+  #rf-zip,
+  .rf-select select {
+    transition: none;
+  }
+}

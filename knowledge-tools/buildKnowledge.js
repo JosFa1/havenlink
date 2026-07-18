@@ -151,9 +151,9 @@ const pages = [
     title: 'Family Intake Form'
   },
   {
-    url: '/adopt/agency-profiles',
-    file: 'public/adopt/agency-profiles.html',
-    title: 'Agency-Managed Profiles'
+    url: '/adopt/resources',
+    file: 'public/adopt/resources.html',
+    title: 'Post-Adoption Resource Finder'
   },
   {
     url: '/adopt/matching',
