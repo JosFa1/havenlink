@@ -29,7 +29,6 @@
   var PARTNER_STARS = 6;
 
   var LIGHT = { star: "20,33,61", accent: "180,85,31", baseAlpha: 0.55, edgeAlpha: 0.08 };
-  var DARK = { star: "250,248,245", accent: "217,119,66", baseAlpha: 0.6, edgeAlpha: 0.1 };
 
   function rand(a, b) { return a + Math.random() * (b - a); }
   function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -304,19 +303,4 @@
     scrollMode: "hero"
   });
 
-  var chamber = createAtlas(document.getElementById("mtAtlasChamber"), {
-    palette: DARK,
-    density: 1 / 8000,
-    maxStars: 200,
-    center: [0.5, 0.42],
-    scrollMode: "section"
-  });
-
-  // the live match flow narrates into the chamber
-  window.addEventListener("havenlink:match-roll", function () {
-    if (chamber) chamber.surge();
-  });
-  window.addEventListener("havenlink:matched", function () {
-    if (chamber) chamber.ignite();
-  });
 })();

@@ -5,10 +5,10 @@
 
    Contents:
      0. Shared: masked line reveals
-     1. Hero - ink constellation
+     1. Hero - paper constellation
      2. Manifesto
      3. Founders - editorial plates
-     4. Ledger lists + hover lens
+     4. Partner card grids
      5. Global-reach map framing
      6. Belief band
      7. Responsive
@@ -55,10 +55,7 @@ html.js body.editorial .hm-reveal.is-in .tm-mask-in {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background-color: var(--ink-deep);
-  background-image:
-    radial-gradient(120% 90% at 76% 22%, rgba(180, 85, 31, 0.18), transparent 62%),
-    radial-gradient(90% 80% at 8% 100%, rgba(20, 33, 61, 0.9), transparent 70%);
+  background-color: var(--paper);
 }
 
 /* oversized so the JS scroll parallax never exposes an edge */
@@ -96,7 +93,7 @@ html.js body.editorial .hm-reveal.is-in .tm-mask-in {
 .tm-hero-rule {
   width: clamp(3rem, 9vw, 8rem);
   height: 1px;
-  background: rgba(250, 248, 245, 0.28);
+  background: rgba(20, 33, 61, 0.28);
 }
 
 .tm-hero-vol {
@@ -105,7 +102,7 @@ html.js body.editorial .hm-reveal.is-in .tm-mask-in {
   font-style: italic;
   font-size: 0.95rem;
   letter-spacing: 0.03em;
-  color: rgba(250, 248, 245, 0.45);
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -115,20 +112,20 @@ body.editorial .tm-hero-title {
   line-height: 0.99;
   letter-spacing: -0.028em;
   font-variation-settings: "opsz" 144;
-  color: var(--paper);
+  color: var(--ink);
   margin: 0 0 clamp(1.75rem, 4.5vh, 2.75rem);
 }
 
 .tm-hero-title em {
   font-style: italic;
-  color: #e4b79a;
+  color: var(--terracotta);
 }
 
 .tm-hero-standfirst {
   font-size: var(--text-lede);
   line-height: 1.65;
   font-weight: 420;
-  color: rgba(250, 248, 245, 0.72);
+  color: var(--muted);
   max-width: 36rem;
   margin: 0 0 clamp(2.25rem, 5.5vh, 3.5rem);
 }
@@ -150,7 +147,7 @@ body.editorial .tm-hero-title {
   margin-inline: auto;
   margin-top: clamp(3rem, 7vh, 5rem);
   padding: 1.5rem var(--gutter) 1.7rem;
-  border-top: var(--hairline-inv);
+  border-top: var(--hairline);
   display: flex;
   align-items: center;
   gap: clamp(1.5rem, 4vw, 3rem);
@@ -164,7 +161,7 @@ body.editorial .tm-hero-title {
   font-weight: 560;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: var(--paper);
+  color: var(--ink);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -173,7 +170,7 @@ body.editorial .tm-hero-title {
   display: inline-block;
   width: 1px;
   height: 26px;
-  background: rgba(250, 248, 245, 0.85);
+  background: rgba(20, 33, 61, 0.85);
   transform-origin: top;
   animation: tm-cue 2.4s var(--ease-out) infinite;
 }
@@ -204,7 +201,7 @@ body.editorial .tm-hero-title {
   font-weight: 420;
   font-size: clamp(1.7rem, 2.6vw, 2.4rem);
   line-height: 1;
-  color: var(--paper);
+  color: var(--ink);
   margin: 0;
   font-variant-numeric: tabular-nums;
 }
@@ -216,7 +213,7 @@ body.editorial .tm-hero-title {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-weight: 540;
-  color: rgba(250, 248, 245, 0.5);
+  color: var(--muted);
   white-space: nowrap;
 }
 
@@ -469,121 +466,152 @@ html.js body.editorial .hm-reveal.is-in .tm-veil {
   color: inherit;
 }
 
-/* ==================== 4. Ledger lists + hover lens ==================== */
+/* ==================== 4. Partner card grids ==================== */
 
-.tm-ledger {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.tm-ledger-item {
-  border-top: var(--hairline);
-  transition: opacity 0.4s ease;
-}
-
-.tm-ledger-item:last-child {
+/* subsection header: eyebrow + italic count over a hairline */
+.tm-subhead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: clamp(2.5rem, 6vh, 4rem) 0 1.5rem;
+  padding-bottom: 0.85rem;
   border-bottom: var(--hairline);
 }
 
-/* hovering one entry recedes the others */
-.tm-ledger:has(.tm-ledger-link:hover) .tm-ledger-item:not(:hover) {
+.tm-subhead:first-of-type {
+  margin-top: 0;
+}
+
+.tm-subhead-count {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--terracotta);
+}
+
+/* ruled grid of compact logo cards */
+.tm-cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: var(--hairline);
+  border-left: var(--hairline);
+}
+
+.tm-card-item {
+  border-right: var(--hairline);
+  border-bottom: var(--hairline);
+  transition: opacity 0.4s ease;
+}
+
+/* hovering one card recedes the others */
+.tm-cards:has(.tm-card:hover) .tm-card-item:not(:hover) {
   opacity: 0.35;
 }
 
-.tm-ledger-link {
-  display: grid;
-  grid-template-columns: 2.5rem 5rem minmax(0, 1fr) 1.5rem;
-  gap: clamp(1rem, 3vw, 2.5rem);
-  align-items: center;
-  padding: 2rem 0;
+.tm-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  padding: clamp(1.4rem, 2.5vw, 2rem);
   text-decoration: none;
   color: inherit;
 }
 
-.tm-ledger-num {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 0.95rem;
-  color: rgba(20, 33, 61, 0.4);
-  transition: color 0.3s ease;
-}
-
-.tm-ledger-link:hover .tm-ledger-num {
-  color: var(--terracotta);
-}
-
-.tm-ledger-logo {
+.tm-card-logo {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 4.25rem;
   aspect-ratio: 1 / 1;
-  background: var(--paper);
   border: var(--hairline);
+  background: var(--paper);
 }
 
-.tm-section--dim .tm-ledger-logo {
+.tm-section--dim .tm-card-logo {
   background: var(--paper-dim);
 }
 
-.tm-ledger-logo img {
-  max-width: 74%;
-  max-height: 74%;
+.tm-card-logo img {
+  max-width: 72%;
+  max-height: 72%;
   object-fit: contain;
   display: block;
 }
 
-.tm-ledger-text {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.45s var(--ease-out);
+/* empty or unreadable logo file: initials lockup (set by team.js) */
+.tm-card-logo.is-missing img {
+  display: none;
 }
 
-.tm-ledger-link:hover .tm-ledger-text {
-  transform: translateX(0.85rem);
-}
-
-.tm-ledger-name {
+.tm-card-logo.is-missing::after {
+  content: attr(data-initials);
   font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.3vw, 1.9rem);
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--terracotta);
+}
+
+.tm-card-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
   font-weight: 450;
-  line-height: 1.15;
+  line-height: 1.2;
   font-variation-settings: "opsz" 40;
   color: var(--ink);
-  margin: 0 0 0.4rem;
   transition: color 0.3s ease;
 }
 
-.tm-ledger-role {
+.tm-card:hover .tm-card-name {
+  color: var(--terracotta);
+}
+
+.tm-card-role {
   font-size: var(--text-meta);
   letter-spacing: 0.04em;
   color: var(--terracotta);
-  margin: 0 0 0.35rem;
+  margin-top: -0.45rem;
 }
 
-.tm-ledger-desc {
+.tm-card-desc {
   color: var(--muted);
-  font-size: var(--text-body);
+  font-size: 0.95rem;
   line-height: 1.6;
-  max-width: 46rem;
-  margin: 0;
 }
 
-.tm-ledger-arrow {
-  font-size: 1.1rem;
+.tm-card-arrow {
+  margin-top: auto;
+  align-self: flex-end;
+  font-size: 1.05rem;
   color: rgba(20, 33, 61, 0.4);
   transition: color 0.3s ease, transform 0.3s var(--ease-out);
-  justify-self: end;
 }
 
-.tm-ledger-link:hover .tm-ledger-arrow {
+.tm-card:hover .tm-card-arrow {
   color: var(--terracotta);
   transform: translateX(4px);
 }
 
-.tm-ledger-link:hover .tm-ledger-name {
-  color: var(--terracotta);
+@media (max-width: 1000px) {
+  .tm-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .tm-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .tm-card-arrow {
+    display: none;
+  }
 }
 
 /* ==================== 5. Global-reach map ==================== */
@@ -755,29 +783,6 @@ html.js body.editorial .hm-reveal.is-in .tm-veil {
     bottom: 0;
     font-size: clamp(6rem, 24vw, 9rem);
   }
-
-  .tm-ledger-link {
-    grid-template-columns: 3.5rem minmax(0, 1fr);
-    row-gap: 0.75rem;
-  }
-
-  .tm-ledger-num {
-    grid-row: 1;
-  }
-
-  .tm-ledger-logo {
-    grid-row: 1 / span 2;
-    grid-column: 1;
-    width: 3.5rem;
-  }
-
-  .tm-ledger-text {
-    grid-column: 2;
-  }
-
-  .tm-ledger-arrow {
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
@@ -832,8 +837,9 @@ html.js body.editorial .hm-reveal.is-in .tm-veil {
     transition: none !important;
   }
 
-  .tm-ledger-item,
-  .tm-ledger-text {
+  .tm-card-item,
+  .tm-card-name,
+  .tm-card-arrow {
     transition: none;
   }
 }

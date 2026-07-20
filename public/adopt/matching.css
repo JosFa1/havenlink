@@ -41,18 +41,6 @@ body.editorial section[id] {
   overflow: hidden;
 }
 
-/* star-field behind the record; beats .hm-on-ink > * via the child combinator.
-   The mask calms the field behind the left content column. */
-.mt-chamber > .mt-chamber-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(100deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.42) 42%, #000 72%);
-  mask-image: linear-gradient(100deg, rgba(0, 0, 0, 0.32) 0%, rgba(0, 0, 0, 0.42) 42%, #000 72%);
-}
-
 .mt-chamber .hm-index {
   color: #e4b79a; /* terracotta lifted for contrast on ink */
 }

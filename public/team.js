@@ -1,13 +1,16 @@
 /**
  * HavenLink - Team page ("The People") behavior.
  *
- * 1. Hero constellation: a cartographic night-map on ink - drifting nodes at
- *    three depths joined by hairlines, terracotta hubs sending arced "routes"
- *    (with travelling signal pulses) into a knot that leans toward the cursor.
+ * 1. Hero constellation: a cartographic map in ink on paper - drifting nodes
+ *    at three depths joined by hairlines, terracotta hubs sending arced
+ *    "routes" (with travelling signal pulses) into a knot that leans toward
+ *    the cursor.
  * 2. Hero scroll parallax: content and canvas fall away at different speeds.
  * 3. Stat count-up for the hero foot ([data-tmcount] - separate from
  *    editorial.js's single [data-countup] hook).
  * 4. Founder portrait drift: the oversized image glides inside its frame.
+ * 5. Partner card logo fallback: empty/unreadable logo files collapse to a
+ *    terracotta initials lockup instead of a broken image.
  *
  * Self-contained (no CDN - CSP), DPR-aware, pauses off-screen/hidden tab,
  * static frame + no parallax under prefers-reduced-motion.
@@ -27,8 +30,8 @@
     var ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    var PAPER = "250,248,245";
-    var TERRA = "224,151,105";
+    var INK = "20,33,61";
+    var TERRA = "180,85,31";
 
     var nodes = [];
     var pulses = [];
@@ -102,7 +105,7 @@
       /* faint meridian rings around the knot */
       var ringR = Math.min(W, H);
       ctx.lineWidth = 1;
-      ctx.strokeStyle = "rgba(" + PAPER + ",0.045)";
+      ctx.strokeStyle = "rgba(" + INK + ",0.06)";
       for (i = 0; i < 3; i++) {
         ctx.beginPath();
         ctx.arc(anchor.x, anchor.y, ringR * (0.12 + i * 0.12), 0, Math.PI * 2);
@@ -144,7 +147,7 @@
           d = Math.sqrt(dx * dx + dy * dy);
           if (d < maxD) {
             alpha = (1 - d / maxD) * 0.16 * Math.min(nodes[a].z, nodes[b].z);
-            ctx.strokeStyle = "rgba(" + PAPER + "," + alpha.toFixed(3) + ")";
+            ctx.strokeStyle = "rgba(" + INK + "," + alpha.toFixed(3) + ")";
             ctx.beginPath();
             ctx.moveTo(px[a], py[a]);
             ctx.lineTo(px[b], py[b]);
@@ -191,7 +194,7 @@
           ? 2 * p.t * p.t
           : 1 - Math.pow(-2 * p.t + 2, 2) / 2;
         var pt = qpoint(px[p.i], py[p.i], n.cx, n.cy, anchor.x, anchor.y, e);
-        ctx.fillStyle = "rgba(" + PAPER + ",0.9)";
+        ctx.fillStyle = "rgba(" + INK + ",0.9)";
         ctx.beginPath();
         ctx.arc(pt.x, pt.y, 1.8, 0, Math.PI * 2);
         ctx.fill();
@@ -211,7 +214,7 @@
           ctx.fill();
         } else {
           ctx.fillStyle =
-            "rgba(" + PAPER + "," + (0.14 + 0.32 * n.z).toFixed(3) + ")";
+            "rgba(" + INK + "," + (0.14 + 0.32 * n.z).toFixed(3) + ")";
           ctx.beginPath();
           ctx.arc(px[i], py[i], 0.8 + n.z * 1.6, 0, Math.PI * 2);
           ctx.fill();
@@ -387,5 +390,37 @@
     window.addEventListener("scroll", queue, { passive: true });
     window.addEventListener("resize", queue);
     apply();
+  })();
+
+  /* ==================== 5. Partner card logo fallback ==================== */
+
+  (function () {
+    var imgs = document.querySelectorAll(".tm-card-logo img");
+    if (!imgs.length) return;
+
+    function initialsFor(name) {
+      var letters = name
+        .replace(/[^A-Za-z0-9 ]/g, "")
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(function (w) { return w.charAt(0).toUpperCase(); })
+        .join("");
+      return letters || "HL";
+    }
+
+    imgs.forEach(function (img) {
+      function fail() {
+        var box = img.closest(".tm-card-logo");
+        var card = img.closest(".tm-card");
+        var name = card ? card.querySelector(".tm-card-name") : null;
+        if (!box) return;
+        box.setAttribute("data-initials", initialsFor(name ? name.textContent : ""));
+        box.classList.add("is-missing");
+      }
+      /* a 0-byte placeholder may already have failed before this runs */
+      if (img.complete && img.naturalWidth === 0) fail();
+      else img.addEventListener("error", fail, { once: true });
+    });
   })();
 })();

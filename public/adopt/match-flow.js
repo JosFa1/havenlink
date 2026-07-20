@@ -233,6 +233,11 @@
       img.className = "mtf-agency-logo";
       img.src = agency.logo;
       img.alt = agency.name + " logo";
+      /* logo file missing or unreadable: fall back to the initials lockup */
+      img.addEventListener("error", function () {
+        var lockup = el("span", "mtf-agency-lockup", initialsFor(agency.name));
+        if (img.parentNode) img.parentNode.replaceChild(lockup, img);
+      }, { once: true });
       head.appendChild(img);
     } else {
       head.appendChild(el("span", "mtf-agency-lockup", initialsFor(agency.name)));

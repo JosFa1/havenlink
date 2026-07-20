@@ -183,14 +183,6 @@
       ctx.lineTo(W, pts[SAMPLES - 1]);
       ctx.stroke();
     }
-
-    // convergence knot: a small woven ring where the threads meet
-    var knotAlpha = 0.5 + 0.18 * Math.sin(t * 0.8);
-    ctx.beginPath();
-    ctx.strokeStyle = "rgba(" + TERRA + ", " + knotAlpha + ")";
-    ctx.lineWidth = 1.4;
-    ctx.arc(anchorX, anchorY + parallaxY, 7 + 1.5 * Math.sin(t * 0.6), 0, Math.PI * 2);
-    ctx.stroke();
   }
 
   function loop(ts) {

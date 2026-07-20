@@ -102,6 +102,204 @@ export const AGENCIES: Agency[] = [
       "A full-service child placing agency, licensed by the State of Michigan to perform private infant and early childhood adoption.",
     tags: ["Child placement", "Infant & early childhood"],
   },
+  {
+    id: "sacred-portion-mt",
+    name: "The Sacred Portion Children's Outreach",
+    state: "MT",
+    partner: true,
+    url: "https://sacredportion.org/",
+    logo: "/png/sacred-portion-logo.png",
+    description:
+      "A faith-based nonprofit child-caring ministry in Bozeman that works internationally and domestically to place children without families and to support the expectant mothers who care for them.",
+    tags: ["Placement", "Domestic & international", "Expectant mother support"],
+  },
+  {
+    id: "lifeline-al",
+    name: "Lifeline Children's Services",
+    state: "AL",
+    partner: true,
+    url: "https://lifelinechild.org/",
+    logo: "/png/lifeline-childrens-logo.png",
+    description:
+      "A Christian, full-service adoption and orphan-care ministry based in Birmingham serving vulnerable children and expectant mothers through domestic and international adoption, foster care, and counseling.",
+    tags: ["Domestic & international", "Foster care", "Counseling"],
+  },
+  {
+    id: "adoption-choices-fl",
+    name: "Adoption Choices of Florida",
+    state: "FL",
+    partner: true,
+    url: "https://adoptionchoicesflorida.com/",
+    logo: "/png/adoption-choices-florida-logo.png",
+    description:
+      "A licensed, full-service agency that helps birth mothers and adoptive families build personalized adoption plans, offering statewide support and leaving major decisions in the birth mother's hands.",
+    tags: ["Placement", "Birth parent support"],
+  },
+  {
+    id: "spence-chapin-ny",
+    name: "Spence-Chapin Services to Families and Children",
+    state: "NY",
+    partner: true,
+    url: "https://www.spence-chapin.org/",
+    logo: "/png/spence-chapin-logo.png",
+    description:
+      "An accredited nonprofit with more than a century of experience finding loving homes for children of all needs and providing lifelong counseling to birth parents, adoptees, and adoptive families.",
+    tags: ["Placement", "Counseling", "Post-adoption support"],
+  },
+  {
+    id: "gladney-tx",
+    name: "Gladney Center for Adoption",
+    state: "TX",
+    partner: true,
+    url: "https://gladney.org/",
+    logo: "/png/gladney-logo.png",
+    description:
+      "A Fort Worth agency operating for over 130 years under the belief that every child deserves a loving family, offering domestic and international adoption alongside lifelong support for adoptees and birth parents.",
+    tags: ["Domestic & international", "Post-adoption support"],
+  },
+  {
+    id: "the-cradle-il",
+    name: "The Cradle",
+    state: "IL",
+    partner: true,
+    url: "https://cradle.org/",
+    logo: "/png/the-cradle-logo.png",
+    description:
+      "A nonprofit, licensed Evanston agency founded in 1923 that provides infant adoption, counseling, and education, and is the only U.S. adoption agency with an on-site nursery.",
+    tags: ["Infant adoption", "Counseling"],
+  },
+  {
+    id: "holt-international-or",
+    name: "Holt International",
+    state: "OR",
+    partner: true,
+    url: "https://www.holtinternational.org/",
+    logo: "/png/holt-international-logo.png",
+    description:
+      "A pioneering international adoption and child-welfare organization based in Eugene that seeks a loving, secure home for every child, first through birth-family preservation and in-country placement.",
+    tags: ["Domestic & international", "Family preservation"],
+  },
+  {
+    id: "chs-north-carolina-nc",
+    name: "Children's Home Society of North Carolina",
+    state: "NC",
+    partner: true,
+    url: "https://www.chsnc.org/",
+    logo: "/png/chs-north-carolina-logo.png",
+    description:
+      "A statewide nonprofit founded in 1902 whose mission is to promote every child's right to a permanent, safe, and loving family through adoption, foster care, family preservation, and parent education.",
+    tags: ["Placement", "Foster care", "Family preservation"],
+  },
+  {
+    id: "raise-the-future-co",
+    name: "Raise the Future",
+    state: "CO",
+    partner: true,
+    url: "https://www.raisethefuture.org/",
+    logo: "/png/raise-the-future-logo.png",
+    description:
+      "A Denver-based nonprofit, formerly The Adoption Exchange, that connects youth waiting in foster care with permanent adult connections and supports those relationships through trauma-informed, wraparound services.",
+    tags: ["Foster care", "Waiting children", "Trauma-informed"],
+  },
+  {
+    id: "arizonas-children-az",
+    name: "Arizona's Children Association",
+    state: "AZ",
+    partner: true,
+    url: "https://www.arizonaschildren.org/",
+    logo: "/png/arizonas-children-logo.png",
+    description:
+      "One of Arizona's oldest and largest statewide child-welfare nonprofits, founded in 1912, working to protect children, empower youth, and strengthen families through foster care, adoption, and behavioral health programs.",
+    tags: ["Foster care", "Placement", "Behavioral health"],
+  },
+  {
+    id: "adoption-network-ca",
+    name: "Adoption Network Law Center",
+    state: "CA",
+    partner: true,
+    url: "https://adoptionnetwork.com/",
+    logo: "/png/adoption-network-law-center-logo.png",
+    description:
+      "An attorney-supervised organization that guides birth mothers and adoptive parents through domestic adoption, pairing legal protection with emotional support throughout the process.",
+    tags: ["Legal services", "Birth parent support"],
+  },
+  {
+    id: "cafaf-ct",
+    name: "Connecticut Alliance of Foster and Adoptive Families",
+    state: "CT",
+    partner: true,
+    url: "https://www.cafafct.org/",
+    logo: "/png/cafaf-logo.png",
+    description:
+      "A statewide nonprofit that strengthens foster, adoptive, and kinship families through support, training, advocacy, and recruitment in partnership with child-welfare professionals.",
+    tags: ["Foster care", "Training & advocacy"],
+  },
+  {
+    id: "chs-minnesota-mn",
+    name: "Children's Home Society of Minnesota",
+    state: "MN",
+    partner: true,
+    url: "https://chlss.org/",
+    logo: "/png/chs-minnesota-logo.png",
+    description:
+      "A St. Paul nonprofit dating to 1889, now partnered with Lutheran Social Service, that provides child-centered infant, international, and foster-care adoption along with post-adoption and pregnancy services.",
+    tags: ["Infant adoption", "Domestic & international", "Post-adoption support"],
+  },
+  {
+    id: "nightlight-ky",
+    name: "Nightlight Christian Adoptions",
+    state: "KY",
+    partner: true,
+    url: "https://nightlight.org/",
+    logo: "/png/nightlight-logo.png",
+    description:
+      "A Hague-accredited Christian agency operating for over 50 years that offers domestic, international, foster, and pioneering Snowflakes embryo adoption alongside pregnancy counseling.",
+    tags: ["Domestic & international", "Embryo adoption", "Counseling"],
+  },
+  {
+    id: "adoption-services-la",
+    name: "Adoption Services, Inc.",
+    state: "LA",
+    partner: true,
+    url: "https://www.adoptionservices.org/",
+    logo: "/png/adoption-services-inc-logo.png",
+    description:
+      "A licensed nonprofit full-service agency operating since 1985 that helps birth parents and adoptive families across the U.S. with domestic adoption and unplanned-pregnancy counseling.",
+    tags: ["Placement", "Counseling"],
+  },
+  {
+    id: "nightlight-sc",
+    name: "Nightlight Christian Adoptions (Greenville)",
+    state: "SC",
+    partner: true,
+    url: "https://nightlight.org/",
+    logo: "/png/nightlight-logo.png",
+    description:
+      "The Greenville office of Nightlight, a Hague-accredited Christian agency providing domestic, international, foster, and embryo adoption plus pregnancy counseling.",
+    tags: ["Domestic & international", "Embryo adoption", "Counseling"],
+  },
+  {
+    id: "shineforth-va",
+    name: "Shineforth",
+    state: "VA",
+    partner: true,
+    url: "https://shineforth.org/",
+    logo: "/png/shineforth-logo.png",
+    description:
+      "A Virginia nonprofit founded in 1900, formerly United Methodist Family Services, that champions children through treatment foster care, adoption, residential treatment, and specialized education statewide.",
+    tags: ["Foster care", "Placement", "Specialized education"],
+  },
+  {
+    id: "bright-futures-ma",
+    name: "Bright Futures Adoption Center",
+    state: "MA",
+    partner: true,
+    url: "https://www.brightfuturesadoption.org/",
+    logo: "/png/bright-futures-logo.png",
+    description:
+      "A full-service, licensed nonprofit Massachusetts adoption agency and program of the RFK Community Alliance, promoting open adoption and giving birth and adoptive parents options and involvement throughout the process.",
+    tags: ["Open adoption", "Placement", "Nonprofit"],
+  },
 
   // ----- Georgia ---------------------------------------------------------------
   {
@@ -150,14 +348,14 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "covenant-care-ga",
-    name: "Covenant Care Services",
+    name: "Covenant Care Adoptions",
     state: "GA",
-    partner: false,
+    partner: true,
     url: "https://www.covenantcareadoptions.com/",
-    logo: null,
+    logo: "/png/covenant-care-logo.png",
     description:
-      "A state-licensed, non-profit Christian adoption agency with counselors across Georgia, serving birth mothers and adoptive families since 1989.",
-    tags: ["Home study", "Placement", "Counseling"],
+      "A state-licensed, nonprofit Christian agency serving Georgia since 1989 that puts the expectant mother first, provides free counseling, and works to find families for children rather than children for families.",
+    tags: ["Placement", "Counseling", "Expectant mother support"],
   },
 
   // ----- Hawaii ------------------------------------------------------------------
@@ -268,11 +466,11 @@ export const AGENCIES: Agency[] = [
     id: "kidsfirst-in",
     name: "KidsFirst Adoption Services",
     state: "IN",
-    partner: false,
+    partner: true,
     url: "https://kidsfirstadoption.com/",
-    logo: null,
+    logo: "/png/kidsfirst-logo.png",
     description:
-      "A private Indianapolis agency licensed for domestic and international adoption, home studies, and post-adoption support for over 20 years.",
+      "A private, licensed Indianapolis agency that has supported expectant and hopeful parents for over 20 years, handling both domestic placements and international adoptions from countries including Bulgaria and Ukraine.",
     tags: ["Home study", "Domestic & international"],
   },
 
@@ -498,12 +696,12 @@ export const AGENCIES: Agency[] = [
     id: "adoptions-from-the-heart-pa",
     name: "Adoptions From The Heart",
     state: "PA",
-    partner: false,
+    partner: true,
     url: "https://afth.org/",
-    logo: null,
+    logo: "/png/afth-logo.png",
     description:
-      "A non-profit agency licensed across the mid-Atlantic that has placed more than 6,000 infants since 1985.",
-    tags: ["Home study", "Infant adoption"],
+      "One of the East Coast's leading private nonprofit agencies, a pioneer of open adoption since 1985 that serves birth parents, adoptive families, and adoptees with equal care across six states.",
+    tags: ["Open adoption", "Infant adoption"],
   },
   {
     id: "adoption-connection-pa",
@@ -577,12 +775,12 @@ export const AGENCIES: Agency[] = [
     id: "harmony-family-center-tn",
     name: "Harmony Family Center",
     state: "TN",
-    partner: false,
+    partner: true,
     url: "https://harmonyfamilycenter.org/",
-    logo: null,
+    logo: "/png/harmony-family-center-logo.png",
     description:
-      "A Tennessee-licensed agency in Knoxville supporting private and international adoption plus statewide post-adoption services.",
-    tags: ["Placement", "Post-adoption", "Therapeutic services"],
+      "A Knoxville nonprofit serving Tennessee since 1996 that creates opportunities for healing and growth through foster and adoptive home studies, permanency work, and trauma-informed therapeutic services.",
+    tags: ["Home study", "Post-adoption", "Therapeutic services"],
   },
   {
     id: "miriams-promise-tn",
@@ -623,11 +821,11 @@ export const AGENCIES: Agency[] = [
     id: "amara-wa",
     name: "Amara",
     state: "WA",
-    partner: false,
+    partner: true,
     url: "https://amarafamily.org/",
-    logo: null,
+    logo: "/png/amara-logo.png",
     description:
-      "Devoted to children and families in the Puget Sound region since 1921, licensing and supporting foster and foster-adoptive families.",
+      "A Seattle- and Tacoma-based nonprofit serving children and families in foster care and adoption across Western Washington, focused on long-term outcomes, healing from trauma, and equity.",
     tags: ["Foster-to-adopt", "Post-adoption"],
   },
   {

@@ -130,3 +130,151 @@
 
   applyVariant();
 })();
+
+/* ---------- Opening logo drift ----------
+   Six cards cycle through the partner roster: partner organizations
+   (cities, agencies of record, global orgs) lead, licensed adoption
+   agencies follow. A card whose logo file is missing or empty falls
+   back to a typographic name card, so the roster can carry entries
+   whose PNGs haven't landed yet. */
+(function () {
+  "use strict";
+
+  var host = document.getElementById("ptDrift");
+  if (!host) return;
+
+  var ROSTER = [
+    /* -- partner organizations first -- */
+    { name: "City of Orlando", logo: "/png/orlando-logo.png" },
+    { name: "UNICEF", logo: "/png/unicef-logo.png" },
+    { name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
+    { name: "City of Winter Park", logo: "/png/winter-park-logo.png" },
+    { name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
+    { name: "City of Sanford", logo: "/png/sanford-logo.png" },
+    { name: "UNFPA", logo: "/png/unfpa-logo.png" },
+    { name: "Hand in Hand", logo: "/png/hihi-logo.png" },
+    { name: "Children of the World Delhi", logo: "/png/children-of-the-world-delhi.png" },
+    /* -- licensed adoption agencies -- */
+    { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
+    { name: "Spence-Chapin", logo: "/png/spence-chapin-logo.png" },
+    { name: "Holt International", logo: "/png/holt-international-logo.png" },
+    { name: "The Cradle", logo: "/png/the-cradle-logo.png" },
+    { name: "Adoption and Beyond", logo: "/png/adoption-beyond.png" },
+    { name: "Adoption Choices of Florida", logo: "/png/adoption-choices-florida-logo.png" },
+    { name: "Adoption Network Law Center", logo: "/png/adoption-network-law-center-logo.png" },
+    { name: "Adoption Services, Inc.", logo: "/png/adoption-services-inc-logo.png" },
+    { name: "Adoptions From The Heart", logo: "/png/afth-logo.png" },
+    { name: "Amara", logo: "/png/amara-logo.png" },
+    { name: "Arizona's Children Association", logo: "/png/arizonas-children-logo.png" },
+    { name: "Children's Home Society of Minnesota", logo: "/png/chs-minnesota-logo.png" },
+    { name: "Children's Home Society of North Carolina", logo: "/png/chs-north-carolina-logo.png" },
+    { name: "Connecticut Alliance of Foster and Adoptive Families", logo: "/png/cafaf-logo.png" },
+    { name: "Connecting Hearts", logo: "/png/connecting-hearts-logo.png" },
+    { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
+    { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
+    { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },
+    { name: "Hearts of Adoptions Alliance", logo: "/png/hoaa-logo.png" },
+    { name: "KidsFirst Adoption Services", logo: "/png/kidsfirst-logo.png" },
+    { name: "Lifeline Children's Services", logo: "/png/lifeline-childrens-logo.png" },
+    { name: "Nightlight Christian Adoptions", logo: "/png/nightlight-logo.png" },
+    { name: "Options 4 Adoption", logo: "/png/options4adoption.png" },
+    { name: "Raise the Future", logo: "/png/raise-the-future-logo.png" },
+    { name: "Shineforth", logo: "/png/shineforth-logo.png" },
+    { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" }
+  ];
+
+  var SLOT_COUNT = 6;
+  var FADE_MS = 460;
+  var reduceMotion =
+    window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // reduced motion still rotates (instantly), just at a calmer cadence
+  var swapEvery = reduceMotion ? 6400 : 2600;
+
+  function buildFace(entry) {
+    var face = document.createElement("span");
+    face.className = "pt-drift-face";
+    var img = document.createElement("img");
+    img.alt = "";
+    img.decoding = "async";
+    img.addEventListener("error", function () {
+      var name = document.createElement("span");
+      name.className = "pt-drift-name";
+      name.textContent = entry.name;
+      face.textContent = "";
+      face.appendChild(name);
+    });
+    img.src = entry.logo;
+    face.appendChild(img);
+    return face;
+  }
+
+  var slots = [];
+  var next = 0;
+
+  for (var i = 0; i < SLOT_COUNT; i++) {
+    var card = document.createElement("figure");
+    card.className = "pt-drift-card is-out";
+    card.appendChild(buildFace(ROSTER[next++ % ROSTER.length]));
+    host.appendChild(card);
+    slots.push(card);
+  }
+
+  // staggered first reveal, timed to land with the panel's hm-reveal
+  slots.forEach(function (card, idx) {
+    setTimeout(function () {
+      card.classList.remove("is-out");
+    }, 250 + idx * 110);
+  });
+
+  function swapCard(card, entry) {
+    if (reduceMotion) {
+      card.textContent = "";
+      card.appendChild(buildFace(entry));
+      return;
+    }
+    card.classList.add("is-out");
+    setTimeout(function () {
+      card.textContent = "";
+      card.appendChild(buildFace(entry));
+      // two frames so the incoming face paints hidden before fading in
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          card.classList.remove("is-out");
+        });
+      });
+    }, FADE_MS);
+  }
+
+  // non-adjacent slot order so consecutive swaps never touch neighbors
+  var SLOT_ORDER = [0, 3, 1, 4, 2, 5];
+  var tickCount = 0;
+
+  function advance() {
+    var slot = slots[SLOT_ORDER[tickCount++ % SLOT_ORDER.length]];
+    swapCard(slot, ROSTER[next++ % ROSTER.length]);
+  }
+
+  /* run only while the tab is visible and the panel is on screen */
+  var timer = null;
+  var inView = !("IntersectionObserver" in window);
+
+  function sync() {
+    var active = inView && !document.hidden;
+    if (active && !timer) timer = setInterval(advance, swapEvery);
+    if (!active && timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries) {
+      inView = entries[0].isIntersecting;
+      sync();
+    }, { threshold: 0.15 }).observe(host);
+  }
+
+  document.addEventListener("visibilitychange", sync);
+  sync();
+})();
