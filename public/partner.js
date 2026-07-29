@@ -164,7 +164,6 @@
     { name: "Adoption Network Law Center", logo: "/png/adoption-network-law-center-logo.png" },
     { name: "Adoption Services, Inc.", logo: "/png/adoption-services-inc-logo.png" },
     { name: "Adoptions From The Heart", logo: "/png/afth-logo.png" },
-    { name: "Amara", logo: "/png/amara-logo.png" },
     { name: "Arizona's Children Association", logo: "/png/arizonas-children-logo.png" },
     { name: "Children's Home Society of Minnesota", logo: "/png/chs-minnesota-logo.png" },
     { name: "Children's Home Society of North Carolina", logo: "/png/chs-north-carolina-logo.png" },
@@ -173,12 +172,12 @@
     { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
     { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
     { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },
+    { name: "Heart of Adoptions, Inc.", logo: "/png/heart-of-adoptions-logo.png" },
     { name: "Hearts of Adoptions Alliance", logo: "/png/hoaa-logo.png" },
     { name: "KidsFirst Adoption Services", logo: "/png/kidsfirst-logo.png" },
     { name: "Lifeline Children's Services", logo: "/png/lifeline-childrens-logo.png" },
     { name: "Nightlight Christian Adoptions", logo: "/png/nightlight-logo.png" },
     { name: "Options 4 Adoption", logo: "/png/options4adoption.png" },
-    { name: "Raise the Future", logo: "/png/raise-the-future-logo.png" },
     { name: "Shineforth", logo: "/png/shineforth-logo.png" },
     { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" }
   ];

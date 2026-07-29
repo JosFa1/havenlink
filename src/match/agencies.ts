@@ -136,6 +136,17 @@ export const AGENCIES: Agency[] = [
     tags: ["Placement", "Birth parent support"],
   },
   {
+    id: "heart-of-adoptions-fl",
+    name: "Heart of Adoptions, Inc.",
+    state: "FL",
+    partner: true,
+    url: "https://heartofadoptions.com/",
+    logo: "/png/heart-of-adoptions-logo.png",
+    description:
+      "A licensed, private adoption agency designed to help create families through adoption.",
+    tags: ["Placement", "Licensed in Florida"],
+  },
+  {
     id: "spence-chapin-ny",
     name: "Spence-Chapin Services to Families and Children",
     state: "NY",
