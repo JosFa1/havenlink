@@ -143,43 +143,54 @@
   var host = document.getElementById("ptDrift");
   if (!host) return;
 
+  /* Mirrors the roster published on /team - keep the two in sync. */
   var ROSTER = [
     /* -- partner organizations first -- */
     { name: "City of Orlando", logo: "/png/orlando-logo.png" },
-    { name: "UNICEF", logo: "/png/unicef-logo.png" },
+    { name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
     { name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
     { name: "City of Winter Park", logo: "/png/winter-park-logo.png" },
     { name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
     { name: "City of Sanford", logo: "/png/sanford-logo.png" },
     { name: "UNFPA", logo: "/png/unfpa-logo.png" },
-    { name: "Hand in Hand", logo: "/png/hihi-logo.png" },
-    { name: "Children of the World Delhi", logo: "/png/children-of-the-world-delhi.png" },
-    /* -- licensed adoption agencies -- */
-    { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
-    { name: "Spence-Chapin", logo: "/png/spence-chapin-logo.png" },
-    { name: "Holt International", logo: "/png/holt-international-logo.png" },
-    { name: "The Cradle", logo: "/png/the-cradle-logo.png" },
+    /* -- licensed adoption agencies, United States -- */
     { name: "Adoption and Beyond", logo: "/png/adoption-beyond.png" },
     { name: "Adoption Choices of Florida", logo: "/png/adoption-choices-florida-logo.png" },
     { name: "Adoption Network Law Center", logo: "/png/adoption-network-law-center-logo.png" },
     { name: "Adoption Services, Inc.", logo: "/png/adoption-services-inc-logo.png" },
     { name: "Adoptions From The Heart", logo: "/png/afth-logo.png" },
     { name: "Arizona's Children Association", logo: "/png/arizonas-children-logo.png" },
+    { name: "Bright Futures Adoption Center", logo: "/png/bright-futures-logo.png" },
     { name: "Children's Home Society of Minnesota", logo: "/png/chs-minnesota-logo.png" },
     { name: "Children's Home Society of North Carolina", logo: "/png/chs-north-carolina-logo.png" },
     { name: "Connecticut Alliance of Foster and Adoptive Families", logo: "/png/cafaf-logo.png" },
     { name: "Connecting Hearts", logo: "/png/connecting-hearts-logo.png" },
     { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
+    { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
     { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
     { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },
     { name: "Heart of Adoptions, Inc.", logo: "/png/heart-of-adoptions-logo.png" },
     { name: "Hearts of Adoptions Alliance", logo: "/png/hoaa-logo.png" },
+    { name: "Holt International", logo: "/png/holt-international-logo.png" },
     { name: "KidsFirst Adoption Services", logo: "/png/kidsfirst-logo.png" },
     { name: "Lifeline Children's Services", logo: "/png/lifeline-childrens-logo.png" },
+    // Nightlight's Greenville office shares this logo; listed once so two
+    // identical faces can never sit on screen together.
     { name: "Nightlight Christian Adoptions", logo: "/png/nightlight-logo.png" },
     { name: "Options 4 Adoption", logo: "/png/options4adoption.png" },
     { name: "Shineforth", logo: "/png/shineforth-logo.png" },
-    { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" }
+    { name: "Spence-Chapin Services to Families and Children", logo: "/png/spence-chapin-logo.png" },
+    { name: "The Cradle", logo: "/png/the-cradle-logo.png" },
+    { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" },
+    /* -- licensed adoption agencies, international -- */
+    { name: "Barnardos Australia", logo: "/png/barnardos-australia-logo.png" },
+    { name: "Buckner Kenya", logo: "/png/buckner-kenya-logo.png" },
+    { name: "CCAI (Chinese Children Adoption International)", logo: "/png/ccai-logo.png" },
+    { name: "Children of the World Delhi", logo: "/png/children-of-the-world-delhi.png" },
+    { name: "Compassionate Orphanage", logo: "/png/compassionate-orphanage-logo.png" },
+    { name: "Door of Hope", logo: "/png/door-of-hope-logo.png" },
+    { name: "Hand in Hand", logo: "/png/hihi-logo.png" },
+    { name: "Palestinian Orphans Association", logo: "/png/palestinian-orphans-logo.png" }
   ];
 
   var SLOT_COUNT = 6;
