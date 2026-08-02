@@ -147,12 +147,12 @@
   var ROSTER = [
     /* -- partner organizations first -- */
     { name: "City of Orlando", logo: "/png/orlando-logo.png" },
-    { name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
+    { name: "UNICEF", logo: "/png/unicef-logo.png" },
     { name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
     { name: "City of Winter Park", logo: "/png/winter-park-logo.png" },
     { name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
     { name: "City of Sanford", logo: "/png/sanford-logo.png" },
-    { name: "UNFPA", logo: "/png/unfpa-logo.png" },
+    { name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
     /* -- licensed adoption agencies, United States -- */
     { name: "Adoption and Beyond", logo: "/png/adoption-beyond.png" },
     { name: "Adoption Choices of Florida", logo: "/png/adoption-choices-florida-logo.png" },
