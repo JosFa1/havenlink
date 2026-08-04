@@ -73,6 +73,38 @@
       </div>
     </section>
 
+    <!-- Voices: testimonials carousel. Cards are rendered from the VOICES
+         array in /voices.js so another entry needs no markup change. Only the
+         static shell below carries .hm-reveal (editorial.js queries once at
+         load, so script-injected cards would never be observed). -->
+    <section class="hl-voices" id="voices" aria-labelledby="voicesTitle">
+      <div class="hm-container hm-container--editorial">
+        <header class="hm-secthead hm-reveal">
+          <span class="hm-eyebrow">In their words</span>
+          <span class="hm-index">Voices</span>
+        </header>
+        <h2 class="hl-voices-title hm-reveal" id="voicesTitle" style="--d: .06s">What people are saying about <em>HavenLink.</em></h2>
+      </div>
+
+      <div class="hl-voices-bar hm-container hm-container--editorial hm-reveal" style="--d: .12s">
+        <div class="hl-voices-rail" aria-hidden="true"><span class="hl-voices-rail-fill"></span></div>
+        <div class="hl-voices-nav">
+          <button type="button" class="hl-voices-arrow" data-voices-dir="-1" aria-label="Previous testimonials" aria-controls="voicesTrack">
+            <span aria-hidden="true">&#8592;</span>
+          </button>
+          <button type="button" class="hl-voices-arrow" data-voices-dir="1" aria-label="Next testimonials" aria-controls="voicesTrack">
+            <span aria-hidden="true">&#8594;</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="hl-voices-viewport hm-reveal" style="--d: .18s">
+        <div class="hl-voices-track" id="voicesTrack" tabindex="0" role="group" aria-label="Testimonials - use the left and right arrow keys to scroll">
+          <ul class="hl-voices-strip" id="voicesStrip"></ul>
+        </div>
+      </div>
+    </section>
+
     <!-- Mission -->
     <section class="hm-mission" id="about">
       <div class="hm-container hm-container--editorial">
@@ -522,10 +554,59 @@
     </div>
   </div>
 
+  <!-- City of Orlando proclamation (opened from the Buddy Dyer voice card).
+       Deliberately NOT styled like the privacy modal: this reproduces a City of
+       Orlando document, so it carries the city's blue, scoped to .hl-proc-modal.
+       The PDF loads into the iframe on open; voices.js swaps in the typeset
+       letter below whenever the iframe can't be trusted (iOS, narrow screens,
+       or the file not being there yet). -->
+  <div id="proclamationModal" class="hl-proc-modal" role="dialog" aria-modal="true" aria-labelledby="procTitle" hidden>
+    <div class="hl-proc-card">
+      <header class="hl-proc-head">
+        <div>
+          <p class="hl-proc-kicker">City of Orlando &middot; Office of Mayor Buddy Dyer</p>
+          <h2 class="hl-proc-title" id="procTitle">Letter of Recognition</h2>
+        </div>
+        <button type="button" id="proclamationClose" class="hl-proc-close" aria-label="Close the proclamation">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </header>
+
+      <div class="hl-proc-body">
+        <iframe class="hl-proc-frame" id="proclamationFrame"
+                title="Letter of recognition from Mayor Buddy Dyer, August 3, 2026"
+                data-src="/documents/havenlink-proclamation-city-of-orlando.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></iframe>
+
+        <article class="hl-proc-letter" id="proclamationLetter" hidden>
+          <header class="hl-proc-letterhead">
+            <p class="hl-proc-city"><span>City of</span><strong>Orlando</strong></p>
+            <p class="hl-proc-office">Office of Mayor Buddy Dyer</p>
+          </header>
+
+          <p class="hl-proc-date">August 3, 2026</p>
+          <p class="hl-proc-addr">Asad Sadikov and Aarav Gupta<br>HavenLink</p>
+          <p>Dear Asad and Aarav,</p>
+          <p>On behalf of the City of Orlando, it is my honor to congratulate you both on the growth and impact of HavenLink. Your efforts to help connect prospective adoptive families, licensed agencies and organizations is certainly worthy of recognition and our community&rsquo;s collective praise.</p>
+          <p>What you have been able to accomplish through HavenLink reflects your commitment, intellectual curiosity and countless hours of hard work. Of course, your kindness and compassion should be commended as well.</p>
+          <p>In Orlando, we believe that the future belongs to innovators, problem-solvers and critical thinkers. We&rsquo;re impressed that you are already helping our community tackle complex challenges. You have set an outstanding example for your peers and brought immense pride to your family, your teachers and our entire community.</p>
+          <p>Please accept my gratitude. I wish you continued impact with HavenLink and success on your academic journey. I also look forward to seeing the incredible contributions you will undoubtedly make in the years ahead.</p>
+          <p class="hl-proc-signoff">Sincerely,</p>
+          <p class="hl-proc-signer">Buddy Dyer, Mayor</p>
+
+          <footer class="hl-proc-letterfoot">
+            <p>Orlando City Hall &middot; 400 South Orange Avenue &middot; PO Box 4990 &middot; Orlando, FL 32802-4990</p>
+            <p>P 407.246.2221 &middot; F 407.246.2842 &middot; orlando.gov</p>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </div>
+
   <script src="/script.js"></script>
   <script src="/account.js"></script>
   <script src="/editorial.js" defer></script>
   <script src="/home.js" defer></script>
+  <script src="/voices.js" defer></script>
   <script src="/chat-widget.js" defer></script>
 </body>
 </html>

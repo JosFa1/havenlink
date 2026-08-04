@@ -311,6 +311,138 @@ export const AGENCIES: Agency[] = [
       "A full-service, licensed nonprofit Massachusetts adoption agency and program of the RFK Community Alliance, promoting open adoption and giving birth and adoptive parents options and involvement throughout the process.",
     tags: ["Open adoption", "Placement", "Nonprofit"],
   },
+  {
+    id: "children-families-first-de",
+    name: "Children & Families First",
+    state: "DE",
+    partner: true,
+    url: "https://cffde.org/",
+    logo: "/png/children-families-first-logo.png",
+    description:
+      "Delaware's statewide child and family services nonprofit, running foster care, adoption, and post-adoption programs whose team recruits and prepares families and stays with them well after placement.",
+    tags: ["Placement", "Post-adoption support", "Foster care"],
+  },
+  {
+    id: "ccano-la",
+    name: "Catholic Charities, Archdiocese of New Orleans",
+    state: "LA",
+    partner: true,
+    url: "https://ccano.org/",
+    logo: "/png/ccano-logo.png",
+    description:
+      "A full maternity and adoption program covering expectant parent counseling, open adoption planning, services for adoptive parents, and post-adoption search and reunion for adult adoptees and birth families.",
+    tags: ["Open adoption", "Counseling", "Search & reunion"],
+  },
+  {
+    id: "paths-for-families-md",
+    name: "Paths for Families",
+    state: "MD",
+    partner: true,
+    url: "https://pathsforfamilies.org/",
+    logo: "/png/paths-for-families-logo.png",
+    description:
+      "Formerly Adoptions Together, with more than 35 years placing children and supporting adoptive and kinship families across the mid-Atlantic through home studies, placement, and family wellbeing services.",
+    tags: ["Home study", "Placement", "Kinship families"],
+  },
+  {
+    id: "canopy-ms",
+    name: "Canopy Children's Solutions",
+    state: "MS",
+    partner: true,
+    url: "https://mycanopy.org/",
+    logo: "/png/canopy-logo.png",
+    description:
+      "One of Mississippi's largest nonprofit providers of behavioral, educational, and family support for children, offering statewide home studies, adoption planning, and placements.",
+    tags: ["Home study", "Placement", "Behavioral health"],
+  },
+  {
+    id: "christian-heritage-ne",
+    name: "Christian Heritage",
+    state: "NE",
+    partner: true,
+    url: "https://chne.org/",
+    logo: "/png/christian-heritage-logo.png",
+    description:
+      "A Lincoln-based agency that recruits, trains, and supports foster and adoptive families across Nebraska, with a 24/7 on-call support line and Trust-Based Relational Intervention training for caregivers.",
+    tags: ["Foster care", "Placement", "Caregiver training"],
+  },
+  {
+    id: "catholic-charities-nd",
+    name: "Catholic Charities North Dakota",
+    state: "ND",
+    partner: true,
+    url: "https://catholiccharitiesnd.org/",
+    logo: "/png/catholic-charities-nd-logo.png",
+    description:
+      "One of North Dakota's longest-running licensed child placing agencies, serving families since 1923 with adoption, guardianship, pregnancy support, and counseling statewide.",
+    tags: ["Placement", "Guardianship", "Counseling"],
+  },
+  {
+    id: "adoption-circle-oh",
+    name: "Adoption Circle",
+    state: "OH",
+    partner: true,
+    url: "https://adoptioncircle.org/",
+    logo: "/png/adoption-circle-logo.png",
+    description:
+      "A private nonprofit adoption agency licensed by the state of Ohio, specializing in placements of newborns and infants up to six months old and working directly with expectant and adoptive parents.",
+    tags: ["Infant adoption", "Placement", "Counseling"],
+  },
+  {
+    id: "adoption-rhode-island-ri",
+    name: "Adoption Rhode Island",
+    state: "RI",
+    partner: true,
+    url: "https://adoptionri.org/",
+    logo: "/png/adoption-rhode-island-logo.png",
+    description:
+      "Rhode Island's dedicated adoption and permanency agency, focused on the roughly 300 children waiting to be adopted from state care and running a Center for Advanced Practice for child welfare professionals.",
+    tags: ["Foster adoption", "Permanency", "Professional training"],
+  },
+  {
+    id: "lss-south-dakota-sd",
+    name: "Lutheran Social Services of South Dakota",
+    state: "SD",
+    partner: true,
+    url: "https://lsssd.org/",
+    logo: "/png/lss-south-dakota-logo.png",
+    description:
+      "Statewide adoption, post-adoption, and pregnancy counseling alongside foster care and kinship services, open to people of all ages, races, faiths, and income levels.",
+    tags: ["Placement", "Post-adoption support", "Counseling"],
+  },
+  {
+    id: "css-utah-ut",
+    name: "Children's Service Society of Utah",
+    state: "UT",
+    partner: true,
+    url: "https://cssutah.org/",
+    logo: "/png/css-utah-logo.png",
+    description:
+      "Utah's oldest child welfare nonprofit, founded in 1884 and the only agency contracted with the state's Division of Child and Family Services to complete home studies for foster adoption, with free options counseling and clinical post-adoption support.",
+    tags: ["Home study", "Foster adoption", "Post-adoption support"],
+  },
+  {
+    id: "lund-vt",
+    name: "Lund",
+    state: "VT",
+    partner: true,
+    url: "https://lundvt.org/",
+    logo: "/png/lund-logo.png",
+    description:
+      "Vermont's primary licensed domestic adoption agency, supporting pregnant and parenting young people and adoptive families through matching, placement, and lifelong post-adoption services.",
+    tags: ["Placement", "Post-adoption support", "Counseling"],
+  },
+  {
+    id: "burlington-umfs-wv",
+    name: "Burlington United Methodist Family Services",
+    state: "WV",
+    partner: true,
+    url: "https://bumfs.org/",
+    logo: "/png/burlington-umfs-logo.png",
+    description:
+      "A West Virginia agency operating adoption, home finding, and foster care programs alongside treatment services for young people with complex needs, placing children in permanent homes for decades.",
+    tags: ["Placement", "Home finding", "Foster care"],
+  },
 
   // ----- Georgia ---------------------------------------------------------------
   {
@@ -532,14 +664,14 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "four-oaks-ia",
-    name: "Four Oaks Family & Children's Services",
+    name: "Four Oaks",
     state: "IA",
-    partner: false,
+    partner: true,
     url: "https://fouroaks.org/",
-    logo: null,
+    logo: "/png/four-oaks-logo.png",
     description:
-      "Contracted by the State of Iowa to recruit, train, license, and support Iowa's foster and adoptive families.",
-    tags: ["Foster care", "Adoption", "Training & licensing"],
+      "Reaching more than 27,000 Iowa children and families a year through housing, education, and treatment services, with a Foster Care and Adoption division that recruits and licenses families statewide and delivers Training for Adoption Competency to child welfare professionals.",
+    tags: ["Foster care", "Training & licensing", "Professional training"],
   },
 
   // ----- Kentucky ----------------------------------------------------------------
@@ -887,14 +1019,14 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "adoption-choice-wi",
-    name: "Adoption Choice",
+    name: "Adoption Choice Inc.",
     state: "WI",
-    partner: false,
+    partner: true,
     url: "https://adoptionchoiceinc.org/",
-    logo: null,
+    logo: "/png/adoption-choice-logo.png",
     description:
-      "A fully licensed non-profit serving all of Wisconsin for 40 years with ethical adoption education, guidance, and lifelong support.",
-    tags: ["Home study", "Placement", "Counseling"],
+      "A private nonprofit licensed adoption agency serving all of Wisconsin, working with expectant parents and adoptive families on domestic infant, international, and special needs adoptions.",
+    tags: ["Domestic & international", "Special needs adoption", "Counseling"],
   },
   {
     id: "adoptions-of-wisconsin-wi",
@@ -970,12 +1102,12 @@ export const AGENCIES: Agency[] = [
     id: "wyoming-childrens-society-wy",
     name: "Wyoming Children's Society",
     state: "WY",
-    partner: false,
+    partner: true,
     url: "https://www.wyomingcs.org/",
-    logo: null,
+    logo: "/png/wyoming-childrens-society-logo.png",
     description:
-      "Wyoming's oldest adoption agency: home studies, matching and placement, and post-adoption support.",
-    tags: ["Home study", "Placement", "Post-adoption"],
+      "Wyoming's local licensed nonprofit adoption agency, working with women facing unplanned pregnancy and with families hoping to adopt through counseling, matching, home studies, and placement statewide.",
+    tags: ["Home study", "Placement", "Counseling"],
   },
 ];
 

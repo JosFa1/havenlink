@@ -19,19 +19,21 @@
       // and remains the gateway to the states inset. Then: Brazil, Bulgaria,
       // Haiti, China (covers Hong Kong), Hungary, India, plus the international
       // partner network — Nigeria, South Africa, Kenya, Australia, Palestine,
-      // Finland, Colombia, Taiwan, Ukraine.
+      // Finland, Colombia, Taiwan, Ukraine, and the 2026 expansion — Belgium,
+      // Chile, Ireland, Italy, Japan.
       partner: ['us', 'br', 'bg', 'ht', 'cn', 'hu', 'in',
-                'ng', 'za', 'ke', 'au', 'ps', 'fi', 'co', 'tw', 'ua'],
+                'ng', 'za', 'ke', 'au', 'ps', 'fi', 'co', 'tw', 'ua',
+                'be', 'cl', 'ie', 'it', 'jp'],
       // Philippines, Romania, Uzbekistan, Canada, New Zealand. Bulgaria is also a
       // partner; "partner" wins, so it renders navy.
       negotiating: ['ph', 'bg', 'ro', 'uz', 'ca', 'nz']
     },
     states: {
-      // Union of every state with a partner agency in src/match/agencies.ts
-      // (includes Massachusetts — Bright Futures Adoption Center).
-      partner: ['al', 'az', 'ca', 'co', 'ct', 'fl', 'ga', 'il', 'in', 'ks',
-                'ky', 'la', 'ma', 'mi', 'mn', 'mo', 'mt', 'nc', 'ny', 'or',
-                'pa', 'sc', 'tn', 'tx', 'va', 'wa'],
+      // Union of every state with a partner agency in src/match/agencies.ts.
+      partner: ['al', 'az', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'ia', 'il',
+                'in', 'ks', 'ky', 'la', 'ma', 'md', 'mi', 'mn', 'mo', 'ms',
+                'mt', 'nc', 'nd', 'ne', 'ny', 'oh', 'or', 'pa', 'ri', 'sc',
+                'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy'],
       negotiating: ['pr', 'hi', 'me'] // Puerto Rico, Hawaii, Maine — in discussion
     }
   };

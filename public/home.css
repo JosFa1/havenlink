@@ -5,12 +5,14 @@
 
    Contents:
      1. Hero + threads canvas
+     1b. Voices - testimonial carousel
      2. Mission
      3. Stakes (ink band)
      4. How It Works - stacked default + pinned chapters
      5. Safety index
      6. Final CTA band
      7. Motion + responsive
+     8. Proclamation modal (City of Orlando)
    ============================================================ */
 
 /* ==================== 1. Hero ==================== */
@@ -144,6 +146,526 @@
   45% { transform: scaleY(1); transform-origin: top; }
   55% { transform: scaleY(1); transform-origin: bottom; }
   100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ============ 1b. Voices - testimonial carousel ============
+
+   A horizontally snapping band of quote cards sitting between the hero and
+   the mission. Cards are injected by voices.js from its VOICES array.
+
+   The signature detail is the thread: a repeating wave drawn on the strip's
+   background at avatar height. Cards are opaque, so it is visible only in the
+   gaps between them - one line stitching every voice together. It lives on
+   the strip rather than the scroll container, so it travels with the cards
+   and keeps going past the right-hand fade.
+   ============================================================ */
+
+/* Every card is script-rendered, so with JS off there is nothing to show. */
+html:not(.js) .hl-voices {
+  display: none;
+}
+
+.hl-voices {
+  /* the card row bleeds right; the left edge lines up with the text column */
+  --hl-edge: calc(max(0px, (100% - var(--container-editorial)) / 2) + var(--gutter));
+  --hl-card-w: min(78vw, 20rem);
+  --hl-card-pad: clamp(1.5rem, 2.4vw, 1.9rem);
+  --hl-avatar: 60px; /* must match AVATAR in voices.js */
+  --hl-strip-pad-b: 3rem;
+  --hl-thread-tile: 40px;
+  /* --paper-dim as an rgb triplet: gradients need a zero-alpha stop of the
+     same hue, or the fade greys out on the way to `transparent` */
+  --hl-fade: 241, 237, 230;
+
+  padding-block: var(--section-pad);
+  background-color: var(--paper-dim);
+  overflow-x: clip; /* belt and braces: the bleed can never widen the page */
+}
+
+.hl-voices-title {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  font-weight: 420;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 60;
+  text-wrap: balance;
+  max-width: 20ch;
+}
+
+.hl-voices-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+/* ---- Progress rail + arrows (same language as the How It Works rail) ---- */
+
+.hl-voices-bar {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
+}
+
+.hl-voices-rail {
+  flex: 1;
+  height: 1px;
+  background-color: rgba(20, 33, 61, 0.16);
+}
+
+.hl-voices-rail-fill {
+  --v-thumb: 1;
+  --v-pos: 0;
+  display: block;
+  height: 1px;
+  width: calc(var(--v-thumb) * 100%);
+  margin-left: calc(var(--v-pos) * (100% - var(--v-thumb) * 100%));
+  background-color: var(--terracotta);
+}
+
+.hl-voices-nav {
+  display: none; /* mobile swipes; arrows appear from the tablet breakpoint */
+  gap: 0.75rem;
+}
+
+.hl-voices-arrow {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--hairline-strong);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.35s var(--ease-out), color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out), opacity 0.35s var(--ease-out);
+}
+
+.hl-voices-arrow:hover:not(:disabled) {
+  background-color: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.hl-voices-arrow:disabled {
+  opacity: 0.26;
+  cursor: default;
+}
+
+/* ---- Scroller ---- */
+
+.hl-voices-viewport {
+  position: relative;
+  margin-top: clamp(1.75rem, 4vh, 2.5rem);
+}
+
+/* Edge fades say "this continues". voices.js writes data-pos, so the left
+   fade only appears once the row has actually been scrolled. */
+.hl-voices-viewport::before,
+.hl-voices-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: clamp(1.75rem, 6vw, 5rem);
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.hl-voices-viewport::before {
+  left: 0;
+  background: linear-gradient(to right, var(--paper-dim), rgba(var(--hl-fade), 0));
+}
+
+.hl-voices-viewport::after {
+  right: 0;
+  background: linear-gradient(to left, var(--paper-dim), rgba(var(--hl-fade), 0));
+}
+
+.hl-voices-viewport[data-pos="mid"]::before,
+.hl-voices-viewport[data-pos="end"]::before,
+.hl-voices-viewport[data-pos="start"]::after,
+.hl-voices-viewport[data-pos="mid"]::after {
+  opacity: 1;
+}
+
+.hl-voices-track {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline-start: var(--hl-edge);
+  overscroll-behavior-x: contain; /* never hand a horizontal fling to the page */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hl-voices-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* the row is full-bleed, so the ring has to sit inside it */
+.hl-voices-track:focus-visible {
+  outline-offset: -3px;
+}
+
+.hl-voices-strip {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  width: max-content;
+  margin: 0;
+  /* top room for the hover lift, bottom room for the card shadow */
+  padding: 1.25rem var(--hl-edge) var(--hl-strip-pad-b);
+  list-style: none;
+
+  /* the thread, aligned to the middle of the avatar row */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='40' viewBox='0 0 260 40'%3E%3Cpath d='M0 20 C 43 11, 87 11, 130 20 S 217 29, 260 20' fill='none' stroke='%23b4551f' stroke-width='1.25' stroke-opacity='0.45' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 260px var(--hl-thread-tile);
+  background-position: left
+    calc(
+      100% - var(--hl-strip-pad-b) - var(--hl-card-pad) - var(--hl-avatar) / 2 -
+        var(--hl-thread-tile) / 2
+    );
+}
+
+/* ---- Cards ---- */
+
+/* The hover lift rides on `transform` and the entrance on `translate`, so the
+   staggered reveal delay below can never leak into the hover response. */
+.hl-voice {
+  --hl-lift: 0px;
+  position: relative;
+  flex: 0 0 var(--hl-card-w);
+  width: var(--hl-card-w);
+  display: flex;
+  flex-direction: column;
+  padding: var(--hl-card-pad);
+  scroll-snap-align: start;
+  background-color: var(--paper);
+  border: var(--hairline);
+  transform: translateY(var(--hl-lift));
+  transition: transform 0.5s var(--ease-out), border-color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out);
+}
+
+.hl-voice:hover {
+  --hl-lift: -4px;
+  border-color: rgba(20, 33, 61, 0.3);
+  box-shadow: 0 24px 50px -34px rgba(13, 24, 48, 0.55);
+}
+
+/* Staggered entrance. The cards are injected after editorial.js has taken its
+   snapshot of .hm-reveal, so they animate off the viewport's .is-in instead. */
+html.js body.editorial .hl-voices-viewport .hl-voice {
+  opacity: 0;
+  translate: 0 20px;
+  transition: transform 0.5s var(--ease-out), border-color 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    opacity 0.7s ease calc(var(--i, 0) * 0.07s),
+    translate 0.6s var(--ease-out) calc(var(--i, 0) * 0.07s);
+}
+
+html.js body.editorial .hl-voices-viewport.is-in .hl-voice {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.hl-voice-figure {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+/* oversized quote glyph, set behind the text */
+.hl-voice--quote .hl-voice-figure::before {
+  content: "\201C";
+  position: absolute;
+  top: calc(var(--hl-card-pad) - 0.85rem);
+  left: calc(var(--hl-card-pad) - 0.3rem);
+  font-family: var(--font-display);
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 1;
+  font-variation-settings: "opsz" 144;
+  color: var(--terracotta);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hl-voice-quote {
+  position: relative;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.hl-voice-quote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 420;
+  line-height: 1.55;
+  letter-spacing: -0.005em;
+  font-variation-settings: "opsz" 36;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+/* Buddy Dyer only - opens the proclamation. Reads like .hm-textlink. */
+.hl-voice-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  align-self: flex-start;
+  margin-top: 1.4rem;
+  padding: 0 0 0.3rem;
+  border: 0;
+  border-bottom: 1px solid rgba(20, 33, 61, 0.35);
+  background: none;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 540;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  cursor: pointer;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.hl-voice-action:hover {
+  color: var(--terracotta);
+  border-bottom-color: var(--terracotta);
+}
+
+.hl-voice-action-mark {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.hl-voice-action:hover .hl-voice-action-mark {
+  transform: translateX(4px);
+}
+
+/* ---- Attribution footer: pinned to the bottom so names line up ---- */
+
+.hl-voice-attrib {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: auto;
+  padding-top: 1.35rem;
+  border-top: var(--hairline);
+}
+
+/* Initials sit underneath; voices.js removes the image if it never loads, so
+   a missing file degrades to the plate instead of a broken-image icon. */
+.hl-voice-avatar {
+  position: relative;
+  flex: 0 0 var(--hl-avatar);
+  width: var(--hl-avatar);
+  height: var(--hl-avatar);
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: var(--paper-dim);
+  border: var(--hairline);
+}
+
+.hl-voice-initials {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  font-variation-settings: "opsz" 30;
+  color: var(--muted);
+}
+
+.hl-voice-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hl-voice-who {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hl-voice-name {
+  font-size: 0.9375rem;
+  font-weight: 560;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+}
+
+.hl-voice-role {
+  font-size: var(--text-meta);
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+/* ---- Coverage cards: the ink band treatment, as a rhythm break ---- */
+
+.hl-voice--coverage {
+  /* editorial.css loads first, so .hm-on-ink's background needs restating */
+  background-color: var(--ink);
+  border-color: transparent;
+}
+
+.hl-voice--coverage:hover {
+  border-color: rgba(250, 248, 245, 0.24);
+}
+
+.hl-voice-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  align-self: flex-start;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #e4b79a; /* the light terracotta used for accents on ink */
+}
+
+.hl-voice-tag::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background-color: currentColor;
+}
+
+.hl-voice-copy {
+  flex: 1;
+  margin: 1.5rem 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.4vw, 1.3rem);
+  font-weight: 420;
+  line-height: 1.35;
+  font-variation-settings: "opsz" 40;
+  color: var(--paper);
+  text-wrap: pretty;
+}
+
+.hl-voice-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  align-self: flex-start;
+  margin-top: 1.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(250, 248, 245, 0.35);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  letter-spacing: 0.02em;
+  color: rgba(250, 248, 245, 0.92);
+  text-decoration: none;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+.hl-voice-link:hover {
+  color: var(--paper);
+  border-bottom-color: #e4b79a;
+}
+
+.hl-voice-glyph {
+  position: relative;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  border: 1px solid rgba(250, 248, 245, 0.4);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.hl-voice-glyph::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.hl-voice-glyph--play::before {
+  transform: translate(-38%, -50%);
+  border-style: solid;
+  border-width: 5px 0 5px 8px;
+  border-color: transparent transparent transparent currentColor;
+}
+
+.hl-voice-glyph--read::before {
+  width: 9px;
+  height: 9px;
+  transform: translate(-55%, -45%) rotate(45deg);
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+.hl-voice-link:hover .hl-voice-glyph {
+  background-color: rgba(228, 183, 154, 0.18);
+  border-color: #e4b79a;
+}
+
+.hl-voice--coverage .hl-voice-attrib {
+  border-top-color: rgba(250, 248, 245, 0.18);
+}
+
+/* a light plate keeps a dark outlet logo legible on the ink card */
+.hl-voice--coverage .hl-voice-avatar {
+  background-color: var(--paper);
+  border-color: rgba(250, 248, 245, 0.24);
+}
+
+.hl-voice--coverage .hl-voice-name {
+  color: var(--paper);
+}
+
+@media (min-width: 768px) {
+  .hl-voices {
+    --hl-card-w: min(42vw, 20rem);
+  }
+
+  .hl-voices-nav {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hl-voices {
+    --hl-card-w: 21rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hl-voice,
+  .hl-voices-arrow,
+  .hl-voice-action-mark,
+  .hl-voices-viewport::before,
+  .hl-voices-viewport::after {
+    transition: none;
+  }
+
+  html.js body.editorial .hl-voices-viewport .hl-voice {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
 }
 
 /* ==================== 2. Mission ==================== */
@@ -710,5 +1232,276 @@ html:not(.js) .hm-chapter .hm-draw {
     flex-direction: column;
     align-items: flex-start;
     gap: 1.5rem;
+  }
+}
+
+/* ============ 8. Proclamation modal (City of Orlando) ============
+
+   Opened from the Buddy Dyer voice card. This reproduces a City of Orlando
+   document, so it deliberately carries the city's own blue rather than the
+   HavenLink palette - the values below are scoped to this modal and never
+   reach the privacy modal, which keeps its existing treatment.
+
+   The PDF loads into the iframe on open. voices.js swaps in the typeset
+   letter whenever the iframe cannot be trusted: iOS, narrow screens, or the
+   file not being in /documents/ yet.
+   ============================================================ */
+
+.hl-proc-modal {
+  --orl-blue: #1c4587;
+  --orl-blue-deep: #10305f;
+  --orl-paper: #ffffff;
+  --orl-ink: #17233d;
+
+  position: fixed;
+  inset: 0;
+  z-index: 2300; /* privacy 2000 - notifications 2100 - newsletter 2200 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.75rem, 3vw, 2rem);
+  background-color: rgba(8, 22, 46, 0.62);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  transition: opacity 0.24s var(--ease-out);
+}
+
+/* display:flex above would otherwise defeat the hidden attribute */
+.hl-proc-modal[hidden] {
+  display: none;
+}
+
+.hl-proc-modal.is-open {
+  opacity: 1;
+}
+
+body.proclamation-open {
+  overflow: hidden;
+}
+
+/* chat-widget.js injects its launcher at z-index 9998, above every modal in
+   the stack - park it (and its panel) while the letter is open. visibility
+   also takes them out of the tab order, which the focus trap wants. */
+body.proclamation-open .hl-chat-btn,
+body.proclamation-open .hl-chat-panel {
+  visibility: hidden;
+}
+
+.hl-proc-card {
+  display: flex;
+  flex-direction: column;
+  width: min(880px, 100%);
+  max-height: 100%;
+  background-color: var(--orl-paper);
+  box-shadow: 0 40px 90px -30px rgba(8, 22, 46, 0.65);
+  transform: translateY(14px) scale(0.985);
+  transition: transform 0.32s var(--ease-out);
+}
+
+.hl-proc-modal.is-open .hl-proc-card {
+  transform: none;
+}
+
+.hl-proc-head {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: clamp(1.3rem, 3vw, 1.9rem) clamp(1.25rem, 3vw, 2.1rem);
+  background: linear-gradient(135deg, var(--orl-blue-deep) 0%, var(--orl-blue) 100%);
+  color: #fff;
+}
+
+.hl-proc-kicker {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.hl-proc-card .hl-proc-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  font-weight: 430;
+  line-height: 1.15;
+  font-variation-settings: "opsz" 40;
+  color: #fff;
+}
+
+.hl-proc-close {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  background: none;
+  color: #fff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.hl-proc-close:hover {
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.62);
+}
+
+/* the site ring is terracotta on paper - unreadable on this blue */
+.hl-proc-close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.hl-proc-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  background-color: var(--orl-paper);
+}
+
+.hl-proc-frame {
+  flex: 1;
+  display: block;
+  width: 100%;
+  min-height: min(70vh, 720px);
+  border: 0;
+}
+
+.hl-proc-frame[hidden],
+.hl-proc-letter[hidden] {
+  display: none;
+}
+
+/* ---- Typeset fallback: the letter itself ---- */
+
+.hl-proc-letter {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1.25rem, 4vw, 3.5rem)
+    clamp(1.5rem, 3vw, 2.5rem);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(0.9375rem, 0.35vw + 0.86rem, 1.0625rem);
+  line-height: 1.62;
+  color: var(--orl-ink);
+}
+
+.hl-proc-letterhead {
+  padding-bottom: 1.1rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  border-bottom: 1px solid rgba(28, 69, 135, 0.3);
+}
+
+.hl-proc-letter .hl-proc-city {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--orl-blue);
+  text-transform: uppercase;
+}
+
+.hl-proc-city span {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+}
+
+.hl-proc-city strong {
+  display: block;
+  margin-top: 0.1rem;
+  font-size: clamp(1.5rem, 5vw, 2.15rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.hl-proc-letter .hl-proc-office {
+  margin: 1rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--orl-blue);
+}
+
+.hl-proc-letter p {
+  margin: 0 0 1.15rem;
+}
+
+.hl-proc-letter .hl-proc-date {
+  margin-bottom: 2rem;
+}
+
+.hl-proc-letter .hl-proc-addr {
+  margin-bottom: 1.75rem;
+}
+
+.hl-proc-letter .hl-proc-signoff {
+  margin-bottom: 0.4rem;
+}
+
+.hl-proc-letter .hl-proc-signer {
+  margin: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  font-weight: 440;
+  font-variation-settings: "opsz" 40;
+  color: var(--orl-blue-deep);
+}
+
+.hl-proc-letterfoot {
+  margin-top: clamp(2rem, 5vw, 3rem);
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(28, 69, 135, 0.3);
+  font-family: var(--font-body);
+  color: var(--orl-blue);
+}
+
+.hl-proc-letterfoot p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  /* the original is justified; too tight for narrow columns */
+  .hl-proc-letter p {
+    text-align: justify;
+    hyphens: auto;
+  }
+
+  .hl-proc-letter .hl-proc-date,
+  .hl-proc-letter .hl-proc-addr,
+  .hl-proc-letter .hl-proc-signoff,
+  .hl-proc-letter .hl-proc-signer {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hl-proc-modal,
+  .hl-proc-card,
+  .hl-proc-close {
+    transition: none;
+  }
+
+  .hl-proc-card {
+    transform: none;
   }
 }

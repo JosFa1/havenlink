@@ -1,0 +1,496 @@
+/* HavenLink homepage "Voices" band: the testimonial carousel and the City of
+   Orlando proclamation modal it opens. Shared behavior (nav state, reveals,
+   count-up) lives in editorial.js; the hero canvas and the pinned "How It
+   Works" driver live in home.js. Everything is null-checked - the SPA fallback
+   can serve index.html on unexpected routes. */
+(function () {
+  "use strict";
+
+  /* ============================================================
+     Content. Appending an object here adds another voice - the cards
+     are generated below, so no markup changes anywhere.
+
+       type: "quote"     blockquote + attribution footer
+       type: "coverage"  ink card: "In the news" tag + outlet link
+
+     Quotes are reproduced verbatim, punctuation included.
+
+     img paths point at /public/png/. A file that is missing or fails
+     to load falls back to the initials plate, so an entry can ship
+     before its artwork does.
+     ============================================================ */
+
+  var VOICES = [
+    {
+      type: "quote",
+      quote: "The young residents behind HavenLink are active, engaged, and are already making a difference in our community. This is a great initiative, and I hope that their efforts continue to be this impactful",
+      name: "Buddy Dyer",
+      title: "Mayor of Orlando",
+      img: "/png/buddy-dyer.png",
+      initials: "BD",
+      alt: "Buddy Dyer, Mayor of Orlando",
+      action: { label: "Read the full proclamation", modal: "proclamation" }
+    },
+    {
+      type: "quote",
+      quote: "The work that HavenLink does to support families and advocate for adoption is important in our community",
+      name: "David Jolly",
+      title: "Former U.S. Representative, Florida",
+      img: "/png/david-jolly.png",
+      initials: "DJ",
+      alt: "David Jolly, former U.S. Representative for Florida"
+    },
+    {
+      type: "coverage",
+      tag: "In the news",
+      copy: "See how Fox 35 covered HavenLink",
+      linkLabel: "Watch the segment",
+      icon: "play",
+      href: "https://www.youtube.com/watch?v=U68DlX2NNAY",
+      name: "Fox 35 Orlando",
+      img: "/png/fox-35-logo.png",
+      initials: "F35",
+      alt: "Fox 35 Orlando"
+    },
+    {
+      type: "quote",
+      quote: "Adoption is such an amazing option, and people really don't know where to start.",
+      name: "Megan Sladek",
+      title: "Mayor of Oviedo",
+      img: "/png/megan-sladek.png",
+      initials: "MS",
+      alt: "Megan Sladek, Mayor of Oviedo"
+    },
+    {
+      type: "quote",
+      quote: "Thank you for your great work on adoption advocacy policy",
+      name: "Carlos Guillermo Smith",
+      title: "Florida State Senator, District 17",
+      img: "/png/carlos-guillermo-smith.png",
+      initials: "CS",
+      alt: "Carlos Guillermo Smith, Florida State Senator for District 17"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is an amazing platform.",
+      name: "UNICEF",
+      title: null,
+      img: "/png/unicef-logo.png",
+      initials: "UN",
+      alt: "UNICEF"
+    },
+    {
+      type: "quote",
+      quote: "The work that HavenLink is doing is truly incredible, and we're looking forward to sharing it with our viewers.",
+      name: "WESH 2",
+      title: null,
+      img: "/png/wesh-2-logo.png",
+      initials: "W2",
+      alt: "WESH 2"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is a great platform … It's the real element where people connect with people and with that you will get results",
+      name: "Keith Truenow",
+      title: "Florida State Senator, District 13",
+      img: "/png/keith-truenow.png",
+      initials: "KT",
+      alt: "Keith Truenow, Florida State Senator for District 13"
+    },
+    {
+      type: "coverage",
+      tag: "In the news",
+      copy: "See how WFTV Channel 9 covered HavenLink",
+      linkLabel: "Read the story",
+      icon: "read",
+      href: "https://www.wftv.com/news/local/trinity-prep-students-build-platform-help-families-navigate-adoption/3ABL6FXWDJCX3CD4FWV3VWMHNU/",
+      name: "WFTV Channel 9",
+      img: "/png/wftv-channel-9-logo.png",
+      initials: "W9",
+      alt: "WFTV Channel 9"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is a wonderful platform",
+      name: "LaVon Bracy Davis",
+      title: "Florida State Senator, District 15",
+      img: "/png/lavon-bracy-davis.png",
+      initials: "LB",
+      alt: "LaVon Bracy Davis, Florida State Senator for District 15"
+    },
+    {
+      type: "quote",
+      quote: "Thank you for what HavenLink has done and continues to do for families in our community and beyond.",
+      name: "City of Winter Park",
+      title: null,
+      img: "/png/winter-park-logo.png",
+      initials: "WP",
+      alt: "City of Winter Park"
+    },
+    {
+      type: "quote",
+      quote: "It's impressive to see how the HavenLink team have grown their project into an initiative that is raising awareness about adoption and helping connect families with licensed agencies.",
+      name: "Youth Global Network",
+      title: null,
+      img: "/png/ygn-logo.png",
+      initials: "YGN",
+      alt: "Youth Global Network"
+    },
+    {
+      type: "quote",
+      quote: "A lot of times, others are challenged to understand how difficult the adoption process is, and the waiting times, and the costs. Platforms such as HavenLink are amazing in explaining the process and connections.",
+      name: "Bonnie Hilton",
+      title: "Utah Administrative Director, Hand in Hand",
+      img: "/png/bonnie-hilton.png",
+      initials: "BH",
+      alt: "Bonnie Hilton, Utah Administrative Director of Hand in Hand"
+    }
+  ];
+
+  var PROCLAMATION_PDF = "/documents/havenlink-proclamation-city-of-orlando.pdf";
+  var AVATAR = 60; /* must match --hl-avatar in home.css - reserves the box */
+  var EAGER = 2; /* first two avatars load eagerly, the rest lazily */
+
+  var strip = document.getElementById("voicesStrip");
+  var track = document.getElementById("voicesTrack");
+  if (!strip || !track) return;
+
+  var viewport = track.parentNode;
+  var railFill = document.querySelector(".hl-voices-rail-fill");
+  var arrows = Array.prototype.slice.call(
+    document.querySelectorAll("[data-voices-dir]")
+  );
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var prefersReduced = reduceMotion.matches;
+  if (reduceMotion.addEventListener) {
+    reduceMotion.addEventListener("change", function (e) {
+      prefersReduced = e.matches;
+    });
+  }
+
+  function scrollBehavior() {
+    return prefersReduced ? "auto" : "smooth";
+  }
+
+  /* ---------- Card construction ---------- */
+
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  /* Initials plate sits underneath; the image is layered on top and removed
+     if it 404s, so a broken-image icon can never appear. The wrapper is a
+     fixed AVATAR square either way - no layout shift when real art lands. */
+  function buildAvatar(voice, index) {
+    var wrap = el("span", "hl-voice-avatar");
+    var initials = el("span", "hl-voice-initials", voice.initials || "");
+    initials.setAttribute("aria-hidden", "true");
+    wrap.appendChild(initials);
+
+    if (!voice.img) return wrap;
+
+    var img = el("img", "hl-voice-img");
+    img.src = voice.img;
+    img.alt = voice.alt || voice.name;
+    img.width = AVATAR;
+    img.height = AVATAR;
+    img.decoding = "async";
+    if (index >= EAGER) img.loading = "lazy";
+    img.addEventListener("error", function () {
+      img.remove();
+    });
+    wrap.appendChild(img);
+    return wrap;
+  }
+
+  function buildAttrib(voice, index, tag) {
+    var cap = el(tag, "hl-voice-attrib");
+    cap.appendChild(buildAvatar(voice, index));
+    var who = el("span", "hl-voice-who");
+    who.appendChild(el("span", "hl-voice-name", voice.name));
+    if (voice.title) who.appendChild(el("span", "hl-voice-role", voice.title));
+    cap.appendChild(who);
+    return cap;
+  }
+
+  function buildQuoteCard(voice, index) {
+    var card = el("li", "hl-voice hl-voice--quote");
+    var fig = el("figure", "hl-voice-figure");
+
+    var quote = el("blockquote", "hl-voice-quote");
+    quote.appendChild(el("p", null, "“" + voice.quote + "”"));
+    fig.appendChild(quote);
+
+    if (voice.action) {
+      var btn = el("button", "hl-voice-action");
+      btn.type = "button";
+      btn.setAttribute("data-voice-modal", voice.action.modal);
+      btn.appendChild(el("span", null, voice.action.label));
+      var mark = el("span", "hl-voice-action-mark", "→");
+      mark.setAttribute("aria-hidden", "true");
+      btn.appendChild(mark);
+      fig.appendChild(btn);
+    }
+
+    /* figcaption stays the last child of figure, as the spec requires */
+    fig.appendChild(buildAttrib(voice, index, "figcaption"));
+    card.appendChild(fig);
+    return card;
+  }
+
+  function buildCoverageCard(voice, index) {
+    var card = el("li", "hl-voice hl-voice--coverage hm-on-ink");
+
+    card.appendChild(el("span", "hl-voice-tag", voice.tag || "In the news"));
+    card.appendChild(el("p", "hl-voice-copy", voice.copy));
+
+    var label = voice.linkLabel || "Watch the segment";
+    var link = el("a", "hl-voice-link");
+    link.href = voice.href;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute(
+      "aria-label",
+      label + " from " + voice.name + " (opens in a new tab)"
+    );
+    var glyph = el(
+      "span",
+      "hl-voice-glyph hl-voice-glyph--" + (voice.icon || "play")
+    );
+    glyph.setAttribute("aria-hidden", "true");
+    link.appendChild(glyph);
+    link.appendChild(el("span", null, label));
+    card.appendChild(link);
+
+    card.appendChild(buildAttrib(voice, index, "div"));
+    return card;
+  }
+
+  var frag = document.createDocumentFragment();
+  VOICES.forEach(function (voice, i) {
+    var card =
+      voice.type === "coverage"
+        ? buildCoverageCard(voice, i)
+        : buildQuoteCard(voice, i);
+    card.style.setProperty("--i", String(i));
+    frag.appendChild(card);
+  });
+  strip.appendChild(frag);
+
+  /* ---------- Scroll state: arrows, edge masks, progress rail ---------- */
+
+  function cardStep() {
+    var card = strip.firstElementChild;
+    if (!card) return track.clientWidth;
+    var gap = parseFloat(window.getComputedStyle(strip).columnGap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  }
+
+  function nudge(dir) {
+    track.scrollBy({ left: dir * cardStep(), behavior: scrollBehavior() });
+  }
+
+  function sync() {
+    var max = Math.max(track.scrollWidth - track.clientWidth, 0);
+    var left = track.scrollLeft;
+    /* 1px of slack: sub-pixel widths mean scrollLeft never lands on max */
+    var atStart = left <= 1;
+    var atEnd = left >= max - 1;
+    var pos = max <= 1 ? "none" : atStart ? "start" : atEnd ? "end" : "mid";
+
+    if (viewport && viewport.setAttribute) viewport.setAttribute("data-pos", pos);
+
+    arrows.forEach(function (btn) {
+      var dir = Number(btn.getAttribute("data-voices-dir")) || 1;
+      btn.disabled = max <= 1 || (dir < 0 ? atStart : atEnd);
+    });
+
+    if (railFill) {
+      var ratio = track.scrollWidth
+        ? Math.min(1, track.clientWidth / track.scrollWidth)
+        : 1;
+      railFill.style.setProperty("--v-thumb", ratio.toFixed(4));
+      railFill.style.setProperty("--v-pos", (max ? left / max : 0).toFixed(4));
+    }
+  }
+
+  var syncQueued = false;
+  function queueSync() {
+    if (syncQueued) return;
+    syncQueued = true;
+    window.requestAnimationFrame(function () {
+      syncQueued = false;
+      sync();
+    });
+  }
+
+  track.addEventListener("scroll", queueSync, { passive: true });
+  window.addEventListener("resize", queueSync, { passive: true });
+  window.addEventListener("load", queueSync);
+
+  arrows.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      nudge(Number(btn.getAttribute("data-voices-dir")) || 1);
+    });
+  });
+
+  track.addEventListener("keydown", function (e) {
+    var dir = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    nudge(dir);
+  });
+
+  sync();
+
+  /* ---------- City of Orlando proclamation modal ---------- */
+
+  var modal = document.getElementById("proclamationModal");
+  var frame = document.getElementById("proclamationFrame");
+  var letter = document.getElementById("proclamationLetter");
+  var closeBtn = document.getElementById("proclamationClose");
+  if (!modal) return;
+
+  var FOCUSABLE =
+    'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
+  var lastFocused = null;
+  var closeTimer = null;
+  var pdfAvailable = null; /* null = not probed yet */
+
+  function useLetter() {
+    if (frame) frame.hidden = true;
+    if (letter) letter.hidden = false;
+  }
+
+  function usePdf() {
+    if (!frame) return useLetter();
+    if (letter) letter.hidden = true;
+    frame.hidden = false;
+    var src = frame.getAttribute("data-src");
+    if (src && !frame.getAttribute("src")) frame.setAttribute("src", src);
+  }
+
+  /* iOS and iPadOS render a PDF in an iframe as a dead grey panel, and an
+     embedded viewer is unusable on a narrow screen - both read the typeset
+     letter instead. */
+  function pdfEmbedUnsupported() {
+    var ua = window.navigator.userAgent || "";
+    var iOS =
+      /iP(hone|ad|od)/.test(ua) ||
+      (/Mac/.test(ua) && window.navigator.maxTouchPoints > 1);
+    return iOS || window.matchMedia("(max-width: 767px)").matches;
+  }
+
+  function resolveProclamation() {
+    if (pdfEmbedUnsupported()) return useLetter();
+    if (pdfAvailable === true) return usePdf();
+    if (pdfAvailable === false) return useLetter();
+    if (!window.fetch) {
+      pdfAvailable = true;
+      return usePdf();
+    }
+    /* The PDF may simply not be committed yet - show the letter meanwhile
+       rather than an empty viewer, and upgrade only if the file is really
+       there. A 200 is not enough: unknown paths fall through to the SPA
+       fallback, which answers with index.html, so the type has to be checked. */
+    useLetter();
+    window
+      .fetch(PROCLAMATION_PDF, { method: "HEAD" })
+      .then(function (res) {
+        var type = res && res.ok && res.headers.get("content-type");
+        pdfAvailable = !!(type && type.indexOf("pdf") !== -1);
+        if (pdfAvailable) usePdf();
+      })
+      .catch(function () {
+        pdfAvailable = false;
+      });
+  }
+
+  function focusables() {
+    return Array.prototype.slice
+      .call(modal.querySelectorAll(FOCUSABLE))
+      .filter(function (node) {
+        return node.offsetParent !== null || node === closeBtn;
+      });
+  }
+
+  function onKeydown(e) {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      closeModal();
+      return;
+    }
+    if (e.key !== "Tab") return;
+    var items = focusables();
+    if (!items.length) return;
+    var first = items[0];
+    var last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  }
+
+  /* Tab inside the embedded viewer is the iframe's own business, but focus
+     must not be able to walk out the far side of it and back into the page. */
+  function onFocusIn(e) {
+    if (modal.hidden || modal.contains(e.target)) return;
+    var items = focusables();
+    (items[0] || closeBtn).focus();
+  }
+
+  function openModal(trigger) {
+    if (closeTimer) {
+      window.clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+    lastFocused = trigger || document.activeElement;
+    resolveProclamation();
+    modal.hidden = false;
+    window.requestAnimationFrame(function () {
+      modal.classList.add("is-open");
+    });
+    document.body.classList.add("proclamation-open");
+    document.addEventListener("keydown", onKeydown, true);
+    document.addEventListener("focusin", onFocusIn);
+    if (closeBtn) closeBtn.focus();
+  }
+
+  function closeModal() {
+    if (modal.hidden) return;
+    modal.classList.remove("is-open");
+    document.body.classList.remove("proclamation-open");
+    document.removeEventListener("keydown", onKeydown, true);
+    document.removeEventListener("focusin", onFocusIn);
+    closeTimer = window.setTimeout(
+      function () {
+        modal.hidden = true;
+        closeTimer = null;
+      },
+      prefersReduced ? 0 : 240
+    );
+    if (lastFocused && typeof lastFocused.focus === "function") {
+      lastFocused.focus();
+    }
+    lastFocused = null;
+  }
+
+  strip.addEventListener("click", function (e) {
+    var btn = e.target.closest && e.target.closest("[data-voice-modal]");
+    if (!btn) return;
+    if (btn.getAttribute("data-voice-modal") === "proclamation") openModal(btn);
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal) closeModal();
+  });
+})();

@@ -44,7 +44,11 @@ export function securityHeaders() {
         fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
         workerSrc: ["'self'", "blob:"],
         formAction: ["'self'", "https://accounts.google.com"],
-        frameAncestors: ["'none'"],
+        // 'self' rather than 'none': the header applies to static assets too,
+        // and the homepage proclamation modal embeds /documents/*.pdf in a
+        // same-origin iframe. Third-party framing stays blocked either way,
+        // so the clickjacking protection is unchanged.
+        frameAncestors: ["'self'"],
         objectSrc: ["'none'"],
         baseUri: ["'self'"],
         upgradeInsecureRequests: config.isProd ? [] : null,

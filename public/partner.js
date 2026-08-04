@@ -153,19 +153,32 @@
     { name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
     { name: "City of Sanford", logo: "/png/sanford-logo.png" },
     { name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
+    { name: "FOX 35 Orlando", logo: "/png/fox-35-logo.png" },
+    { name: "WFTV Channel 9", logo: "/png/wftv-channel-9-logo.png" },
     /* -- licensed adoption agencies, United States -- */
     { name: "Adoption and Beyond", logo: "/png/adoption-beyond.png" },
+    { name: "Adoption Choice Inc.", logo: "/png/adoption-choice-logo.png" },
     { name: "Adoption Choices of Florida", logo: "/png/adoption-choices-florida-logo.png" },
+    { name: "Adoption Circle", logo: "/png/adoption-circle-logo.png" },
     { name: "Adoption Network Law Center", logo: "/png/adoption-network-law-center-logo.png" },
+    { name: "Adoption Rhode Island", logo: "/png/adoption-rhode-island-logo.png" },
     { name: "Adoption Services, Inc.", logo: "/png/adoption-services-inc-logo.png" },
     { name: "Adoptions From The Heart", logo: "/png/afth-logo.png" },
     { name: "Arizona's Children Association", logo: "/png/arizonas-children-logo.png" },
     { name: "Bright Futures Adoption Center", logo: "/png/bright-futures-logo.png" },
+    { name: "Burlington United Methodist Family Services", logo: "/png/burlington-umfs-logo.png" },
+    { name: "Canopy Children's Solutions", logo: "/png/canopy-logo.png" },
+    { name: "Catholic Charities, Archdiocese of New Orleans", logo: "/png/ccano-logo.png" },
+    { name: "Catholic Charities North Dakota", logo: "/png/catholic-charities-nd-logo.png" },
+    { name: "Children & Families First", logo: "/png/children-families-first-logo.png" },
     { name: "Children's Home Society of Minnesota", logo: "/png/chs-minnesota-logo.png" },
     { name: "Children's Home Society of North Carolina", logo: "/png/chs-north-carolina-logo.png" },
+    { name: "Children's Service Society of Utah", logo: "/png/css-utah-logo.png" },
+    { name: "Christian Heritage", logo: "/png/christian-heritage-logo.png" },
     { name: "Connecticut Alliance of Foster and Adoptive Families", logo: "/png/cafaf-logo.png" },
     { name: "Connecting Hearts", logo: "/png/connecting-hearts-logo.png" },
     { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
+    { name: "Four Oaks", logo: "/png/four-oaks-logo.png" },
     { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
     { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
     { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },
@@ -174,22 +187,31 @@
     { name: "Holt International", logo: "/png/holt-international-logo.png" },
     { name: "KidsFirst Adoption Services", logo: "/png/kidsfirst-logo.png" },
     { name: "Lifeline Children's Services", logo: "/png/lifeline-childrens-logo.png" },
+    { name: "Lund", logo: "/png/lund-logo.png" },
+    { name: "Lutheran Social Services of South Dakota", logo: "/png/lss-south-dakota-logo.png" },
     // Nightlight's Greenville office shares this logo; listed once so two
     // identical faces can never sit on screen together.
     { name: "Nightlight Christian Adoptions", logo: "/png/nightlight-logo.png" },
     { name: "Options 4 Adoption", logo: "/png/options4adoption.png" },
+    { name: "Paths for Families", logo: "/png/paths-for-families-logo.png" },
     { name: "Shineforth", logo: "/png/shineforth-logo.png" },
     { name: "Spence-Chapin Services to Families and Children", logo: "/png/spence-chapin-logo.png" },
     { name: "The Cradle", logo: "/png/the-cradle-logo.png" },
     { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" },
+    { name: "Wyoming Children's Society", logo: "/png/wyoming-childrens-society-logo.png" },
     /* -- licensed adoption agencies, international -- */
+    { name: "Adoptiehuis (Gewenst Kind vzw)", logo: "/png/adoptiehuis-logo.png" },
+    { name: "Ai.Bi. Amici dei Bambini", logo: "/png/aibi-logo.png" },
     { name: "Barnardos Australia", logo: "/png/barnardos-australia-logo.png" },
     { name: "Buckner Kenya", logo: "/png/buckner-kenya-logo.png" },
     { name: "CCAI (Chinese Children Adoption International)", logo: "/png/ccai-logo.png" },
     { name: "Children of the World Delhi", logo: "/png/children-of-the-world-delhi.png" },
     { name: "Compassionate Orphanage", logo: "/png/compassionate-orphanage-logo.png" },
     { name: "Door of Hope", logo: "/png/door-of-hope-logo.png" },
+    { name: "Fundación San José para la Adopción", logo: "/png/fundacion-san-jose-logo.png" },
     { name: "Hand in Hand", logo: "/png/hihi-logo.png" },
+    { name: "Helping Hands Adoption Mediation Agency", logo: "/png/helping-hands-logo.png" },
+    { name: "Japan International Social Service (ISSJ)", logo: "/png/issj-logo.png" },
     { name: "Palestinian Orphans Association", logo: "/png/palestinian-orphans-logo.png" }
   ];
 
@@ -207,12 +229,19 @@
     var img = document.createElement("img");
     img.alt = "";
     img.decoding = "async";
-    img.addEventListener("error", function () {
+    function showName() {
       var name = document.createElement("span");
       name.className = "pt-drift-name";
       name.textContent = entry.name;
       face.textContent = "";
       face.appendChild(name);
+    }
+    img.addEventListener("error", showName);
+    // A partner whose real art hasn't been supplied yet carries a 1x1 placeholder
+    // PNG: it loads cleanly, so "error" never fires and the card would drift past
+    // empty. Treat it as no logo at all and fall back to the same name plate.
+    img.addEventListener("load", function () {
+      if (img.naturalWidth <= 1 && img.naturalHeight <= 1) showName();
     });
     img.src = entry.logo;
     face.appendChild(img);
