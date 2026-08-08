@@ -78,26 +78,31 @@
       </div>
       <div class="tm-hero-foot hm-reveal" style="--d: .65s">
         <a href="#manifesto" class="tm-scrollcue" aria-label="Scroll to our conviction"><span class="tm-scrollcue-line"></span>Scroll</a>
+        <!-- data-tmcount values are recomputed by team.js from the card lists
+             and reach-data.js before the count-up runs; the literals below are
+             only the no-JS fallback. -->
         <dl class="tm-hero-stats">
           <div class="tm-stat">
             <dt class="tm-stat-label">Founders</dt>
-            <dd class="tm-stat-num" data-tmcount="2">02</dd>
+            <!-- [data-founder], not .tm-person: the section also carries team
+                 members who are not founders. -->
+            <dd class="tm-stat-num" data-tmcount="2" data-tmcount-of="#founders [data-founder]">02</dd>
           </div>
           <div class="tm-stat">
             <dt class="tm-stat-label">Licensed agencies</dt>
-            <dd class="tm-stat-num" data-tmcount="55">55</dd>
+            <dd class="tm-stat-num" data-tmcount="72" data-tmcount-of="#adoption-agencies .tm-card-item">72</dd>
           </div>
           <div class="tm-stat">
             <dt class="tm-stat-label">Civic partners</dt>
-            <dd class="tm-stat-num" data-tmcount="9">09</dd>
+            <dd class="tm-stat-num" data-tmcount="12" data-tmcount-of="#organizations .tm-card-item">12</dd>
           </div>
           <div class="tm-stat">
             <dt class="tm-stat-label">Countries</dt>
-            <dd class="tm-stat-num" data-tmcount="21">21</dd>
+            <dd class="tm-stat-num" data-tmcount="22" data-tmcount-reach="countries">22</dd>
           </div>
           <div class="tm-stat">
             <dt class="tm-stat-label">States</dt>
-            <dd class="tm-stat-num" data-tmcount="40">40</dd>
+            <dd class="tm-stat-num" data-tmcount="40" data-tmcount-reach="states">40</dd>
           </div>
         </dl>
       </div>
@@ -129,7 +134,7 @@
           <span class="hm-index">02 — 05</span>
         </header>
         <ul class="tm-people">
-          <li class="tm-person hm-reveal">
+          <li class="tm-person hm-reveal" data-founder>
             <span class="tm-person-ghost" aria-hidden="true">01</span>
             <div class="tm-person-head">
               <span class="tm-person-index">№ 01</span>
@@ -162,7 +167,7 @@
             </div>
           </li>
 
-          <li class="tm-person hm-reveal">
+          <li class="tm-person hm-reveal" data-founder>
             <span class="tm-person-ghost" aria-hidden="true">02</span>
             <div class="tm-person-head">
               <span class="tm-person-index">№ 02</span>
@@ -241,14 +246,54 @@
         <p class="tm-lede hm-reveal">Every agency in the HavenLink network is licensed, reviewed, and accountable for the families it serves.</p>
         <h3 class="tm-subhead hm-reveal">
           <span class="hm-eyebrow">United States</span>
-          <span class="tm-subhead-count">42</span>
+          <span class="tm-subhead-count" data-count-cards>42</span>
         </h3>
         <ul class="tm-cards">
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://abondoflove.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/a-bond-of-love-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">A Bond of Love Adoption Agency</span>
+              <span class="tm-card-desc">A Sarasota-based licensed agency serving families across southwest Florida, offering confidential support to expectant mothers weighing adoption and full placement services for adoptive parents.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://achildshope.com" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/a-childs-hope-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">A Child's Hope</span>
+              <span class="tm-card-desc">A licensed North Carolina adoption agency with offices in Raleigh, Greensboro, and Asheville, working on domestic infant adoption. It supports birth mothers through the decision and adoptive families through placement.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://adoptionadvocates.net" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/adoption-advocates-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Adoption Advocates</span>
+              <span class="tm-card-desc">An Austin-based licensed nonprofit adoption agency operating since 1991, providing professional support to expectant parents and adoptive families across Texas.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
           <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://adoption-beyond.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/adoption-beyond.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Adoption and Beyond</span>
               <span class="tm-card-desc">Available to perform domestic, international, private, and embryo home study assessments.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://adoptionassociates.net" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/adoption-associates-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Adoption Associates</span>
+              <span class="tm-card-desc">A Michigan agency specializing in unplanned pregnancy counseling and domestic infant adoption, with no-obligation support for expectant parents. It also completes home studies and placements for adoptive families.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://adoptioncentre.com" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/adoption-centre-kansas-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Adoption Centre of Kansas</span>
+              <span class="tm-card-desc">A Wichita-based licensed adoption agency working with birth parents and adoptive families across Kansas, covering counseling, matching, and placement.</span>
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -285,6 +330,14 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://adoptionoptions.com" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/adoption-options-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Adoption Options</span>
+              <span class="tm-card-desc">A Denver-based nonprofit adoption agency working with expectant parents and adoptive families across Colorado under the banner Building Families, Creating Futures. It handles counseling, matching, home studies, and post-placement support.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://adoptionri.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/adoption-rhode-island-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Adoption Rhode Island</span>
@@ -309,6 +362,30 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://adoptionsofindiana.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/adoptions-of-indiana-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Adoptions of Indiana</span>
+              <span class="tm-card-desc">A licensed Indiana agency built around a simple vision of every child in a loving home, every adoptee and parent supported, every community educated. It provides matching, placement, and education for adoptive families and birth parents.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://ampersandfamilies.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/ampersand-families-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Ampersand Families</span>
+              <span class="tm-card-desc">A Minnesota licensed child placing agency focused on older youth in foster care, finding permanent homes connected to relatives, kin, community, and culture. It also trains child welfare professionals on relative and kinship adoption.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://antiochadoptions.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/antioch-adoptions-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Antioch Adoptions</span>
+              <span class="tm-card-desc">A nonprofit child placing agency listed by Washington DCYF, operating in Washington and Arizona and providing entirely fee-free services. It has finalized more than 500 adoptions since 2000 and runs both a foster-to-adopt track and a private infant program.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://www.arizonaschildren.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/arizonas-children-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Arizona's Children Association</span>
@@ -317,10 +394,26 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://boysandgirlsaid.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/boys-and-girls-aid-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Boys &amp; Girls Aid</span>
+              <span class="tm-card-desc">A long-established Oregon child welfare nonprofit running foster care, adoption, housing, and shelter programs, with a dedicated foster care adoption process for families seeking permanency.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://www.brightfuturesadoption.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/bright-futures-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Bright Futures Adoption Center</span>
               <span class="tm-card-desc">A full-service, licensed nonprofit Massachusetts agency and program of the RFK Community Alliance, championing open adoption and giving birth and adoptive parents options throughout the process.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://buildingarizonafamilies.com" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/building-arizona-families-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Building Arizona Families</span>
+              <span class="tm-card-desc">A licensed and internationally accredited Arizona adoption agency working with expectant mothers and hopeful adoptive families on domestic infant placements. It carries an A+ Better Business Bureau rating.</span>
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -421,10 +514,26 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://foreverfamiliesthroughadoption.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/forever-families-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Forever Families Through Adoption</span>
+              <span class="tm-card-desc">A Westchester-based nonprofit adoption placement agency authorized in both New York and Connecticut, serving birth parents, adoptive parents, and adoptees. It also runs as a resource center for the wider adoption community.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://fouroaks.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/four-oaks-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Four Oaks</span>
               <span class="tm-card-desc">Reaching more than 27,000 Iowa children and families a year, with a Foster Care and Adoption division that licenses families statewide and trains child welfare professionals.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://georgiaagape.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/georgia-agape-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Georgia AGAPE</span>
+              <span class="tm-card-desc">A licensed Georgia agency offering maternity support services alongside its adoption and foster care programs. It works with expectant parents statewide and places children with approved adoptive families.</span>
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -477,6 +586,14 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://hfs.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/holy-family-services-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Holy Family Services Adoption and Foster Care</span>
+              <span class="tm-card-desc">One of California's long-running nonprofit adoption and foster care agencies, providing non-judgmental counseling for birth parents considering adoption and uniting infants and children with adoptive families. It puts real emphasis on serving families of every shape and background.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://kidsfirstadoption.com/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/kidsfirst-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">KidsFirst Adoption Services</span>
@@ -497,6 +614,14 @@
               <span class="tm-card-logo"><img src="/png/lund-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">Lund</span>
               <span class="tm-card-desc">Vermont's primary licensed domestic adoption agency, supporting pregnant and parenting young people and adoptive families through matching, placement, and lifelong post-adoption services.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://lcfs.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/lcfs-illinois-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Lutheran Child and Family Services of Illinois</span>
+              <span class="tm-card-desc">LCFS runs adoption and birth parent services statewide alongside foster care, counseling, and intact family services. Its focus is protecting children and building futures for those who've experienced trauma.</span>
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -557,6 +682,14 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://sunrise.org" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/sunrise-childrens-services-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Sunrise Children's Services</span>
+              <span class="tm-card-desc">Sunrise provides foster care, adoption, and residential treatment across Kentucky, focused on children who've experienced trauma. A large share of its placements move from foster care into permanent adoption.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://cradle.org/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/the-cradle-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">The Cradle</span>
@@ -583,7 +716,7 @@
         </ul>
         <h3 class="tm-subhead hm-reveal">
           <span class="hm-eyebrow">International</span>
-          <span class="tm-subhead-count">13</span>
+          <span class="tm-subhead-count" data-count-cards>13</span>
         </h3>
         <ul class="tm-cards">
           <li class="tm-card-item hm-reveal">
@@ -690,6 +823,14 @@
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://sunriseadoption.com" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/sunrise-adoption-canada-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Sunrise Adoption (Sunrise Family Services Society)</span>
+              <span class="tm-card-desc">A British Columbia government-licensed adoption agency and an Accredited Body under the Hague Adoption Convention, based in North Vancouver and serving families across the province. It handles pregnancy counseling, home studies, matching, direct placements, and intercountry adoption.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
       </div>
     </section>
@@ -704,7 +845,7 @@
         <p class="tm-lede hm-reveal">International bodies, state agencies, and local governments that share our commitment to children and families.</p>
         <h3 class="tm-subhead hm-reveal">
           <span class="hm-eyebrow">Government entities</span>
-          <span class="tm-subhead-count">05</span>
+          <span class="tm-subhead-count" data-count-cards>05</span>
         </h3>
         <ul class="tm-cards">
           <li class="tm-card-item hm-reveal">
@@ -726,15 +867,6 @@
             </a>
           </li>
           <li class="tm-card-item hm-reveal">
-            <a class="tm-card" href="https://cityofwinterpark.org/" target="_blank" rel="noopener noreferrer">
-              <span class="tm-card-logo"><img src="/png/winter-park-logo.png" alt="" loading="lazy"></span>
-              <span class="tm-card-name">City of Winter Park</span>
-              <span class="tm-card-role">Municipal Government</span>
-              <span class="tm-card-desc">The municipal government of Winter Park, Florida, dedicated to serving its community and the well-being of local families and children.</span>
-              <span class="tm-card-arrow" aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li class="tm-card-item hm-reveal">
             <a class="tm-card" href="https://www.cityofoviedo.net/" target="_blank" rel="noopener noreferrer">
               <span class="tm-card-logo"><img src="/png/oviedo-logo.png" alt="" loading="lazy"></span>
               <span class="tm-card-name">City of Oviedo</span>
@@ -752,10 +884,20 @@
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
+          <!-- No .tm-card-logo: the Winter Park mark was retired from the site.
+               The card intentionally leads with its name instead. -->
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://cityofwinterpark.org/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-name">City of Winter Park</span>
+              <span class="tm-card-role">Municipal Government</span>
+              <span class="tm-card-desc">The municipal government of Winter Park, Florida, dedicated to serving its community and the well-being of local families and children.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
         <h3 class="tm-subhead hm-reveal">
           <span class="hm-eyebrow">Global organizations, nonprofits, and media</span>
-          <span class="tm-subhead-count">04</span>
+          <span class="tm-subhead-count" data-count-cards>04</span>
         </h3>
         <ul class="tm-cards">
           <li class="tm-card-item hm-reveal">
@@ -791,6 +933,33 @@
               <span class="tm-card-name">WFTV Channel 9</span>
               <span class="tm-card-role">Media Partner</span>
               <span class="tm-card-desc">Central Florida's ABC affiliate since 1958, reporting from downtown Orlando on the issues, families, and neighborhoods of the region.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://www.orlandosentinel.com/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/orlando-sentinel-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Orlando Sentinel</span>
+              <span class="tm-card-role">Newspaper</span>
+              <span class="tm-card-desc">Central Florida's primary daily newspaper, published since 1876, covering news, government, and opinion across the Orlando region.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://mynews13.com/fl/orlando" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/spectrum-news-13-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">Spectrum News 13</span>
+              <span class="tm-card-role">Broadcast News</span>
+              <span class="tm-card-desc">A 24-hour local news channel serving Orlando and Central Florida with coverage of the region's communities, local government, and public affairs.</span>
+              <span class="tm-card-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="tm-card-item hm-reveal">
+            <a class="tm-card" href="https://www.wesh.com/" target="_blank" rel="noopener noreferrer">
+              <span class="tm-card-logo"><img src="/png/wesh-2-logo.png" alt="" loading="lazy"></span>
+              <span class="tm-card-name">WESH 2</span>
+              <span class="tm-card-role">Broadcast News</span>
+              <span class="tm-card-desc">The NBC affiliate serving Orlando and Daytona Beach, delivering local news, weather, and investigative reporting across Central Florida.</span>
               <span class="tm-card-arrow" aria-hidden="true">→</span>
             </a>
           </li>
@@ -1114,6 +1283,9 @@
   <script src="/script.js"></script>
   <script src="/account.js"></script>
   <script src="/editorial.js" defer></script>
+  <!-- reach-data.js first: team.js counts the hero's countries/states off it
+       and expansion-map.js dyes the map from the same arrays. -->
+  <script src="/reach-data.js" defer></script>
   <script src="/team.js" defer></script>
   <script src="/expansion-map.js" defer></script>
   <script src="/chat-widget.js" defer></script>

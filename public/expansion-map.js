@@ -5,38 +5,15 @@
  * reveals a U.S. states inset when the United States is hovered, focused, or
  * tapped. Everything is same-origin (no CDN) to satisfy the site CSP.
  *
- * Region codes are lowercase: ISO 3166-1 alpha-2 for countries, USPS 2-letter
- * for states. To update the real footprint, edit EXPANSION_DATA below - that is
- * the only thing that needs to change. "partner" always wins over "negotiating"
- * when a region appears in both lists.
+ * To update the real footprint, edit reach-data.js - that is the only thing
+ * that needs to change, and team.js / partner.js count their "countries" and
+ * "states" figures off the very same arrays.
  */
 (function () {
   'use strict';
 
-  var EXPANSION_DATA = {
-    countries: {
-      // 'us' stays a partner so the United States is dyed fully on the world map
-      // and remains the gateway to the states inset. Then: Brazil, Bulgaria,
-      // Haiti, China (covers Hong Kong), Hungary, India, plus the international
-      // partner network — Nigeria, South Africa, Kenya, Australia, Palestine,
-      // Finland, Colombia, Taiwan, Ukraine, and the 2026 expansion — Belgium,
-      // Chile, Ireland, Italy, Japan.
-      partner: ['us', 'br', 'bg', 'ht', 'cn', 'hu', 'in',
-                'ng', 'za', 'ke', 'au', 'ps', 'fi', 'co', 'tw', 'ua',
-                'be', 'cl', 'ie', 'it', 'jp'],
-      // Philippines, Romania, Uzbekistan, Canada, New Zealand. Bulgaria is also a
-      // partner; "partner" wins, so it renders navy.
-      negotiating: ['ph', 'bg', 'ro', 'uz', 'ca', 'nz']
-    },
-    states: {
-      // Union of every state with a partner agency in src/match/agencies.ts.
-      partner: ['al', 'az', 'ca', 'co', 'ct', 'de', 'fl', 'ga', 'ia', 'il',
-                'in', 'ks', 'ky', 'la', 'ma', 'md', 'mi', 'mn', 'mo', 'ms',
-                'mt', 'nc', 'nd', 'ne', 'ny', 'oh', 'or', 'pa', 'ri', 'sc',
-                'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy'],
-      negotiating: ['pr', 'hi', 'me'] // Puerto Rico, Hawaii, Maine — in discussion
-    }
-  };
+  var EXPANSION_DATA = window.HL_REACH;
+  if (!EXPANSION_DATA) return; // reach-data.js must load first
 
   var root = document.getElementById('expansionMap');
   if (!root) return; // this script is a no-op on every page except the Team page

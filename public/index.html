@@ -554,20 +554,27 @@
     </div>
   </div>
 
-  <!-- City of Orlando proclamation (opened from the Buddy Dyer voice card).
-       Deliberately NOT styled like the privacy modal: this reproduces a City of
-       Orlando document, so it carries the city's blue, scoped to .hl-proc-modal.
-       The PDF loads into the iframe on open; voices.js swaps in the typeset
-       letter below whenever the iframe can't be trusted (iOS, narrow screens,
-       or the file not being there yet). -->
+  <!-- City of Orlando documents, opened from the voice cards: Mayor Dyer's
+       letter of recognition and Commissioner Rose's HavenLink Week
+       proclamation. Deliberately NOT styled like the privacy modal - these
+       reproduce City of Orlando paperwork, so they carry the city's own blue
+       and a serif face, scoped to .hl-proc-modal.
+
+       Only the letter has a PDF counterpart: it loads into the iframe on open,
+       and voices.js falls back to the typeset article below whenever the
+       iframe can't be trusted (iOS, narrow screens, or the file not being
+       there yet). The proclamation is always typeset.
+
+       Each <article> carries its own header strings in data-kicker/data-title;
+       voices.js copies them into the modal head when it opens. -->
   <div id="proclamationModal" class="hl-proc-modal" role="dialog" aria-modal="true" aria-labelledby="procTitle" hidden>
     <div class="hl-proc-card">
       <header class="hl-proc-head">
         <div>
-          <p class="hl-proc-kicker">City of Orlando &middot; Office of Mayor Buddy Dyer</p>
+          <p class="hl-proc-kicker" id="procKicker">City of Orlando &middot; Office of Mayor Buddy Dyer</p>
           <h2 class="hl-proc-title" id="procTitle">Letter of Recognition</h2>
         </div>
-        <button type="button" id="proclamationClose" class="hl-proc-close" aria-label="Close the proclamation">
+        <button type="button" id="proclamationClose" class="hl-proc-close" aria-label="Close the document">
           <span aria-hidden="true">&times;</span>
         </button>
       </header>
@@ -577,26 +584,80 @@
                 title="Letter of recognition from Mayor Buddy Dyer, August 3, 2026"
                 data-src="/documents/havenlink-proclamation-city-of-orlando.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH"></iframe>
 
-        <article class="hl-proc-letter" id="proclamationLetter" hidden>
-          <header class="hl-proc-letterhead">
-            <p class="hl-proc-city"><span>City of</span><strong>Orlando</strong></p>
-            <p class="hl-proc-office">Office of Mayor Buddy Dyer</p>
+        <!-- ===== Letter of recognition — Mayor Buddy Dyer, August 3, 2026 ===== -->
+        <article class="hl-proc-doc hl-proc-letter" id="proclamationLetter" hidden
+                 data-kicker="City of Orlando · Office of Mayor Buddy Dyer"
+                 data-title="Letter of Recognition">
+          <!-- png/orlando-logo.png is the fountain mark on its own; the city's
+               letterhead pairs it with the wordmark, which is set in type here
+               so the lockup reads correctly whatever art the file carries. -->
+          <header class="hl-doc-letterhead">
+            <span class="hl-doc-logo"><img class="hl-doc-img" src="/png/orlando-logo.png" alt="" width="86" height="86"></span>
+            <span class="hl-doc-wordmark"><span>City of</span><strong>Orlando</strong></span>
           </header>
+          <p class="hl-doc-office">Office of Mayor Buddy Dyer</p>
 
-          <p class="hl-proc-date">August 3, 2026</p>
-          <p class="hl-proc-addr">Asad Sadikov and Aarav Gupta<br>HavenLink</p>
-          <p>Dear Asad and Aarav,</p>
+          <p class="hl-doc-date">August 3, 2026</p>
+          <p class="hl-doc-addr">Asad Sadikov and Aarav Gupta<br>HavenLink</p>
+          <p class="hl-doc-salutation">Dear Asad and Aarav,</p>
           <p>On behalf of the City of Orlando, it is my honor to congratulate you both on the growth and impact of HavenLink. Your efforts to help connect prospective adoptive families, licensed agencies and organizations is certainly worthy of recognition and our community&rsquo;s collective praise.</p>
           <p>What you have been able to accomplish through HavenLink reflects your commitment, intellectual curiosity and countless hours of hard work. Of course, your kindness and compassion should be commended as well.</p>
           <p>In Orlando, we believe that the future belongs to innovators, problem-solvers and critical thinkers. We&rsquo;re impressed that you are already helping our community tackle complex challenges. You have set an outstanding example for your peers and brought immense pride to your family, your teachers and our entire community.</p>
           <p>Please accept my gratitude. I wish you continued impact with HavenLink and success on your academic journey. I also look forward to seeing the incredible contributions you will undoubtedly make in the years ahead.</p>
-          <p class="hl-proc-signoff">Sincerely,</p>
-          <p class="hl-proc-signer">Buddy Dyer, Mayor</p>
+          <p class="hl-doc-signoff">Sincerely,</p>
+          <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/buddy-dyer-signature.png" alt="" width="200" height="70"></span>
+          <p class="hl-doc-signer">Buddy Dyer, Mayor</p>
 
-          <footer class="hl-proc-letterfoot">
+          <footer class="hl-doc-foot">
             <p>Orlando City Hall &middot; 400 South Orange Avenue &middot; PO Box 4990 &middot; Orlando, FL 32802-4990</p>
             <p>P 407.246.2221 &middot; F 407.246.2842 &middot; orlando.gov</p>
           </footer>
+        </article>
+
+        <!-- ===== Proclamation — Commissioner Shan Rose, September 15, 2026 ===== -->
+        <article class="hl-proc-doc hl-proc-proclamation" id="proclamationRose" hidden
+                 data-kicker="City of Orlando · Office of Commissioner Shan Rose"
+                 data-title="Proclamation — HavenLink Week">
+          <header class="hl-doc-sealhead">
+            <span class="hl-doc-seal"><img class="hl-doc-img" src="/png/orlando-seal.png" alt="Seal of the City of Orlando" width="104" height="104"></span>
+          </header>
+
+          <dl class="hl-doc-whereas">
+            <dt>Whereas,</dt>
+            <dd>HavenLink is a free civic technology platform founded in 2025 by students at Trinity Preparatory School in Winter Park to provide prospective adoptive parents with a guided path from their first questions through the day a child comes home, while connecting families directly with licensed adoption agencies; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink has remained completely free for every family it serves and has assisted more than 1,000 users while connecting over 200 families with licensed adoption agencies throughout 32 states and five countries; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink collaborates with more than 30 licensed adoption agencies and has established partnerships with UNICEF and the United Nations Population Fund, demonstrating the far-reaching impact of a locally founded initiative; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink is led by Technical Director Asad Sadikov and Nontechnical Director Aarav Gupta, whose vision, leadership, and commitment have transformed a high school project into a nationally recognized platform that continues to serve families seeking to build loving and permanent homes through adoption; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink has strengthened awareness of adoption by engaging with local governments, state legislative offices, community organizations, and the media, while promoting access to reliable adoption resources and advocating for families across Florida and beyond; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>The work of HavenLink has been recognized by WFTV Channel 9, FOX 35 Orlando, and the Orlando Sentinel, highlighting the organization&rsquo;s innovation, service, and dedication to improving access to adoption information; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>Florida is home to more than 20,000 children in foster care, and organizations like HavenLink play an important role in helping prospective adoptive parents navigate the adoption process by providing trusted, accessible guidance at no cost; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>The City of Orlando proudly recognizes young leaders whose innovation, compassion, and civic engagement strengthen our community and inspire others to create meaningful solutions to complex challenges;</dd>
+          </dl>
+
+          <p class="hl-doc-resolve"><span class="hl-doc-sc">Now, therefore,</span> I, Commissioner Shan Rose, by virtue of the authority vested in me, do hereby proclaim September 14 through September 20, 2026</p>
+          <p class="hl-doc-week">&ldquo;HavenLink Week&rdquo;</p>
+          <p class="hl-doc-inthe">in the City of Orlando.</p>
+
+          <div class="hl-doc-witness">
+            <p><span class="hl-doc-sc">In witness whereof,</span> I hereunto have set my hand and caused the Seal of the City of Orlando to be affixed this 15<sup>th</sup> day of September 2026.</p>
+            <!-- No reproduced signature for Commissioner Rose - the attribution is
+                 set in type, so there is no signature line to sit under either. -->
+            <p class="hl-doc-signer">Shan Rose<br><span>Commissioner, District 5</span></p>
+          </div>
         </article>
       </div>
     </div>

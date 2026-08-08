@@ -133,39 +133,55 @@
 
 /* ---------- Opening logo drift ----------
    Six cards cycle through the partner roster: partner organizations
-   (cities, agencies of record, global orgs) lead, licensed adoption
-   agencies follow. A card whose logo file is missing or empty falls
-   back to a typographic name card, so the roster can carry entries
-   whose PNGs haven't landed yet. */
+   (cities, agencies of record, global orgs, media) lead, licensed
+   adoption agencies follow. A card whose logo file is missing, empty,
+   or deliberately absent (logo: null) falls back to a typographic name
+   card, so the roster can carry entries whose PNGs haven't landed yet.
+
+   `kind` drives the derived "N licensed agencies" figure in the opening
+   meta line - see the counter block at the foot of this file. */
 (function () {
   "use strict";
-
-  var host = document.getElementById("ptDrift");
-  if (!host) return;
 
   /* Mirrors the roster published on /team - keep the two in sync. */
   var ROSTER = [
     /* -- partner organizations first -- */
-    { name: "City of Orlando", logo: "/png/orlando-logo.png" },
-    { name: "UNICEF", logo: "/png/unicef-logo.png" },
-    { name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
-    { name: "City of Winter Park", logo: "/png/winter-park-logo.png" },
-    { name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
-    { name: "City of Sanford", logo: "/png/sanford-logo.png" },
-    { name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
-    { name: "FOX 35 Orlando", logo: "/png/fox-35-logo.png" },
-    { name: "WFTV Channel 9", logo: "/png/wftv-channel-9-logo.png" },
+    { kind: "org", name: "City of Orlando", logo: "/png/orlando-logo.png" },
+    { kind: "org", name: "UNICEF", logo: "/png/unicef-logo.png" },
+    { kind: "org", name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
+    // The City of Winter Park logo was retired from the site; the partner
+    // itself stays, carried by its name plate.
+    { kind: "org", name: "City of Winter Park", logo: null },
+    { kind: "org", name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
+    { kind: "org", name: "City of Sanford", logo: "/png/sanford-logo.png" },
+    { kind: "org", name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
+    { kind: "org", name: "FOX 35 Orlando", logo: "/png/fox-35-logo.png" },
+    { kind: "org", name: "WFTV Channel 9", logo: "/png/wftv-channel-9-logo.png" },
+    { kind: "org", name: "Orlando Sentinel", logo: "/png/orlando-sentinel-logo.png" },
+    { kind: "org", name: "Spectrum News 13", logo: "/png/spectrum-news-13-logo.png" },
+    { kind: "org", name: "WESH 2", logo: "/png/wesh-2-logo.png" },
     /* -- licensed adoption agencies, United States -- */
+    { name: "A Bond of Love Adoption Agency", logo: "/png/a-bond-of-love-logo.png" },
+    { name: "A Child's Hope", logo: "/png/a-childs-hope-logo.png" },
+    { name: "Adoption Advocates", logo: "/png/adoption-advocates-logo.png" },
     { name: "Adoption and Beyond", logo: "/png/adoption-beyond.png" },
+    { name: "Adoption Associates", logo: "/png/adoption-associates-logo.png" },
+    { name: "Adoption Centre of Kansas", logo: "/png/adoption-centre-kansas-logo.png" },
     { name: "Adoption Choice Inc.", logo: "/png/adoption-choice-logo.png" },
     { name: "Adoption Choices of Florida", logo: "/png/adoption-choices-florida-logo.png" },
     { name: "Adoption Circle", logo: "/png/adoption-circle-logo.png" },
     { name: "Adoption Network Law Center", logo: "/png/adoption-network-law-center-logo.png" },
+    { name: "Adoption Options", logo: "/png/adoption-options-logo.png" },
     { name: "Adoption Rhode Island", logo: "/png/adoption-rhode-island-logo.png" },
     { name: "Adoption Services, Inc.", logo: "/png/adoption-services-inc-logo.png" },
     { name: "Adoptions From The Heart", logo: "/png/afth-logo.png" },
+    { name: "Adoptions of Indiana", logo: "/png/adoptions-of-indiana-logo.png" },
+    { name: "Ampersand Families", logo: "/png/ampersand-families-logo.png" },
+    { name: "Antioch Adoptions", logo: "/png/antioch-adoptions-logo.png" },
     { name: "Arizona's Children Association", logo: "/png/arizonas-children-logo.png" },
+    { name: "Boys & Girls Aid", logo: "/png/boys-and-girls-aid-logo.png" },
     { name: "Bright Futures Adoption Center", logo: "/png/bright-futures-logo.png" },
+    { name: "Building Arizona Families", logo: "/png/building-arizona-families-logo.png" },
     { name: "Burlington United Methodist Family Services", logo: "/png/burlington-umfs-logo.png" },
     { name: "Canopy Children's Solutions", logo: "/png/canopy-logo.png" },
     { name: "Catholic Charities, Archdiocese of New Orleans", logo: "/png/ccano-logo.png" },
@@ -178,16 +194,20 @@
     { name: "Connecticut Alliance of Foster and Adoptive Families", logo: "/png/cafaf-logo.png" },
     { name: "Connecting Hearts", logo: "/png/connecting-hearts-logo.png" },
     { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
+    { name: "Forever Families Through Adoption", logo: "/png/forever-families-logo.png" },
     { name: "Four Oaks", logo: "/png/four-oaks-logo.png" },
+    { name: "Georgia AGAPE", logo: "/png/georgia-agape-logo.png" },
     { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
     { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
     { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },
     { name: "Heart of Adoptions, Inc.", logo: "/png/heart-of-adoptions-logo.png" },
     { name: "Hearts of Adoptions Alliance", logo: "/png/hoaa-logo.png" },
     { name: "Holt International", logo: "/png/holt-international-logo.png" },
+    { name: "Holy Family Services Adoption and Foster Care", logo: "/png/holy-family-services-logo.png" },
     { name: "KidsFirst Adoption Services", logo: "/png/kidsfirst-logo.png" },
     { name: "Lifeline Children's Services", logo: "/png/lifeline-childrens-logo.png" },
     { name: "Lund", logo: "/png/lund-logo.png" },
+    { name: "Lutheran Child and Family Services of Illinois", logo: "/png/lcfs-illinois-logo.png" },
     { name: "Lutheran Social Services of South Dakota", logo: "/png/lss-south-dakota-logo.png" },
     // Nightlight's Greenville office shares this logo; listed once so two
     // identical faces can never sit on screen together.
@@ -196,6 +216,7 @@
     { name: "Paths for Families", logo: "/png/paths-for-families-logo.png" },
     { name: "Shineforth", logo: "/png/shineforth-logo.png" },
     { name: "Spence-Chapin Services to Families and Children", logo: "/png/spence-chapin-logo.png" },
+    { name: "Sunrise Children's Services", logo: "/png/sunrise-childrens-services-logo.png" },
     { name: "The Cradle", logo: "/png/the-cradle-logo.png" },
     { name: "The Sacred Portion Children's Outreach", logo: "/png/sacred-portion-logo.png" },
     { name: "Wyoming Children's Society", logo: "/png/wyoming-childrens-society-logo.png" },
@@ -212,8 +233,35 @@
     { name: "Hand in Hand", logo: "/png/hihi-logo.png" },
     { name: "Helping Hands Adoption Mediation Agency", logo: "/png/helping-hands-logo.png" },
     { name: "Japan International Social Service (ISSJ)", logo: "/png/issj-logo.png" },
-    { name: "Palestinian Orphans Association", logo: "/png/palestinian-orphans-logo.png" }
+    { name: "Palestinian Orphans Association", logo: "/png/palestinian-orphans-logo.png" },
+    { name: "Sunrise Adoption (Sunrise Family Services Society)", logo: "/png/sunrise-adoption-canada-logo.png" }
   ];
+
+  /* ---------- Derived figures in the opening meta line ----------
+     Counted off ROSTER and window.HL_REACH rather than typed into the
+     markup, so they stay honest the next time the network grows. Note the
+     agency figure trails /team by one: Nightlight appears twice there
+     (head office + Greenville) but once here, so two identical faces can
+     never drift on screen together. */
+  (function () {
+    var fills = document.querySelectorAll("[data-pt-count]");
+    if (!fills.length) return;
+
+    var reach = window.HL_REACH || { countries: {}, states: {} };
+    var totals = {
+      agencies: ROSTER.filter(function (e) { return e.kind !== "org"; }).length,
+      states: (reach.states.partner || []).length,
+      countries: (reach.countries.partner || []).length
+    };
+
+    fills.forEach(function (node) {
+      var key = node.getAttribute("data-pt-count");
+      if (totals[key] != null) node.textContent = String(totals[key]);
+    });
+  })();
+
+  var host = document.getElementById("ptDrift");
+  if (!host) return;
 
   var SLOT_COUNT = 6;
   var FADE_MS = 460;
@@ -235,6 +283,12 @@
       name.textContent = entry.name;
       face.textContent = "";
       face.appendChild(name);
+    }
+    // A partner with no logo at all (logo: null) never gets an <img> - going
+    // straight to the name plate means no request and no broken-image window.
+    if (!entry.logo) {
+      showName();
+      return face;
     }
     img.addEventListener("error", showName);
     // A partner whose real art hasn't been supplied yet carries a 1x1 placeholder

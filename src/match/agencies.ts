@@ -479,15 +479,18 @@ export const AGENCIES: Agency[] = [
     tags: ["Placement", "Waiting children"],
   },
   {
+    // Joined the partner network in the 2026 intake; it was already carried
+    // here as a directory listing, so the existing record is promoted in place
+    // rather than duplicated (ids are the stable key for saved matches).
     id: "georgia-agape-ga",
-    name: "Georgia Agape",
+    name: "Georgia AGAPE",
     state: "GA",
-    partner: false,
-    url: "https://www.georgiaagape.org/",
-    logo: null,
+    partner: true,
+    url: "https://georgiaagape.org",
+    logo: "/png/georgia-agape-logo.png",
     description:
-      "A faith-based, nationally accredited child-placing agency serving Georgia families since 1970.",
-    tags: ["Home study", "Placement", "Foster care"],
+      "A licensed Georgia agency offering maternity support services alongside its adoption and foster care programs. It works with expectant parents statewide and places children with approved adoptive families.",
+    tags: ["Maternity support", "Foster care", "Placement"],
   },
   {
     id: "covenant-care-ga",
@@ -584,15 +587,17 @@ export const AGENCIES: Agency[] = [
     tags: ["Home study", "Placement", "Birth-parent support"],
   },
   {
+    // Promoted from directory listing to partner in the 2026 intake - see the
+    // note on georgia-agape-ga.
     id: "adoptions-of-indiana-in",
     name: "Adoptions of Indiana",
     state: "IN",
-    partner: false,
-    url: "https://adoptionsofindiana.org/",
-    logo: null,
+    partner: true,
+    url: "https://adoptionsofindiana.org",
+    logo: "/png/adoptions-of-indiana-logo.png",
     description:
-      "Professional, compassionate adoption services for adoptees, expectant and birth parents, and adoptive families.",
-    tags: ["Home study", "Placement"],
+      "A licensed Indiana agency built around a simple vision of every child in a loving home, every adoptee and parent supported, every community educated. It provides matching, placement, and education for adoptive families and birth parents.",
+    tags: ["Matching", "Placement", "Family education"],
   },
   {
     id: "childrens-bureau-in",
@@ -720,15 +725,17 @@ export const AGENCIES: Agency[] = [
     tags: ["Foster care", "Adoption", "Therapeutic care"],
   },
   {
+    // Promoted from directory listing to partner in the 2026 intake - see the
+    // note on georgia-agape-ga.
     id: "sunrise-childrens-ky",
     name: "Sunrise Children's Services",
     state: "KY",
-    partner: false,
-    url: "https://www.sunrise.org/",
-    logo: null,
+    partner: true,
+    url: "https://sunrise.org",
+    logo: "/png/sunrise-childrens-services-logo.png",
     description:
-      "Serving Kentucky kids for over 155 years; its foster-to-adopt program has celebrated more than 500 adoptions since 2006.",
-    tags: ["Foster-to-adopt", "Residential care"],
+      "Sunrise provides foster care, adoption, and residential treatment across Kentucky, focused on children who've experienced trauma. A large share of its placements move from foster care into permanent adoption.",
+    tags: ["Foster care", "Foster-to-adopt", "Trauma-informed care"],
   },
 
   // ----- Montana -----------------------------------------------------------------
@@ -1108,6 +1115,182 @@ export const AGENCIES: Agency[] = [
     description:
       "Wyoming's local licensed nonprofit adoption agency, working with women facing unplanned pregnancy and with families hoping to adopt through counseling, matching, home studies, and placement statewide.",
     tags: ["Home study", "Placement", "Counseling"],
+  },
+
+  // ----- 2026 partner intake ---------------------------------------------------
+  // Antioch Adoptions and Forever Families Through Adoption each serve two
+  // states, so they carry one entry per state (same convention as
+  // adoption-beyond-ks / adoption-beyond-mo above).
+  //
+  // Sunrise Adoption (Sunrise Family Services Society, British Columbia) joined
+  // the network in this batch but is NOT here: this dataset is keyed on
+  // 2-letter US state codes and no international agency has ever been
+  // registered for matching. It appears on /team, the reach map, and the
+  // partner logo strip only.
+  {
+    id: "building-arizona-families-az",
+    name: "Building Arizona Families",
+    state: "AZ",
+    partner: true,
+    url: "https://buildingarizonafamilies.com",
+    logo: "/png/building-arizona-families-logo.png",
+    description:
+      "A licensed and internationally accredited Arizona adoption agency working with expectant mothers and hopeful adoptive families on domestic infant placements. It carries an A+ Better Business Bureau rating.",
+    tags: ["Domestic infant", "Birth parent support", "Hague accredited"],
+  },
+  {
+    id: "antioch-adoptions-az",
+    name: "Antioch Adoptions",
+    state: "AZ",
+    partner: true,
+    url: "https://antiochadoptions.org",
+    logo: "/png/antioch-adoptions-logo.png",
+    description:
+      "A nonprofit child placing agency listed by Washington DCYF, operating in Washington and Arizona and providing entirely fee-free services. It has finalized more than 500 adoptions since 2000 and runs both a foster-to-adopt track and a private infant program.",
+    tags: ["Fee-free", "Foster-to-adopt", "Domestic infant"],
+  },
+  {
+    id: "holy-family-services-ca",
+    name: "Holy Family Services Adoption and Foster Care",
+    state: "CA",
+    partner: true,
+    url: "https://hfs.org",
+    logo: "/png/holy-family-services-logo.png",
+    description:
+      "One of California's long-running nonprofit adoption and foster care agencies, providing non-judgmental counseling for birth parents considering adoption and uniting infants and children with adoptive families. It puts real emphasis on serving families of every shape and background.",
+    tags: ["Foster care", "Birth parent counseling", "Placement"],
+  },
+  {
+    id: "adoption-options-co",
+    name: "Adoption Options",
+    state: "CO",
+    partner: true,
+    url: "https://adoptionoptions.com",
+    logo: "/png/adoption-options-logo.png",
+    description:
+      "A Denver-based nonprofit adoption agency working with expectant parents and adoptive families across Colorado under the banner Building Families, Creating Futures. It handles counseling, matching, home studies, and post-placement support.",
+    tags: ["Home study", "Counseling", "Post-placement support"],
+  },
+  {
+    id: "forever-families-ct",
+    name: "Forever Families Through Adoption",
+    state: "CT",
+    partner: true,
+    url: "https://foreverfamiliesthroughadoption.org",
+    logo: "/png/forever-families-logo.png",
+    description:
+      "A Westchester-based nonprofit adoption placement agency authorized in both New York and Connecticut, serving birth parents, adoptive parents, and adoptees. It also runs as a resource center for the wider adoption community.",
+    tags: ["Placement", "Birth parent support", "Adoptee resources"],
+  },
+  {
+    id: "a-bond-of-love-fl",
+    name: "A Bond of Love Adoption Agency",
+    state: "FL",
+    partner: true,
+    url: "https://abondoflove.org",
+    logo: "/png/a-bond-of-love-logo.png",
+    description:
+      "A Sarasota-based licensed agency serving families across southwest Florida, offering confidential support to expectant mothers weighing adoption and full placement services for adoptive parents.",
+    tags: ["Placement", "Birth parent support", "Licensed in Florida"],
+  },
+  {
+    id: "lcfs-illinois-il",
+    name: "Lutheran Child and Family Services of Illinois",
+    state: "IL",
+    partner: true,
+    url: "https://lcfs.org",
+    logo: "/png/lcfs-illinois-logo.png",
+    description:
+      "LCFS runs adoption and birth parent services statewide alongside foster care, counseling, and intact family services. Its focus is protecting children and building futures for those who've experienced trauma.",
+    tags: ["Foster care", "Birth parent support", "Counseling"],
+  },
+  {
+    id: "adoption-centre-kansas-ks",
+    name: "Adoption Centre of Kansas",
+    state: "KS",
+    partner: true,
+    url: "https://adoptioncentre.com",
+    logo: "/png/adoption-centre-kansas-logo.png",
+    description:
+      "A Wichita-based licensed adoption agency working with birth parents and adoptive families across Kansas, covering counseling, matching, and placement.",
+    tags: ["Matching", "Placement", "Counseling"],
+  },
+  {
+    id: "adoption-associates-mi",
+    name: "Adoption Associates",
+    state: "MI",
+    partner: true,
+    url: "https://adoptionassociates.net",
+    logo: "/png/adoption-associates-logo.png",
+    description:
+      "A Michigan agency specializing in unplanned pregnancy counseling and domestic infant adoption, with no-obligation support for expectant parents. It also completes home studies and placements for adoptive families.",
+    tags: ["Home study", "Domestic infant", "Counseling"],
+  },
+  {
+    id: "ampersand-families-mn",
+    name: "Ampersand Families",
+    state: "MN",
+    partner: true,
+    url: "https://ampersandfamilies.org",
+    logo: "/png/ampersand-families-logo.png",
+    description:
+      "A Minnesota licensed child placing agency focused on older youth in foster care, finding permanent homes connected to relatives, kin, community, and culture. It also trains child welfare professionals on relative and kinship adoption.",
+    tags: ["Older youth", "Kinship adoption", "Child placement"],
+  },
+  {
+    id: "a-childs-hope-nc",
+    name: "A Child's Hope",
+    state: "NC",
+    partner: true,
+    url: "https://achildshope.com",
+    logo: "/png/a-childs-hope-logo.png",
+    description:
+      "A licensed North Carolina adoption agency with offices in Raleigh, Greensboro, and Asheville, working on domestic infant adoption. It supports birth mothers through the decision and adoptive families through placement.",
+    tags: ["Domestic infant", "Birth parent support", "Placement"],
+  },
+  {
+    id: "forever-families-ny",
+    name: "Forever Families Through Adoption",
+    state: "NY",
+    partner: true,
+    url: "https://foreverfamiliesthroughadoption.org",
+    logo: "/png/forever-families-logo.png",
+    description:
+      "A Westchester-based nonprofit adoption placement agency authorized in both New York and Connecticut, serving birth parents, adoptive parents, and adoptees. It also runs as a resource center for the wider adoption community.",
+    tags: ["Placement", "Birth parent support", "Adoptee resources"],
+  },
+  {
+    id: "boys-and-girls-aid-or",
+    name: "Boys & Girls Aid",
+    state: "OR",
+    partner: true,
+    url: "https://boysandgirlsaid.org",
+    logo: "/png/boys-and-girls-aid-logo.png",
+    description:
+      "A long-established Oregon child welfare nonprofit running foster care, adoption, housing, and shelter programs, with a dedicated foster care adoption process for families seeking permanency.",
+    tags: ["Foster care", "Foster-to-adopt", "Youth housing"],
+  },
+  {
+    id: "adoption-advocates-tx",
+    name: "Adoption Advocates",
+    state: "TX",
+    partner: true,
+    url: "https://adoptionadvocates.net",
+    logo: "/png/adoption-advocates-logo.png",
+    description:
+      "An Austin-based licensed nonprofit adoption agency operating since 1991, providing professional support to expectant parents and adoptive families across Texas.",
+    tags: ["Placement", "Birth parent support", "501(c)(3) non-profit"],
+  },
+  {
+    id: "antioch-adoptions-wa",
+    name: "Antioch Adoptions",
+    state: "WA",
+    partner: true,
+    url: "https://antiochadoptions.org",
+    logo: "/png/antioch-adoptions-logo.png",
+    description:
+      "A nonprofit child placing agency listed by Washington DCYF, operating in Washington and Arizona and providing entirely fee-free services. It has finalized more than 500 adoptions since 2000 and runs both a foster-to-adopt track and a private infant program.",
+    tags: ["Fee-free", "Foster-to-adopt", "Domestic infant"],
   },
 ];
 

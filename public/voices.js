@@ -63,7 +63,7 @@
     },
     {
       type: "quote",
-      quote: "Thank you for your great work on adoption advocacy policy",
+      quote: "After meeting with the HavenLink team, I would suggest for people in my district to use their great tool if they are looking to adopt!",
       name: "Carlos Guillermo Smith",
       title: "Florida State Senator, District 17",
       img: "/png/carlos-guillermo-smith.png",
@@ -123,7 +123,8 @@
       quote: "Thank you for what HavenLink has done and continues to do for families in our community and beyond.",
       name: "City of Winter Park",
       title: null,
-      img: "/png/winter-park-logo.png",
+      /* no img: the Winter Park mark was retired from the site, so this card
+         carries the initials plate instead. */
       initials: "WP",
       alt: "City of Winter Park"
     },
@@ -144,6 +145,41 @@
       img: "/png/bonnie-hilton.png",
       initials: "BH",
       alt: "Bonnie Hilton, Utah Administrative Director of Hand in Hand"
+    },
+    {
+      type: "quote",
+      quote: "The City of Orlando proudly recognizes the young leaders of HavenLink whose innovation, compassion, and civic engagement strengthen our community and inspire others to create meaningful solutions to complex challenges.",
+      name: "Shan Rose",
+      title: "Orlando City Commissioner",
+      img: "/png/shan-rose.png",
+      initials: "SR",
+      alt: "Shan Rose, Orlando City Commissioner",
+      action: { label: "Read the full proclamation", modal: "proclamation-rose" }
+    },
+    {
+      type: "quote",
+      quote: "This is an amazing endeavor.",
+      name: "Jay Reddick",
+      title: "Orlando Sentinel Editor",
+      img: "/png/jay-reddick.png",
+      initials: "JR",
+      alt: "Jay Reddick, Orlando Sentinel Editor",
+      action: {
+        label: "Read the article",
+        href: "https://www.orlandosentinel.com/2026/07/22/commentary-finding-support-in-the-slow-adoption-process/"
+      }
+    },
+    {
+      type: "coverage",
+      tag: "In the news",
+      copy: "Central Florida students raise awareness for foster adoption",
+      linkLabel: "Read the story",
+      icon: "read",
+      href: "https://mynews13.com/fl/orlando/news/2026/08/06/central-florida-students-raise-awareness-for-foster-adoption",
+      name: "Spectrum News 13",
+      img: "/png/spectrum-news-13-logo.png",
+      initials: "S13",
+      alt: "Spectrum News 13"
     }
   ];
 
@@ -225,15 +261,30 @@
     quote.appendChild(el("p", null, "“" + voice.quote + "”"));
     fig.appendChild(quote);
 
+    /* An action either opens one of the document modals below (action.modal)
+       or leaves for an outside page (action.href) - same treatment either way,
+       a button or a link depending on what it actually does. */
     if (voice.action) {
-      var btn = el("button", "hl-voice-action");
-      btn.type = "button";
-      btn.setAttribute("data-voice-modal", voice.action.modal);
-      btn.appendChild(el("span", null, voice.action.label));
+      var act;
+      if (voice.action.href) {
+        act = el("a", "hl-voice-action");
+        act.href = voice.action.href;
+        act.target = "_blank";
+        act.rel = "noopener noreferrer";
+        act.setAttribute(
+          "aria-label",
+          voice.action.label + " about " + voice.name + " (opens in a new tab)"
+        );
+      } else {
+        act = el("button", "hl-voice-action");
+        act.type = "button";
+        act.setAttribute("data-voice-modal", voice.action.modal);
+      }
+      act.appendChild(el("span", null, voice.action.label));
       var mark = el("span", "hl-voice-action-mark", "→");
       mark.setAttribute("aria-hidden", "true");
-      btn.appendChild(mark);
-      fig.appendChild(btn);
+      act.appendChild(mark);
+      fig.appendChild(act);
     }
 
     /* figcaption stays the last child of figure, as the spec requires */
@@ -347,7 +398,14 @@
 
   sync();
 
-  /* ---------- City of Orlando proclamation modal ---------- */
+  /* ---------- City of Orlando document modals ----------
+     One shell, two documents: Mayor Dyer's letter of recognition and
+     Commissioner Rose's HavenLink Week proclamation. A card's
+     data-voice-modal names which <article> to show; everything else - the
+     focus trap, Escape, backdrop click, scroll lock - is shared.
+
+     Only the Dyer letter has a PDF counterpart, so only it runs the probe
+     below; the proclamation is always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -355,15 +413,34 @@
   var closeBtn = document.getElementById("proclamationClose");
   if (!modal) return;
 
+  var docs = {
+    proclamation: letter,
+    "proclamation-rose": document.getElementById("proclamationRose")
+  };
+  var kicker = document.getElementById("procKicker");
+  var titleEl = document.getElementById("procTitle");
+
   var FOCUSABLE =
     'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
   var lastFocused = null;
   var closeTimer = null;
   var pdfAvailable = null; /* null = not probed yet */
 
+  /* Show one document and hide the rest, then relabel the modal header from
+     that document's own data- attributes. */
+  function showDoc(key) {
+    Object.keys(docs).forEach(function (k) {
+      if (docs[k]) docs[k].hidden = k !== key;
+    });
+    var doc = docs[key];
+    if (!doc) return;
+    if (kicker) kicker.textContent = doc.getAttribute("data-kicker") || "";
+    if (titleEl) titleEl.textContent = doc.getAttribute("data-title") || "";
+  }
+
   function useLetter() {
     if (frame) frame.hidden = true;
-    if (letter) letter.hidden = false;
+    showDoc("proclamation");
   }
 
   function usePdf() {
@@ -373,6 +450,28 @@
     var src = frame.getAttribute("data-src");
     if (src && !frame.getAttribute("src")) frame.setAttribute("src", src);
   }
+
+  /* Empty placeholder art (a 0-byte signature or seal that hasn't landed yet)
+     must never surface as a broken-image glyph: drop the <img> and let the
+     wrapper hold its reserved space. Mirrors buildAvatar's handling above. */
+  function guardDocImages() {
+    modal.querySelectorAll(".hl-doc-img").forEach(function (img) {
+      function drop() {
+        /* read the parent BEFORE detaching - afterwards it is null */
+        var box = img.parentNode;
+        img.remove();
+        if (box && box.classList) box.classList.add("is-empty");
+      }
+      if (img.complete && img.naturalWidth <= 1) drop();
+      else {
+        img.addEventListener("error", drop, { once: true });
+        img.addEventListener("load", function () {
+          if (img.naturalWidth <= 1) drop();
+        }, { once: true });
+      }
+    });
+  }
+  guardDocImages();
 
   /* iOS and iPadOS render a PDF in an iframe as a dead grey panel, and an
      embedded viewer is unusable on a narrow screen - both read the typeset
@@ -446,13 +545,18 @@
     (items[0] || closeBtn).focus();
   }
 
-  function openModal(trigger) {
+  function openModal(trigger, key) {
     if (closeTimer) {
       window.clearTimeout(closeTimer);
       closeTimer = null;
     }
     lastFocused = trigger || document.activeElement;
-    resolveProclamation();
+    /* the letter may still be swapped for the PDF; the proclamation never is */
+    if (key === "proclamation") resolveProclamation();
+    else {
+      if (frame) frame.hidden = true;
+      showDoc(key);
+    }
     modal.hidden = false;
     window.requestAnimationFrame(function () {
       modal.classList.add("is-open");
@@ -485,7 +589,8 @@
   strip.addEventListener("click", function (e) {
     var btn = e.target.closest && e.target.closest("[data-voice-modal]");
     if (!btn) return;
-    if (btn.getAttribute("data-voice-modal") === "proclamation") openModal(btn);
+    var key = btn.getAttribute("data-voice-modal");
+    if (docs[key]) openModal(btn, key);
   });
 
   if (closeBtn) closeBtn.addEventListener("click", closeModal);

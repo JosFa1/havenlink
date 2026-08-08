@@ -1248,10 +1248,13 @@ html:not(.js) .hm-chapter .hm-draw {
    ============================================================ */
 
 .hl-proc-modal {
-  --orl-blue: #1c4587;
-  --orl-blue-deep: #10305f;
+  /* Sampled straight out of png/orlando-logo.png: its palette is one solid
+     #00529b plus sixteen antialias blends toward white. Do not eyeball this. */
+  --orl-blue: #00529b;
+  --orl-blue-deep: #003a6e;
   --orl-paper: #ffffff;
-  --orl-ink: #17233d;
+  --orl-desk: #e7eaef; /* the surface the reproduced page sits on */
+  --orl-ink: #16161a;
 
   position: fixed;
   inset: 0;
@@ -1363,15 +1366,22 @@ body.proclamation-open .hl-chat-panel {
   outline-offset: 3px;
 }
 
+/* The body is the scroller and the desk; each document is a sheet of paper
+   centred on it, so a short viewport scrolls the page rather than clipping it. */
 .hl-proc-body {
   flex: 1;
   min-height: 0;
   display: flex;
-  background-color: var(--orl-paper);
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background-color: var(--orl-desk);
 }
 
 .hl-proc-frame {
   flex: 1;
+  align-self: stretch;
   display: block;
   width: 100%;
   min-height: min(70vh, 720px);
@@ -1379,118 +1389,305 @@ body.proclamation-open .hl-chat-panel {
 }
 
 .hl-proc-frame[hidden],
-.hl-proc-letter[hidden] {
+.hl-proc-doc[hidden] {
   display: none;
 }
 
-/* ---- Typeset fallback: the letter itself ---- */
+/* ============================================================
+   Reproduced City of Orlando documents
+   Shared page furniture for the Dyer letter and the Rose proclamation:
+   US Letter portrait, ~1in margins, serif throughout, city blue accents.
+   A document taller than one page (the proclamation runs to two) simply
+   grows past the ratio - aspect-ratio sets the preferred height, and the
+   column's automatic minimum size keeps content from being squeezed.
+   ============================================================ */
 
-.hl-proc-letter {
+.hl-proc-doc {
   flex: 1;
   min-width: 0;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  padding: clamp(1.5rem, 4vw, 3.25rem) clamp(1.25rem, 4vw, 3.5rem)
-    clamp(1.5rem, 3vw, 2.5rem);
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: clamp(0.9375rem, 0.35vw + 0.86rem, 1.0625rem);
-  line-height: 1.62;
+  max-width: 800px;
+  margin: clamp(0.75rem, 2.5vw, 2rem) auto;
+  aspect-ratio: 8.5 / 11;
+  display: flex;
+  flex-direction: column;
+  padding: 9.1% 11.8%; /* ≈1in on each edge of an 8.5×11 sheet */
+  background-color: var(--orl-paper);
+  box-shadow: 0 2px 18px -6px rgba(8, 22, 46, 0.35);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 0.92rem; /* ≈11pt */
+  line-height: 1.55;
   color: var(--orl-ink);
 }
 
-.hl-proc-letterhead {
-  padding-bottom: 1.1rem;
-  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
-  border-bottom: 1px solid rgba(28, 69, 135, 0.3);
+.hl-proc-doc p {
+  margin: 0 0 0.9rem;
 }
 
-.hl-proc-letter .hl-proc-city {
-  margin: 0;
+/* ---- shared: images that may still be empty placeholders ---- */
+
+.hl-doc-img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* voices.js drops an <img> that is missing or 0-byte and marks its box, which
+   holds the reserved space so nothing reflows when the real art lands. */
+.hl-doc-logo,
+.hl-doc-seal,
+.hl-doc-sig {
+  display: block;
+}
+
+.hl-doc-logo {
+  width: 86px;
+  height: 86px;
+}
+
+.hl-doc-seal {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto;
+}
+
+.hl-doc-sig {
+  width: 200px;
+  height: 70px;
+  margin: 0.35rem 0 0.4rem;
+}
+
+.hl-doc-logo.is-empty,
+.hl-doc-seal.is-empty,
+.hl-doc-sig.is-empty {
+  background-color: rgba(0, 82, 155, 0.05);
+}
+
+/* ---- letterhead ---- */
+
+.hl-doc-letterhead {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--orl-blue);
+}
+
+.hl-doc-wordmark {
   font-family: var(--font-body);
+  line-height: 1;
   color: var(--orl-blue);
   text-transform: uppercase;
 }
 
-.hl-proc-city span {
+.hl-doc-wordmark span {
   display: block;
   font-size: 0.8125rem;
   font-weight: 500;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.24em;
 }
 
-.hl-proc-city strong {
+.hl-doc-wordmark strong {
   display: block;
-  margin-top: 0.1rem;
-  font-size: clamp(1.5rem, 5vw, 2.15rem);
+  margin-top: 0.14rem;
+  font-size: 2rem;
   font-weight: 700;
-  line-height: 1;
   letter-spacing: 0.01em;
 }
 
-.hl-proc-letter .hl-proc-office {
-  margin: 1rem 0 0;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.hl-proc-doc .hl-doc-office {
+  margin: 0.5rem 0 0;
+  font-variant: small-caps;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   text-align: right;
   color: var(--orl-blue);
 }
 
-.hl-proc-letter p {
-  margin: 0 0 1.15rem;
+.hl-proc-doc .hl-doc-date {
+  margin-top: clamp(1.5rem, 3vw, 2.1rem);
+  margin-bottom: 1.35rem;
 }
 
-.hl-proc-letter .hl-proc-date {
-  margin-bottom: 2rem;
+.hl-proc-doc .hl-doc-addr {
+  margin-bottom: 1.25rem;
 }
 
-.hl-proc-letter .hl-proc-addr {
-  margin-bottom: 1.75rem;
+.hl-proc-doc .hl-doc-signoff {
+  margin-bottom: 0.2rem;
 }
 
-.hl-proc-letter .hl-proc-signoff {
-  margin-bottom: 0.4rem;
-}
-
-.hl-proc-letter .hl-proc-signer {
+.hl-proc-doc .hl-doc-signer {
   margin: 0;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 1.3rem;
-  font-weight: 440;
-  font-variation-settings: "opsz" 40;
-  color: var(--orl-blue-deep);
 }
 
-.hl-proc-letterfoot {
-  margin-top: clamp(2rem, 5vw, 3rem);
-  padding-top: 1.1rem;
-  border-top: 1px solid rgba(28, 69, 135, 0.3);
-  font-family: var(--font-body);
-  color: var(--orl-blue);
-}
-
-.hl-proc-letterfoot p {
-  margin: 0;
-  font-size: 0.75rem;
-  line-height: 1.65;
-  text-align: center;
-}
-
+/* the original is justified; too tight to break well on a narrow column */
 @media (min-width: 768px) {
-  /* the original is justified; too tight for narrow columns */
   .hl-proc-letter p {
     text-align: justify;
     hyphens: auto;
+    text-indent: 0;
   }
 
-  .hl-proc-letter .hl-proc-date,
-  .hl-proc-letter .hl-proc-addr,
-  .hl-proc-letter .hl-proc-signoff,
-  .hl-proc-letter .hl-proc-signer {
+  .hl-proc-letter .hl-doc-office {
+    text-align: right;
+  }
+
+  .hl-proc-letter .hl-doc-date,
+  .hl-proc-letter .hl-doc-addr,
+  .hl-proc-letter .hl-doc-salutation,
+  .hl-proc-letter .hl-doc-signoff,
+  .hl-proc-letter .hl-doc-signer {
     text-align: left;
+  }
+}
+
+/* ---- page foot ---- */
+
+.hl-doc-foot {
+  margin-top: auto; /* sits on the bottom margin of the sheet */
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--orl-blue);
+  color: var(--orl-blue);
+}
+
+.hl-doc-foot p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ============================================================
+   Proclamation-specific
+   ============================================================ */
+
+.hl-doc-sealhead {
+  margin-bottom: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* The WHEREAS clauses hang in two columns: the term in a narrow fixed
+   gutter, the clause in the measure beside it. This is the shape of the
+   document - keep the two columns aligned at the top of each row. */
+.hl-doc-whereas {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  column-gap: 1.5rem;
+  row-gap: 1.15rem;
+  margin: 0 0 1.6rem;
+}
+
+.hl-doc-whereas dt {
+  grid-column: 1;
+  font-variant: small-caps;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: var(--orl-ink);
+}
+
+.hl-doc-whereas dd {
+  grid-column: 2;
+  margin: 0;
+  text-align: left;
+  font-style: italic;
+}
+
+.hl-doc-sc {
+  font-variant: small-caps;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.hl-proc-doc .hl-doc-resolve {
+  margin-bottom: 1.4rem;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hl-proc-doc .hl-doc-week {
+  margin: 0 0 0.9rem;
+  font-size: clamp(1.15rem, 3vw, 1.6rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--orl-blue-deep);
+}
+
+.hl-proc-doc .hl-doc-inthe {
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* witness block occupies the right half of the sheet, as on the original */
+.hl-doc-witness {
+  margin-left: 50%;
+  text-align: right;
+  font-style: italic;
+}
+
+/* No signature art here, so the attribution carries no signature rule above it -
+   an empty rule under the witness paragraph would just read as an unsigned line. */
+.hl-proc-doc .hl-doc-witness .hl-doc-signer {
+  font-weight: 700;
+}
+
+.hl-doc-witness .hl-doc-signer span {
+  font-weight: 400;
+}
+
+/* ---- narrow screens: same document, no fixed page ---- */
+
+@media (max-width: 767px) {
+  .hl-proc-doc {
+    aspect-ratio: auto;
+    margin: 0;
+    max-width: none;
+    padding: clamp(1.5rem, 6vw, 2.25rem) clamp(1.25rem, 6vw, 2rem);
+    box-shadow: none;
+  }
+
+  .hl-doc-logo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .hl-doc-wordmark strong {
+    font-size: 1.45rem;
+  }
+
+  .hl-doc-wordmark span {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+  }
+
+  .hl-doc-seal {
+    width: 76px;
+    height: 76px;
+  }
+
+  /* the hanging gutter costs too much measure here - stack instead */
+  .hl-doc-whereas {
+    grid-template-columns: 1fr;
+    row-gap: 0.35rem;
+  }
+
+  .hl-doc-whereas dt {
+    grid-column: 1;
+  }
+
+  .hl-doc-whereas dd {
+    grid-column: 1;
+    margin-bottom: 0.9rem;
+  }
+
+  .hl-doc-witness {
+    margin-left: 0;
   }
 }
 

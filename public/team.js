@@ -6,10 +6,12 @@
  *    "routes" (with travelling signal pulses) into a knot that leans toward
  *    the cursor.
  * 2. Hero scroll parallax: content and canvas fall away at different speeds.
- * 3. Stat count-up for the hero foot ([data-tmcount] - separate from
+ * 3. Derived counters: hero stats and subsection counts are computed from the
+ *    card lists and reach-data.js, never typed into the markup.
+ * 4. Stat count-up for the hero foot ([data-tmcount] - separate from
  *    editorial.js's single [data-countup] hook).
- * 4. Founder portrait drift: the oversized image glides inside its frame.
- * 5. Partner card logo fallback: empty/unreadable logo files collapse to a
+ * 5. Founder portrait drift: the oversized image glides inside its frame.
+ * 6. Partner card logo fallback: empty/unreadable logo files collapse to a
  *    terracotta initials lockup instead of a broken image.
  *
  * Self-contained (no CDN - CSP), DPR-aware, pauses off-screen/hidden tab,
@@ -311,13 +313,53 @@
     apply();
   })();
 
-  /* ==================== 3. Stat count-up ==================== */
+  /* ==================== 3. Derived counters ====================
+     Every figure on this page is counted, never typed: the hero stats off
+     the card lists they summarise, countries/states off the same arrays
+     that dye the map (reach-data.js). The literals in the markup are the
+     no-JS fallback only. Runs before the count-up below so the animation
+     lands on the derived target. */
+
+  function padCount(v) { return (v < 10 ? "0" : "") + v; }
+
+  (function () {
+    /* subsection headers: "United States 58", "International 14", ... */
+    document.querySelectorAll("[data-count-cards]").forEach(function (out) {
+      var head = out.closest(".tm-subhead");
+      var list = head && head.nextElementSibling;
+      while (list && !list.classList.contains("tm-cards")) {
+        list = list.nextElementSibling;
+      }
+      if (!list) return;
+      out.textContent = padCount(list.querySelectorAll(".tm-card-item").length);
+    });
+
+    /* hero stats: count the cards a stat stands for ... */
+    document.querySelectorAll("[data-tmcount-of]").forEach(function (out) {
+      var n = document.querySelectorAll(out.getAttribute("data-tmcount-of")).length;
+      out.setAttribute("data-tmcount", String(n));
+      out.textContent = padCount(n);
+    });
+
+    /* ... and the reach figures off the map's own partner lists */
+    var reach = window.HL_REACH;
+    if (!reach) return;
+    document.querySelectorAll("[data-tmcount-reach]").forEach(function (out) {
+      var group = reach[out.getAttribute("data-tmcount-reach")];
+      var n = group && group.partner ? group.partner.length : 0;
+      if (!n) return;
+      out.setAttribute("data-tmcount", String(n));
+      out.textContent = padCount(n);
+    });
+  })();
+
+  /* ==================== 4. Stat count-up ==================== */
 
   (function () {
     var els = document.querySelectorAll("[data-tmcount]");
     if (!els.length) return;
 
-    function pad(v) { return (v < 10 ? "0" : "") + v; }
+    var pad = padCount;
 
     function animate(el) {
       var target = parseInt(el.getAttribute("data-tmcount"), 10) || 0;
@@ -355,7 +397,7 @@
     }
   })();
 
-  /* ==================== 4. Founder portrait drift ==================== */
+  /* ==================== 5. Founder portrait drift ==================== */
 
   (function () {
     if (reduce) return;
@@ -392,7 +434,7 @@
     apply();
   })();
 
-  /* ==================== 5. Partner card logo fallback ==================== */
+  /* ==================== 6. Partner card logo fallback ==================== */
 
   (function () {
     var imgs = document.querySelectorAll(".tm-card-logo img");
