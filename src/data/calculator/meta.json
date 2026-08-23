@@ -1,0 +1,4 @@
+{
+  "version": "calc-2026-08-19-1",
+  "note": "Bump this version whenever any calculator seed file changes. The seeder no-ops when this value matches what is already loaded."
+}

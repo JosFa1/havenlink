@@ -917,7 +917,7 @@ html:not(.js) .hm-chapter .hm-draw {
 
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
   html.js .hm-hiw-track {
-    height: calc(4 * 90vh);
+    height: calc(5 * 90vh);
   }
 
   html.js .hm-hiw-stage {
@@ -956,7 +956,8 @@ html:not(.js) .hm-chapter .hm-draw {
   html.js .hm-hiw-stage[data-step="0"] .hm-chapter[data-i="0"],
   html.js .hm-hiw-stage[data-step="1"] .hm-chapter[data-i="1"],
   html.js .hm-hiw-stage[data-step="2"] .hm-chapter[data-i="2"],
-  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"] {
+  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"],
+  html.js .hm-hiw-stage[data-step="4"] .hm-chapter[data-i="4"] {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
@@ -966,7 +967,8 @@ html:not(.js) .hm-chapter .hm-draw {
   html.js .hm-hiw-stage[data-step="0"] .hm-chapter[data-i="0"] .hm-draw,
   html.js .hm-hiw-stage[data-step="1"] .hm-chapter[data-i="1"] .hm-draw,
   html.js .hm-hiw-stage[data-step="2"] .hm-chapter[data-i="2"] .hm-draw,
-  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"] .hm-draw {
+  html.js .hm-hiw-stage[data-step="3"] .hm-chapter[data-i="3"] .hm-draw,
+  html.js .hm-hiw-stage[data-step="4"] .hm-chapter[data-i="4"] .hm-draw {
     stroke-dashoffset: 0;
   }
 
@@ -1046,14 +1048,16 @@ html:not(.js) .hm-chapter .hm-draw {
   }
 
   html.js .hm-hiw-ticks li:nth-child(1) { top: 2%; }
-  html.js .hm-hiw-ticks li:nth-child(2) { top: 34%; }
-  html.js .hm-hiw-ticks li:nth-child(3) { top: 66%; }
-  html.js .hm-hiw-ticks li:nth-child(4) { top: 98%; }
+  html.js .hm-hiw-ticks li:nth-child(2) { top: 26%; }
+  html.js .hm-hiw-ticks li:nth-child(3) { top: 50%; }
+  html.js .hm-hiw-ticks li:nth-child(4) { top: 74%; }
+  html.js .hm-hiw-ticks li:nth-child(5) { top: 98%; }
 
   html.js .hm-hiw-stage[data-step="0"] .hm-hiw-ticks li:nth-child(1),
   html.js .hm-hiw-stage[data-step="1"] .hm-hiw-ticks li:nth-child(2),
   html.js .hm-hiw-stage[data-step="2"] .hm-hiw-ticks li:nth-child(3),
-  html.js .hm-hiw-stage[data-step="3"] .hm-hiw-ticks li:nth-child(4) {
+  html.js .hm-hiw-stage[data-step="3"] .hm-hiw-ticks li:nth-child(4),
+  html.js .hm-hiw-stage[data-step="4"] .hm-hiw-ticks li:nth-child(5) {
     color: var(--terracotta);
   }
 }
@@ -1559,6 +1563,86 @@ body.proclamation-open .hl-chat-panel {
 }
 
 /* ============================================================
+   Oviedo variant
+   Mayor Sladek's letter is City of Oviedo paperwork, not Orlando's. Its
+   letterhead is centred with the contact block at the head instead of the
+   foot, and the accent is the city's indigo - #30217c, the dominant solid in
+   png/oviedo-logo.png. Only the two colour tokens are re-pointed; every other
+   piece of sheet furniture above is shared with the Orlando documents.
+   ============================================================ */
+
+.hl-proc-doc--oviedo {
+  --orl-blue: #30217c;
+  --orl-blue-deep: #241862;
+}
+
+.hl-doc-ovihead {
+  padding-bottom: 0.9rem;
+  border-bottom: 2px solid var(--orl-blue);
+  text-align: center;
+}
+
+.hl-doc-logo--oviedo {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 0.55rem;
+}
+
+.hl-proc-doc .hl-doc-ovi-city {
+  margin: 0 0 0.4rem;
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--orl-blue);
+}
+
+.hl-proc-doc .hl-doc-ovi-contact {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.75;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--orl-blue-deep);
+}
+
+.hl-proc-doc .hl-doc-ovi-office {
+  margin: 0.65rem 0 0;
+  font-variant: small-caps;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--orl-blue);
+}
+
+.hl-proc-doc .hl-doc-re {
+  margin-bottom: 1.25rem;
+  font-weight: 700;
+}
+
+.hl-proc-doc--oviedo .hl-doc-signer span {
+  font-weight: 400;
+}
+
+/* .hl-proc-letter p justifies from 768px up - the centred letterhead and the
+   flush-left RE line have to opt back out, and inheritance from
+   .hl-doc-ovihead is not enough to beat that rule. */
+@media (min-width: 768px) {
+  .hl-proc-letter .hl-doc-ovi-city,
+  .hl-proc-letter .hl-doc-ovi-contact,
+  .hl-proc-letter .hl-doc-ovi-office {
+    text-align: center;
+  }
+
+  .hl-proc-letter .hl-doc-re {
+    text-align: left;
+  }
+}
+
+/* ============================================================
    Proclamation-specific
    ============================================================ */
 
@@ -1655,6 +1739,11 @@ body.proclamation-open .hl-chat-panel {
   .hl-doc-logo {
     width: 52px;
     height: 52px;
+  }
+
+  .hl-doc-logo--oviedo {
+    width: 68px;
+    height: 68px;
   }
 
   .hl-doc-wordmark strong {

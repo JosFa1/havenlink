@@ -40,6 +40,7 @@
             <li role="none"><a href="/adopt/intake-form" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
             <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">3. Compatibility Matching</a></li>
             <li role="none"><a href="/adopt/resources" class="dropdown-item" role="menuitem">4. Resource Finder</a></li>
+            <li role="none"><a href="/adopt/calculator" class="dropdown-item" role="menuitem">5. Financial Calculator</a></li>
           </ul>
         </li>
         <li><a href="/team" class="nav-link">Team</a></li>
@@ -145,7 +146,7 @@
             <p class="hm-reveal" style="--d: .18s">
               HavenLink brings the core steps together and keeps licensed agencies involved throughout the process.
             </p>
-            <p class="hm-stakes-pivot hm-reveal" style="--d: .26s">HavenLink organizes the process into four steps.</p>
+            <p class="hm-stakes-pivot hm-reveal" style="--d: .26s">HavenLink organizes the process into five steps.</p>
           </div>
         </div>
       </div>
@@ -159,7 +160,7 @@
           <span class="hm-index">03 - 05</span>
         </header>
         <h2 class="hm-hiw-title hm-reveal">How It Works</h2>
-        <p class="hm-hiw-sub hm-reveal" style="--d: .1s">Four simple steps to connect families with their perfect match</p>
+        <p class="hm-hiw-sub hm-reveal" style="--d: .1s">Five simple steps to connect families with their perfect match</p>
       </div>
 
       <div class="hm-hiw-track">
@@ -171,6 +172,7 @@
               <li>02</li>
               <li>03</li>
               <li>04</li>
+              <li>05</li>
             </ol>
           </div>
           <ol class="hm-hiw-steps">
@@ -235,6 +237,25 @@
                   <path class="hm-draw" pathLength="1" d="M129 141 L141 129"/>
                   <path class="hm-draw hm-draw--accent" pathLength="1" d="M100 128 C86 108 82 101 82 90 A18 18 0 1 1 118 90 C118 101 114 108 100 128 Z"/>
                   <path class="hm-draw hm-draw--accent" pathLength="1" d="M108 88 A8 8 0 1 1 92 88 A8 8 0 1 1 108 88"/>
+                </svg>
+              </div>
+            </li>
+            <li class="hm-chapter" data-i="4">
+              <span class="hm-chapter-ghost" aria-hidden="true">05</span>
+              <div class="hm-chapter-text">
+                <span class="hm-chapter-index">Step 05</span>
+                <h3 class="hm-chapter-title">Financial Calculator</h3>
+                <p class="hm-chapter-desc">See what adoption actually costs in your state, what comes back in subsidies and tax credits, and the real out-of-pocket number &mdash; with the timing between spending and reimbursement made explicit.</p>
+              </div>
+              <div class="hm-chapter-art" aria-hidden="true">
+                <svg viewBox="0 0 240 240" role="img">
+                  <path class="hm-draw" pathLength="1" d="M76 36 L164 36 L164 204 L76 204 Z"/>
+                  <path class="hm-draw" pathLength="1" d="M76 92 L164 92"/>
+                  <path class="hm-draw" pathLength="1" d="M98 120 L110 120 M115 120 L125 120 M130 120 L142 120"/>
+                  <path class="hm-draw" pathLength="1" d="M98 148 L110 148 M115 148 L125 148 M130 148 L142 148"/>
+                  <path class="hm-draw" pathLength="1" d="M98 176 L110 176 M115 176 L125 176 M130 176 L142 176"/>
+                  <path class="hm-draw hm-draw--accent" pathLength="1" d="M120 48 L120 87"/>
+                  <path class="hm-draw hm-draw--accent" pathLength="1" d="M133 57 C133 51 127 48 120 48 C113 48 107 51 107 58 C107 71 133 65 133 78 C133 84 127 87 120 87 C113 87 107 84 107 78"/>
                 </svg>
               </div>
             </li>
@@ -351,7 +372,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2024 HavenLink. All rights reserved.</p>
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
     </div>
   </footer>
@@ -554,11 +575,13 @@
     </div>
   </div>
 
-  <!-- City of Orlando documents, opened from the voice cards: Mayor Dyer's
-       letter of recognition and Commissioner Rose's HavenLink Week
-       proclamation. Deliberately NOT styled like the privacy modal - these
-       reproduce City of Orlando paperwork, so they carry the city's own blue
-       and a serif face, scoped to .hl-proc-modal.
+  <!-- Reproduced civic documents, opened from the voice cards: Mayor Dyer's
+       letter of recognition, Commissioner Rose's HavenLink Week proclamation,
+       Commissioner Keen's letter, and Mayor Sladek's letter from the City of
+       Oviedo. Deliberately NOT styled like the privacy modal - these reproduce
+       real paperwork, so they carry the issuing city's own colour and a serif
+       face, scoped to .hl-proc-modal (Orlando blue by default; the Oviedo
+       letter overrides the palette on .hl-proc-doc--oviedo).
 
        Only the letter has a PDF counterpart: it loads into the iframe on open,
        and voices.js falls back to the typeset article below whenever the
@@ -658,6 +681,64 @@
                  set in type, so there is no signature line to sit under either. -->
             <p class="hl-doc-signer">Shan Rose<br><span>Commissioner, District 5</span></p>
           </div>
+        </article>
+
+        <!-- ===== Letter of recognition — Commissioner Tom Keen, August 8, 2026 =====
+             Same City of Orlando letterhead as the Dyer letter above; only the
+             office line, the body, and the signature differ. -->
+        <article class="hl-proc-doc hl-proc-letter" id="letterKeen" hidden
+                 data-kicker="City of Orlando · Office of Commissioner Tom Keen"
+                 data-title="Letter of Recognition">
+          <header class="hl-doc-letterhead">
+            <span class="hl-doc-logo"><img class="hl-doc-img" src="/png/orlando-logo.png" alt="" width="86" height="86"></span>
+            <span class="hl-doc-wordmark"><span>City of</span><strong>Orlando</strong></span>
+          </header>
+          <p class="hl-doc-office">Office of Commissioner Tom Keen</p>
+
+          <p class="hl-doc-date">August 8, 2026</p>
+          <p class="hl-doc-addr">Aarav Gupta &amp; Asad Sadikov<br>Trinity Preparatory School<br>5700 Trinity Prep Ln<br>Winter Park, FL 32792</p>
+          <p class="hl-doc-salutation">Dear Mr. Gupta &amp; Mr. Sadikov</p>
+          <p>It is with great admiration that I recognize HavenLink for its innovative work helping prospective adoptive families navigate what can often be an overwhelming process. HavenLink demonstrates an extraordinary level of initiative mixed with civic responsibility. You created a practical solution: a free platform that provides prospective adoptive parents with a clear starting point and connects them directly with licensed adoption agencies&mdash;without charging families for the service.</p>
+          <p>HavenLink has grown into a network connecting families with more than 30 licensed adoption agencies across 32 states and five countries, presented before city councils throughout Central Florida, and met with state legislators to raise awareness about adoption resources and the need to make reliable information easier for families to find. Your efforts have attracted significant public attention, including coverage from WFTV Channel 9, FOX 35 Orlando, Spectrum News 13, and the Orlando Sentinel.</p>
+          <p>The accomplishments of HavenLink are a remarkable example of what young people can achieve when they combine technology, empathy, entrepreneurship, and a genuine desire to serve their community. HavenLink deserves recognition not only for the platform it has created, but for the example you are setting for your peers. Your initiative is helping make the adoption journey clearer and more accessible for families while bringing greater attention to an issue that deserves thoughtful community support.</p>
+          <p class="hl-doc-signoff">With sincere appreciation and recognition,</p>
+          <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/tom-keen-signature.png" alt="" width="200" height="70"></span>
+          <p class="hl-doc-signer">Commissioner Tom Keen</p>
+
+          <footer class="hl-doc-foot">
+            <p>Orlando City Hall &middot; 400 South Orange Avenue &middot; PO Box 4990 &middot; Orlando, FL 32802-4990</p>
+            <p>P 407.246.2221 &middot; F 407.246.2842 &middot; orlando.gov</p>
+          </footer>
+        </article>
+
+        <!-- ===== Letter — Mayor Megan C. Sladek, City of Oviedo, August 2026 =====
+             Not a City of Orlando document: the Oviedo letterhead is centred, in
+             the city’s own indigo, and carries its contact block at the head
+             rather than the foot. The palette override rides on
+             .hl-proc-doc--oviedo in home.css.
+
+             Body copy is reproduced verbatim from the signed letter, including
+             the stray "and" in the opening sentence. -->
+        <article class="hl-proc-doc hl-proc-letter hl-proc-doc--oviedo" id="letterSladek" hidden
+                 data-kicker="City of Oviedo · From the Office of the Mayor"
+                 data-title="Letter of Support">
+          <header class="hl-doc-ovihead">
+            <span class="hl-doc-logo hl-doc-logo--oviedo"><img class="hl-doc-img" src="/png/oviedo-logo.png" alt="" width="96" height="96"></span>
+            <p class="hl-doc-ovi-city">City of Oviedo Florida</p>
+            <p class="hl-doc-ovi-contact">400 Alexandria Blvd &bull; Oviedo, Florida 32765<br>407-971-5550 &bull; Fax (407) 971-5803<br>www.cityofoviedo.net</p>
+            <p class="hl-doc-ovi-office">From the Office of the Mayor</p>
+          </header>
+
+          <p class="hl-doc-date">August 2026</p>
+          <p class="hl-doc-addr">Aarav Gupta and Asad Sadikov</p>
+          <p class="hl-doc-re">RE: HavenLink</p>
+          <p class="hl-doc-salutation">Dear Mr. Gupta and Mr. Sadikov,</p>
+          <p>In advance of National Adoption Month in November, and I want to thank you for identifying a real gap in our community and building something to close it.</p>
+          <p>HavenLink at havenlink.org is an incredibly helpful resource that helps prospective adoptive parents understand where to begin the process and connects them directly with licensed adoption agencies. There are children in Florida waiting for permanent homes, and there are families here who would step forward if the path were clearer. I am grateful that you identified this problem, and that you took action to solve it. Accessibility and lack of knowledge are two of the biggest barriers to more people considering adoption, and you have made it immensely more easy for people to take that first step toward exploring the possibility.</p>
+          <p>I am looking forward to seeing how you grow this resource in the years to come.</p>
+          <p class="hl-doc-signoff">Gratefully,</p>
+          <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/megan-sladek-signature.png" alt="" width="200" height="70"></span>
+          <p class="hl-doc-signer">Megan C. Sladek<br><span>Mayor of Oviedo</span></p>
         </article>
       </div>
     </div>

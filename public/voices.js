@@ -33,12 +33,22 @@
     },
     {
       type: "quote",
+      quote: "The accomplishments of HavenLink are a remarkable example of what young people can achieve when they combine technology, empathy, entrepreneurship, and a genuine desire to serve their community.",
+      name: "Tom Keen",
+      title: "Orlando City Commissioner, District 1",
+      img: "/png/tom-keen.png",
+      initials: "TK",
+      alt: "Tom Keen, Orlando City Commissioner for District 1",
+      action: { label: "Read the full letter", modal: "letter-keen" }
+    },
+    {
+      type: "quote",
       quote: "The work that HavenLink does to support families and advocate for adoption is important in our community",
       name: "David Jolly",
-      title: "Former U.S. Representative, Florida",
+      title: "Democratic Candidate for Florida Governor",
       img: "/png/david-jolly.png",
       initials: "DJ",
-      alt: "David Jolly, former U.S. Representative for Florida"
+      alt: "David Jolly, Democratic candidate for Governor of Florida"
     },
     {
       type: "coverage",
@@ -54,12 +64,13 @@
     },
     {
       type: "quote",
-      quote: "Adoption is such an amazing option, and people really don't know where to start.",
+      quote: "I want to thank HavenLink for identifying a real gap in our community and building something to close it. I am looking forward to seeing how you grow this resource in the years to come.",
       name: "Megan Sladek",
       title: "Mayor of Oviedo",
       img: "/png/megan-sladek.png",
       initials: "MS",
-      alt: "Megan Sladek, Mayor of Oviedo"
+      alt: "Megan Sladek, Mayor of Oviedo",
+      action: { label: "Read the full letter", modal: "letter-sladek" }
     },
     {
       type: "quote",
@@ -69,15 +80,6 @@
       img: "/png/carlos-guillermo-smith.png",
       initials: "CS",
       alt: "Carlos Guillermo Smith, Florida State Senator for District 17"
-    },
-    {
-      type: "quote",
-      quote: "HavenLink is an amazing platform.",
-      name: "UNICEF",
-      title: null,
-      img: "/png/unicef-logo.png",
-      initials: "UN",
-      alt: "UNICEF"
     },
     {
       type: "quote",
@@ -100,7 +102,7 @@
     {
       type: "coverage",
       tag: "In the news",
-      copy: "See how WFTV Channel 9 covered HavenLink",
+      copy: "Trinity Prep students build platform to help families navigate adoption",
       linkLabel: "Read the story",
       icon: "read",
       href: "https://www.wftv.com/news/local/trinity-prep-students-build-platform-help-families-navigate-adoption/3ABL6FXWDJCX3CD4FWV3VWMHNU/",
@@ -120,13 +122,12 @@
     },
     {
       type: "quote",
-      quote: "Thank you for what HavenLink has done and continues to do for families in our community and beyond.",
-      name: "City of Winter Park",
-      title: null,
-      /* no img: the Winter Park mark was retired from the site, so this card
-         carries the initials plate instead. */
-      initials: "WP",
-      alt: "City of Winter Park"
+      quote: "I want to recognize HavenLink and its founders for outstanding youth civic innovation. Thank you for what you have done and continue to do for families in our community and beyond.",
+      name: "Sheila DeCiccio",
+      title: "Mayor of Winter Park",
+      img: "/png/sheila-deciccio.png",
+      initials: "SD",
+      alt: "Sheila DeCiccio, Mayor of Winter Park"
     },
     {
       type: "quote",
@@ -157,17 +158,16 @@
       action: { label: "Read the full proclamation", modal: "proclamation-rose" }
     },
     {
-      type: "quote",
-      quote: "This is an amazing endeavor.",
-      name: "Jay Reddick",
-      title: "Orlando Sentinel Editor",
-      img: "/png/jay-reddick.png",
-      initials: "JR",
-      alt: "Jay Reddick, Orlando Sentinel Editor",
-      action: {
-        label: "Read the article",
-        href: "https://www.orlandosentinel.com/2026/07/22/commentary-finding-support-in-the-slow-adoption-process/"
-      }
+      type: "coverage",
+      tag: "In the news",
+      copy: "Finding support in the slow adoption process",
+      linkLabel: "Read the story",
+      icon: "read",
+      href: "https://www.orlandosentinel.com/2026/07/22/commentary-finding-support-in-the-slow-adoption-process/",
+      name: "Orlando Sentinel",
+      img: "/png/orlando-sentinel-logo.png",
+      initials: "OS",
+      alt: "Orlando Sentinel"
     },
     {
       type: "coverage",
@@ -220,7 +220,10 @@
 
   /* Initials plate sits underneath; the image is layered on top and removed
      if it 404s, so a broken-image icon can never appear. The wrapper is a
-     fixed AVATAR square either way - no layout shift when real art lands. */
+     fixed AVATAR square either way - no layout shift when real art lands.
+     Once the real art paints the plate is dropped: several outlet logos ship
+     on a transparent ground and would otherwise read their own initials
+     through the mark. */
   function buildAvatar(voice, index) {
     var wrap = el("span", "hl-voice-avatar");
     var initials = el("span", "hl-voice-initials", voice.initials || "");
@@ -229,8 +232,11 @@
 
     if (!voice.img) return wrap;
 
+    function dropInitials() {
+      if (initials.parentNode) initials.remove();
+    }
+
     var img = el("img", "hl-voice-img");
-    img.src = voice.img;
     img.alt = voice.alt || voice.name;
     img.width = AVATAR;
     img.height = AVATAR;
@@ -239,6 +245,10 @@
     img.addEventListener("error", function () {
       img.remove();
     });
+    img.addEventListener("load", dropInitials);
+    img.src = voice.img;
+    /* a cached image can already be decoded before the listener above binds */
+    if (img.complete && img.naturalWidth) dropInitials();
     wrap.appendChild(img);
     return wrap;
   }
@@ -398,14 +408,16 @@
 
   sync();
 
-  /* ---------- City of Orlando document modals ----------
-     One shell, two documents: Mayor Dyer's letter of recognition and
-     Commissioner Rose's HavenLink Week proclamation. A card's
+  /* ---------- Reproduced-document modals ----------
+     One shell, four documents: Mayor Dyer's letter of recognition,
+     Commissioner Rose's HavenLink Week proclamation, Commissioner Keen's
+     letter, and Mayor Sladek's letter from the City of Oviedo. A card's
      data-voice-modal names which <article> to show; everything else - the
-     focus trap, Escape, backdrop click, scroll lock - is shared.
+     focus trap, Escape, backdrop click, scroll lock - is shared, and each
+     article supplies its own header strings via data-kicker/data-title.
 
      Only the Dyer letter has a PDF counterpart, so only it runs the probe
-     below; the proclamation is always the typeset article. */
+     below; the other three are always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -415,7 +427,9 @@
 
   var docs = {
     proclamation: letter,
-    "proclamation-rose": document.getElementById("proclamationRose")
+    "proclamation-rose": document.getElementById("proclamationRose"),
+    "letter-keen": document.getElementById("letterKeen"),
+    "letter-sladek": document.getElementById("letterSladek")
   };
   var kicker = document.getElementById("procKicker");
   var titleEl = document.getElementById("procTitle");

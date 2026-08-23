@@ -131,12 +131,19 @@
   applyVariant();
 })();
 
-/* ---------- Opening logo drift ----------
-   Six cards cycle through the partner roster: partner organizations
-   (cities, agencies of record, global orgs, media) lead, licensed
-   adoption agencies follow. A card whose logo file is missing, empty,
-   or deliberately absent (logo: null) falls back to a typographic name
-   card, so the roster can carry entries whose PNGs haven't landed yet.
+/* ---------- Opening quilt ----------
+   A block of patches cycles through the partner roster: partner organizations
+   (cities, agencies of record, global orgs, media) lead, licensed adoption
+   agencies follow. Every patch carries a mark and nothing else - the marks
+   are the point, and a caption under the block says whose they are. The 2x2
+   turns on a slower clock than the rest so the block never reads as one
+   uniform flicker. A patch whose logo file 404s, turns out to be a 1x1
+   placeholder, or is simply too slow falls back to a typographic name plate,
+   so the roster can carry entries whose PNGs haven't landed yet.
+
+   Only entries that actually carry a mark drift (see DRIFT below): a partner
+   held deliberately without one (logo: null) stays on the roster - and in the
+   counts, and on /team - but never takes a slot in the cycle.
 
    `kind` drives the derived "N licensed agencies" figure in the opening
    meta line - see the counter block at the foot of this file. */
@@ -148,12 +155,17 @@
     /* -- partner organizations first -- */
     { kind: "org", name: "City of Orlando", logo: "/png/orlando-logo.png" },
     { kind: "org", name: "UNICEF", logo: "/png/unicef-logo.png" },
+    { kind: "org", name: "United States Senate Committee on Finance", logo: "/png/us-senate-finance-logo.png" },
+    { kind: "org", name: "Florida Senate", logo: "/png/florida-senate-logo.png" },
+    { kind: "org", name: "Florida House of Representatives", logo: "/png/florida-house-logo.png" },
     { kind: "org", name: "Florida Department of Children and Families", logo: "/png/dcf-logo.png" },
-    // The City of Winter Park logo was retired from the site; the partner
-    // itself stays, carried by its name plate.
+    // The City of Winter Park mark was retired from the site; the partner
+    // itself stays on the roster and in the counts, but sits out the drift.
     { kind: "org", name: "City of Winter Park", logo: null },
     { kind: "org", name: "City of Oviedo", logo: "/png/oviedo-logo.png" },
     { kind: "org", name: "City of Sanford", logo: "/png/sanford-logo.png" },
+    { kind: "org", name: "Orange County", logo: "/png/orange-county-logo.png" },
+    { kind: "org", name: "City of Orange City", logo: "/png/orange-city-logo.png" },
     { kind: "org", name: "YGN Youth Global Network", logo: "/png/ygn-logo.png" },
     { kind: "org", name: "FOX 35 Orlando", logo: "/png/fox-35-logo.png" },
     { kind: "org", name: "WFTV Channel 9", logo: "/png/wftv-channel-9-logo.png" },
@@ -262,105 +274,327 @@
 
   var host = document.getElementById("ptDrift");
   if (!host) return;
+  var indexEl = document.getElementById("ptQuiltIndex");
 
-  var SLOT_COUNT = 6;
-  var FADE_MS = 460;
+  /* The cycle draws on the marks only. ROSTER above stays whole - the counters
+     just overhead read it, and /team lists every partner either way. */
+  var DRIFT = ROSTER.filter(function (entry) { return !!entry.logo; });
+
   var reduceMotion =
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  // reduced motion still rotates (instantly), just at a calmer cadence
-  var swapEvery = reduceMotion ? 6400 : 2600;
 
-  function buildFace(entry) {
-    var face = document.createElement("span");
-    face.className = "pt-drift-face";
-    var img = document.createElement("img");
+  var FADE_MS = 460;
+  /* Two of the marks are over 600KB. Rather than let one freeze a patch on a
+     cold connection, give up on it and fall through to the name plate. */
+  var LOAD_BAIL_MS = 1200;
+  // how long decode() gets to help before we go with the loaded mark anyway
+  var DECODE_GRACE_MS = 120;
+  /* Under this a mark cannot fill the 2x2 without visibly softening - the
+     roster runs from 28px to 1445px - so small marks are kept to the small
+     patches, where they sit at their own size and look deliberate. */
+  var LOWRES_PX = 120;
+  // reduced motion still rotates (instantly), just at a calmer cadence
+  var markEvery = reduceMotion ? 6400 : 2600;
+  var leadEvery = reduceMotion ? 11000 : 4600;
+
+  /* Layout tables, one per breakpoint, mirroring the grid-template-areas in
+     partner.css. Every patch carries a mark. `big` marks a 2x2, which only
+     ever draws marks large enough to hold it; `lead` is the one patch that
+     runs on the slower clock and drives the running index.
+
+     `order` is the rotation sequence: consecutive turns never land on two
+     patches that touch, so the block never appears to ripple. */
+  var FULL_LAYOUT = {
+    order: ["m2", "m5", "m6", "m8", "m9", "m4", "m7", "m3", "m10"],
+    patches: [
+      { area: "m1", big: true, lead: true },
+      { area: "m2", alt: true },
+      { area: "m3" },
+      { area: "m4" },
+      { area: "m5", alt: true },
+      { area: "m6", alt: true },
+      { area: "m7" },
+      { area: "m8", big: true },
+      { area: "m9" },
+      { area: "m10", alt: true }
+    ]
+  };
+
+  var COMPACT_LAYOUT = {
+    order: ["m2", "m5", "m3", "m4"],
+    patches: [
+      { area: "m1", big: true, lead: true },
+      { area: "m2", alt: true },
+      { area: "m3" },
+      { area: "m4" },
+      { area: "m5", alt: true }
+    ]
+  };
+
+  var TINY_LAYOUT = {
+    order: ["m2", "m3"],
+    patches: [
+      { area: "m1", big: true, lead: true },
+      { area: "m2", alt: true },
+      { area: "m3" }
+    ]
+  };
+
+  var markSlots = [];
+  var leadSlot = null;
+  var cursor = 0;
+  var markTick = 0;
+  var markTimer = null;
+  var leadTimer = null;
+  var inView = true;
+  var lastLayout = null;
+  var seedTimers = [];
+  /* Marks that turned out too small for the plate, learned from naturalWidth
+     the first time each one lands there. Deliberately not a hardcoded list -
+     it cannot go stale when a PNG is replaced. */
+  var lowRes = Object.create(null);
+
+  function pad3(n) {
+    return n < 10 ? "00" + n : n < 100 ? "0" + n : String(n);
+  }
+
+  /* One cursor feeds both clocks, so no two patches can hold the same mark:
+     a given patch refills every ~16s, and in that time the two clocks together
+     consume about nine of the 87 entries. */
+  function nextEntry(forBig) {
+    for (var guard = 0; guard < DRIFT.length; guard++) {
+      var idx = cursor;
+      cursor = (cursor + 1) % DRIFT.length;
+      if (forBig && lowRes[DRIFT[idx].logo]) continue;
+      return { entry: DRIFT[idx], ordinal: idx + 1 };
+    }
+    return { entry: DRIFT[0], ordinal: 1 };
+  }
+
+  /* Load and decode before the turn starts, not after it ends - otherwise a
+     patch fades in empty on a cold cache and fills in a beat later. */
+  function loadMark(entry, done) {
+    var img = new Image();
+    var settled = false;
+    var grace = null;
+    /* Give up only on a mark that never arrives. If one has loaded by now we
+       use it regardless - the bail is here for the 600KB seals on a cold
+       connection, not to throw away a picture we already hold. */
+    var bail = setTimeout(function () {
+      finish(img.complete && img.naturalWidth > 1);
+    }, LOAD_BAIL_MS);
+
+    function finish(ok) {
+      if (settled) return;
+      settled = true;
+      clearTimeout(bail);
+      clearTimeout(grace);
+      done(ok ? img : null);
+    }
+
     img.alt = "";
     img.decoding = "async";
-    function showName() {
-      var name = document.createElement("span");
-      name.className = "pt-drift-name";
-      name.textContent = entry.name;
-      face.textContent = "";
-      face.appendChild(name);
-    }
-    // A partner with no logo at all (logo: null) never gets an <img> - going
-    // straight to the name plate means no request and no broken-image window.
-    if (!entry.logo) {
-      showName();
-      return face;
-    }
-    img.addEventListener("error", showName);
-    // A partner whose real art hasn't been supplied yet carries a 1x1 placeholder
-    // PNG: it loads cleanly, so "error" never fires and the card would drift past
-    // empty. Treat it as no logo at all and fall back to the same name plate.
+    // the headline is the LCP here; logos must not outrank the font preloads
+    img.setAttribute("fetchpriority", "low");
+    img.addEventListener("error", function () { finish(false); });
     img.addEventListener("load", function () {
-      if (img.naturalWidth <= 1 && img.naturalHeight <= 1) showName();
+      // a 1x1 placeholder loads cleanly, so "error" never fires for it
+      if (img.naturalWidth <= 1 && img.naturalHeight <= 1) return finish(false);
+      if (img.decode) {
+        /* Decode ahead of the turn so the swap cannot stutter - but never
+           block on it. decode() both rejects and, in a tab that is not
+           compositing, stalls outright on marks that are perfectly fine. */
+        img.decode().then(function () { finish(true); }, function () { finish(true); });
+        grace = setTimeout(function () { finish(true); }, DECODE_GRACE_MS);
+      } else {
+        finish(true);
+      }
     });
     img.src = entry.logo;
-    face.appendChild(img);
-    return face;
   }
 
-  var slots = [];
-  var next = 0;
-
-  for (var i = 0; i < SLOT_COUNT; i++) {
-    var card = document.createElement("figure");
-    card.className = "pt-drift-card is-out";
-    card.appendChild(buildFace(ROSTER[next++ % ROSTER.length]));
-    host.appendChild(card);
-    slots.push(card);
+  function nameplate(entry) {
+    var name = document.createElement("span");
+    name.className = "pt-patch-name";
+    name.textContent = entry.name;
+    return name;
   }
 
-  // staggered first reveal, timed to land with the panel's hm-reveal
-  slots.forEach(function (card, idx) {
-    setTimeout(function () {
-      card.classList.remove("is-out");
-    }, 250 + idx * 110);
-  });
+  function render(slot, pick, img) {
+    var entry = pick.entry;
+    var face = document.createElement("span");
+    face.className = "pt-patch-face";
 
-  function swapCard(card, entry) {
-    if (reduceMotion) {
-      card.textContent = "";
-      card.appendChild(buildFace(entry));
-      return;
+    if (img) {
+      // the cap that keeps every mark at or under 1:1 - see partner.css
+      img.style.setProperty("--nat-w", img.naturalWidth + "px");
+      img.style.setProperty("--nat-h", img.naturalHeight + "px");
     }
-    card.classList.add("is-out");
-    setTimeout(function () {
-      card.textContent = "";
-      card.appendChild(buildFace(entry));
-      // two frames so the incoming face paints hidden before fading in
+
+    face.appendChild(img || nameplate(entry));
+
+    /* Remember a mark that turned out too small to carry a 2x2, so it is
+       never pulled for one again - it reads better at its own size in one of
+       the singles. Learned from naturalWidth rather than kept as a list, so
+       it cannot go stale when a PNG is replaced. */
+    if (slot.big && img &&
+        Math.max(img.naturalWidth, img.naturalHeight) < LOWRES_PX) {
+      lowRes[entry.logo] = true;
+    }
+
+    /* The ordinal is the one captured when this mark was pulled, not a live
+       read - the cursor moves for every other patch too. */
+    if (slot.lead && indexEl) {
+      indexEl.textContent = pad3(pick.ordinal) + " / " + pad3(DRIFT.length);
+    }
+
+    slot.el.textContent = "";
+    slot.el.appendChild(face);
+  }
+
+  // two frames: the face has to be laid out at opacity 0 before it can transition
+  function fadeIn(slot) {
+    requestAnimationFrame(function () {
       requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          card.classList.remove("is-out");
-        });
+        slot.el.classList.remove("is-out");
+        setTimeout(function () {
+          slot.el.classList.remove("is-turning");
+        }, 560);
       });
-    }, FADE_MS);
+    });
   }
 
-  // non-adjacent slot order so consecutive swaps never touch neighbors
-  var SLOT_ORDER = [0, 3, 1, 4, 2, 5];
-  var tickCount = 0;
-
-  function advance() {
-    var slot = slots[SLOT_ORDER[tickCount++ % SLOT_ORDER.length]];
-    swapCard(slot, ROSTER[next++ % ROSTER.length]);
+  function swap(slot) {
+    var pick = nextEntry(slot.big);
+    var token = ++slot.token;
+    loadMark(pick.entry, function (img) {
+      if (slot.token !== token) return; // the slot moved on while we waited
+      if (reduceMotion) {
+        render(slot, pick, img);
+        return;
+      }
+      slot.el.classList.add("is-turning", "is-out");
+      setTimeout(function () {
+        if (slot.token !== token) return;
+        render(slot, pick, img);
+        fadeIn(slot);
+      }, FADE_MS);
+    });
   }
 
-  /* run only while the tab is visible and the panel is on screen */
-  var timer = null;
-  var inView = !("IntersectionObserver" in window);
+  function build(layout) {
+    var byArea = {};
+    // a rebuild abandons the previous block, so drop its pending seeds rather
+    // than let them fetch marks for patches that are no longer in the document
+    seedTimers.forEach(clearTimeout);
+    seedTimers = [];
+    host.textContent = "";
+    markSlots = [];
+    leadSlot = null;
+    markTick = 0;
+
+    layout.patches.forEach(function (def) {
+      var el = document.createElement("div");
+      var cls = "pt-patch";
+      if (def.big) cls += " pt-patch--big";
+      if (def.alt) cls += " pt-patch--alt";
+      el.className = cls;
+      el.style.gridArea = def.area;
+      host.appendChild(el);
+
+      var slot = { el: el, big: !!def.big, lead: !!def.lead, token: 0 };
+      byArea[def.area] = slot;
+      if (def.lead) leadSlot = slot;
+    });
+
+    markSlots = layout.order
+      .map(function (area) { return byArea[area]; })
+      .filter(Boolean);
+
+    /* Seed on a stagger. This paces the fetches as well as the reveal: the
+       opening set is ~1.5MB, and firing it at once would contend with the
+       two font preloads for the headline. */
+    var seeds = (leadSlot ? [leadSlot] : []).concat(markSlots);
+    seeds.forEach(function (slot, i) {
+      slot.el.classList.add("is-out");
+      seedTimers.push(setTimeout(function () {
+        var pick = nextEntry(slot.big);
+        var token = ++slot.token;
+        loadMark(pick.entry, function (img) {
+          if (slot.token !== token) return;
+          render(slot, pick, img);
+          if (reduceMotion) slot.el.classList.remove("is-out");
+          else fadeIn(slot);
+        });
+      }, 250 + i * 110));
+    });
+  }
+
+  function advanceMark() {
+    if (!markSlots.length) return;
+    swap(markSlots[markTick++ % markSlots.length]);
+  }
+
+  function advanceLead() {
+    if (leadSlot) swap(leadSlot);
+  }
 
   function sync() {
+    /* Reconcile the layout here too. A tab that was hidden while the window
+       changed size never ran the rendering steps that dispatch matchMedia
+       change events, so it can come back holding the wrong table - and a
+       patch whose grid area is not in the active template auto-places itself
+       into an implicit row. rebuild() is a comparison when nothing moved. */
+    rebuild();
     var active = inView && !document.hidden;
-    if (active && !timer) timer = setInterval(advance, swapEvery);
-    if (!active && timer) {
-      clearInterval(timer);
-      timer = null;
+    if (active && !markTimer) {
+      markTimer = setInterval(advanceMark, markEvery);
+      leadTimer = setInterval(advanceLead, leadEvery);
+    } else if (!active && markTimer) {
+      clearInterval(markTimer);
+      clearInterval(leadTimer);
+      markTimer = null;
+      leadTimer = null;
     }
   }
 
+  /* Rebuilding on a breakpoint rather than hiding surplus patches in CSS is
+     what stops a phone cycling - and fetching - seven marks to show two.
+     `cursor` is not reset, so the sequence carries across the change. */
+  var mqCompact = window.matchMedia && window.matchMedia("(max-width: 1024px)");
+  var mqTiny = window.matchMedia && window.matchMedia("(max-width: 640px)");
+
+  function currentLayout() {
+    if (mqTiny && mqTiny.matches) return TINY_LAYOUT;
+    if (mqCompact && mqCompact.matches) return COMPACT_LAYOUT;
+    return FULL_LAYOUT;
+  }
+
+  function rebuild() {
+    var layout = currentLayout();
+    if (layout === lastLayout) return;
+    lastLayout = layout;
+    build(layout);
+  }
+
+  [mqCompact, mqTiny].forEach(function (mq) {
+    if (!mq) return;
+    if (mq.addEventListener) mq.addEventListener("change", rebuild);
+    else if (mq.addListener) mq.addListener(rebuild);
+  });
+
+  // belt and braces: resize fires where a deferred change event may not
+  var resizeTimer = null;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(rebuild, 150);
+  });
+
+  rebuild();
+
+  /* Watch the quilt, never the hero: a 100svh section clears a 0.15 threshold
+     almost permanently and would keep pulling logos well off screen. */
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
       inView = entries[0].isIntersecting;

@@ -1,0 +1,1248 @@
+/* ============================================================
+   HavenLink — Financial Calculator (adopt step 5, "The Tide Plate")
+   Requires editorial.css (tokens, primitives, shared hero) first.
+   Classes prefixed fc- ; calculator.js and tide-plate.js render into the
+   #fc-* ids and emit .fc-tide-* / .fc-rows / .fc-msg states — those class
+   names are contract.
+
+   Page structure: paper hero (the specimen worksheet fills itself in on the
+   #fcWorksheet canvas, calculator-hero.js) ->
+   the console (eight questions as one instrument) -> [results] dim headline
+   -> the arithmetic -> the fork -> dim foster-care A/B -> THE INK PLATE
+   (pinned, scroll-scrubbed tide ribbon) -> ongoing -> dim notes -> sources
+   -> funding -> closing ink CTA.
+   ============================================================ */
+
+/* Clear both the nav and the sticky adopt progress bar on anchor jumps. */
+body.editorial section[id] {
+  scroll-margin-top: calc(var(--hm-nav-h) + 4rem);
+}
+
+body.calculator {
+  /* Money direction. The only red/green on the site, so it stays semantic and
+     never decorative — and the ink band needs lightened siblings to survive on
+     a dark ground. */
+  --fc-out: #a3341f;
+  --fc-back: #2f6b43;
+  --fc-out-inv: #e08a6a;
+  --fc-back-inv: #7fb894;
+  --fc-sand: #e4b79a;
+}
+
+/* ==================== 1. Hero ==================== */
+
+/* faint terracotta bloom under the worksheet plate */
+body.calculator .fc-hero {
+  background-image: radial-gradient(
+    36rem 26rem at 74% 46%,
+    rgba(180, 85, 31, 0.05),
+    transparent 70%
+  );
+}
+
+/* The shared hero centres its copy and insets it by a full gutter; against the
+   worksheet plate that sits the block too low and too far in. Pull it up and
+   out. The copy still centres - the bottom padding just biases the centring
+   upward, and collapses to a top-aligned block on short viewports where there
+   was no slack to bias. max() keeps the left inset positive on narrow screens,
+   where --gutter is already down at its 1.25rem floor. */
+body.calculator .fc-hero .ed-hero-inner {
+  padding-top: clamp(1.25rem, 3vh, 2.25rem);
+  padding-bottom: clamp(2rem, 9vh, 6rem);
+  padding-left: max(1.25rem, calc(var(--gutter) - 1.75rem));
+}
+
+/* Below 620px calculator-hero.js drops the ledger and draws the blank engraved
+   sheet instead, so this is texture behind stacked copy, not a second column. */
+@media (max-width: 768px) {
+  body.calculator .fc-hero .ed-hero-canvas {
+    opacity: 0.7;
+  }
+}
+
+/* ==================== 2. The console (form) ==================== */
+
+body.calculator .fc-form-statement {
+  margin-top: 0.25rem;
+}
+
+body.calculator .fc-form {
+  margin-top: clamp(2.25rem, 5vh, 3.25rem);
+}
+
+/* One continuous instrument: hairline cells with no gaps, not a grid of boxes. */
+body.calculator .fc-console {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: var(--hairline);
+  border-top: 2px solid var(--ink);
+  background: var(--paper);
+}
+
+body.calculator .fc-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0;
+  padding: clamp(1.35rem, 2.4vw, 1.85rem) clamp(1.15rem, 2.2vw, 1.6rem)
+           clamp(1.5rem, 2.6vw, 2rem);
+  border-top: var(--hairline);
+  border-left: var(--hairline);
+}
+
+/* The first row has the 2px rule above it already. */
+body.calculator .fc-field:nth-child(-n + 3) { border-top: none; }
+body.calculator .fc-field:nth-child(3n + 1) { border-left: none; }
+
+body.calculator .fc-field--wide { grid-column: span 2; }
+
+body.calculator .fc-field-num {
+  position: absolute;
+  top: clamp(1.35rem, 2.4vw, 1.85rem);
+  right: clamp(1.15rem, 2.2vw, 1.6rem);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: rgba(20, 33, 61, 0.32);
+  transition: color 0.3s ease;
+}
+
+body.calculator .fc-field:focus-within .fc-field-num { color: var(--terracotta); }
+
+body.calculator .fc-label {
+  display: block;
+  padding-right: 2.5rem;
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* Editorial field idiom: no box, transparent ground, a large serif value over a
+   single rule. Matches the resource finder's console. */
+body.calculator .fc-select { position: relative; display: block; }
+
+body.calculator .fc-field select,
+body.calculator .fc-num {
+  width: 100%;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  line-height: 1.3;
+  color: var(--ink);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid rgba(20, 33, 61, 0.32);
+  border-radius: 0;
+  padding: 0.35rem 0 0.5rem;
+  transition: border-color 0.3s var(--ease-out);
+}
+
+body.calculator .fc-field select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 1.6rem;
+  cursor: pointer;
+}
+
+body.calculator .fc-num {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+body.calculator .fc-field select:focus,
+body.calculator .fc-num:focus {
+  outline: none;
+  border-bottom-color: var(--terracotta);
+}
+
+body.calculator .fc-field select:focus-visible,
+body.calculator .fc-num:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+
+body.calculator .fc-select::after {
+  content: "";
+  position: absolute;
+  right: 0.35rem;
+  top: 45%;
+  width: 0.45em;
+  height: 0.45em;
+  border-right: 1.5px solid var(--ink);
+  border-bottom: 1.5px solid var(--ink);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+body.calculator .fc-field--check .fc-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+body.calculator .fc-field--check input {
+  flex: none;
+  margin-top: 0.15rem;
+  accent-color: var(--terracotta);
+  width: 1rem;
+  height: 1rem;
+}
+
+body.calculator .fc-hint {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 40ch;
+}
+
+body.calculator .fc-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+body.calculator .fc-actions--wrap {
+  flex-wrap: wrap;
+  row-gap: 0.85rem;
+}
+
+/* ==================== 3. Messages + the fallback banner ==================== */
+
+body.calculator .fc-msg {
+  display: none;
+  margin-top: 1.25rem;
+  padding: 0.8rem 1.1rem;
+  border-left: 2px solid var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+body.calculator .fc-msg.show { display: block; }
+body.calculator .fc-msg.error { border-left-color: var(--fc-out); background: #fdf2ef; }
+body.calculator .fc-msg.success { border-left-color: var(--fc-back); background: #f0f6f1; }
+
+body.calculator .hm-on-ink .fc-msg.error,
+body.calculator .hm-on-ink .fc-msg.success {
+  background: rgba(250, 248, 245, 0.06);
+  color: var(--paper);
+}
+body.calculator .hm-on-ink .fc-msg.error { border-left-color: var(--fc-out-inv); }
+body.calculator .hm-on-ink .fc-msg.success { border-left-color: var(--fc-back-inv); }
+
+/* Most estimates fall back to national figures, so this is the common case, not
+   an error state. It reads as an editorial margin note. */
+body.calculator .fc-banner {
+  margin-bottom: clamp(2rem, 5vh, 3rem);
+  padding-left: 1.15rem;
+  border-left: 1px solid var(--terracotta);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+/* ==================== 4. Headline ==================== */
+
+body.calculator .fc-headline-figure {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 8vw, 6rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 100;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  margin: 0.75rem 0 1.5rem;
+  text-wrap: balance;
+}
+
+body.calculator .fc-headline-read {
+  max-width: 58ch;
+  font-size: var(--text-lede);
+  line-height: 1.65;
+  font-weight: 420;
+  color: var(--muted);
+}
+
+body.calculator .fc-asof {
+  margin-top: 1rem;
+  font-size: var(--text-meta);
+  color: var(--muted);
+}
+
+/* ==================== 5. Cards + rows ==================== */
+
+/* Hairline grid, no gaps — the house card idiom is a rule, not a box. */
+body.calculator .fc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  border-top: 2px solid var(--ink);
+}
+
+body.calculator .fc-card {
+  /* auto-fit tracks default to min-width:auto, which lets a wide child push the
+     whole grid past the container. Every card track here must be shrinkable. */
+  min-width: 0;
+  padding: 1.5rem clamp(1.1rem, 2vw, 1.75rem) 1.75rem;
+  border-left: var(--hairline);
+  border-bottom: var(--hairline);
+  transition: opacity 0.3s var(--ease-out);
+}
+
+body.calculator .fc-card:first-child { border-left: none; }
+
+/* De-emphasise the rest on hover — already the team page's idiom. */
+@media (hover: hover) {
+  body.calculator .fc-cards:has(.fc-card:hover) .fc-card:not(:hover) { opacity: 0.4; }
+}
+
+body.calculator .fc-card-title {
+  font-family: var(--font-body);
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 1.25rem;
+}
+
+body.calculator .fc-rows {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem 1rem;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+body.calculator .fc-rows--wide { max-width: 46rem; }
+
+body.calculator .fc-rows dt {
+  color: var(--ink);
+  line-height: 1.45;
+  /* A long program name wraps; it never widens the row. */
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* nowrap is deliberate and is why the figures line up — so ONLY money may be a
+   <dd>. Prose goes through addRow(..., { note: true }) and lands on
+   .fc-row-note below, which spans both tracks and wraps. */
+body.calculator .fc-rows dd {
+  margin: 0;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+body.calculator .fc-rows .fc-row-note {
+  grid-column: 1 / -1;
+  white-space: normal;
+  text-align: left;
+  overflow-wrap: anywhere;
+  max-width: 62ch;
+  margin: -0.15rem 0 0.35rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+body.calculator .fc-rows .fc-row-strong {
+  font-weight: 600;
+  border-top: var(--hairline);
+  padding-top: 0.55rem;
+  margin-top: 0.25rem;
+}
+
+/* A total rule needs something above it to total. When the emphasised row is
+   the first in its list it read as a stray hairline across the top of the card. */
+body.calculator .fc-rows dt.fc-row-strong:first-child,
+body.calculator .fc-rows dt.fc-row-strong:first-child + dd {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+body.calculator .fc-rows .fc-row-sub {
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+/* Indent the term, never the figure — padding on the value side widened the
+   auto track by a rem for nothing and cost the label the same rem. */
+body.calculator .fc-rows dt.fc-row-sub {
+  padding-left: 1rem;
+  text-wrap: pretty;
+}
+
+body.calculator .fc-rows .fc-row-words {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 14ch;
+  justify-self: end;
+}
+
+/* ==================== 6. Blocks + the fork ==================== */
+
+body.calculator .fc-block { margin-top: clamp(3rem, 8vh, 5rem); }
+
+body.calculator .fc-block-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 450;
+  font-variation-settings: "opsz" 40;
+  line-height: 1.14;
+  margin: 0;
+}
+
+body.calculator .fc-block-lede {
+  max-width: 60ch;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0.85rem 0 1.5rem;
+}
+
+body.calculator .fc-fork-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: var(--hairline);
+}
+
+/* Name the stake: this is one administrative determination, worth real money. */
+body.calculator .fc-fork-delta {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--terracotta);
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+  /* Not nowrap. A money figure has no break opportunity inside it anyway, and
+     this line now carries a sentence — held on one line it overhung a 380px
+     viewport by 78px. */
+  min-width: 0;
+  max-width: 34ch;
+  text-wrap: balance;
+}
+
+body.calculator .fc-fork-body { position: relative; }
+
+/* Two columns visibly diverging from one point, drawn in the plate's vocabulary. */
+body.calculator .fc-fork-split {
+  display: block;
+  width: 100%;
+  height: 3.25rem;
+  overflow: visible;
+}
+
+body.calculator .fc-fork-path {
+  fill: none;
+  stroke: var(--terracotta);
+  stroke-width: 1;
+  opacity: 0.55;
+  vector-effect: non-scaling-stroke;
+}
+
+body.calculator .fc-fork-body .fc-cards { border-top: none; }
+
+/* The fork reads as a comparison table, not two card stacks — see the note in
+   calculator.html. Reuses .fc-table so the two tabular blocks on the page share
+   one set of rules. */
+body.calculator .fc-table--fork {
+  margin-bottom: 0;
+  table-layout: fixed;
+  font-size: 0.9375rem;
+}
+
+body.calculator .fc-table--fork thead td {
+  border-bottom: 2px solid var(--ink);
+  padding: 0;
+}
+
+body.calculator .fc-table--fork th[scope="col"] {
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.85rem;
+  text-align: right;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+/* The determination is the expensive branch, so it is the one set in the
+   page's accent — the reader should be able to find it without reading. */
+body.calculator .fc-table--fork th[scope="col"]:nth-child(2) { color: var(--terracotta); }
+
+body.calculator .fc-table--fork th[scope="row"] {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  padding-right: 1rem;
+  overflow-wrap: anywhere;
+}
+
+/* tbody in the selector on purpose: the base `.fc-table td` rule lives further
+   down the sheet at equal specificity and would otherwise win, left-aligning
+   figures under right-aligned headers. */
+body.calculator .fc-table--fork tbody td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.9rem;
+  padding-bottom: 0.9rem;
+  padding-right: 0;
+}
+
+body.calculator .fc-table--fork tbody td:nth-child(2) { color: var(--terracotta); }
+
+/* Collapsed to one value column, the row label should keep the width it had
+   rather than stretching across half the container. */
+body.calculator .fc-table--fork thead tr:has(th:only-of-type) ~ * th[scope="row"],
+body.calculator .fc-table--fork th[scope="col"]:only-of-type { width: 34%; }
+
+/* ==================== 7. The foster-care A/B ==================== */
+
+body.calculator .fc-ab {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin-top: clamp(2.5rem, 6vh, 3.5rem);
+  border-top: 2px solid var(--ink);
+}
+
+body.calculator .fc-ab-side {
+  padding: 1.75rem clamp(1.1rem, 2vw, 1.75rem) 2rem;
+  border-left: var(--hairline);
+  border-bottom: var(--hairline);
+}
+
+body.calculator .fc-ab-side:first-child { border-left: none; }
+
+body.calculator .fc-ab-label {
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.85rem;
+}
+
+/* Both figures at the SAME scale — the comparison is the point, so it must not
+   be flattered by typography. */
+body.calculator .fc-ab-figure {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-variant-numeric: tabular-nums;
+  margin: 0;
+}
+
+body.calculator .fc-ab-side--alt .fc-ab-figure { color: var(--terracotta); }
+
+body.calculator .fc-ab-read {
+  max-width: 52ch;
+  margin-top: 1.75rem;
+  font-size: var(--text-lede);
+  line-height: 1.6;
+  font-weight: 420;
+  color: var(--muted);
+}
+
+/* ==================== 8. THE TIDE PLATE ====================
+   The page's signature element and its only ink band. A two-boundary
+   uncertainty ribbon of the family's cumulative cash position across the
+   adoption journey: path A is the low-cost world, path B the high-cost world,
+   and the band between them is what we genuinely cannot narrow.
+
+   Fallback-first. Everything below the pinned block is the static plate; the
+   scrub is layered on inside the desktop + motion-OK gate at the bottom. */
+
+body.calculator .fc-tide {
+  --tide-p: 1;
+  --tide-travel: 200vh;
+  /* The adopt progress bar is sticky at var(--hm-nav-h) too, so the stage has to
+     come to rest below it rather than sliding under a translucent paper strip.
+     This is only the fallback: the bar's real height is 3.4rem at some
+     breakpoints and 5.3rem at others, and guessing it slid the plate's top lane
+     — the zero rule and the live readout — under the bar. calculator.js
+     measures the chrome and overwrites this. */
+  --fc-sticky-top: calc(var(--hm-nav-h) + 3.4rem);
+  position: relative;
+}
+
+body.calculator .fc-tide-intro {
+  padding-block: clamp(3.5rem, 9vh, 6rem) clamp(1.5rem, 4vh, 2.5rem);
+}
+
+body.calculator .fc-tide-stage {
+  padding-block: clamp(1.5rem, 4vh, 2.5rem) clamp(3.5rem, 9vh, 6rem);
+}
+
+body.calculator .fc-tide-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+}
+
+body.calculator .fc-tide-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3.1rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 60;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--paper);
+  max-width: 20ch;
+  text-wrap: balance;
+  margin: 0 0 1rem;
+}
+
+body.calculator .fc-tide-title em {
+  font-style: italic;
+  color: var(--fc-sand);
+}
+
+body.calculator .fc-tide-lede {
+  max-width: 56ch;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: rgba(250, 248, 245, 0.66);
+  margin: 0 0 clamp(1.5rem, 4vh, 2.5rem);
+}
+
+body.calculator .fc-tide-plate {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* .hm-on-ink > * is position:relative, so the band's grain paints UNDER all
+   content. Re-lay the identical texture over the plate so the ribbon sits in
+   the same film as the rest of the band. */
+body.calculator .fc-tide-plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* tide-plate.js builds its viewBox from THIS box, so the box is what must have
+   a height — not the SVG. The old `height: auto` + `max-height: Nvh` pair meant
+   the drawing was scaled to fit the shorter axis and letterboxed on the longer
+   one: about 73px of dead space at each end and every label rendered a quarter
+   smaller than it was authored. There is no max-height here on purpose. */
+body.calculator .fc-tide-svg {
+  height: clamp(320px, 62vh, 620px);
+  min-height: 0;
+}
+
+body.calculator .fc-tide-svg svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+body.calculator .fc-tide-caption {
+  margin-top: 1.25rem;
+  max-width: 62ch;
+  font-size: var(--text-meta);
+  line-height: 1.6;
+  color: rgba(250, 248, 245, 0.55);
+}
+
+/* ---- SVG element styling. var() does not resolve in SVG presentation
+        attributes, so every token colour has to arrive through a class. ---- */
+
+body.calculator .fc-tide-stop-a { stop-color: #b4551f; stop-opacity: 0.5; }
+body.calculator .fc-tide-stop-b { stop-color: #b4551f; stop-opacity: 0.04; }
+
+body.calculator .fc-tide-base line { stroke: rgba(250, 248, 245, 0.5); stroke-width: 1; }
+
+body.calculator .fc-tide-zero-label {
+  fill: rgba(250, 248, 245, 0.6);
+  font-family: var(--font-body);
+  font-weight: 560;
+  letter-spacing: 0.14em;
+}
+
+body.calculator .fc-tide-guides line {
+  stroke: rgba(250, 248, 245, 0.16);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+
+body.calculator .fc-tide-guide-label {
+  fill: rgba(250, 248, 245, 0.45);
+  font-family: var(--font-body);
+  font-weight: 560;
+  letter-spacing: 0.11em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The y axis is relative and otherwise unlabelled, so this is the only thing
+   standing between "$395" and "$40,000" reading identically. It is the scale. */
+body.calculator .fc-tide-guide-label--peak {
+  fill: rgba(250, 248, 245, 0.82);
+  letter-spacing: 0.13em;
+}
+
+body.calculator .fc-tide-edge {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The edge to plan for is drawn brightest. */
+body.calculator .fc-tide-edge--high { stroke: #d97742; stroke-width: 1.75; }
+body.calculator .fc-tide-edge--low { stroke: rgba(217, 119, 66, 0.45); stroke-width: 1; }
+
+/* When every low-cost level is $0 the low edge lies exactly on the zero rule and
+   disappears into it, which is why a genuine $0–$395 band reads as a bare
+   rectangle. Dashed, it reads as the boundary it is. */
+body.calculator .fc-tide-edge--low.is-flat {
+  stroke-dasharray: 4 4;
+  stroke: rgba(217, 119, 66, 0.7);
+}
+
+/* The one line on this plate that means money ARRIVING, and on Florida's
+   foster-care path it is the entire answer — weighted accordingly. */
+body.calculator .fc-tide-tail {
+  fill: none;
+  stroke: var(--fc-back-inv);
+  stroke-width: 2.25;
+  stroke-linecap: round;
+}
+
+/* Only Florida publishes a monthly figure; everywhere else the amount is
+   negotiated per child, so the tail has no slope to draw. */
+body.calculator .fc-tide-tail--flat { stroke-dasharray: 3 5; opacity: 0.75; }
+
+body.calculator .fc-tide-tail-label {
+  fill: var(--fc-back-inv);
+  font-family: var(--font-body);
+  font-weight: 560;
+  font-variant-numeric: tabular-nums;
+}
+
+/* An engraver's dimension line, not the dashed stitch used on the partner page. */
+body.calculator .fc-tide-gap path {
+  fill: none;
+  stroke: rgba(250, 248, 245, 0.55);
+  stroke-width: 1;
+}
+
+body.calculator .fc-tide-gap-title {
+  fill: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 560;
+  letter-spacing: 0.18em;
+}
+
+body.calculator .fc-tide-gap-note {
+  fill: rgba(250, 248, 245, 0.55);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+body.calculator .fc-tide-ev line { stroke: rgba(250, 248, 245, 0.18); stroke-width: 1; }
+
+/* Chart furniture, not a mark: light enough to read past, present enough to
+   answer "which label belongs to which tick". */
+body.calculator .fc-tide-leader {
+  stroke: rgba(250, 248, 245, 0.14);
+  stroke-width: 1;
+  stroke-dasharray: 2 6;
+}
+
+body.calculator .fc-tide-node { fill: #d97742; stroke: none; }
+
+/* A stage that costs nothing still happened: a hollow ring, never a $0. */
+body.calculator .fc-tide-ev[data-amount="zero"] .fc-tide-node {
+  fill: none;
+  stroke: rgba(250, 248, 245, 0.45);
+  stroke-width: 1.25;
+}
+
+/* Half the weight of the gap bracket: this groups stages, it does not measure
+   a duration. */
+body.calculator .fc-tide-zero-brace {
+  fill: none;
+  stroke: rgba(250, 248, 245, 0.3);
+  stroke-width: 1;
+}
+
+body.calculator .fc-tide-tie {
+  fill: none;
+  stroke: rgba(250, 248, 245, 0.28);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+
+body.calculator .fc-tide-ev-label {
+  fill: var(--paper);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+body.calculator .fc-tide-ev-when {
+  fill: rgba(250, 248, 245, 0.5);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+body.calculator .fc-tide-ev-amt {
+  fill: rgba(250, 248, 245, 0.8);
+  font-family: var(--font-body);
+  font-variant-numeric: tabular-nums;
+}
+
+body.calculator .fc-tide-ev--back .fc-tide-ev-amt { fill: var(--fc-back-inv); }
+
+body.calculator .fc-tide-ev[data-amount="zero"] .fc-tide-ev-amt {
+  fill: rgba(250, 248, 245, 0.45);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+body.calculator .fc-tide-plumb line {
+  stroke: #d97742;
+  stroke-width: 1;
+  opacity: 0.7;
+}
+
+/* No pin means no scroll parameter, so the travelling head and live readout have
+   nothing to track. The static figures stay — only the motion is lost. */
+body.calculator .fc-tide-head,
+body.calculator .fc-tide-readout { display: none; }
+
+body.calculator .fc-tide-head line { stroke: #d97742; stroke-width: 1.25; }
+
+body.calculator .fc-tide-readout-label {
+  fill: rgba(250, 248, 245, 0.5);
+  font-family: var(--font-body);
+  font-weight: 560;
+  letter-spacing: 0.15em;
+}
+
+body.calculator .fc-tide-readout-fig {
+  fill: var(--paper);
+  font-family: var(--font-display);
+  font-weight: 420;
+  font-variation-settings: "opsz" 40;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- the list beneath: accessible base, no-JS fallback, and what shows if the
+        plate's reconciliation invariant ever fails ---- */
+
+body.calculator .fc-tide-list-wrap {
+  padding-bottom: clamp(3rem, 7vh, 5rem);
+}
+
+body.calculator .fc-tide-list {
+  border-top: 1px solid rgba(250, 248, 245, 0.16);
+  padding-top: 1.1rem;
+}
+
+body.calculator .fc-tide-list-summary {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 530;
+  color: var(--fc-sand);
+}
+
+body.calculator .fc-timeline {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+}
+
+body.calculator .fc-timeline-item {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(250, 248, 245, 0.12);
+  font-size: 0.9375rem;
+}
+
+body.calculator .fc-timeline-dir {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.calculator .fc-timeline-item--out .fc-timeline-dir { color: var(--fc-out-inv); }
+body.calculator .fc-timeline-item--back .fc-timeline-dir { color: var(--fc-back-inv); }
+
+body.calculator .fc-timeline-when {
+  color: rgba(250, 248, 245, 0.55);
+  font-size: 0.8125rem;
+  text-align: right;
+}
+
+/* When derive() returns null the graphic is withheld entirely rather than drawn
+   in a way that could contradict the headline. */
+body.calculator .fc-tide[data-plate="off"] .fc-tide-plate,
+html:not(.js) body.calculator .fc-tide-plate { display: none; }
+
+/* ==================== 9. Ongoing support ==================== */
+
+body.calculator .fc-ongoing-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: start;
+}
+
+body.calculator .fc-ongoing-figure-wrap { border-top: 2px solid var(--ink); padding-top: 1.25rem; }
+
+body.calculator .fc-ongoing-figure {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 60;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+  font-variant-numeric: tabular-nums;
+  color: var(--terracotta);
+  margin: 0;
+}
+
+body.calculator .fc-ongoing-figure-label {
+  margin-top: 0.6rem;
+  font-size: var(--text-meta);
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 26ch;
+}
+
+body.calculator .fc-ongoing-figure-detail {
+  margin-top: 0.9rem;
+  padding-top: 0.9rem;
+  border-top: var(--hairline);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--muted);
+  max-width: 34ch;
+}
+
+/* ---- the support list ----
+   A hairline list in the same idiom as .fc-saved. The load-bearing detail is
+   that the sentence sits on its OWN full-width row: the amount track is
+   max-content and nowrap, and prose sharing that track is what used to push
+   the document sideways. */
+
+body.calculator .fc-support {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 2px solid var(--ink);
+}
+
+body.calculator .fc-support-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  column-gap: 1.5rem;
+  align-items: baseline;
+  padding: 1rem 0 1.1rem;
+  border-bottom: var(--hairline);
+  font-size: 0.9375rem;
+}
+
+body.calculator .fc-support-name {
+  font-weight: 530;
+  color: var(--ink);
+  line-height: 1.45;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+body.calculator .fc-support-amount {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--terracotta);
+}
+
+body.calculator .fc-support-detail {
+  grid-column: 1 / -1;
+  margin: 0.45rem 0 0;
+  max-width: 62ch;
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+/* ==================== 10. Notes ==================== */
+
+body.calculator .fc-notes .fc-note-item {
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 66ch;
+}
+
+body.calculator .fc-notes li { align-items: baseline; }
+
+body.calculator .fc-note {
+  max-width: 66ch;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ==================== 11. Sources drawer ==================== */
+
+body.calculator .fc-math {
+  border-top: 2px solid var(--ink);
+  border-bottom: var(--hairline);
+  padding: 1.1rem 0;
+}
+
+body.calculator .fc-math-summary {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 530;
+  color: var(--ink);
+}
+
+body.calculator .fc-math-summary:hover { color: var(--terracotta); }
+
+/* Wide tables must scroll inside themselves, never the page. */
+body.calculator .fc-math-body {
+  padding-top: 1.75rem;
+  overflow-x: auto;
+}
+
+body.calculator .fc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2.5rem;
+  font-size: 0.875rem;
+}
+
+body.calculator .fc-table-caption {
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 460;
+  font-variation-settings: "opsz" 30;
+  padding-bottom: 0.75rem;
+}
+
+body.calculator .fc-table th,
+body.calculator .fc-table td {
+  text-align: left;
+  padding: 0.65rem 0.75rem 0.65rem 0;
+  border-bottom: var(--hairline);
+  vertical-align: top;
+}
+
+body.calculator .fc-table th {
+  font-size: var(--text-eyebrow);
+  font-weight: 560;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+body.calculator .fc-table td:nth-child(2),
+body.calculator .fc-table td:nth-child(3) {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+body.calculator .fc-source {
+  font-size: 0.75rem;
+  color: var(--terracotta);
+}
+
+body.calculator .fc-disclaimer {
+  margin-top: 2.5rem;
+  padding-top: 1.1rem;
+  border-top: var(--hairline);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 66ch;
+}
+
+/* ==================== 12. Funding + saved ==================== */
+
+body.calculator .fc-funding-list { margin-top: clamp(2rem, 5vh, 3rem); }
+
+body.calculator .fc-funding-note { margin-top: 2rem; font-size: 0.8125rem; }
+
+body.calculator .fc-saved {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 2px solid var(--ink);
+}
+
+body.calculator .fc-saved-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 1rem 0;
+  border-bottom: var(--hairline);
+  font-size: 0.9375rem;
+}
+
+body.calculator .fc-saved-figure {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+body.calculator .fc-saved-pdf { color: var(--terracotta); font-size: 0.875rem; }
+
+/* ==================== 13. Closing CTA ==================== */
+
+body.calculator .fc-textlink-inv {
+  color: var(--paper);
+  border-bottom-color: rgba(250, 248, 245, 0.35);
+}
+
+body.calculator .fc-textlink-inv:hover {
+  color: var(--fc-sand);
+  border-bottom-color: var(--fc-sand);
+}
+
+/* ==================== 14. The pin ====================
+   Desktop + motion-OK + JS only. pinRange is (track - stage), so setting the
+   track to stage + --tide-travel makes pinRange equal --tide-travel exactly and
+   keeps that the one honest tuning knob. */
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-track {
+    height: calc(100svh - var(--fc-sticky-top) + var(--tide-travel));
+  }
+
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-stage {
+    position: sticky;
+    top: var(--fc-sticky-top);
+    height: calc(100vh - var(--fc-sticky-top));
+    height: calc(100svh - var(--fc-sticky-top));
+    display: flex;
+    /* stretch, never centre: centring is what sliced the content at BOTH ends
+       when it was taller than the stage. Nothing overflows now, and the plate
+       is handed whatever height is left rather than guessing at a vh. */
+    align-items: stretch;
+    overflow: hidden;
+    padding-block: clamp(1rem, 3vh, 2rem);
+  }
+
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-inner,
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-plate {
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-svg {
+    flex: 1 1 auto;
+    height: auto;
+    min-height: 0;
+  }
+
+  /* A reserved two-line slot. Without it a longer caption would shrink the
+     plate's flex remainder AFTER the SVG was generated for the taller box. */
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-caption {
+    flex: 0 0 auto;
+    margin-top: 0.85rem;
+    min-height: calc(2 * 1.6 * var(--text-meta));
+  }
+
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-head,
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-readout { display: block; }
+
+  /* Labels rise in as the scrub head passes them. */
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-ev {
+    opacity: 0.25;
+    transition: opacity 0.45s var(--ease-out);
+  }
+
+  html.js body.calculator .fc-tide[data-plate="on"] .fc-tide-ev[data-passed="1"] {
+    opacity: 1;
+  }
+}
+
+/* ==================== 15. Narrow screens ==================== */
+
+@media (max-width: 1024px) {
+  body.calculator .fc-console { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  body.calculator .fc-field:nth-child(-n + 3) { border-top: var(--hairline); }
+  body.calculator .fc-field:nth-child(3n + 1) { border-left: var(--hairline); }
+  body.calculator .fc-field:nth-child(-n + 2) { border-top: none; }
+  body.calculator .fc-field:nth-child(2n + 1) { border-left: none; }
+  body.calculator .fc-field--wide { grid-column: span 2; }
+}
+
+@media (max-width: 860px) {
+  /* The sticky adopt subnav is taller here. */
+  body.editorial section[id] { scroll-margin-top: calc(var(--hm-nav-h) + 6.5rem); }
+
+  body.calculator .fc-ongoing-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  body.calculator .fc-console { grid-template-columns: 1fr; }
+  body.calculator .fc-field { border-left: none; border-top: var(--hairline); }
+  body.calculator .fc-field:first-child { border-top: none; }
+  body.calculator .fc-field--wide { grid-column: span 1; }
+
+  body.calculator .fc-card,
+  body.calculator .fc-ab-side { border-left: none; }
+
+  body.calculator .fc-timeline-item,
+  body.calculator .fc-saved-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+
+  body.calculator .fc-support-item { grid-template-columns: 1fr; }
+
+  body.calculator .fc-table--fork,
+  body.calculator .fc-table--fork th[scope="row"] { font-size: 0.8125rem; }
+  body.calculator .fc-table--fork th[scope="col"] { font-size: 0.6875rem; }
+
+  body.calculator .fc-timeline-when,
+  body.calculator .fc-saved-figure,
+  body.calculator .fc-support-amount { text-align: left; }
+
+  body.calculator .fc-actions .hm-btn { width: 100%; justify-content: center; }
+}

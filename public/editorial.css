@@ -48,6 +48,31 @@ html {
   --hm-nav-h: 68px;
 }
 
+/* Root scale. Type and spacing are rem-based almost everywhere, so the root
+   font-size is the one knob that shrinks the whole design proportionally -
+   nothing is re-proportioned, it just sits at a smaller size.
+
+   The type clamps top out at their rem maximum somewhere around 1300px, and
+   the plain-rem spacing never adapted to viewport at all, so from laptop
+   widths up the design stops shrinking with the screen and reads oversized on
+   anything but a large monitor. These steps take that back. Phones and small
+   tablets are left at 100% - down there the clamps are near their minimums and
+   are already doing the adapting.
+
+   Percentages (not px) so a reader who has raised their browser's default font
+   size still gets it honoured. */
+@media (min-width: 900px) {
+  html {
+    font-size: 94%;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 90%;
+  }
+}
+
 body.editorial {
   /* Design tokens */
   --paper: #faf8f5;

@@ -23,9 +23,10 @@ window.HL_REACH = {
     partner: ['us', 'br', 'bg', 'ht', 'cn', 'hu', 'in',
               'ng', 'za', 'ke', 'au', 'ps', 'fi', 'co', 'tw', 'ua',
               'be', 'cl', 'ie', 'it', 'jp', 'ca'],
-    // Philippines, Romania, Uzbekistan, New Zealand. Bulgaria is also a
-    // partner; "partner" wins, so it renders navy.
-    negotiating: ['ph', 'bg', 'ro', 'uz', 'nz']
+    // Philippines, Romania, New Zealand, and the newer talks - Mexico, Turkey,
+    // Algeria, Angola, the Central African Republic, Bolivia. Bulgaria is also
+    // a partner; "partner" wins, so it renders navy.
+    negotiating: ['ph', 'bg', 'ro', 'nz', 'mx', 'tr', 'dz', 'ao', 'cf', 'bo']
   },
   states: {
     // Union of every state with a partner agency in src/match/agencies.ts.
@@ -33,6 +34,7 @@ window.HL_REACH = {
               'in', 'ks', 'ky', 'la', 'ma', 'md', 'mi', 'mn', 'mo', 'ms',
               'mt', 'nc', 'nd', 'ne', 'ny', 'oh', 'or', 'pa', 'ri', 'sc',
               'sd', 'tn', 'tx', 'ut', 'va', 'vt', 'wa', 'wi', 'wv', 'wy'],
-    negotiating: ['pr', 'hi', 'me'] // Puerto Rico, Hawaii, Maine - in discussion
+    // Puerto Rico, Hawaii, Maine, New Jersey, Nevada - in discussion
+    negotiating: ['pr', 'hi', 'me', 'nj', 'nv']
   }
 };

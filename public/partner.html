@@ -42,6 +42,7 @@
             <li role="none"><a href="/adopt/intake-form" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
             <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">3. Compatibility Matching</a></li>
             <li role="none"><a href="/adopt/resources" class="dropdown-item" role="menuitem">4. Resource Finder</a></li>
+            <li role="none"><a href="/adopt/calculator" class="dropdown-item" role="menuitem">5. Financial Calculator</a></li>
           </ul>
         </li>
         <li><a href="/team" class="nav-link">Team</a></li>
@@ -54,30 +55,38 @@
   <main class="pt-main">
 
     <!-- Opening -->
-    <section class="pt-opening">
-      <div class="hm-container hm-container--editorial">
-        <div class="pt-opening-grid">
-          <div class="pt-opening-copy">
-            <p class="pt-opening-eyebrow hm-eyebrow hm-reveal">Partnerships</p>
-            <h1 class="pt-title hm-reveal" style="--d: .08s">Stronger woven <em>together.</em></h1>
-            <p class="pt-standfirst hm-reveal" style="--d: .16s">
-              HavenLink connects licensed adoption agencies and community organizations with families across the country through one secure platform built around bringing children home.
-            </p>
-            <div class="pt-opening-actions hm-reveal" style="--d: .24s">
-              <a href="#partnership-form" class="hm-btn hm-btn--ink">Start your application <span class="hm-btn-arrow">↓</span></a>
-              <a href="#why-partner" class="hm-textlink">Why partner with us</a>
-            </div>
-          </div>
-          <div class="pt-opening-visual hm-reveal" style="--d: .2s">
-            <div class="pt-drift" id="ptDrift" aria-hidden="true"></div>
-            <p class="pt-drift-caption">The cities and organizations we build with, and the licensed agencies families meet on HavenLink.</p>
-          </div>
+    <section class="ed-hero pt-hero" id="top">
+      <div class="ed-hero-inner">
+        <p class="ed-hero-eyebrow pt-hero-eyebrow hm-eyebrow hm-reveal">Partnerships</p>
+        <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Stronger woven <em>together.</em></h1>
+        <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
+          HavenLink connects licensed adoption agencies and community organizations with families across the country through one secure platform built around bringing children home.
+        </p>
+        <div class="ed-hero-actions hm-reveal" style="--d: .24s">
+          <a href="#partnership-form" class="hm-btn hm-btn--ink">Start your application <span class="hm-btn-arrow">&darr;</span></a>
+          <a href="#why-partner" class="hm-textlink">Why partner with us</a>
         </div>
-        <div class="pt-opening-meta hm-reveal" style="--d: .32s">
-          <span><span data-pt-count="agencies">71</span> licensed agencies in the network</span>
-          <span>Serving families across <span data-pt-count="states">40</span> states and <span data-pt-count="countries">22</span> countries</span>
-          <span>Reply within 1-2 business days</span>
+
+        <!-- The quilt. Patches are built by partner.js; this shell is static so
+             the caption and the roster link survive without JS. -->
+        <div class="pt-quilt">
+          <div class="pt-quilt-block">
+            <div class="pt-quilt-grid hm-reveal" id="ptDrift" style="--d: .2s" aria-hidden="true"></div>
+            <span class="pt-quilt-shuttle" aria-hidden="true"></span>
+          </div>
+          <p class="pt-quilt-foot hm-reveal" style="--d: .3s">
+            <span class="pt-quilt-caption">The cities and organizations we build with, and the licensed agencies families meet on HavenLink.</span>
+            <span class="pt-quilt-index" id="ptQuiltIndex" aria-hidden="true"></span>
+            <a class="hm-textlink pt-quilt-link" href="/team">See every partner</a>
+          </p>
         </div>
+      </div>
+
+      <div class="ed-hero-meta">
+        <a class="ed-scrollcue" href="#why-partner" aria-label="Scroll to why partner"><span class="ed-scrollcue-line"></span>Scroll</a>
+        <span class="ed-hero-meta-item"><span data-pt-count="agencies">71</span> licensed agencies in the network</span>
+        <span class="ed-hero-meta-item">Families across <span data-pt-count="states">40</span> states and <span data-pt-count="countries">22</span> countries</span>
+        <span class="ed-hero-meta-item">Reply within 1&ndash;2 business days</span>
       </div>
     </section>
 
@@ -365,7 +374,7 @@
     </div>
 
     <div class="footer-bottom">
-      <p>&copy; 2024 HavenLink. All rights reserved.</p>
+      <p>&copy; 2025 HavenLink. All rights reserved.</p>
       <p><a href="#privacy-policy" class="privacy-policy-link">Privacy Policy</a></p>
     </div>
   </footer>

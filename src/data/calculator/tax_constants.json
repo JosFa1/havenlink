@@ -1,0 +1,61 @@
+[
+  {
+    "tax_year": 2026,
+    "federal_credit_max_cents": 1767000,
+    "refundable_cap_cents": 512000,
+    "phaseout_start_cents": 26508000,
+    "phaseout_end_cents": 30508000,
+    "source_url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf",
+    "liability_json": {
+      "single": {
+        "standard_deduction_cents": 1610000,
+        "brackets": [
+          { "up_to_cents": 1240000, "rate": 0.10 },
+          { "up_to_cents": 5040000, "rate": 0.12 },
+          { "up_to_cents": 10570000, "rate": 0.22 },
+          { "up_to_cents": 20177500, "rate": 0.24 },
+          { "up_to_cents": 25622500, "rate": 0.32 },
+          { "up_to_cents": 64060000, "rate": 0.35 },
+          { "up_to_cents": null, "rate": 0.37 }
+        ]
+      },
+      "married_joint": {
+        "standard_deduction_cents": 3220000,
+        "brackets": [
+          { "up_to_cents": 2480000, "rate": 0.10 },
+          { "up_to_cents": 10080000, "rate": 0.12 },
+          { "up_to_cents": 21140000, "rate": 0.22 },
+          { "up_to_cents": 40355000, "rate": 0.24 },
+          { "up_to_cents": 51245000, "rate": 0.32 },
+          { "up_to_cents": 76870000, "rate": 0.35 },
+          { "up_to_cents": null, "rate": 0.37 }
+        ]
+      },
+      "married_separate": {
+        "standard_deduction_cents": 1610000,
+        "brackets": [
+          { "up_to_cents": 1240000, "rate": 0.10 },
+          { "up_to_cents": 5040000, "rate": 0.12 },
+          { "up_to_cents": 10570000, "rate": 0.22 },
+          { "up_to_cents": 20177500, "rate": 0.24 },
+          { "up_to_cents": 25622500, "rate": 0.32 },
+          { "up_to_cents": 38435000, "rate": 0.35 },
+          { "up_to_cents": null, "rate": 0.37 }
+        ]
+      },
+      "head_of_household": {
+        "standard_deduction_cents": 2415000,
+        "brackets": [
+          { "up_to_cents": 1770000, "rate": 0.10 },
+          { "up_to_cents": 6745000, "rate": 0.12 },
+          { "up_to_cents": 10570000, "rate": 0.22 },
+          { "up_to_cents": 20175000, "rate": 0.24 },
+          { "up_to_cents": 25620000, "rate": 0.32 },
+          { "up_to_cents": 64060000, "rate": 0.35 },
+          { "up_to_cents": null, "rate": 0.37 }
+        ]
+      }
+    },
+    "state_credit_rules_json": {}
+  }
+]

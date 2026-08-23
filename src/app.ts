@@ -19,6 +19,7 @@ import { authRouter } from "./auth/routes";
 import { chatRouter } from "./chat/routes";
 import { matchRouter } from "./match/routes";
 import { resourcesRouter } from "./resources/routes";
+import { calculatorRouter } from "./calculator/routes";
 import { pageGuard } from "./middleware/pageGuard";
 
 const app = express();
@@ -62,6 +63,9 @@ app.use("/api/match", matchRouter);
 
 // ----- Post-Adoption Resource Finder (Step 4) ------------------------------------
 app.use("/api/resources", resourcesRouter);
+
+// ----- Financial Calculator (Step 5) ---------------------------------------------
+app.use("/api/calculator", calculatorRouter);
 
 // Partnership form submission endpoint
 app.post("/api/partnership-request", async (req, res) => {
@@ -531,6 +535,11 @@ app.get("/adopt/matching", (req, res) => {
 // Step 4: Post-Adoption Resource Finder (replaced the former Agency-Managed Profiles).
 app.get("/adopt/resources", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/adopt/resources.html"));
+});
+
+// Step 5: Financial Calculator.
+app.get("/adopt/calculator", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/adopt/calculator.html"));
 });
 
 // Old Step 4 URL -> permanently redirect to the resource finder that replaced it.

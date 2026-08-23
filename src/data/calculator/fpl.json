@@ -1,0 +1,74 @@
+[
+  {
+    "year": 2026,
+    "household_size": 1,
+    "amount_cents": 1596000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 2,
+    "amount_cents": 2164000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 3,
+    "amount_cents": 2732000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 4,
+    "amount_cents": 3300000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 5,
+    "amount_cents": 3868000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 6,
+    "amount_cents": 4436000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 7,
+    "amount_cents": 5004000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 8,
+    "amount_cents": 5572000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 9,
+    "amount_cents": 6140000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 10,
+    "amount_cents": 6708000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 11,
+    "amount_cents": 7276000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  },
+  {
+    "year": 2026,
+    "household_size": 12,
+    "amount_cents": 7844000,
+    "source_url": "https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines"
+  }
+]

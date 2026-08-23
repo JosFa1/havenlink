@@ -1,7 +1,7 @@
 /**
  * Page-level auth gate for the adoption flow.
  *
- * The four adoption pages require a logged-in user. This guard is mounted BEFORE
+ * The five adoption pages require a logged-in user. This guard is mounted BEFORE
  * express.static so it intercepts every form of the request — the clean URL
  * (/adopt/home-study) AND the raw file (/adopt/home-study.html) — otherwise
  * express.static would serve the .html directly and let a hand-typed URL slip
@@ -20,6 +20,7 @@ export const PROTECTED_PAGES = [
   "/adopt/intake-form",
   "/adopt/matching",
   "/adopt/resources",
+  "/adopt/calculator",
 ] as const;
 
 const PROTECTED = new Set<string>(PROTECTED_PAGES);

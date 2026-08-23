@@ -19,9 +19,17 @@
 
   var navbar = document.getElementById("navbar");
 
+  /* getBoundingClientRect, not offsetHeight: the nav is a fractional number of
+     pixels tall (padding in rem against a scaled root), and offsetHeight rounds
+     it to an integer. Rounded up, the adopt step bar sticks a hair below the
+     nav and page content shows through the seam; rounded down it tucks under.
+     The exact height makes the two bars meet. */
   function syncNavHeight() {
     if (!navbar) return;
-    docEl.style.setProperty("--hm-nav-h", navbar.offsetHeight + "px");
+    docEl.style.setProperty(
+      "--hm-nav-h",
+      navbar.getBoundingClientRect().height + "px"
+    );
   }
   syncNavHeight();
   window.addEventListener("resize", syncNavHeight);

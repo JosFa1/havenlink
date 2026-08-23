@@ -144,3 +144,114 @@ END
 $$;
 
 CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON "session" ("expire");
+
+-- ===== Financial Calculator (Step 5) =========================================
+-- Added post-launch; all statements are idempotent so `npm run migrate` stays safe
+-- to re-run. The four reference tables below are ENTIRELY seed-managed: their only
+-- writer is `npm run seed` (src/db/seedCalculator.ts), loading committed JSON from
+-- src/data/calculator/. No dollar figure is ever hardcoded in application code --
+-- every row carries an `effective_year` and the `source_url` it was read from.
+--
+-- Two-layer lookup, matching the eligibility engine's federal + state-override
+-- pattern. `state_code` is a 2-letter code, or the sentinel 'US' for the national
+-- layer. ('US' rather than NULL because Postgres UNIQUE does not dedupe NULLs, so
+-- a nullable column would silently permit duplicate national rows.)
+
+-- Cost line items. Resolution is all-or-nothing per (state, adoption_type): a state
+-- with any rows for that type uses only its own; a state with none falls back to the
+-- 'US' rows and the result is flagged so the UI can show the "no state data yet"
+-- banner. Partial state profiles would understate a gross cost, so they are not mixed.
+CREATE TABLE IF NOT EXISTS calc_cost_profiles (
+  id             uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  state_code     char(2) NOT NULL,
+  adoption_type  text NOT NULL,
+  line_item      text NOT NULL,
+  label          text NOT NULL,
+  low_cents      integer NOT NULL CHECK (low_cents >= 0),
+  high_cents     integer NOT NULL CHECK (high_cents >= low_cents),
+  effective_year integer NOT NULL,
+  source_url     text NOT NULL,
+  sort_order     integer NOT NULL DEFAULT 0,
+  UNIQUE (state_code, adoption_type, line_item, effective_year)
+);
+
+CREATE INDEX IF NOT EXISTS idx_calc_cost_lookup
+  ON calc_cost_profiles (state_code, adoption_type, effective_year);
+
+-- Subsidy / reimbursement / Medicaid / tuition programs. Unlike cost profiles these
+-- resolve per program: `program_key` identifies the program across layers, and a
+-- state row REPLACES the 'US' row with the same key (e.g. Florida's $1,000
+-- nonrecurring reimbursement overrides the $2,000 federal ceiling). Programs with no
+-- state row still apply nationally (e.g. the DoD military reimbursement).
+-- `eligibility_json` gates a program, e.g. {"special_needs": true} or {"military": true}.
+CREATE TABLE IF NOT EXISTS calc_subsidy_rules (
+  id                uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  state_code        char(2) NOT NULL,
+  program_key       text NOT NULL,
+  program_name      text NOT NULL,
+  program_type      text NOT NULL
+                    CHECK (program_type IN ('monthly', 'one_time', 'medical', 'tuition')),
+  eligibility_json  jsonb NOT NULL DEFAULT '{}'::jsonb,
+  -- NULL amounts mean "this program exists but the amount is set case by case".
+  -- The UI must say that rather than render a zero.
+  amount_low_cents  integer CHECK (amount_low_cents >= 0),
+  amount_high_cents integer CHECK (amount_high_cents >= 0),
+  detail            text,
+  effective_year    integer NOT NULL,
+  source_url        text NOT NULL,
+  UNIQUE (state_code, program_key, effective_year)
+);
+
+-- Federal adoption-credit constants, one row per tax year. `liability_json` holds the
+-- standard deduction and rate schedule per filing status; it exists because capping
+-- the non-refundable portion at estimated tax liability is impossible without them,
+-- and those figures may not live in application code either.
+CREATE TABLE IF NOT EXISTS calc_tax_constants (
+  tax_year                 integer PRIMARY KEY,
+  federal_credit_max_cents integer NOT NULL,
+  refundable_cap_cents     integer NOT NULL,
+  phaseout_start_cents     integer NOT NULL,
+  phaseout_end_cents       integer NOT NULL,
+  -- { "<filing_status>": { "standard_deduction_cents": n,
+  --                        "brackets": [ { "up_to_cents": n | null, "rate": 0.10 }, ... ] } }
+  liability_json           jsonb NOT NULL,
+  -- { "<STATE>": { "name": ..., "type": "percent_of_federal" | "flat_max",
+  --                "value": n, "source_url": ... } }
+  state_credit_rules_json  jsonb NOT NULL DEFAULT '{}'::jsonb,
+  source_url               text NOT NULL
+);
+
+-- HHS poverty guidelines, used for the grant-eligibility readout. Household sizes
+-- above the largest seeded row clamp to it and the result is flagged.
+CREATE TABLE IF NOT EXISTS calc_fpl (
+  year           integer NOT NULL,
+  household_size integer NOT NULL,
+  amount_cents   integer NOT NULL,
+  source_url     text NOT NULL,
+  PRIMARY KEY (year, household_size)
+);
+
+-- Single-row marker gating the calculator seed, mirroring resource_data_meta: the
+-- seed no-ops unless the committed version differs from what was last loaded.
+CREATE TABLE IF NOT EXISTS calc_data_meta (
+  singleton  boolean PRIMARY KEY DEFAULT true CHECK (singleton),
+  version    text NOT NULL,
+  loaded_at  timestamptz NOT NULL DEFAULT now()
+);
+
+-- Saved estimates. APPEND-ONLY: re-running with changed inputs writes a new version
+-- rather than overwriting the prior result, so a family can compare paths.
+-- PRIVACY: `inputs` stores the income BAND id only -- never an exact income figure --
+-- and results are never emailed anywhere. A family's income screen is theirs alone.
+CREATE TABLE IF NOT EXISTS calculator_results (
+  id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id    uuid NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  version    integer NOT NULL,
+  inputs     jsonb NOT NULL,
+  result     jsonb NOT NULL,
+  created_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE (user_id, version)
+);
+
+CREATE INDEX IF NOT EXISTS idx_calculator_results_user
+  ON calculator_results (user_id, version DESC);

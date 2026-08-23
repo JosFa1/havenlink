@@ -48,8 +48,9 @@
   const PROTECTED_PAGES = [
     "/adopt/home-study",
     "/adopt/intake-form",
-    "/adopt/agency-profiles",
     "/adopt/matching",
+    "/adopt/resources",
+    "/adopt/calculator",
   ];
 
   // Canonicalise the same way the server does (lower-case, drop trailing slash

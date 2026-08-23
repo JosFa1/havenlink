@@ -852,12 +852,14 @@ p {
 
 /* ==================== Adopt Section ==================== */
 
+/* Sticks directly under the navbar. editorial.js measures the real nav height
+   into --hm-nav-h; the 64px is the pre-JS fallback, not a second opinion. */
 .adopt-subnav {
   background-color: var(--white);
   border-bottom: 2px solid var(--gray-light);
   z-index: 999;
   position: sticky;
-  top: 64px;
+  top: var(--hm-nav-h, 64px);
 }
 
 .subnav-container {

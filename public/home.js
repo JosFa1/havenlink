@@ -32,7 +32,7 @@
     if (!track || !stage || !pinQuery.matches || prefersReduced) return;
     var p = (window.scrollY - trackTop) / pinRange;
     p = Math.max(0, Math.min(1, p));
-    var step = Math.min(3, Math.floor(p * 4));
+    var step = Math.min(4, Math.floor(p * 5));
     if (stage.getAttribute("data-step") !== String(step)) {
       stage.setAttribute("data-step", String(step));
     }
