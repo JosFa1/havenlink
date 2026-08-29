@@ -479,15 +479,16 @@ export const AGENCIES: Agency[] = [
     tags: ["Placement", "Waiting children"],
   },
   {
-    // Joined the partner network in the 2026 intake; it was already carried
-    // here as a directory listing, so the existing record is promoted in place
-    // rather than duplicated (ids are the stable key for saved matches).
+    // Left the partner network; the record drops back to the directory listing
+    // it was before the 2026 intake rather than being deleted outright, since
+    // ids are the stable key for saved matches. Georgia stays a partner state
+    // on covenant-care-ga below.
     id: "georgia-agape-ga",
     name: "Georgia AGAPE",
     state: "GA",
-    partner: true,
+    partner: false,
     url: "https://georgiaagape.org",
-    logo: "/png/georgia-agape-logo.png",
+    logo: null,
     description:
       "A licensed Georgia agency offering maternity support services alongside its adoption and foster care programs. It works with expectant parents statewide and places children with approved adoptive families.",
     tags: ["Maternity support", "Foster care", "Placement"],
@@ -587,8 +588,9 @@ export const AGENCIES: Agency[] = [
     tags: ["Home study", "Placement", "Birth-parent support"],
   },
   {
-    // Promoted from directory listing to partner in the 2026 intake - see the
-    // note on georgia-agape-ga.
+    // Promoted from directory listing to partner in the 2026 intake: the
+    // existing record is promoted in place rather than duplicated, because
+    // ids are the stable key for saved matches.
     id: "adoptions-of-indiana-in",
     name: "Adoptions of Indiana",
     state: "IN",
@@ -726,7 +728,7 @@ export const AGENCIES: Agency[] = [
   },
   {
     // Promoted from directory listing to partner in the 2026 intake - see the
-    // note on georgia-agape-ga.
+    // note on adoptions-of-indiana-in.
     id: "sunrise-childrens-ky",
     name: "Sunrise Children's Services",
     state: "KY",

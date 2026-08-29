@@ -577,8 +577,8 @@
 
   <!-- Reproduced civic documents, opened from the voice cards: Mayor Dyer's
        letter of recognition, Commissioner Rose's HavenLink Week proclamation,
-       Commissioner Keen's letter, and Mayor Sladek's letter from the City of
-       Oviedo. Deliberately NOT styled like the privacy modal - these reproduce
+       Commissioner Keen's letter, Mayor Sladek's letter from the City of
+       Oviedo, and Mayor Marks' proclamation from the City of Orange City. Deliberately NOT styled like the privacy modal - these reproduce
        real paperwork, so they carry the issuing city's own colour and a serif
        face, scoped to .hl-proc-modal (Orlando blue by default; the Oviedo
        letter overrides the palette on .hl-proc-doc--oviedo).
@@ -620,7 +620,6 @@
           </header>
           <p class="hl-doc-office">Office of Mayor Buddy Dyer</p>
 
-          <p class="hl-doc-date">August 3, 2026</p>
           <p class="hl-doc-addr">Asad Sadikov and Aarav Gupta<br>HavenLink</p>
           <p class="hl-doc-salutation">Dear Asad and Aarav,</p>
           <p>On behalf of the City of Orlando, it is my honor to congratulate you both on the growth and impact of HavenLink. Your efforts to help connect prospective adoptive families, licensed agencies and organizations is certainly worthy of recognition and our community&rsquo;s collective praise.</p>
@@ -695,7 +694,6 @@
           </header>
           <p class="hl-doc-office">Office of Commissioner Tom Keen</p>
 
-          <p class="hl-doc-date">August 8, 2026</p>
           <p class="hl-doc-addr">Aarav Gupta &amp; Asad Sadikov<br>Trinity Preparatory School<br>5700 Trinity Prep Ln<br>Winter Park, FL 32792</p>
           <p class="hl-doc-salutation">Dear Mr. Gupta &amp; Mr. Sadikov</p>
           <p>It is with great admiration that I recognize HavenLink for its innovative work helping prospective adoptive families navigate what can often be an overwhelming process. HavenLink demonstrates an extraordinary level of initiative mixed with civic responsibility. You created a practical solution: a free platform that provides prospective adoptive parents with a clear starting point and connects them directly with licensed adoption agencies&mdash;without charging families for the service.</p>
@@ -729,7 +727,6 @@
             <p class="hl-doc-ovi-office">From the Office of the Mayor</p>
           </header>
 
-          <p class="hl-doc-date">August 2026</p>
           <p class="hl-doc-addr">Aarav Gupta and Asad Sadikov</p>
           <p class="hl-doc-re">RE: HavenLink</p>
           <p class="hl-doc-salutation">Dear Mr. Gupta and Mr. Sadikov,</p>
@@ -739,6 +736,67 @@
           <p class="hl-doc-signoff">Gratefully,</p>
           <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/megan-sladek-signature.png" alt="" width="200" height="70"></span>
           <p class="hl-doc-signer">Megan C. Sladek<br><span>Mayor of Oviedo</span></p>
+        </article>
+
+        <!-- ===== Proclamation — Mayor Kelli Marks, City of Orange City, August 25, 2026 =====
+             Not a City of Orlando document, but it reuses the shared proclamation
+             furniture above so it reads as one set with Commissioner Rose's. The
+             difference is the head: this original leads with a typeset title
+             rather than a seal, and the seal instead sits beside the attestation
+             at the foot. There is no reproduced signature - we do not have one -
+             so the attest block carries the seal and the name only.
+
+             The accent is the city's own orange, set on .hl-proc-doc--orangecity
+             the way the Oviedo variant re-points its indigo. -->
+        <article class="hl-proc-doc hl-proc-proclamation hl-proc-doc--orangecity" id="proclamationMarks" hidden
+                 data-kicker="City of Orange City &middot; Office of the Mayor"
+                 data-title="Proclamation &mdash; Recognition of HavenLink"
+                 data-accent="orange-city">
+          <header class="hl-doc-prochead">
+            <p class="hl-doc-proc-city">City of Orange City, Florida</p>
+            <p class="hl-doc-proc-word">Proclamation</p>
+          </header>
+
+          <dl class="hl-doc-whereas">
+            <dt>Whereas,</dt>
+            <dd>HavenLink is a free civic technology platform, founded by students at Trinity Preparatory School in Winter Park, that guides prospective adoptive parents from their first question through the day a child comes home; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink has never charged a family for its services and has served more than 2,000 families, connecting them with licensed adoption agencies; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink works with more than 30 licensed adoption agencies across 32 states and five countries; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink holds partnerships with UNICEF and the Florida Department of Children and Families, recognition rarely extended to an organization founded by high school students; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink is led by co-founders Asad Sadikov and Aarav Gupta, who built and continue to run a working national platform while still in high school; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>HavenLink has carried this work into the public square, presenting to city councils across Central Florida, briefing state legislative offices, and publishing a newsletter on adoption policy; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>The work of HavenLink has been recognized by WFTV Channel 9, FOX 35 Orlando, and Spectrum News 13, and the Orlando Sentinel published commentary from the organization on July 22, 2026; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>Florida has more than 20,000 children in foster care, and clear information about adoption became harder for residents to find after House Bill 1083 closed public photo listings on July 1, 2024, making the free guidance HavenLink offers more valuable to families than ever; and</dd>
+
+            <dt>Whereas,</dt>
+            <dd>The founders of HavenLink have given their time to this work without compensation and have kept the platform free to every family who uses it;</dd>
+          </dl>
+
+          <p class="hl-doc-resolve"><span class="hl-doc-sc">Now, therefore,</span> I, Kelli Marks, Mayor of the City of Orange City, and on behalf of the City Council, do hereby recognize HavenLink for their contributions to the community.</p>
+
+          <!-- Seal sits out at the left margin, centred against the attestation
+               block on the right. Same art the team page uses for the city. -->
+          <div class="hl-doc-attest">
+            <span class="hl-doc-seal hl-doc-seal--attest"><img class="hl-doc-img" src="/png/orange-city-logo.png" alt="Seal of the City of Orange City" width="118" height="118"></span>
+            <div class="hl-doc-attest-body">
+              <p><span class="hl-doc-sc">In witness whereof,</span> I have hereunto set my hand and caused the Official Seal of the City of Orange City to be affixed on this day, August 25, 2026.</p>
+              <p class="hl-doc-signer">Kelli Marks<br><span>Mayor</span></p>
+            </div>
+          </div>
         </article>
       </div>
     </div>

@@ -23,32 +23,13 @@
   var VOICES = [
     {
       type: "quote",
-      quote: "The young residents behind HavenLink are active, engaged, and are already making a difference in our community. This is a great initiative, and I hope that their efforts continue to be this impactful",
+      quote: "The young residents behind HavenLink are active, engaged, and are already making a difference in our community. This is a great initiative, and I hope that their efforts continue to be so largely impactful!",
       name: "Buddy Dyer",
       title: "Mayor of Orlando",
       img: "/png/buddy-dyer.png",
       initials: "BD",
       alt: "Buddy Dyer, Mayor of Orlando",
       action: { label: "Read the full proclamation", modal: "proclamation" }
-    },
-    {
-      type: "quote",
-      quote: "The accomplishments of HavenLink are a remarkable example of what young people can achieve when they combine technology, empathy, entrepreneurship, and a genuine desire to serve their community.",
-      name: "Tom Keen",
-      title: "Orlando City Commissioner, District 1",
-      img: "/png/tom-keen.png",
-      initials: "TK",
-      alt: "Tom Keen, Orlando City Commissioner for District 1",
-      action: { label: "Read the full letter", modal: "letter-keen" }
-    },
-    {
-      type: "quote",
-      quote: "The work that HavenLink does to support families and advocate for adoption is important in our community",
-      name: "David Jolly",
-      title: "Democratic Candidate for Florida Governor",
-      img: "/png/david-jolly.png",
-      initials: "DJ",
-      alt: "David Jolly, Democratic candidate for Governor of Florida"
     },
     {
       type: "coverage",
@@ -64,6 +45,45 @@
     },
     {
       type: "quote",
+      quote: "The students who built HavenLink researched a real problem in our community, families struggling to navigate adoption, and did something about it. That's the Florida grit I am proud of.",
+      name: "Rick Scott",
+      title: "United States Senator for Florida",
+      img: "/png/rick-scott.png",
+      initials: "RS",
+      alt: "Rick Scott, United States Senator for Florida"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink reflects Orlando's belief in being there for kids. I am glad Central Florida's high schoolers are doing such influential work!",
+      name: "Maxwell Frost",
+      title: "United States Representative for Central Florida",
+      img: "/png/maxwell-frost.png",
+      initials: "MF",
+      alt: "Maxwell Frost, United States Representative for Central Florida"
+    },
+    {
+      type: "coverage",
+      tag: "In the news",
+      copy: "Central Florida students raise awareness for foster adoption",
+      linkLabel: "Read the story",
+      icon: "read",
+      href: "https://mynews13.com/fl/orlando/news/2026/08/06/central-florida-students-raise-awareness-for-foster-adoption",
+      name: "Spectrum News 13",
+      img: "/png/spectrum-news-13-logo.png",
+      initials: "S13",
+      alt: "Spectrum News 13"
+    },
+    {
+      type: "quote",
+      quote: "The work that HavenLink does to support families and advocate for adoption is important in our community",
+      name: "David Jolly",
+      title: "Democratic Candidate for Florida Governor",
+      img: "/png/david-jolly.png",
+      initials: "DJ",
+      alt: "David Jolly, Democratic candidate for Governor of Florida"
+    },
+    {
+      type: "quote",
       quote: "I want to thank HavenLink for identifying a real gap in our community and building something to close it. I am looking forward to seeing how you grow this resource in the years to come.",
       name: "Megan Sladek",
       title: "Mayor of Oviedo",
@@ -74,30 +94,13 @@
     },
     {
       type: "quote",
-      quote: "After meeting with the HavenLink team, I would suggest for people in my district to use their great tool if they are looking to adopt!",
-      name: "Carlos Guillermo Smith",
-      title: "Florida State Senator, District 17",
-      img: "/png/carlos-guillermo-smith.png",
-      initials: "CS",
-      alt: "Carlos Guillermo Smith, Florida State Senator for District 17"
-    },
-    {
-      type: "quote",
-      quote: "The work that HavenLink is doing is truly incredible, and we're looking forward to sharing it with our viewers.",
-      name: "WESH 2",
-      title: null,
-      img: "/png/wesh-2-logo.png",
-      initials: "W2",
-      alt: "WESH 2"
-    },
-    {
-      type: "quote",
-      quote: "HavenLink is a great platform … It's the real element where people connect with people and with that you will get results",
-      name: "Keith Truenow",
-      title: "Florida State Senator, District 13",
-      img: "/png/keith-truenow.png",
-      initials: "KT",
-      alt: "Keith Truenow, Florida State Senator for District 13"
+      quote: "The accomplishments of HavenLink are a remarkable example of what young people can achieve when they combine technology, empathy, entrepreneurship, and a genuine desire to serve their community.",
+      name: "Tom Keen",
+      title: "Orlando City Commissioner, District 1",
+      img: "/png/tom-keen.png",
+      initials: "TK",
+      alt: "Tom Keen, Orlando City Commissioner for District 1",
+      action: { label: "Read the full letter", modal: "letter-keen" }
     },
     {
       type: "coverage",
@@ -113,12 +116,13 @@
     },
     {
       type: "quote",
-      quote: "HavenLink is a wonderful platform",
-      name: "LaVon Bracy Davis",
-      title: "Florida State Senator, District 15",
-      img: "/png/lavon-bracy-davis.png",
-      initials: "LB",
-      alt: "LaVon Bracy Davis, Florida State Senator for District 15"
+      quote: "The City of Orlando proudly recognizes the young leaders of HavenLink whose innovation, compassion, and civic engagement strengthen our community and inspire others to create meaningful solutions to complex challenges.",
+      name: "Shan Rose",
+      title: "Orlando City Commissioner",
+      img: "/png/shan-rose.png",
+      initials: "SR",
+      alt: "Shan Rose, Orlando City Commissioner",
+      action: { label: "Read the full proclamation", modal: "proclamation-rose" }
     },
     {
       type: "quote",
@@ -128,6 +132,70 @@
       img: "/png/sheila-deciccio.png",
       initials: "SD",
       alt: "Sheila DeCiccio, Mayor of Winter Park"
+    },
+    {
+      type: "quote",
+      quote: "After meeting with the HavenLink team, I would suggest for people in my district to use their great tool if they are looking to adopt!",
+      name: "Carlos Guillermo Smith",
+      title: "Florida State Senator, District 17",
+      img: "/png/carlos-guillermo-smith.png",
+      initials: "CS",
+      alt: "Carlos Guillermo Smith, Florida State Senator for District 17"
+    },
+    {
+      type: "quote",
+      quote: "I was truly impressed by all the work HavenLink is doing. I advise my constituents to use this amazing tool.",
+      name: "Anna V. Eskamani",
+      title: ["Florida State Representative", "Orlando Mayor Candidate"],
+      img: "/png/anna-eskamani.png",
+      initials: "AE",
+      alt: "Anna V. Eskamani, Florida State Representative and candidate for Mayor of Orlando"
+    },
+    {
+      type: "quote",
+      quote: "The work that HavenLink is doing is truly incredible, and we're looking forward to sharing it with our viewers.",
+      name: "WESH 2",
+      title: null,
+      img: "/png/wesh-2-logo.png",
+      initials: "W2",
+      alt: "WESH 2"
+    },
+    {
+      type: "quote",
+      quote: "The free guidance HavenLink offers is extremely valuable to the families of Orange City. On behalf of the City Council, I hereby recognize HavenLink for their contributions to our community.",
+      name: "Kelli Marks",
+      title: "Mayor of Orange City",
+      img: "/png/kelli-marks.png",
+      initials: "KM",
+      alt: "Kelli Marks, Mayor of Orange City",
+      action: { label: "Read the full proclamation", modal: "proclamation-marks" }
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is a great platform … It's the real element where people connect with people and with that you will get results",
+      name: "Keith Truenow",
+      title: "Florida State Senator, District 13",
+      img: "/png/keith-truenow.png",
+      initials: "KT",
+      alt: "Keith Truenow, Florida State Senator for District 13"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is a wonderful platform",
+      name: "LaVon Bracy Davis",
+      title: "Florida State Senator, District 15",
+      img: "/png/lavon-bracy-davis.png",
+      initials: "LB",
+      alt: "LaVon Bracy Davis, Florida State Senator for District 15"
+    },
+    {
+      type: "quote",
+      quote: "HavenLink is the kind of thing Florida needs. Initiatives like these are what will get us into the future.",
+      name: "Emily Duda Buckley",
+      title: "Nominee for Florida House",
+      img: "/png/emily-duda-buckley.png",
+      initials: "EB",
+      alt: "Emily Duda Buckley, nominee for the Florida House"
     },
     {
       type: "quote",
@@ -148,16 +216,6 @@
       alt: "Bonnie Hilton, Utah Administrative Director of Hand in Hand"
     },
     {
-      type: "quote",
-      quote: "The City of Orlando proudly recognizes the young leaders of HavenLink whose innovation, compassion, and civic engagement strengthen our community and inspire others to create meaningful solutions to complex challenges.",
-      name: "Shan Rose",
-      title: "Orlando City Commissioner",
-      img: "/png/shan-rose.png",
-      initials: "SR",
-      alt: "Shan Rose, Orlando City Commissioner",
-      action: { label: "Read the full proclamation", modal: "proclamation-rose" }
-    },
-    {
       type: "coverage",
       tag: "In the news",
       copy: "Finding support in the slow adoption process",
@@ -168,18 +226,6 @@
       img: "/png/orlando-sentinel-logo.png",
       initials: "OS",
       alt: "Orlando Sentinel"
-    },
-    {
-      type: "coverage",
-      tag: "In the news",
-      copy: "Central Florida students raise awareness for foster adoption",
-      linkLabel: "Read the story",
-      icon: "read",
-      href: "https://mynews13.com/fl/orlando/news/2026/08/06/central-florida-students-raise-awareness-for-foster-adoption",
-      name: "Spectrum News 13",
-      img: "/png/spectrum-news-13-logo.png",
-      initials: "S13",
-      alt: "Spectrum News 13"
     }
   ];
 
@@ -258,7 +304,16 @@
     cap.appendChild(buildAvatar(voice, index));
     var who = el("span", "hl-voice-who");
     who.appendChild(el("span", "hl-voice-name", voice.name));
-    if (voice.title) who.appendChild(el("span", "hl-voice-role", voice.title));
+    /* A title given as an array is set one line per entry - for the offices
+       too long to sit on a single line under the name. */
+    if (voice.title) {
+      var role = el("span", "hl-voice-role");
+      [].concat(voice.title).forEach(function (line, n) {
+        if (n) role.appendChild(document.createElement("br"));
+        role.appendChild(document.createTextNode(line));
+      });
+      who.appendChild(role);
+    }
     cap.appendChild(who);
     return cap;
   }
@@ -409,15 +464,16 @@
   sync();
 
   /* ---------- Reproduced-document modals ----------
-     One shell, four documents: Mayor Dyer's letter of recognition,
+     One shell, five documents: Mayor Dyer's letter of recognition,
      Commissioner Rose's HavenLink Week proclamation, Commissioner Keen's
-     letter, and Mayor Sladek's letter from the City of Oviedo. A card's
+     letter, Mayor Sladek's letter from the City of Oviedo, and Mayor Marks'
+     proclamation from the City of Orange City. A card's
      data-voice-modal names which <article> to show; everything else - the
      focus trap, Escape, backdrop click, scroll lock - is shared, and each
      article supplies its own header strings via data-kicker/data-title.
 
      Only the Dyer letter has a PDF counterpart, so only it runs the probe
-     below; the other three are always the typeset article. */
+     below; the other four are always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -429,7 +485,8 @@
     proclamation: letter,
     "proclamation-rose": document.getElementById("proclamationRose"),
     "letter-keen": document.getElementById("letterKeen"),
-    "letter-sladek": document.getElementById("letterSladek")
+    "letter-sladek": document.getElementById("letterSladek"),
+    "proclamation-marks": document.getElementById("proclamationMarks")
   };
   var kicker = document.getElementById("procKicker");
   var titleEl = document.getElementById("procTitle");
@@ -450,6 +507,12 @@
     if (!doc) return;
     if (kicker) kicker.textContent = doc.getAttribute("data-kicker") || "";
     if (titleEl) titleEl.textContent = doc.getAttribute("data-title") || "";
+    /* A document that is not City of Orlando paperwork can name its own accent,
+       which re-points the shell's palette so the header band matches the sheet
+       under it. No attribute means the default Orlando blue. */
+    var accent = doc.getAttribute("data-accent");
+    if (accent) modal.setAttribute("data-accent", accent);
+    else modal.removeAttribute("data-accent");
   }
 
   function useLetter() {

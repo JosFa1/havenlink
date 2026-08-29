@@ -208,7 +208,6 @@
     { name: "Covenant Care Adoptions", logo: "/png/covenant-care-logo.png" },
     { name: "Forever Families Through Adoption", logo: "/png/forever-families-logo.png" },
     { name: "Four Oaks", logo: "/png/four-oaks-logo.png" },
-    { name: "Georgia AGAPE", logo: "/png/georgia-agape-logo.png" },
     { name: "Gladney Center for Adoption", logo: "/png/gladney-logo.png" },
     { name: "Greater Hopes", logo: "/png/greater-hopes.png" },
     { name: "Harmony Family Center", logo: "/png/harmony-family-center-logo.png" },

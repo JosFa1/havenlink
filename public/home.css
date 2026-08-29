@@ -1508,12 +1508,10 @@ body.proclamation-open .hl-chat-panel {
   color: var(--orl-blue);
 }
 
-.hl-proc-doc .hl-doc-date {
-  margin-top: clamp(1.5rem, 3vw, 2.1rem);
-  margin-bottom: 1.35rem;
-}
-
+/* First block under the letterhead - carries the gap down from the office
+   line, which the dateline used to hold before the dates came out. */
 .hl-proc-doc .hl-doc-addr {
+  margin-top: clamp(1.5rem, 3vw, 2.1rem);
   margin-bottom: 1.25rem;
 }
 
@@ -1537,7 +1535,6 @@ body.proclamation-open .hl-chat-panel {
     text-align: right;
   }
 
-  .hl-proc-letter .hl-doc-date,
   .hl-proc-letter .hl-doc-addr,
   .hl-proc-letter .hl-doc-salutation,
   .hl-proc-letter .hl-doc-signoff,
@@ -1725,6 +1722,111 @@ body.proclamation-open .hl-chat-panel {
   font-weight: 400;
 }
 
+/* ============================================================
+   Orange City variant
+   Mayor Marks' proclamation leads with a typeset title instead of a seal,
+   and carries the seal down to the left margin beside the attestation at the
+   foot. Everything else - sheet, WHEREAS gutter, resolve clause - is the
+   shared furniture above; only the two accent tokens are re-pointed, the same
+   move the Oviedo variant makes.
+
+   The accent is Florida orange, pulled toward the ring of the city seal in
+   png/orange-city-logo.png. The ring itself is far too light to set type in -
+   these are darkened to clear 4.5:1 on the paper (4.6:1 and 6.9:1).
+   ============================================================ */
+
+/* Declared once, reachable two ways: on the shell, so the modal's header band
+   carries the accent while this document is the one on show, and on the sheet
+   itself, so the article is right whatever frames it. */
+.hl-proc-modal[data-accent="orange-city"],
+.hl-proc-doc--orangecity {
+  --orl-blue: #cc4a16;
+  --orl-blue-deep: #9e3810;
+}
+
+.hl-doc-prochead {
+  margin-bottom: clamp(1.4rem, 3.2vw, 2.1rem);
+  padding-bottom: clamp(0.7rem, 1.8vw, 1rem);
+  border-bottom: 2px solid var(--orl-blue);
+  text-align: center;
+}
+
+/* The title is set in ink, not in the accent - the orange stays on the rule
+   under it, the seal, and the shell's header band. */
+.hl-proc-doc .hl-doc-proc-city {
+  margin: 0 0 0.45rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--orl-ink);
+}
+
+/* the display line of the sheet - the widest letterspacing on the page */
+.hl-proc-doc .hl-doc-proc-word {
+  margin: 0;
+  font-size: clamp(1.35rem, 3.6vw, 2.05rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  line-height: 1.15;
+  text-transform: uppercase;
+  /* tracking is added to the right of every letter, the last one included, so
+     a centred line reads half a step left of true centre - pull it back */
+  text-indent: 0.12em;
+  color: var(--orl-ink);
+}
+
+/* Attestation: the seal sits out at the left margin of the sheet, the
+   attestation and name keep the right half where a signature would go, and
+   the seal is centred against that block. */
+.hl-doc-attest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-top: auto; /* holds the block on the bottom margin of the sheet */
+  padding-top: clamp(1rem, 3vw, 1.75rem);
+  font-style: italic;
+}
+
+.hl-doc-attest-body {
+  flex: 0 1 56%;
+  min-width: 0;
+  text-align: right;
+}
+
+/* the seal fills its reserved box - it reads a little larger out here at the
+   margin than the Rose proclamation's does at the head of the sheet */
+.hl-doc-seal--attest .hl-doc-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hl-doc-attest-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* the seal is a fixed square, so it must not be squeezed by the text beside it */
+.hl-doc-seal--attest {
+  flex: none;
+  width: 118px;
+  height: 118px;
+  margin: 0;
+}
+
+/* No signature art, so no signature rule above the name - an empty rule
+   would just read as an unsigned line. Mirrors the Rose proclamation. */
+.hl-proc-doc .hl-doc-attest .hl-doc-signer {
+  margin-top: 0.85rem;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.hl-doc-attest .hl-doc-signer span {
+  font-weight: 400;
+}
+
 /* ---- narrow screens: same document, no fixed page ---- */
 
 @media (max-width: 767px) {
@@ -1777,6 +1879,28 @@ body.proclamation-open .hl-chat-panel {
 
   .hl-doc-witness {
     margin-left: 0;
+  }
+
+  /* the seal and the attestation cannot share a line in this measure */
+  .hl-doc-attest {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hl-doc-attest-body {
+    flex: 0 1 auto;
+    text-align: center;
+  }
+
+  .hl-doc-seal--attest {
+    width: 86px;
+    height: 86px;
+  }
+
+  .hl-proc-doc .hl-doc-proc-word {
+    letter-spacing: 0.16em;
+    text-indent: 0.08em;
   }
 }
 
