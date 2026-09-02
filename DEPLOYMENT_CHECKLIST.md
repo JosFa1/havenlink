@@ -128,7 +128,7 @@ After first deployment succeeds:
    - Amplify console → Deployments → View logs
 
 3. **Verify Static Files**
-   - Images load (aaravgupta.png, etc.)
+   - Images load (asadsadikov.png, etc.)
    - Stylesheets apply (styles.css)
    - Scripts execute (script.js)
 

@@ -98,7 +98,7 @@ HavenLink
 
 **Key Sections:**
 - Team header section
-- Founders section (Asad Sadikov, Aarav Gupta, Joe Borgman)
+- Founders section (Asad Sadikov, Joe Borgman)
 - Team member biographies
 - Partner organizations (UNICEF, Connecting Hearts, etc.)
 
@@ -194,7 +194,6 @@ HavenLink
 ### Images Located in `public/png/`
 - `logo.png` - HavenLink logo
 - `asadsadikov.png` - Founder photo
-- `aaravgupta.png` - Founder photo
 - Additional organizational images
 
 ### Stylesheets
