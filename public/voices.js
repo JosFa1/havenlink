@@ -53,6 +53,9 @@
       alt: "Rick Scott, United States Senator for Florida"
     },
     {
+      /* Temporarily off the carousel - kept here so it can be brought back by
+         deleting the hidden flag. */
+      hidden: true,
       type: "quote",
       quote: "HavenLink reflects Orlando's belief in being there for kids. I am glad Central Florida's high schoolers are doing such influential work!",
       name: "Maxwell Frost",
@@ -386,8 +389,15 @@
     return card;
   }
 
+  /* An entry marked hidden:true keeps its content in VOICES but is not
+     rendered; indices below are taken after the filter so lazy-loading and
+     the --i stagger stay contiguous. */
+  var VISIBLE = VOICES.filter(function (voice) {
+    return !voice.hidden;
+  });
+
   var frag = document.createDocumentFragment();
-  VOICES.forEach(function (voice, i) {
+  VISIBLE.forEach(function (voice, i) {
     var card =
       voice.type === "coverage"
         ? buildCoverageCard(voice, i)
