@@ -1317,7 +1317,12 @@ body.proclamation-open .hl-chat-panel {
   justify-content: space-between;
   gap: 1.5rem;
   padding: clamp(1.3rem, 3vw, 1.9rem) clamp(1.25rem, 3vw, 2.1rem);
-  background: linear-gradient(135deg, var(--orl-blue-deep) 0%, var(--orl-blue) 100%);
+  /* Flat, not a fade: one solid accent all the way across. --orl-blue-deep
+     (rather than --orl-blue) is the fill because the kicker sits at 74% white
+     on it - on the Orange City accent the brighter token drops that to 3.1:1,
+     under AA for 0.8125rem type, while the deep token holds 4.5:1. Re-pointed
+     per document by the accent blocks below, so each sheet paints its own. */
+  background: var(--orl-blue-deep);
   color: #fff;
 }
 
@@ -1827,6 +1832,108 @@ body.proclamation-open .hl-chat-panel {
   font-weight: 400;
 }
 
+/* ============================================================
+   Orange County variant
+   Mayor Demings' letter is county paperwork. Its head is a three-part lockup -
+   seal, name block, portrait - where the Orlando letters run a seal-and-
+   wordmark line, and it is the one letter in the set that keeps a dateline.
+   Everything below the rule is the shared letter furniture above; as with the
+   Oviedo and Orange City variants, only the two accent tokens are re-pointed.
+
+   The accent is the county navy #054074, the dominant solid in
+   png/orange-county-logo.png. It clears 4.5:1 on the paper (9.7:1) and carries
+   the modal's header band at the deepened step (white at 74% reads 8.2:1).
+   ============================================================ */
+
+.hl-proc-modal[data-accent="orange-county"],
+.hl-proc-doc--orangecounty {
+  --orl-blue: #054074;
+  --orl-blue-deep: #03305a;
+}
+
+.hl-doc-ochead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(0.6rem, 2vw, 1.1rem);
+  /* no rule under this head: the original letterhead closes on white, unlike
+     the Orlando sheets, which run a hairline beneath the wordmark */
+}
+
+/* The round mayoral seal runs larger than the Orlando wordmark - about 14% of
+   the sheet in the original, so 104px here rather than .hl-doc-logo's 86px.
+   It keeps that class for the is-empty wash while the art is still 0-byte. */
+.hl-doc-seal--oc {
+  width: 104px;
+  height: 104px;
+}
+
+.hl-doc-seal--oc .hl-doc-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hl-doc-ocname {
+  min-width: 0;
+}
+
+.hl-proc-doc .hl-doc-oc-office {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--orl-blue-deep);
+}
+
+.hl-proc-doc .hl-doc-oc-mayor {
+  margin: 0.05rem 0 0.3rem;
+  font-size: clamp(1.45rem, 3.6vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--orl-blue-deep);
+}
+
+.hl-proc-doc .hl-doc-oc-contact {
+  margin: 0;
+  font-size: 0.7rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--orl-ink);
+}
+
+.hl-doc-oc-contact strong {
+  font-weight: 700;
+}
+
+/* portrait plate: a fixed box so the head keeps its shape whether or not the
+   art has landed - .is-empty paints the same faint wash as the other slots */
+.hl-doc-portrait {
+  display: block;
+  flex: none;
+  width: 104px;
+  height: 130px;
+}
+
+.hl-doc-portrait .hl-doc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hl-doc-portrait.is-empty {
+  background-color: rgba(0, 82, 155, 0.05);
+}
+
+/* the dateline is this letter's first block under the rule, so it carries the
+   drop that .hl-doc-addr holds on the Orlando sheets */
+.hl-proc-doc .hl-doc-date {
+  margin-top: clamp(1.5rem, 3vw, 2.1rem);
+  margin-bottom: 1.5rem;
+}
+
 /* ---- narrow screens: same document, no fixed page ---- */
 
 @media (max-width: 767px) {
@@ -1860,6 +1967,30 @@ body.proclamation-open .hl-chat-panel {
   .hl-doc-seal {
     width: 76px;
     height: 76px;
+  }
+
+  /* the three-part county head has no room to sit in a row at this width:
+     the seal and the portrait share the top line, the name block drops under
+     them so the mayor's name keeps its size instead of shrinking to fit */
+  .hl-doc-ochead {
+    grid-template-columns: auto 1fr;
+    row-gap: 0.75rem;
+  }
+
+  .hl-doc-ocname {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .hl-doc-seal--oc {
+    width: 64px;
+    height: 64px;
+  }
+
+  .hl-doc-portrait {
+    justify-self: end;
+    width: 74px;
+    height: 92px;
   }
 
   /* the hanging gutter costs too much measure here - stack instead */

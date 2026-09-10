@@ -138,6 +138,16 @@
     },
     {
       type: "quote",
+      quote: "HavenLink's remarkable achievements in their local county demonstrate the power of young people to turn an idea into a meaningful reality. On behalf of the 1.6 million residents of Orange County, I thank you for the vital work you are doing.",
+      name: "Jerry L. Demings",
+      title: "Mayor of Orange County",
+      img: "/png/jerry-demings.png",
+      initials: "JD",
+      alt: "Jerry L. Demings, Mayor of Orange County",
+      action: { label: "Read the full letter", modal: "letter-demings" }
+    },
+    {
+      type: "quote",
       quote: "After meeting with the HavenLink team, I would suggest for people in my district to use their great tool if they are looking to adopt!",
       name: "Carlos Guillermo Smith",
       title: "Florida State Senator, District 17",
@@ -474,16 +484,17 @@
   sync();
 
   /* ---------- Reproduced-document modals ----------
-     One shell, five documents: Mayor Dyer's letter of recognition,
+     One shell, six documents: Mayor Dyer's letter of recognition,
      Commissioner Rose's HavenLink Week proclamation, Commissioner Keen's
-     letter, Mayor Sladek's letter from the City of Oviedo, and Mayor Marks'
-     proclamation from the City of Orange City. A card's
+     letter, Mayor Sladek's letter from the City of Oviedo, Mayor Marks'
+     proclamation from the City of Orange City, and Mayor Demings' letter
+     from Orange County. A card's
      data-voice-modal names which <article> to show; everything else - the
      focus trap, Escape, backdrop click, scroll lock - is shared, and each
      article supplies its own header strings via data-kicker/data-title.
 
      Only the Dyer letter has a PDF counterpart, so only it runs the probe
-     below; the other four are always the typeset article. */
+     below; the other five are always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -496,6 +507,7 @@
     "proclamation-rose": document.getElementById("proclamationRose"),
     "letter-keen": document.getElementById("letterKeen"),
     "letter-sladek": document.getElementById("letterSladek"),
+    "letter-demings": document.getElementById("letterDemings"),
     "proclamation-marks": document.getElementById("proclamationMarks")
   };
   var kicker = document.getElementById("procKicker");
