@@ -6,5 +6,4 @@ dist
 !.env.example
 npm-debug.log*
 *.log
-knowledge-tools/output
 deploy/tmp-*.json
