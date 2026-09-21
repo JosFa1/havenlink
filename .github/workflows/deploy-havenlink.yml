@@ -13,7 +13,9 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   APP_NAME: ${{ vars.APP_NAME }}
   DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
-  IMAGE_TAG: ${{ github.sha }}
+  # Include the run ID so a failed deployment can be retried without trying
+  # to overwrite an immutable ECR tag that the previous run already pushed.
+  IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}
   ECR_REPOSITORY: havenlink-serverless
   STACK_NAME: havenlink-serverless-candidate
 
