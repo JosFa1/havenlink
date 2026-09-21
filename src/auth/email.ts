@@ -3,6 +3,7 @@
  * in app.ts) and the templated transactional emails.
  */
 import nodemailer from "nodemailer";
+import { SESv2Client, SendEmailCommand } from "@aws-sdk/client-sesv2";
 import { config } from "../config";
 
 export const transporter = nodemailer.createTransport({
@@ -15,6 +16,47 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
+const ses = new SESv2Client({
+  region: process.env.AWS_REGION ?? process.env.AWS_DEFAULT_REGION ?? "us-east-1",
+});
+
+type EmailMessage = {
+  from: string;
+  to: string | string[];
+  replyTo?: string;
+  subject: string;
+  text: string;
+  html?: string;
+};
+
+function bareAddress(value: string): string {
+  const match = value.match(/<([^>]+)>/);
+  return (match?.[1] ?? value).trim();
+}
+
+/** Send through the Lambda role in production, avoiding expiring SMTP keys. */
+export async function sendEmail(message: EmailMessage): Promise<void> {
+  if (config.EMAIL_TRANSPORT === "ses") {
+    const to = Array.isArray(message.to) ? message.to : [message.to];
+    await ses.send(new SendEmailCommand({
+      FromEmailAddress: bareAddress(message.from),
+      Destination: { ToAddresses: to.map(bareAddress) },
+      ReplyToAddresses: message.replyTo ? [bareAddress(message.replyTo)] : undefined,
+      Content: {
+        Simple: {
+          Subject: { Data: message.subject, Charset: "UTF-8" },
+          Body: {
+            Text: { Data: message.text, Charset: "UTF-8" },
+            ...(message.html ? { Html: { Data: message.html, Charset: "UTF-8" } } : {}),
+          },
+        },
+      },
+    }));
+    return;
+  }
+  await transporter.sendMail(message);
+}
+
 /** Build the absolute verification link from the app base URL + raw token. */
 function verificationLink(rawToken: string): string {
   const base = config.APP_BASE_URL.replace(/\/$/, "");
@@ -26,7 +68,7 @@ export async function sendVerificationEmail(
   rawToken: string
 ): Promise<void> {
   const link = verificationLink(rawToken);
-  await transporter.sendMail({
+  await sendEmail({
     from: config.EMAIL_FROM,
     to,
     subject: "Verify your HavenLink email",
@@ -53,7 +95,7 @@ export async function sendNewsletterSubscriberNotification(
     timeZone: "America/New_York",
     timeZoneName: "short",
   });
-  await transporter.sendMail({
+  await sendEmail({
     from: config.EMAIL_FROM,
     to: "havenlink.org@gmail.com",
     replyTo: subscriberEmail,

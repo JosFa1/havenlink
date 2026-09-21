@@ -18,6 +18,22 @@ CREATE TABLE IF NOT EXISTS users (
   updated_at      timestamptz NOT NULL DEFAULT now()
 );
 
+-- Durable change feed used during the PostgreSQL-authoritative migration.  Each
+-- user mutation inserts the complete post-write row in the same transaction;
+-- the candidate worker can replay events idempotently by aggregate_id/version.
+CREATE TABLE IF NOT EXISTS havenlink_outbox (
+  id              bigserial PRIMARY KEY,
+  aggregate_type  text NOT NULL,
+  aggregate_id    uuid NOT NULL,
+  event_type      text NOT NULL,
+  payload         jsonb NOT NULL,
+  created_at      timestamptz NOT NULL DEFAULT now(),
+  processed_at    timestamptz,
+  attempts        integer NOT NULL DEFAULT 0,
+  last_error      text
+);
+CREATE INDEX IF NOT EXISTS idx_havenlink_outbox_pending ON havenlink_outbox (id) WHERE processed_at IS NULL;
+
 -- Newsletter prompt state (added post-launch; ALTERs are idempotent so `npm run
 -- migrate` is safe to re-run). `prompt_pending` is set true only when a brand-new
 -- account is created, so the one-time popup shows for new signups but never for

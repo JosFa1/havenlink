@@ -27,8 +27,13 @@
   },
   "homepage": "https://github.com/acid701/havenlink#readme",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.1133.0",
+    "@aws-sdk/client-s3": "^3.1133.0",
+    "@aws-sdk/client-sesv2": "^3.1137.0",
+    "@aws-sdk/lib-dynamodb": "^3.1133.0",
     "@google/genai": "^2.10.0",
     "argon2": "^0.41.1",
+    "compression": "^1.8.2",
     "connect-pg-simple": "^10.0.0",
     "cookie-parser": "^1.4.7",
     "csrf-csrf": "^3.0.6",
@@ -45,6 +50,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/compression": "^1.8.1",
     "@types/connect-pg-simple": "^7.0.3",
     "@types/cookie-parser": "^1.4.8",
     "@types/express": "^5.0.6",

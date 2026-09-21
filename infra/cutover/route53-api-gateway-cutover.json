@@ -1,0 +1,29 @@
+{
+  "Comment": "HavenLink production API cutover to the validated serverless candidate",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "havenlink.org.",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "Z1UJRXOUMOOFQ8",
+          "DNSName": "d-70a3wa3i2g.execute-api.us-east-1.amazonaws.com.",
+          "EvaluateTargetHealth": false
+        }
+      }
+    },
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "www.havenlink.org.",
+        "Type": "A",
+        "AliasTarget": {
+          "HostedZoneId": "Z1UJRXOUMOOFQ8",
+          "DNSName": "d-czfpu34c8k.execute-api.us-east-1.amazonaws.com.",
+          "EvaluateTargetHealth": false
+        }
+      }
+    }
+  ]
+}

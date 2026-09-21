@@ -1,9 +1,10 @@
 // Config is imported first so .env is loaded and validated before anything else.
 import { config } from "./config";
 import express from "express";
+import compression from "compression";
 import path from "path";
 import cookieParser from "cookie-parser";
-import { transporter } from "./auth/email";
+import { sendEmail } from "./auth/email";
 import { sessionMiddleware } from "./middleware/session";
 import { securityHeaders } from "./middleware/security";
 import { doubleCsrfProtection, invalidCsrfTokenError } from "./middleware/security";
@@ -37,6 +38,11 @@ if (config.isProd) {
 
 // ----- Core middleware (order matters) ---------------------------------------
 app.use(securityHeaders());
+app.get("/health", (_req, res) => res.status(200).json({ ok: true }));
+// Compress HTML, JSON, CSS, and JavaScript before they leave API Gateway. This
+// matters on the public pages because their HTML shell and scripts are served
+// by the same Lambda as the API rather than by a separate static origin.
+app.use(compression({ threshold: 1024 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser()); // required by csrf-csrf to read the CSRF cookie
@@ -50,7 +56,16 @@ app.use(passport.session());
 // .html file nor a hand-typed URL can bypass the login requirement.
 app.use(pageGuard);
 
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../public"), {
+  setHeaders: (res, filePath) => {
+    // These filenames are intentionally not content-hashed, so use a bounded
+    // cache with revalidation rather than immutable caching. HTML remains
+    // uncached and can pick up a deploy immediately.
+    if (/\.(?:css|js|json|png|jpe?g|gif|svg|webp|ico|woff2?|pdf|gz)$/i.test(filePath)) {
+      res.setHeader("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+    }
+  },
+}));
 
 // ----- Auth routes ------------------------------------------------------------
 app.use("/auth", authRouter);
@@ -137,7 +152,7 @@ ${message || "No additional information provided"}
     };
 
     // Critical path: the request is only "received" once HavenLink is notified.
-    await transporter.sendMail(mailOptions);
+    await sendEmail(mailOptions);
 
     // Send confirmation email to the organization
     const confirmationEmail = {
@@ -159,7 +174,7 @@ havenlink.org@gmail.com
     // Best-effort: a bad/typo'd applicant address must not fail a request that
     // HavenLink has already been notified about.
     try {
-      await transporter.sendMail(confirmationEmail);
+      await sendEmail(confirmationEmail);
     } catch (confirmErr) {
       console.error(
         "Partnership confirmation email failed (request still recorded):",
@@ -245,7 +260,7 @@ ${sectionsText}
     `;
 
     // Critical path: the submission is only "received" once HavenLink is notified.
-    await transporter.sendMail({
+    await sendEmail({
       from: config.EMAIL_FROM,
       to: "havenlink.org@gmail.com",
       replyTo: user.email, // let the team reply straight to the family
@@ -463,7 +478,7 @@ app.post("/api/home-study-submission", doubleCsrfProtection, async (req, res) =>
     }
 
     // Critical path: the submission is only "received" once HavenLink is notified.
-    await transporter.sendMail({
+    await sendEmail({
       from: config.EMAIL_FROM,
       to: "havenlink.org@gmail.com",
       replyTo: user.email, // let the team reply straight to the family

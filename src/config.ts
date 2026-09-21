@@ -22,7 +22,7 @@ const schema = z.object({
   APP_BASE_URL: z.string().url(),
 
   // Postgres. Require TLS verification in prod; allow plain local connections in dev.
-  DATABASE_URL: z.string().min(1),
+  DATABASE_URL: z.string().optional().default(""),
 
   // Session signing secret (opaque cookie). Must be long + random.
   SESSION_SECRET: z.string().min(32, "SESSION_SECRET must be >= 32 chars"),
@@ -42,6 +42,10 @@ const schema = z.object({
     .transform((value) => value === "true"),
   SMTP_USER: z.string().min(1),
   SMTP_PASSWORD: z.string().min(1),
+  // SES uses the Lambda execution role directly in production. SMTP remains
+  // available for local development and any environment that explicitly opts
+  // into it.
+  EMAIL_TRANSPORT: z.enum(["smtp", "ses"]).default("smtp"),
 
   // ---- Gemini AI chatbot ----------------------------------------------------
   // Optional: the site boots without these; the /api/chat route just reports that
@@ -96,9 +100,15 @@ if (!parsed.success) {
   throw new Error(`Invalid environment configuration:\n${issues}`);
 }
 
+const serverlessMode = process.env.DATA_BACKEND === "dynamodb" || !!process.env.DDB_TABLE;
+if (!serverlessMode && !parsed.data.DATABASE_URL) {
+  throw new Error("Invalid environment configuration: DATABASE_URL is required outside DynamoDB mode");
+}
+
 export const config = {
   ...parsed.data,
   isProd,
+  serverlessMode,
 };
 
 export type AppConfig = typeof config;

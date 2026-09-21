@@ -7,16 +7,14 @@ import session from "express-session";
 import connectPgSimple from "connect-pg-simple";
 import { config } from "../config";
 import { pool } from "../db/pool";
+import { DynamoSessionStore } from "../db/session-dynamo";
 
 const PgStore = connectPgSimple(session);
 
 export function sessionMiddleware() {
+  const useDynamo = process.env.DATA_BACKEND === "dynamodb" || !!process.env.DDB_TABLE;
   return session({
-    store: new PgStore({
-      pool,
-      tableName: "session",
-      createTableIfMissing: false, // table is created by our migration
-    }),
+    store: useDynamo ? new DynamoSessionStore() : new PgStore({ pool, tableName: "session", createTableIfMissing: false }),
     name: "havenlink.sid",
     secret: config.SESSION_SECRET,
     resave: false,

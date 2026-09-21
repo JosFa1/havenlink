@@ -26,7 +26,7 @@
       quote: "The young residents behind HavenLink are active, engaged, and are already making a difference in our community. This is a great initiative, and I hope that their efforts continue to be so largely impactful!",
       name: "Buddy Dyer",
       title: "Mayor of Orlando",
-      img: "/png/buddy-dyer.png",
+      img: "/png/buddy-dyer.webp",
       initials: "BD",
       alt: "Buddy Dyer, Mayor of Orlando",
       action: { label: "Read the full proclamation", modal: "proclamation" }
@@ -48,7 +48,7 @@
       quote: "The students who built HavenLink researched a real problem in our community, families struggling to navigate adoption, and did something about it. That's the Florida grit I am proud of.",
       name: "Rick Scott",
       title: "United States Senator for Florida",
-      img: "/png/rick-scott.png",
+      img: "/png/rick-scott.webp",
       initials: "RS",
       alt: "Rick Scott, United States Senator for Florida"
     },
@@ -60,7 +60,7 @@
       quote: "HavenLink reflects Orlando's belief in being there for kids. I am glad Central Florida's high schoolers are doing such influential work!",
       name: "Maxwell Frost",
       title: "United States Representative for Central Florida",
-      img: "/png/maxwell-frost.png",
+      img: "/png/maxwell-frost.webp",
       initials: "MF",
       alt: "Maxwell Frost, United States Representative for Central Florida"
     },
@@ -90,7 +90,7 @@
       quote: "I want to thank HavenLink for identifying a real gap in our community and building something to close it. I am looking forward to seeing how you grow this resource in the years to come.",
       name: "Megan Sladek",
       title: "Mayor of Oviedo",
-      img: "/png/megan-sladek.png",
+      img: "/png/megan-sladek.webp",
       initials: "MS",
       alt: "Megan Sladek, Mayor of Oviedo",
       action: { label: "Read the full letter", modal: "letter-sladek" }
@@ -224,7 +224,7 @@
       quote: "A lot of times, others are challenged to understand how difficult the adoption process is, and the waiting times, and the costs. Platforms such as HavenLink are amazing in explaining the process and connections.",
       name: "Bonnie Hilton",
       title: "Utah Administrative Director, Hand in Hand",
-      img: "/png/bonnie-hilton.png",
+      img: "/png/bonnie-hilton.webp",
       initials: "BH",
       alt: "Bonnie Hilton, Utah Administrative Director of Hand in Hand"
     },
@@ -242,7 +242,6 @@
     }
   ];
 
-  var PROCLAMATION_PDF = "/documents/havenlink-proclamation-city-of-orlando.pdf";
   var AVATAR = 60; /* must match --hl-avatar in home.css - reserves the box */
   var EAGER = 2; /* first two avatars load eagerly, the rest lazily */
 
@@ -517,7 +516,10 @@
     'a[href], button:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])';
   var lastFocused = null;
   var closeTimer = null;
-  var pdfAvailable = null; /* null = not probed yet */
+  // The PDF is not part of the deployed public asset set. Keep the typeset
+  // letter as the authoritative document instead of probing a missing path
+  // that the SPA fallback would answer with homepage HTML.
+  var pdfAvailable = false;
 
   /* Show one document and hide the rest, then relabel the modal header from
      that document's own data- attributes. */
@@ -586,26 +588,7 @@
   function resolveProclamation() {
     if (pdfEmbedUnsupported()) return useLetter();
     if (pdfAvailable === true) return usePdf();
-    if (pdfAvailable === false) return useLetter();
-    if (!window.fetch) {
-      pdfAvailable = true;
-      return usePdf();
-    }
-    /* The PDF may simply not be committed yet - show the letter meanwhile
-       rather than an empty viewer, and upgrade only if the file is really
-       there. A 200 is not enough: unknown paths fall through to the SPA
-       fallback, which answers with index.html, so the type has to be checked. */
-    useLetter();
-    window
-      .fetch(PROCLAMATION_PDF, { method: "HEAD" })
-      .then(function (res) {
-        var type = res && res.ok && res.headers.get("content-type");
-        pdfAvailable = !!(type && type.indexOf("pdf") !== -1);
-        if (pdfAvailable) usePdf();
-      })
-      .catch(function () {
-        pdfAvailable = false;
-      });
+    return useLetter();
   }
 
   function focusables() {

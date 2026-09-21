@@ -12,7 +12,7 @@
  */
 import { Router } from "express";
 import { config } from "../config";
-import { transporter } from "../auth/email";
+import { sendEmail } from "../auth/email";
 import { requireAuth } from "../middleware/requireAuth";
 import { doubleCsrfProtection } from "../middleware/security";
 import { recordMatch, type User } from "../db/users";
@@ -232,7 +232,7 @@ matchRouter.post("/confirm", requireAuth, doubleCsrfProtection, async (req, res)
     // Best-effort notification to the team; a mail hiccup must not undo or
     // fail a match that is already stored.
     try {
-      await transporter.sendMail({
+      await sendEmail({
         from: config.EMAIL_FROM,
         to: "havenlink.org@gmail.com",
         replyTo: user.email, // let the team reply straight to the family

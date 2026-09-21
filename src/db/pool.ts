@@ -7,7 +7,7 @@
  * In dev, local Postgres typically has no TLS, so SSL is disabled there.
  */
 import fs from "fs";
-import { Pool } from "pg";
+import { Pool, type PoolClient } from "pg";
 import { config } from "../config";
 
 export function sslConfig() {
@@ -40,4 +40,11 @@ export async function query<T = Record<string, unknown>>(
 ): Promise<{ rows: T[]; rowCount: number }> {
   const res = await pool.query(text, params as never);
   return { rows: res.rows as T[], rowCount: res.rowCount ?? 0 };
+}
+
+export async function transaction<T>(fn: (client: PoolClient) => Promise<T>): Promise<T> {
+  const client = await pool.connect();
+  try { await client.query("BEGIN"); const value = await fn(client); await client.query("COMMIT"); return value; }
+  catch (error) { await client.query("ROLLBACK"); throw error; }
+  finally { client.release(); }
 }
