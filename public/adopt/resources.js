@@ -112,6 +112,14 @@
       .then(function (cfg) {
         if (!cfg || !cfg.configured || !cfg.apiKey) throw new Error("MAPS_NOT_CONFIGURED");
         return new Promise(function (resolve, reject) {
+          // Google invokes this hook when the browser key is invalid, disabled,
+          // or blocked by referrer restrictions. Without it the script can load
+          // while leaving Google's red error overlay over the map forever.
+          var previousAuthFailure = window.gm_authFailure;
+          window.gm_authFailure = function () {
+            window.gm_authFailure = previousAuthFailure;
+            reject(new Error("MAPS_AUTH_FAILED"));
+          };
           window.__havenMapsReady = function () { resolve(); };
           var s = document.createElement("script");
           s.src = "https://maps.googleapis.com/maps/api/js?key=" +
@@ -349,7 +357,9 @@
       mapEl.innerHTML = '<div class="rf-map-fallback">' +
         (err && err.message === "MAPS_NOT_CONFIGURED"
           ? "The map is not configured in this environment — every finding is logged in the field notes."
-          : "The map couldn't load right now — every finding is logged in the field notes.") + "</div>";
+          : err && err.message === "MAPS_AUTH_FAILED"
+            ? "The map key was rejected by Google — every finding is still available in the field notes."
+            : "The map couldn't load right now — every finding is logged in the field notes.") + "</div>";
       if (merged.length === 0) {
         showMsg("info", "Nothing charted within " + data.radiusMiles + " mi.");
       }

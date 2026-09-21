@@ -588,7 +588,9 @@ app.get("/adopt/matching.html", (req, res) => {
 
 // Root route redirects to /home
 app.get("/", (req, res) => {
-  res.redirect("/home");
+  // Serve the canonical homepage directly.  A redirect adds a second API
+  // Gateway/Lambda request, which is especially noticeable on a cold start.
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
 

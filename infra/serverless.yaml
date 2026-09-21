@@ -22,7 +22,6 @@ Parameters:
   GoogleCloudProject: { Type: String, Default: havenlink-500500 }
   GeminiLocation: { Type: String, Default: us-central1 }
   GoogleMapsApiKey: { Type: String, NoEcho: true }
-  EcsExecutionRoleArn: { Type: String }
 Resources:
   DataTable:
     Type: AWS::DynamoDB::Table
@@ -127,24 +126,6 @@ Resources:
           GEMINI_SA_KEY: !Sub '{{resolve:secretsmanager:${ExistingVertexSecretArn}:SecretString}}'
           GOOGLE_MAPS_API_KEY: !Ref GoogleMapsApiKey
 
-  # Keep one execution environment ready at all times. The public site and its
-  # API share this function, so this removes the 4-6 second first-request delay
-  # without changing the application contract. One warm 512 MB instance adds a
-  # small predictable monthly charge and is intentional for the sub-second goal.
-  ApiVersion:
-    Type: AWS::Lambda::Version
-    Properties:
-      FunctionName: !Ref ApiFunction
-      Description: !Ref ImageUri
-  ApiAlias:
-    Type: AWS::Lambda::Alias
-    Properties:
-      Name: live
-      FunctionName: !Ref ApiFunction
-      FunctionVersion: !GetAtt ApiVersion.Version
-      ProvisionedConcurrencyConfig:
-        ProvisionedConcurrentExecutions: 1
-
   HttpApi:
     Type: AWS::ApiGatewayV2::Api
     Properties: { Name: !Sub '${AppName}-${Environment}', ProtocolType: HTTP, CorsConfiguration: { AllowCredentials: true, AllowHeaders: ['content-type', 'x-csrf-token'], AllowMethods: ['*'], AllowOrigins: ['https://havenlink.org', 'https://www.havenlink.org'] } }
@@ -153,7 +134,7 @@ Resources:
     Properties:
       ApiId: !Ref HttpApi
       IntegrationType: AWS_PROXY
-      IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiAlias.Arn}/invocations'
+      IntegrationUri: !Sub 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${ApiFunction.Arn}/invocations'
       PayloadFormatVersion: '2.0'
   ProxyRoute:
     Type: AWS::ApiGatewayV2::Route
@@ -166,7 +147,7 @@ Resources:
     Properties: { ApiId: !Ref HttpApi, StageName: '$default', AutoDeploy: true }
   InvokePermission:
     Type: AWS::Lambda::Permission
-    Properties: { Action: lambda:InvokeFunction, FunctionName: !Ref ApiAlias, Principal: apigateway.amazonaws.com, SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*/*' }
+    Properties: { Action: lambda:InvokeFunction, FunctionName: !Ref ApiFunction, Principal: apigateway.amazonaws.com, SourceArn: !Sub 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${HttpApi}/*/*' }
 
   Certificate:
     Type: AWS::CertificateManager::Certificate
@@ -195,34 +176,6 @@ Resources:
       Type: A
       AliasTarget: { DNSName: !GetAtt CustomDomain.RegionalDomainName, HostedZoneId: !GetAtt CustomDomain.RegionalHostedZoneId }
 
-  MigratorRole:
-    Type: AWS::IAM::Role
-    Properties:
-      RoleName: !Sub '${AppName}-${Environment}-migrator'
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement: [{ Effect: Allow, Principal: { Service: ecs-tasks.amazonaws.com }, Action: sts:AssumeRole }]
-      Policies:
-        - PolicyName: migrator-access
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action: [dynamodb:BatchWriteItem, dynamodb:DescribeTable, dynamodb:GetItem, dynamodb:PutItem, dynamodb:Query, dynamodb:Scan, dynamodb:UpdateItem, dynamodb:TransactWriteItems]
-                Resource: [!GetAtt DataTable.Arn, !Sub '${DataTable.Arn}/index/*']
-              - Effect: Allow
-                Action: secretsmanager:GetSecretValue
-                Resource: [!Ref ExistingDatabaseSecretArn]
-              - Effect: Allow
-                Action: [logs:CreateLogStream, logs:PutLogEvents]
-                Resource: !GetAtt LambdaLogGroup.Arn
-              - Effect: Allow
-                Action: [s3:GetObject, s3:PutObject]
-                Resource: !Sub '${MigrationCheckpointBucket.Arn}/*'
-              - Effect: Allow
-                Action: s3:ListBucket
-                Resource: !GetAtt MigrationCheckpointBucket.Arn
-
   MigrationCheckpointBucket:
     Type: AWS::S3::Bucket
     DeletionPolicy: Retain
@@ -233,40 +186,10 @@ Resources:
       VersioningConfiguration: { Status: Enabled }
       PublicAccessBlockConfiguration: { BlockPublicAcls: true, BlockPublicPolicy: true, IgnorePublicAcls: true, RestrictPublicBuckets: true }
 
-  MigratorTaskDefinition:
-    Type: AWS::ECS::TaskDefinition
-    Properties:
-      Family: !Sub '${AppName}-${Environment}-migrator'
-      RequiresCompatibilities: [FARGATE]
-      NetworkMode: awsvpc
-      Cpu: '256'
-      Memory: '512'
-      RuntimePlatform: { CpuArchitecture: ARM64, OperatingSystemFamily: LINUX }
-      ExecutionRoleArn: !Ref EcsExecutionRoleArn
-      TaskRoleArn: !GetAtt MigratorRole.Arn
-      ContainerDefinitions:
-        - Name: migrator
-          Image: !Ref ImageUri
-          Essential: true
-          Command: [node, scripts/migrate-postgres-to-dynamodb.mjs, --mode=backfill]
-          Environment:
-            - { Name: DDB_TABLE, Value: !Ref DataTable }
-            - { Name: AWS_REGION, Value: !Ref AWS::Region }
-            - { Name: PGSSLMODE, Value: require }
-          Secrets:
-            - { Name: DATABASE_URL, ValueFrom: !Ref ExistingDatabaseSecretArn }
-          LogConfiguration:
-            LogDriver: awslogs
-            Options:
-              awslogs-group: !Ref LambdaLogGroup
-              awslogs-region: !Ref AWS::Region
-              awslogs-stream-prefix: migrator
-
 Outputs:
   TableName: { Value: !Ref DataTable }
   ApiEndpoint: { Value: !Sub 'https://${ApiDomainName}' }
   ApiRegionalDomainName: { Value: !GetAtt CustomDomain.RegionalDomainName }
   ApiRegionalHostedZoneId: { Value: !GetAtt CustomDomain.RegionalHostedZoneId }
   LambdaArn: { Value: !GetAtt ApiFunction.Arn }
-  MigratorTaskDefinition: { Value: !Ref MigratorTaskDefinition }
   MigrationCheckpointBucket: { Value: !Ref MigrationCheckpointBucket }
