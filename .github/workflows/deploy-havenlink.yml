@@ -55,16 +55,6 @@ jobs:
           push: true
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
 
-      - name: Resolve HavenLink hosted zone
-        id: route53
-        run: |
-          zone_id=$(aws route53 list-hosted-zones-by-name \
-            --dns-name "${DOMAIN_NAME}." \
-            --query "HostedZones[?Name=='${DOMAIN_NAME}.'].Id | [0]" \
-            --output text)
-          test -n "$zone_id" -a "$zone_id" != None
-          echo "hosted_zone_id=${zone_id##*/}" >> "$GITHUB_OUTPUT"
-
       - name: Deploy serverless candidate stack
         run: |
           aws cloudformation deploy \
@@ -79,7 +69,7 @@ jobs:
               ImageUri="${{ steps.login-ecr.outputs.registry }}/${ECR_REPOSITORY}:${IMAGE_TAG}" \
               ApiDomainName="serverless-api.${DOMAIN_NAME}" \
               ProductionDomainName="$DOMAIN_NAME" \
-              HostedZoneId="${{ steps.route53.outputs.hosted_zone_id }}" \
+              HostedZoneId="${{ vars.HOSTED_ZONE_ID }}" \
               ExistingDatabaseSecretArn="${{ secrets.DATABASE_URL_SECRET_ARN }}" \
               ExistingSessionSecretArn="${{ secrets.SESSION_SECRET_SECRET_ARN }}" \
               ExistingGoogleClientSecretArn="${{ secrets.GOOGLE_CLIENT_SECRET_SECRET_ARN }}" \
