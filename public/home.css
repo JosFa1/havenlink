@@ -1934,6 +1934,204 @@ body.proclamation-open .hl-chat-panel {
   margin-bottom: 1.5rem;
 }
 
+/* ============================================================
+   United States Senate variant
+   Senator Scott's letter is federal stationery and shares almost none of the
+   head furniture above: a three-part engraved band - name block left, the
+   blackletter wordmark centred, committee assignments down the right - and no
+   rule closing it. The body is indented-paragraph style rather than the
+   flush-left block the city letters use, the dateline is centred, and the
+   sign-off column sits near the middle of the measure, all as the original
+   sets them.
+
+   The accent is #1a4f96, sampled from the letterhead ink in the scan. It
+   clears 4.5:1 on the paper (7.4:1) and carries the modal's header band at
+   the deepened step (white at 74% reads 7.9:1). As with the other variants,
+   only the two colour tokens are re-pointed.
+   ============================================================ */
+
+.hl-proc-modal[data-accent="senate"],
+.hl-proc-doc--senate {
+  --orl-blue: #1a4f96;
+  --orl-blue-deep: #143c72;
+}
+
+/* Name block and committee list take exactly the width their lines need -
+   neither may wrap, the original sets both on single lines - and the wordmark
+   floats in the slack between them. The two sides are uneven, so it lands a
+   little left of the measure's centre, which is where the original puts it. */
+.hl-doc-senhead {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: clamp(0.5rem, 2vw, 1.1rem);
+}
+
+.hl-doc-senname {
+  padding-top: 0.15rem;
+  white-space: nowrap;
+}
+
+.hl-proc-doc .hl-doc-sen-senator,
+.hl-proc-doc .hl-doc-sen-state {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--orl-blue);
+}
+
+.hl-proc-doc .hl-doc-sen-senator {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* the state sits centred under the name in the original, not flush with it */
+.hl-proc-doc .hl-doc-sen-state {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+/* Art, not type: no blackletter face ships widely enough to set this, and the
+   CSP forbids a font CDN. Sized off the sheet rather than the intrinsic px so
+   it holds its share of the measure at every width. */
+.hl-doc-senwordmark {
+  display: block;
+  justify-self: center;
+  align-self: center; /* rides the middle of the committee stack, as engraved */
+  /* The original engraves it at about a third of the measure; 205px is that
+     third once the sheet is at its 800px ceiling, and below that it simply
+     takes the slack the two side blocks leave. */
+  width: min(100%, 205px);
+}
+
+.hl-doc-senwordmark .hl-doc-img {
+  width: 100%;
+  height: auto;
+}
+
+.hl-doc-senwordmark.is-empty {
+  height: 50px;
+  background-color: rgba(0, 82, 155, 0.05);
+}
+
+.hl-proc-doc .hl-doc-sen-committees {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.3;
+  text-align: right;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--orl-blue);
+}
+
+.hl-doc-sen-committees li + li {
+  margin-top: 0.7rem;
+}
+
+/* "Chairman" hangs under the committee it belongs to, a step smaller */
+.hl-doc-sen-committees span {
+  display: block;
+  margin-top: 0.12rem;
+  font-size: 0.5625rem;
+  letter-spacing: 0.05em;
+}
+
+.hl-proc-doc .hl-doc-date--center {
+  margin-top: clamp(1.6rem, 3.4vw, 2.4rem);
+  margin-bottom: clamp(1.6rem, 3.4vw, 2.4rem);
+  text-align: center;
+}
+
+/* Federal letters indent the first line instead of leaving a blank line
+   between paragraphs; the city sheets do the opposite, so this is scoped. */
+.hl-proc-doc--senate p {
+  margin-bottom: 0.85rem;
+  text-indent: 3.2em; /* the original's half-inch first-line indent */
+}
+
+.hl-proc-doc--senate .hl-doc-sen-senator,
+.hl-proc-doc--senate .hl-doc-sen-state,
+.hl-proc-doc--senate .hl-doc-date,
+.hl-proc-doc--senate .hl-doc-addr,
+.hl-proc-doc--senate .hl-doc-salutation,
+.hl-proc-doc--senate .hl-doc-signoff,
+.hl-proc-doc--senate .hl-doc-signer,
+.hl-proc-doc--senate .hl-doc-foot p {
+  text-indent: 0;
+}
+
+.hl-proc-doc--senate .hl-doc-addr {
+  margin-top: 0;
+  margin-bottom: 1.15rem;
+}
+
+/* the whole sign-off column is set in from the left margin, roughly to the
+   middle of the measure - not a hanging indent on the sign-off line alone */
+.hl-doc-senclose {
+  margin-top: clamp(0.9rem, 2.4vw, 1.5rem);
+  margin-left: 38%;
+}
+
+.hl-proc-doc--senate .hl-doc-signer span {
+  font-weight: 400;
+}
+
+/* No rule over this foot: the original closes on white and sets the address
+   and the number as one engraved line split by a short vertical stroke. */
+.hl-doc-foot--senate {
+  border-top: 0;
+  /* margin-top:auto still pins it to the bottom margin, but this letter runs
+     long enough to eat the slack - the padding keeps the engraved line clear
+     of the sign-off the way the original does. */
+  padding-top: clamp(1.4rem, 3.5vw, 2.6rem);
+}
+
+.hl-proc-doc .hl-doc-foot--senate p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hl-doc-foot-rule {
+  flex: none;
+  width: 1px;
+  height: 1.35em;
+  background-color: var(--orl-blue);
+}
+
+@media (min-width: 768px) {
+  /* .hl-proc-letter p justifies from 768px up - the engraved band and the
+     centred dateline have to opt back out the way Oviedo's head does */
+  .hl-proc-letter .hl-doc-sen-state,
+  .hl-proc-letter .hl-doc-date--center,
+  .hl-proc-letter .hl-doc-foot--senate p {
+    text-align: center;
+  }
+
+  .hl-proc-letter .hl-doc-sen-senator {
+    text-align: left;
+  }
+
+  .hl-proc-letter .hl-doc-sen-committees {
+    text-align: right;
+  }
+}
+
 /* ---- narrow screens: same document, no fixed page ---- */
 
 @media (max-width: 767px) {
@@ -2032,6 +2230,37 @@ body.proclamation-open .hl-chat-panel {
   .hl-proc-doc .hl-doc-proc-word {
     letter-spacing: 0.16em;
     text-indent: 0.08em;
+  }
+
+  /* The engraved band has no room for three columns in this measure: the
+     name block and the committee list share the top line, the wordmark drops
+     under them across the full width so it keeps a readable size. */
+  .hl-doc-senhead {
+    grid-template-columns: auto 1fr;
+    row-gap: 0.9rem;
+  }
+
+  .hl-doc-senwordmark {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: min(100%, 300px);
+    margin: 0 auto;
+  }
+
+  /* the sign-off column cannot afford a 38% indent here */
+  .hl-doc-senclose {
+    margin-left: 0;
+  }
+
+  /* the address and the number stack rather than ride one engraved line */
+  .hl-proc-doc .hl-doc-foot--senate p {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .hl-doc-foot-rule {
+    width: 2.5rem;
+    height: 1px;
   }
 }
 

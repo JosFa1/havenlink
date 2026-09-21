@@ -578,10 +578,12 @@
   <!-- Reproduced civic documents, opened from the voice cards: Mayor Dyer's
        letter of recognition, Commissioner Rose's HavenLink Week proclamation,
        Commissioner Keen's letter, Mayor Sladek's letter from the City of
-       Oviedo, and Mayor Marks' proclamation from the City of Orange City. Deliberately NOT styled like the privacy modal - these reproduce
-       real paperwork, so they carry the issuing city's own colour and a serif
-       face, scoped to .hl-proc-modal (Orlando blue by default; the Oviedo
-       letter overrides the palette on .hl-proc-doc--oviedo).
+       Oviedo, Mayor Marks' proclamation from the City of Orange City, Mayor
+       Demings' letter from Orange County, and Senator Scott's letter from the
+       United States Senate. Deliberately NOT styled like the privacy modal - these reproduce
+       real paperwork, so they carry the issuing body's own colour and a serif
+       face, scoped to .hl-proc-modal (Orlando blue by default; each non-Orlando
+       sheet overrides the palette on its own .hl-proc-doc--* variant).
 
        Only the letter has a PDF counterpart: it loads into the iframe on open,
        and voices.js falls back to the typeset article below whenever the
@@ -649,10 +651,10 @@
             <dd>HavenLink is a free civic technology platform founded in 2025 by students at Trinity Preparatory School in Winter Park to provide prospective adoptive parents with a guided path from their first questions through the day a child comes home, while connecting families directly with licensed adoption agencies; and</dd>
 
             <dt>Whereas,</dt>
-            <dd>HavenLink has remained completely free for every family it serves and has assisted more than 1,000 users while connecting over 200 families with licensed adoption agencies throughout 32 states and five countries; and</dd>
+            <dd>HavenLink has remained completely free for every family it serves and has assisted more than 2,350 families by connecting them with licensed adoption agencies throughout 40 states and 22 countries; and</dd>
 
             <dt>Whereas,</dt>
-            <dd>HavenLink collaborates with more than 30 licensed adoption agencies and has established partnerships with UNICEF and the United Nations Population Fund, demonstrating the far-reaching impact of a locally founded initiative; and</dd>
+            <dd>HavenLink collaborates with more than 65 licensed adoption agencies and has established partnerships with UNICEF and the Florida Department of Children and Families, demonstrating the far-reaching impact of a locally founded initiative; and</dd>
 
             <dt>Whereas,</dt>
             <dd>HavenLink is led by Technical Director Asad Sadikov and Nontechnical Director Aarav Gupta, whose vision, leadership, and commitment have transformed a high school project into a nationally recognized platform that continues to serve families seeking to build loving and permanent homes through adoption; and</dd>
@@ -678,7 +680,7 @@
             <p><span class="hl-doc-sc">In witness whereof,</span> I hereunto have set my hand and caused the Seal of the City of Orlando to be affixed this 15<sup>th</sup> day of September 2026.</p>
             <!-- No reproduced signature for Commissioner Rose - the attribution is
                  set in type, so there is no signature line to sit under either. -->
-            <p class="hl-doc-signer">Shan Rose<br><span>Commissioner, District 5</span></p>
+            <p class="hl-doc-signer">Shan Rose<br><span>Commissioner</span></p>
           </div>
         </article>
 
@@ -843,6 +845,64 @@
           <p class="hl-doc-signoff">Sincerely,</p>
           <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/jerry-demings-signature.png" alt="" width="200" height="70"></span>
           <p class="hl-doc-signer">Jerry L. Demings<br><span>Orange County Mayor</span></p>
+        </article>
+
+        <!-- ===== Letter — Senator Rick Scott, United States Senate, September 28, 2026 =====
+             Federal stationery, so nothing about the head is shared with the
+             city sheets: a three-part band — the senator's name block out at
+             the left, the engraved "United States Senate" wordmark centred
+             under it, the committee assignments stacked down the right — and
+             no rule closing it. The body is indented-paragraph style rather
+             than the flush-left block the city letters use, the date is
+             centred above the address, and the sign-off column sits near the
+             middle of the measure, all as the original sets them.
+
+             png/us-senate-wordmark.png is the blackletter lockup lifted from
+             the letterhead: it is art rather than type because no blackletter
+             face is installed widely enough to set it, and CSP forbids a font
+             CDN. png/rick-scott-signature.png ships 0-byte for now the way
+             shan-rose-signature.png does - guardDocImages() drops any <img>
+             that 404s or lands empty and marks its box, so the sign-off keeps
+             its shape until the real signature arrives.
+
+             The accent is the Senate blue #1a4f96, sampled from the scan.
+
+             Body copy is reproduced verbatim from the signed letter. -->
+        <article class="hl-proc-doc hl-proc-letter hl-proc-doc--senate" id="letterScott" hidden
+                 data-kicker="United States Senate &middot; Office of Senator Rick Scott"
+                 data-title="Letter of Congratulations"
+                 data-accent="senate">
+          <header class="hl-doc-senhead">
+            <div class="hl-doc-senname">
+              <p class="hl-doc-sen-senator">Rick Scott</p>
+              <p class="hl-doc-sen-state">Florida</p>
+            </div>
+            <span class="hl-doc-senwordmark"><img class="hl-doc-img" src="/png/us-senate-wordmark.png" alt="United States Senate" width="380" height="50"></span>
+            <ul class="hl-doc-sen-committees">
+              <li>Armed Services</li>
+              <li>Budget</li>
+              <li>Foreign Relations</li>
+              <li>Homeland Security</li>
+              <li>Special Committee<br>on Aging<span>Chairman</span></li>
+            </ul>
+          </header>
+
+          <p class="hl-doc-date hl-doc-date--center">September 28, 2026</p>
+          <p class="hl-doc-addr">Mr. Aarav Gupta and Mr. Asad Sadikov<br>Co-Founder &amp; Technical Director<br>HavenLink</p>
+          <p class="hl-doc-salutation">Dear Mr. Gupta and Mr. Sadikov:</p>
+          <p>On behalf of all Floridians, it is my honor to congratulate HavenLink on celebrating your remarkable milestone of serving more than 2,400 prospective adoptive parents. You have served your community, and I applaud your commitment to meeting the needs of Florida families. Organizations like yours are what make our state so great, and your work to step up when your fellow Floridians are in need is part of what makes our state so remarkable.</p>
+          <p>As your United States Senator, I continue fighting to create a better life for Florida families so every Floridian, no matter how they grow up, has the opportunity to get a good job, receive a quality education, and raise their family in a safe community. My goal is to continue building on Florida&rsquo;s tremendous success so every Florida family can live their American dream. I am incredibly proud of our state&rsquo;s success, and none of it would be possible without dedicated organizations like HavenLink. Organizations like yours not only help those in need, but also strengthen the fabric of our communities and helps our state thrive.</p>
+          <p>Congratulations again on your accomplishments, and thank you for your service to your community and our state. Florida is truly the best state in the nation to live the American dream, and that is in part due to amazing people like you. You have my best wishes for many more years of continued success in serving Florida families.</p>
+
+          <div class="hl-doc-senclose">
+            <p class="hl-doc-signoff">Sincerely,</p>
+            <span class="hl-doc-sig"><img class="hl-doc-img" src="/png/rick-scott-signature.png" alt="" width="200" height="70"></span>
+            <p class="hl-doc-signer">Rick Scott<br><span>United States Senator</span></p>
+          </div>
+
+          <footer class="hl-doc-foot hl-doc-foot--senate">
+            <p>110 Hart Senate Office Building, Washington, DC 20510<span class="hl-doc-foot-rule" aria-hidden="true"></span>202&ndash;224&ndash;5274</p>
+          </footer>
         </article>
       </div>
     </div>
