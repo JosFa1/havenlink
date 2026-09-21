@@ -98,7 +98,11 @@ Resources:
       FunctionName: !Sub '${AppName}-${Environment}'
       PackageType: Image
       Architectures: [arm64]
-      MemorySize: 512
+      # Extra CPU at 2048 MB materially reduces cold-start initialization for
+      # the bundled Node runtime and static asset manifest. It is still
+      # pay-per-request and avoids a permanent provisioned-concurrency charge
+      # while the account quota request is pending.
+      MemorySize: 2048
       Timeout: 30
       Role: !GetAtt LambdaRole.Arn
       Code: { ImageUri: !Ref ImageUri }
