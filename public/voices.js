@@ -50,7 +50,8 @@
       title: "United States Senator for Florida",
       img: "/png/rick-scott.webp",
       initials: "RS",
-      alt: "Rick Scott, United States Senator for Florida"
+      alt: "Rick Scott, United States Senator for Florida",
+      action: { label: "Read the full letter", modal: "letter-scott" }
     },
     {
       /* Temporarily off the carousel - kept here so it can be brought back by
@@ -99,10 +100,10 @@
       type: "quote",
       quote: "The accomplishments of HavenLink are a remarkable example of what young people can achieve when they combine technology, empathy, entrepreneurship, and a genuine desire to serve their community.",
       name: "Tom Keen",
-      title: "Orlando City Commissioner, District 1",
+      title: "Orlando City Commissioner",
       img: "/png/tom-keen.png",
       initials: "TK",
-      alt: "Tom Keen, Orlando City Commissioner for District 1",
+      alt: "Tom Keen, Orlando City Commissioner",
       action: { label: "Read the full letter", modal: "letter-keen" }
     },
     {
@@ -150,19 +151,19 @@
       type: "quote",
       quote: "After meeting with the HavenLink team, I would suggest for people in my district to use their great tool if they are looking to adopt!",
       name: "Carlos Guillermo Smith",
-      title: "Florida State Senator, District 17",
+      title: "Florida State Senator",
       img: "/png/carlos-guillermo-smith.png",
       initials: "CS",
-      alt: "Carlos Guillermo Smith, Florida State Senator for District 17"
+      alt: "Carlos Guillermo Smith, Florida State Senator"
     },
     {
       type: "quote",
       quote: "I was truly impressed by all the work HavenLink is doing. I advise my constituents to use this amazing tool.",
       name: "Anna V. Eskamani",
-      title: ["Florida State Representative", "Orlando Mayor Candidate"],
+      title: "Florida State Representative",
       img: "/png/anna-eskamani.png",
       initials: "AE",
-      alt: "Anna V. Eskamani, Florida State Representative and candidate for Mayor of Orlando"
+      alt: "Anna V. Eskamani, Florida State Representative"
     },
     {
       type: "quote",
@@ -187,19 +188,19 @@
       type: "quote",
       quote: "HavenLink is a great platform … It's the real element where people connect with people and with that you will get results",
       name: "Keith Truenow",
-      title: "Florida State Senator, District 13",
+      title: "Florida State Senator",
       img: "/png/keith-truenow.png",
       initials: "KT",
-      alt: "Keith Truenow, Florida State Senator for District 13"
+      alt: "Keith Truenow, Florida State Senator"
     },
     {
       type: "quote",
       quote: "HavenLink is a wonderful platform",
       name: "LaVon Bracy Davis",
-      title: "Florida State Senator, District 15",
+      title: "Florida State Senator",
       img: "/png/lavon-bracy-davis.png",
       initials: "LB",
-      alt: "LaVon Bracy Davis, Florida State Senator for District 15"
+      alt: "LaVon Bracy Davis, Florida State Senator"
     },
     {
       type: "quote",
@@ -483,17 +484,18 @@
   sync();
 
   /* ---------- Reproduced-document modals ----------
-     One shell, six documents: Mayor Dyer's letter of recognition,
+     One shell, seven documents: Mayor Dyer's letter of recognition,
      Commissioner Rose's HavenLink Week proclamation, Commissioner Keen's
      letter, Mayor Sladek's letter from the City of Oviedo, Mayor Marks'
-     proclamation from the City of Orange City, and Mayor Demings' letter
-     from Orange County. A card's
+     proclamation from the City of Orange City, Mayor Demings' letter
+     from Orange County, and Senator Scott's letter from the United States
+     Senate. A card's
      data-voice-modal names which <article> to show; everything else - the
      focus trap, Escape, backdrop click, scroll lock - is shared, and each
      article supplies its own header strings via data-kicker/data-title.
 
      Only the Dyer letter has a PDF counterpart, so only it runs the probe
-     below; the other five are always the typeset article. */
+     below; the other six are always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -507,6 +509,7 @@
     "letter-keen": document.getElementById("letterKeen"),
     "letter-sladek": document.getElementById("letterSladek"),
     "letter-demings": document.getElementById("letterDemings"),
+    "letter-scott": document.getElementById("letterScott"),
     "proclamation-marks": document.getElementById("proclamationMarks")
   };
   var kicker = document.getElementById("procKicker");
