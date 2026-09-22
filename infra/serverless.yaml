@@ -19,6 +19,7 @@ Parameters:
   SmtpHost: { Type: String, Default: email-smtp.us-east-1.amazonaws.com }
   SmtpPort: { Type: String, Default: '587' }
   SmtpUser: { Type: String, NoEcho: true }
+  SesConfigurationSetName: { Type: String, Default: my-first-configuration-set }
   GoogleCloudProject: { Type: String, Default: havenlink-500500 }
   GeminiLocation: { Type: String, Default: us-central1 }
   GoogleMapsApiKey: { Type: String, NoEcho: true }
@@ -89,7 +90,13 @@ Resources:
                   - !Ref ExistingVertexSecretArn
               - Effect: Allow
                 Action: ses:SendEmail
-                Resource: !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/havenlink.org'
+                Resource:
+                  - !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/havenlink.org'
+                  # SES applies the identity's default configuration set even
+                  # when the application omits ConfigurationSetName. The role
+                  # therefore needs the narrowly scoped configuration-set ARN
+                  # as well as the verified sending identity.
+                  - !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:configuration-set/${SesConfigurationSetName}'
 
   ApiFunction:
     Type: AWS::Lambda::Function
