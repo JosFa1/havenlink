@@ -77,7 +77,7 @@ ALTER TABLE users
 ALTER TABLE users
   ADD COLUMN IF NOT EXISTS matched_at timestamptz;
 
--- ===== Post-Adoption Resource Finder (Step 4) ================================
+-- ===== Post-Adoption Resource Finder (Step 5) ================================
 -- Added post-launch; all statements are idempotent so `npm run migrate` stays safe
 -- to re-run. Data is loaded separately by `npm run seed` (src/db/seedResources.ts)
 -- from committed, gzipped artifacts in src/data/ — schema here, rows there.
@@ -161,7 +161,7 @@ $$;
 
 CREATE INDEX IF NOT EXISTS "IDX_session_expire" ON "session" ("expire");
 
--- ===== Financial Calculator (Step 5) =========================================
+-- ===== Financial Calculator (Step 4) =========================================
 -- Added post-launch; all statements are idempotent so `npm run migrate` stays safe
 -- to re-run. The four reference tables below are ENTIRELY seed-managed: their only
 -- writer is `npm run seed` (src/db/seedCalculator.ts), loading committed JSON from

@@ -76,10 +76,10 @@ app.use("/api/chat", chatRouter);
 // ----- Compatibility matching ---------------------------------------------------
 app.use("/api/match", matchRouter);
 
-// ----- Post-Adoption Resource Finder (Step 4) ------------------------------------
+// ----- Post-Adoption Resource Finder (Step 5) ------------------------------------
 app.use("/api/resources", resourcesRouter);
 
-// ----- Financial Calculator (Step 5) ---------------------------------------------
+// ----- Financial Calculator (Step 4) ---------------------------------------------
 app.use("/api/calculator", calculatorRouter);
 
 // Partnership form submission endpoint
@@ -547,12 +547,12 @@ app.get("/adopt/matching", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/adopt/matching.html"));
 });
 
-// Step 4: Post-Adoption Resource Finder (replaced the former Agency-Managed Profiles).
+// Step 5: Post-Adoption Resource Finder (replaced the former Agency-Managed Profiles).
 app.get("/adopt/resources", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/adopt/resources.html"));
 });
 
-// Step 5: Financial Calculator.
+// Step 4: Financial Calculator.
 app.get("/adopt/calculator", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/adopt/calculator.html"));
 });

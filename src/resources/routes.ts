@@ -1,5 +1,5 @@
 /**
- * Post-Adoption Resource Finder API (Step 4).
+ * Post-Adoption Resource Finder API (Step 5).
  *
  *   GET /api/resources?zip=&categories=&radius=  — nearby resources for a ZIP
  *   GET /api/resources/maps-config               — the browser Google Maps key

@@ -354,7 +354,7 @@ html:not(.js) .pt-quilt {
 }
 
 .pt-apply-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -804,7 +804,7 @@ html:not(.js) .pt-quilt {
 }
 
 .pt-close-line em {
-  font-style: italic;
+  font-style: normal;
   color: #e4b79a;
 }
 

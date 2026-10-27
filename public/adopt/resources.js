@@ -1,5 +1,5 @@
 /**
- * Post-Adoption Resource Finder (Step 4, "The Cartography") — front end.
+ * Post-Adoption Resource Finder (Step 5, "The Cartography") — front end.
  *
  * Fetches nearby resources from our own API (GET /api/resources) and renders them as
  * a synced Google Map + field-notes ledger. The map is recolored into the editorial

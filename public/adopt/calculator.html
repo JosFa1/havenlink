@@ -42,8 +42,8 @@
             <li role="none"><a href="/adopt/home-study" class="dropdown-item" role="menuitem">1. Home Study Service</a></li>
             <li role="none"><a href="/adopt/intake-form" class="dropdown-item" role="menuitem">2. Family Intake Form</a></li>
             <li role="none"><a href="/adopt/matching" class="dropdown-item" role="menuitem">3. Compatibility Matching</a></li>
-            <li role="none"><a href="/adopt/resources" class="dropdown-item" role="menuitem">4. Resource Finder</a></li>
-            <li role="none"><a href="/adopt/calculator" class="dropdown-item" role="menuitem">5. Financial Calculator</a></li>
+            <li role="none"><a href="/adopt/calculator" class="dropdown-item" role="menuitem">4. Financial Calculator</a></li>
+            <li role="none"><a href="/adopt/resources" class="dropdown-item" role="menuitem">5. Resource Finder</a></li>
           </ul>
         </li>
         <li><a href="/team" class="nav-link">Team</a></li>
@@ -68,13 +68,13 @@
         <span class="subnav-step">03</span>
         <span class="subnav-label">Matching</span>
       </a>
-      <a href="/adopt/resources" class="subnav-item" data-step="4">
+      <a href="/adopt/calculator" class="subnav-item active" data-step="4">
         <span class="subnav-step">04</span>
-        <span class="subnav-label">Resources</span>
-      </a>
-      <a href="/adopt/calculator" class="subnav-item active" data-step="5">
-        <span class="subnav-step">05</span>
         <span class="subnav-label">Calculator</span>
+      </a>
+      <a href="/adopt/resources" class="subnav-item" data-step="5">
+        <span class="subnav-step">05</span>
+        <span class="subnav-label">Resources</span>
       </a>
     </div>
   </nav>
@@ -83,7 +83,7 @@
 
     <!-- ==================== Hero ====================
          Full ed-hero shell over the shared full-bleed canvas, same as Steps 03
-         and 04. calculator-hero.js fills in a specimen worksheet: a printed
+         and 05. calculator-hero.js fills in a specimen worksheet: a printed
          sheet (guilloché watermark, ruled lines, money rule, register corners)
          that a pen completes line by line, figures counting up as they are
          written. The paperwork up here; the tide plate further down is the
@@ -92,7 +92,7 @@
       <canvas id="fcWorksheet" class="ed-hero-canvas" aria-hidden="true"></canvas>
 
       <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">HavenLink Registry &mdash; Financial Estimate HL-05</p>
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">HavenLink Registry &mdash; Financial Estimate HL-04</p>
         <h1 class="ed-hero-title hm-reveal" style="--d: .08s">What adoption <em>actually costs.</em></h1>
         <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
           Tell us your state, household, and the kind of adoption you are considering. We will show
@@ -101,7 +101,7 @@
         </p>
         <div class="ed-hero-actions hm-reveal" style="--d: .24s">
           <a href="#estimate" class="hm-btn hm-btn--ink">Run the numbers <span class="hm-btn-arrow">→</span></a>
-          <a href="/adopt/resources" class="hm-textlink">Back to the resource finder</a>
+          <a href="/adopt/matching" class="hm-textlink">Back to matching</a>
         </div>
       </div>
 
@@ -141,11 +141,8 @@
               <span class="fc-field-num">02</span>
               <label class="fc-label" for="fc-type">Kind of adoption</label>
               <span class="fc-select"><select id="fc-type" name="adoptionType" required>
-                <option value="foster_care">Adoption from foster care</option>
-                <option value="private_domestic_infant" selected>Private domestic infant adoption</option>
+                <option value="foster_care" selected>Adoption from foster care</option>
                 <option value="international">Intercountry (international) adoption</option>
-                <option value="relative_kinship">Relative or kinship adoption</option>
-                <option value="stepparent">Stepparent adoption</option>
               </select></span>
               <span class="fc-hint">This is the biggest driver of cost &mdash; the ranges differ by an order of magnitude.</span>
             </p>

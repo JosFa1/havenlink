@@ -1,5 +1,5 @@
 /* ============================================================
-   HavenLink - Post-Adoption Resource Finder (adopt step 4, "The Cartography")
+   HavenLink - Post-Adoption Resource Finder (adopt step 5, "The Cartography")
    Requires editorial.css (tokens, primitives, shared hero) first.
    Classes prefixed rf- ; resources.js renders into #rf-map / #rf-results and
    emits .rf-item / .rf-tag / .rf-msg states — those class names are contract.
@@ -40,7 +40,7 @@ body.editorial section[id] {
 }
 
 .rf-statement em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 

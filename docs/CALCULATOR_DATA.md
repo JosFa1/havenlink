@@ -102,29 +102,58 @@ current intercountry adoptions.)
 |---|---|---|
 | Home study and adoptive-parent training | Free | [FL DCF Adoption Exchange — Benefits](https://adoptionexchange.myflfamilies.com/Benefits) |
 | Agency / program fee | "little or nothing" | same |
-| Circuit court filing fee | up to $395 | [Fla. Stat. 28.241(1)(a)1.a](https://www.flsenate.gov/Laws/Statutes/2025/28.241) |
-| Maintenance adoption subsidy | $5,000/year, paid monthly | [Fla. Stat. 409.166(4)(c)](https://www.flsenate.gov/Laws/Statutes/2024/409.166) |
+| Circuit court adoption filing fee | $400 – $442 | Base fee capped at $395 by [Fla. Stat. 28.241(1)(a)1.a](https://www.flsenate.gov/Laws/Statutes/2026/28.241); clerks add charges — [Orange County](https://www.myorangeclerk.com/Divisions/Family/Family-Law) $400, [Nassau County](https://www.nassauclerk.com/206/Clerks-Fee-Schedule) $442 incl. sealing |
+| Maintenance adoption subsidy | $5,000/year, paid monthly | [Fla. Stat. 409.166(4)(c)](https://www.flsenate.gov/Laws/Statutes/2026/409.166) |
 | Nonrecurring expense reimbursement | up to $1,000 | Fla. Stat. 409.166(7) |
 | Medicaid | to age 18, some to 21 | FL DCF Benefits |
 | Postsecondary tuition exemption | to age 28 | Fla. Stat. 409.166(2)(a), FL DCF Benefits |
+| Recognition of a foreign adoption decree | no Florida readoption required | [Fla. Stat. 63.192](https://www.flsenate.gov/Laws/Statutes/2026/63.192) |
 
-Two judgment calls worth knowing about:
+Judgment calls worth knowing about:
 
-- **Court filing is seeded as `$0 – $395`.** The statutory fee is up to $395; DCF says
-  the agency can pay it for families who cannot afford it. The range spans both.
+- **Court filing is seeded as `$0 – $442`.** The highest county total found is $442;
+  DCF says the agency can pay it for families who cannot afford it. The range spans
+  both. (It was `$0 – $395` until October 2026, which understated what clerks charge.)
 - **The monthly subsidy is stored as `41667` cents/month** — $5,000/year ÷ 12. The
   statute expresses it annually; the calculator's ongoing block is monthly throughout.
   It is also a negotiated figure ("or an amount other than $5,000 as agreed in
   writing"), so the seeded value is the statutory default, not a promise.
+- **Intercountry:** the program fee and USCIS fees are not Florida's to set, so those
+  rows repeat the national figures. The Florida row is finalizing or re-adopting in a
+  Florida court, `$0 – $442` — required for an IR-4/IH-4 visa, optional otherwise.
 
-Only Florida **foster care** is seeded. Every other Florida adoption type falls back to
-the national ranges, correctly and with the banner.
+### New York
+
+| Figure | Value | Source |
+|---|---|---|
+| Home study and agency fee | None for a child in a local commissioner's guardianship | [OCFS adoption FAQ](https://ocfs.ny.gov/programs/adoption/faq.php) |
+| Court filing fee | None — Family Court charges no filing fees | [NY Courts](https://www.nycourts.gov/node/60226) |
+| Attorney to finalize | Generally required (OCFS); no state fee schedule, so national $0 – $4,500 | Children's Bureau |
+| Maintenance adoption subsidy | $1,083.82 – $1,490.34/month basic rate (2026–27); special $2,338.46, exceptional $3,544.56, extraordinary $4,312.59 | [26-OCFS-ADM-10, Attachment A](https://ocfs.ny.gov/main/policies/external/2026/adm/26-OCFS-ADM-10.pdf) |
+| Subsidy paid at 100% of board rate | Agreements approved since Sept. 1, 2023 | [18 NYCRR 421.24(a)(6)](https://www.law.cornell.edu/regulations/new-york/18-NYCRR-421.24) |
+| Nonrecurring expense reimbursement | up to $2,000 | 18 NYCRR 421.24(d)(3) |
+| Medicaid or medical subsidy | to 21 (disability), 18 (hard-to-place) | [OCFS adoption subsidies](https://ocfs.ny.gov/programs/adoption/post-adoption/subsidies.php) |
+| Foster Youth College Success Initiative | Adopted from care after age 13 | [NYSED](https://www.nysed.gov/postsecondary-services/foster-youth-college-success-initiative) |
+
+- **The monthly subsidy range is the basic rate only** — upstate age 0–5 to metro age
+  12+. The higher tiers need a documented disability, so they are named in the detail
+  text rather than widening the range, which would overstate it for most families.
+- **The rates reset every July 1.** 26-OCFS-ADM-10 covers July 2026 – June 2027; the
+  next ADM-10 supersedes it.
+- **Intercountry:** as with Florida, only the court step is New York's own — finalizing,
+  registering (Dom. Rel. Law 111-c), or re-adopting (Dom. Rel. Law 115-a), with no
+  filing fee.
+
+Florida and New York are seeded for **foster care and intercountry**, the only two
+paths HavenLink offers. The engine still carries national rows for private domestic,
+kinship, and stepparent adoption because the tests use them, but the API rejects those
+types.
 
 ---
 
 ## Known gaps
 
-1. **49 states + DC have no state-specific data.** They fall back to national ranges.
+1. **48 states + DC have no state-specific data.** They fall back to national ranges.
    This is designed behavior, not a bug — but the fallback banner appears on the large
    majority of results today.
 2. **Alaska and Hawaii poverty guidelines** are wrong (see above).

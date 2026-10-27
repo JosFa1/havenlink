@@ -1,5 +1,5 @@
 /**
- * Financial Calculator (Step 5) — shared types.
+ * Financial Calculator (Step 4) — shared types.
  *
  * MONEY IS ALWAYS INTEGER CENTS. No floats anywhere in the money path; the only
  * fractional values in this module are bracket rates and the phase-out factor, and

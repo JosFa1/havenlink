@@ -1,5 +1,5 @@
 /**
- * Financial Calculator (Step 5) — front end.
+ * Financial Calculator (Step 4) — front end.
  *
  * Posts the form to POST /api/calculator/estimate and renders the result: headline,
  * three blocks, ongoing support, timeline, the always-visible foster-care comparison,

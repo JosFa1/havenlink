@@ -65,7 +65,7 @@
     "source_url": "https://www.childwelfare.gov/resources/planning-adoption-knowing-costs-and-resources/" },
 
   {
-    "_comment": "FLORIDA — seeded end to end for foster care, the path Florida actually subsidizes. Florida has no state-specific rows for the other adoption types, so those fall back to 'US' and the result is flagged."
+    "_comment": "FLORIDA — foster care, the path Florida actually subsidizes."
   },
 
   { "state_code": "FL", "adoption_type": "foster_care", "line_item": "home_study",
@@ -77,7 +77,78 @@
     "low_cents": 0, "high_cents": 0, "effective_year": 2026, "sort_order": 20,
     "source_url": "https://adoptionexchange.myflfamilies.com/Benefits" },
   { "state_code": "FL", "adoption_type": "foster_care", "line_item": "court_filing",
-    "label": "Circuit court filing fee (Fla. Stat. 28.241) — the agency can pay this for families who cannot afford it, so the low end is $0",
-    "low_cents": 0, "high_cents": 39500, "effective_year": 2025, "sort_order": 30,
-    "source_url": "https://www.flsenate.gov/Laws/Statutes/2025/28.241" }
+    "label": "Circuit court adoption filing fee — Fla. Stat. 28.241 caps the base fee at $395 and county clerks add charges such as sealing (Orange County charges $400, Nassau County $442). The agency can pay this for families who cannot afford it, so the low end is $0",
+    "low_cents": 0, "high_cents": 44200, "effective_year": 2026, "sort_order": 30,
+    "source_url": "https://www.nassauclerk.com/206/Clerks-Fee-Schedule" },
+
+  {
+    "_comment": "FLORIDA — intercountry. The program fee and USCIS fees are set by the agency, the child's country, and the federal government, not by Florida, so those rows repeat the national figures. What is Florida's own is finalizing or re-adopting in a Florida court."
+  },
+
+  { "state_code": "FL", "adoption_type": "international", "line_item": "program_fee_inclusive",
+    "label": "Intercountry program fee — set by the placing agency and the child's country, not by Florida, so this is the Children's Bureau national all-inclusive range covering foreign travel, immigration processing, court costs, adoption education, and documentation.",
+    "low_cents": 2000000, "high_cents": 5000000, "effective_year": 2022, "sort_order": 10,
+    "source_url": "https://www.childwelfare.gov/resources/planning-adoption-knowing-costs-and-resources/" },
+  { "state_code": "FL", "adoption_type": "international", "line_item": "uscis_i800a",
+    "label": "USCIS Form I-800A — suitability to adopt from a Convention country",
+    "low_cents": 92000, "high_cents": 92000, "effective_year": 2026, "sort_order": 20,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "FL", "adoption_type": "international", "line_item": "uscis_i800",
+    "label": "USCIS Form I-800 — petition to classify the child as an immediate relative",
+    "low_cents": 92000, "high_cents": 92000, "effective_year": 2026, "sort_order": 30,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "FL", "adoption_type": "international", "line_item": "uscis_biometrics",
+    "label": "USCIS biometric services fee",
+    "low_cents": 3000, "high_cents": 3000, "effective_year": 2026, "sort_order": 40,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "FL", "adoption_type": "international", "line_item": "state_finalization",
+    "label": "Finalizing or re-adopting in a Florida circuit court — required when the adoption was not completed abroad (IR-4/IH-4 visa), optional otherwise because Fla. Stat. 63.192 already recognizes a foreign adoption decree. County clerk fees run $400 (Orange) to $442 (Nassau, including sealing)",
+    "low_cents": 0, "high_cents": 44200, "effective_year": 2026, "sort_order": 50,
+    "source_url": "https://www.nassauclerk.com/206/Clerks-Fee-Schedule" },
+
+  {
+    "_comment": "NEW YORK — foster care. Agencies charge no fee when the child is in a local commissioner's guardianship and Family Court charges no filing fees, so the only real cost is the attorney New York generally requires to finalize. New York publishes no attorney fee schedule, so that row is the national range."
+  },
+
+  { "state_code": "NY", "adoption_type": "foster_care", "line_item": "home_study",
+    "label": "Home study — public and private agencies charge no fee for adoption services when the child is in the guardianship of a local social services commissioner",
+    "low_cents": 0, "high_cents": 0, "effective_year": 2026, "sort_order": 10,
+    "source_url": "https://ocfs.ny.gov/programs/adoption/faq.php" },
+  { "state_code": "NY", "adoption_type": "foster_care", "line_item": "agency_program_fee",
+    "label": "Agency / program fee — none for a child in a local commissioner's guardianship. An agency that holds guardianship itself may charge an income-based fee, though few do for children with special needs",
+    "low_cents": 0, "high_cents": 0, "effective_year": 2026, "sort_order": 20,
+    "source_url": "https://ocfs.ny.gov/programs/adoption/faq.php" },
+  { "state_code": "NY", "adoption_type": "foster_care", "line_item": "court_filing",
+    "label": "Court filing fee — New York Family Court charges no filing fees",
+    "low_cents": 0, "high_cents": 0, "effective_year": 2026, "sort_order": 30,
+    "source_url": "https://www.nycourts.gov/node/60226" },
+  { "state_code": "NY", "adoption_type": "foster_care", "line_item": "attorney_fees",
+    "label": "Attorney to finalize the adoption in court — OCFS says one is generally required. New York publishes no fee schedule, so this is the Children's Bureau national range",
+    "low_cents": 0, "high_cents": 450000, "effective_year": 2022, "sort_order": 40,
+    "source_url": "https://www.childwelfare.gov/resources/planning-adoption-knowing-costs-and-resources/" },
+
+  {
+    "_comment": "NEW YORK — intercountry. As with Florida, the program fee and USCIS fees are not New York's to set. What is New York's own is registering or re-adopting in a New York court, which carries no filing fee."
+  },
+
+  { "state_code": "NY", "adoption_type": "international", "line_item": "program_fee_inclusive",
+    "label": "Intercountry program fee — set by the placing agency and the child's country, not by New York, so this is the Children's Bureau national all-inclusive range covering foreign travel, immigration processing, court costs, adoption education, and documentation.",
+    "low_cents": 2000000, "high_cents": 5000000, "effective_year": 2022, "sort_order": 10,
+    "source_url": "https://www.childwelfare.gov/resources/planning-adoption-knowing-costs-and-resources/" },
+  { "state_code": "NY", "adoption_type": "international", "line_item": "uscis_i800a",
+    "label": "USCIS Form I-800A — suitability to adopt from a Convention country",
+    "low_cents": 92000, "high_cents": 92000, "effective_year": 2026, "sort_order": 20,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "NY", "adoption_type": "international", "line_item": "uscis_i800",
+    "label": "USCIS Form I-800 — petition to classify the child as an immediate relative",
+    "low_cents": 92000, "high_cents": 92000, "effective_year": 2026, "sort_order": 30,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "NY", "adoption_type": "international", "line_item": "uscis_biometrics",
+    "label": "USCIS biometric services fee",
+    "low_cents": 3000, "high_cents": 3000, "effective_year": 2026, "sort_order": 40,
+    "source_url": "https://www.uscis.gov/sites/default/files/document/forms/g-1055.pdf" },
+  { "state_code": "NY", "adoption_type": "international", "line_item": "state_finalization",
+    "label": "Finalizing, registering (Dom. Rel. Law 111-c), or re-adopting (Dom. Rel. Law 115-a) a foreign adoption in New York — Family Court charges no filing fee",
+    "low_cents": 0, "high_cents": 0, "effective_year": 2026, "sort_order": 50,
+    "source_url": "https://www.nycourts.gov/node/60226" }
 ]

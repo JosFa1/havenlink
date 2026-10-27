@@ -49,7 +49,7 @@ test("FL foster care with special needs: near-zero cash up front, subsidy domina
   // fee can remain, and the agency may cover even that.
   assert.equal(result.primary.cashUpFront.low, 0);
   assert.ok(
-    dollars(result.primary.cashUpFront.high) <= 400,
+    dollars(result.primary.cashUpFront.high) <= 500,
     `expected near-zero cash up front, got $${dollars(result.primary.cashUpFront.high)}`
   );
 
@@ -218,6 +218,27 @@ test("unseeded state falls back to national ranges with a banner and no silent z
   assert.ok(result.primary.lineItems.length > 0, "fallback must supply line items");
   assert.ok(result.primary.gross.high > 0, "fallback must not produce a silent zero");
   assert.ok(result.primary.cashUpFront.high > 0);
+});
+
+test("FL and NY have their own figures for both offered paths, so no fallback banner", () => {
+  for (const state of ["FL", "NY"]) {
+    const tables = buildTables(state);
+    for (const adoptionType of ["foster_care", "international"] as AdoptionType[]) {
+      const result = calculate(inputs({ state, adoptionType, specialNeeds: "yes" }), tables);
+      assert.equal(result.usedNationalFallback, false, `${state}/${adoptionType} fell back`);
+      assert.ok(!codes(result).includes("NATIONAL_FALLBACK"), `${state}/${adoptionType} banner`);
+      assert.ok(result.primary.lineItems.length > 0);
+    }
+  }
+
+  // New York's own subsidy and reimbursement rows replace the federal ones.
+  const ny = calculate(
+    inputs({ state: "NY", adoptionType: "foster_care", specialNeeds: "yes" }),
+    buildTables("NY")
+  );
+  assert.deepEqual(ny.ongoing.monthlySubsidy, { low: 108382, high: 149034 });
+  assert.ok(ny.ongoing.medicaid && ny.ongoing.tuitionWaiver);
+  assert.deepEqual(ny.primary.reimbursements, { low: 0, high: 200000 });
 });
 
 test("every adoption type resolves for an unseeded state without throwing", () => {

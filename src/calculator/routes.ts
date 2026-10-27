@@ -1,5 +1,5 @@
 /**
- * Financial Calculator API (Step 5).
+ * Financial Calculator API (Step 4).
  *
  *   POST /api/calculator/estimate            — run an estimate (nothing is stored)
  *   POST /api/calculator/save                — append a versioned saved estimate
@@ -61,13 +61,10 @@ const inputSchema = z.object({
     .trim()
     .toUpperCase()
     .regex(/^[A-Z]{2}$/, "Select your state."),
-  adoptionType: z.enum([
-    "foster_care",
-    "private_domestic_infant",
-    "international",
-    "relative_kinship",
-    "stepparent",
-  ]),
+  // HavenLink only works with foster care and intercountry adoption. The engine and
+  // seed data still know the other types (the tests use them), but no request can
+  // reach them.
+  adoptionType: z.enum(["foster_care", "international"]),
   householdSize: z.coerce.number().int().min(1).max(12),
   incomeBand: z.enum([
     "under_30k",

@@ -156,11 +156,19 @@ sits happily beside a 2026 USCIS fee.
 - National cost ranges for all five adoption types (Children's Bureau, June 2022) and
   USCIS adoption filing fees (Form G-1055, edition 05/29/26).
 
-**Florida** — foster care, end to end. Home study and agency fee $0, court filing
-capped at the statutory $395, the $5,000/year maintenance subsidy, the $1,000
-nonrecurring reimbursement, Medicaid, and the postsecondary tuition exemption.
+**Florida** — foster care and intercountry. Home study and agency fee $0, court filing
+up to $442, the $5,000/year maintenance subsidy, the $1,000 nonrecurring
+reimbursement, Medicaid, and the postsecondary tuition exemption.
+
+**New York** — foster care and intercountry. No agency or court fees, attorney at the
+national range, the OCFS board-rate subsidy (reset every July 1 by that year's
+ADM-10), the $2,000 nonrecurring reimbursement, Medicaid, and the Foster Youth College
+Success Initiative.
 
 **Every other state** — falls back to the national ranges with the banner.
+
+HavenLink offers only **foster care and intercountry** adoption; the API rejects the
+other three types. Their national rows stay because the tests use them.
 
 > Nothing here has been through a second pair of human eyes. Before this is relied on
 > in production, someone should open every `source_url` in these files and confirm the

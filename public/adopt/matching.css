@@ -115,7 +115,7 @@ body.editorial section[id] {
 }
 
 .mtf-title em {
-  font-style: italic;
+  font-style: normal;
   color: #d97742;
 }
 
@@ -534,7 +534,7 @@ html.js body.editorial .mt-score.is-in .mt-factor-fill {
 }
 
 .mt-intro-statement em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -608,7 +608,7 @@ html.js body.editorial .mt-score.is-in .mt-factor-fill {
 }
 
 .mt-cta-line em {
-  font-style: italic;
+  font-style: normal;
   color: #e4b79a;
 }
 

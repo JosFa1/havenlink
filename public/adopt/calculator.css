@@ -1,5 +1,5 @@
 /* ============================================================
-   HavenLink — Financial Calculator (adopt step 5, "The Tide Plate")
+   HavenLink — Financial Calculator (adopt step 4, "The Tide Plate")
    Requires editorial.css (tokens, primitives, shared hero) first.
    Classes prefixed fc- ; calculator.js and tide-plate.js render into the
    #fc-* ids and emit .fc-tide-* / .fc-rows / .fc-msg states — those class
@@ -618,7 +618,7 @@ body.calculator .fc-tide-title {
 }
 
 body.calculator .fc-tide-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--fc-sand);
 }
 

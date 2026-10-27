@@ -1,5 +1,5 @@
 /**
- * Financial Calculator (Step 5) — the calculation.
+ * Financial Calculator (Step 4) — the calculation.
  *
  * PURE. No I/O, no database, no network, no clock (the tax year is an input). Given
  * the same inputs and the same tables it always returns the same result, which is

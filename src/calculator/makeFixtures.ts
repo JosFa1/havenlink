@@ -54,7 +54,7 @@ const fixtures = {
   /* Florida's own foster-care figures — the only combination that escapes the
      national fallback, and the one with a real monthly subsidy. */
   flFoster: payloadFor({ state: "FL", adoptionType: "foster_care", specialNeeds: "yes" }),
-  /* The clamp case: gross {$0,$395} against a $1,000 reimbursement. */
+  /* The clamp case: gross {$0,$442} against a $1,000 reimbursement. */
   flFosterClamp: payloadFor({ state: "FL", adoptionType: "foster_care", specialNeeds: "yes",
     householdSize: 3, incomeBand: "50k_75k" }),
   /* The crossed subtraction: military reimbursement moves one boundary only. */

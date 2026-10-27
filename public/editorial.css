@@ -192,7 +192,6 @@ body.editorial .logo-haven {
 
 body.editorial .logo-link {
   color: var(--terracotta);
-  font-style: italic;
 }
 
 body.editorial .nav-link,
@@ -703,7 +702,7 @@ body.editorial .newsletter-title {
 }
 
 body.editorial .newsletter-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -940,7 +939,7 @@ body.editorial .newsletter-body > .newsletter-actions {
 }
 
 .ed-hero-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -1115,7 +1114,7 @@ html.js body.editorial .hm-reveal.is-in .ed-draw {
 }
 
 .ed-statement em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -1264,7 +1263,7 @@ html.js body.editorial .hm-reveal.is-in .ed-draw {
 }
 
 .ed-cta-line em {
-  font-style: italic;
+  font-style: normal;
   color: #e4b79a;
 }
 

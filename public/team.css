@@ -117,7 +117,7 @@ body.editorial .tm-hero-title {
 }
 
 .tm-hero-title em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -349,7 +349,7 @@ body.editorial .tm-person-name {
 }
 
 .tm-person-name em {
-  font-style: italic;
+  font-style: normal;
   color: var(--terracotta);
 }
 
@@ -721,7 +721,7 @@ html.js body.editorial .hm-reveal.is-in .tm-veil {
 }
 
 .tm-belief-quote em {
-  font-style: italic;
+  font-style: normal;
   color: #e4b79a;
 }
 

@@ -197,9 +197,9 @@ test("the crossed reimbursement subtraction reaches the copy, not just the geome
 });
 
 test("the clamp case still reports the authoritative figure", () => {
-  // FL foster care with special needs: gross {$0, $395} against a $1,000
+  // FL foster care with special needs: gross {$0, $442} against a $1,000
   // reimbursement. Naive accumulation clamps to {$0, $0} and would print $0 under
-  // a headline of "$0 – $395".
+  // a headline of "$0 – $442".
   const tables = buildTables("FL");
   const result = calculate(
     inputs({ state: "FL", adoptionType: "foster_care", specialNeeds: "yes" }),
