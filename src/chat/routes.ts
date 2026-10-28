@@ -59,7 +59,7 @@ const chatLimiter = rateLimit({
   legacyHeaders: false,
   message: {
     reply:
-      "You're sending messages a little fast — please wait a moment and try again.",
+      "You're sending messages a little fast. Please wait a moment and try again.",
   },
 });
 

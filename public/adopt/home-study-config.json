@@ -197,7 +197,7 @@
   },
   "DEFAULT": {
     "stateName": "",
-    "note": "Requirements vary by state. These questions cover what most states require — always confirm specifics with a licensed agency in your state.",
+    "note": "Requirements vary by state. These questions cover what most states require, but always confirm specifics with a licensed agency in your state.",
     "additionalQuestions": [
       {
         "id": "default_residency",
@@ -213,7 +213,7 @@
       },
       {
         "id": "default_references",
-        "question": "Are you able to provide 3 to 4 personal references — typically non-relatives — who can speak to your character and readiness to parent?",
+        "question": "Are you able to provide 3 to 4 personal references (typically non-relatives) who can speak to your character and readiness to parent?",
         "why": "Most states require 3–5 personal references as part of the home study.",
         "inputType": "yes_no",
         "disqualifyOn": "no",

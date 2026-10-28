@@ -8,7 +8,7 @@
     "program_type": "one_time",
     "eligibility_json": { "special_needs": true },
     "amount_low_cents": 0, "amount_high_cents": 200000,
-    "detail": "A one-time reimbursement for reasonable and necessary adoption fees — court costs, attorney fees, and other adoption-related expenses. The federal ceiling is $2,000; each state sets its own rate up to that amount.",
+    "detail": "A one-time reimbursement for reasonable and necessary adoption fees, such as court costs, attorney fees, and other adoption-related expenses. The federal ceiling is $2,000; each state sets its own rate up to that amount.",
     "effective_year": 2022,
     "source_url": "https://www.childwelfare.gov/resources/planning-adoption-knowing-costs-and-resources/" },
 
@@ -44,7 +44,7 @@
     "program_type": "monthly",
     "eligibility_json": { "special_needs": true },
     "amount_low_cents": 41667, "amount_high_cents": 41667,
-    "detail": "Florida pays $5,000 annually, on a monthly basis, for the support and maintenance of the child until the 18th birthday — or another amount agreed in writing between the adoptive parents and the department. The monthly payment may not exceed the foster care maintenance payment the child would otherwise have received.",
+    "detail": "Florida pays $5,000 annually (or another amount agreed in writing between the adoptive parents and the department), on a monthly basis, for the support and maintenance of the child until the 18th birthday. The monthly payment may not exceed the foster care maintenance payment the child would otherwise have received.",
     "effective_year": 2026,
     "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/409.166" },
 
@@ -53,7 +53,7 @@
     "program_type": "one_time",
     "eligibility_json": { "special_needs": true },
     "amount_low_cents": 0, "amount_high_cents": 100000,
-    "detail": "Florida reimburses up to $1,000 in nonrecurring expenses — attorney fees, court costs, birth certificate fees, travel, agency fees, and physical examination fees.",
+    "detail": "Florida reimburses up to $1,000 in nonrecurring expenses: attorney fees, court costs, birth certificate fees, travel, agency fees, and physical examination fees.",
     "effective_year": 2026,
     "source_url": "https://www.flsenate.gov/Laws/Statutes/2026/409.166" },
 

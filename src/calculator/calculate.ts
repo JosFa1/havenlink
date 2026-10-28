@@ -306,7 +306,7 @@ function buildOngoing(
       explanation:
         "Intercountry adoptions sit outside the state child welfare system, so Title IV-E " +
         "adoption assistance, Medicaid coverage, and state tuition waivers do not apply to " +
-        "this path. That is not a gap in our data — those programs genuinely do not reach here.",
+        "this path. That is not a gap in our data. Those programs genuinely do not reach here.",
     };
   }
 
@@ -314,7 +314,7 @@ function buildOngoing(
     return {
       ...empty,
       explanation:
-        "Ongoing adoption assistance — the monthly subsidy, Medicaid, and tuition waivers — " +
+        "Ongoing adoption assistance (the monthly subsidy, Medicaid, and tuition waivers) " +
         "is tied to a state's special-needs determination. Without that determination these " +
         "programs do not apply.",
     };
@@ -479,7 +479,7 @@ function buildTimeline(adoptionType: AdoptionType, taxYear: number): TimelineEnt
     },
     {
       key: "finalization",
-      label: "Court finalization — remaining court and legal costs",
+      label: "Court finalization: remaining court and legal costs",
       when: "6–12 months after placement",
       direction: "out",
     },
@@ -491,7 +491,7 @@ function buildTimeline(adoptionType: AdoptionType, taxYear: number): TimelineEnt
     },
     {
       key: "tax_credit",
-      label: `Adoption tax credit claimed — filing your ${taxYear} return`,
+      label: `Adoption tax credit claimed when filing your ${taxYear} return`,
       when: `Early ${taxYear + 1}, for an adoption finalized in ${taxYear}`,
       direction: "back",
     },
@@ -540,7 +540,7 @@ const NOTE_MESSAGES: Record<NoteCode, string> = {
     "Relative, kinship, and stepparent adoptions usually involve no agency program fee. " +
     "Private-infant figures do not apply to this path and are not shown.",
   SPECIAL_NEEDS_UNKNOWN:
-    "\"Special needs\" is a legal and administrative category a state assigns — not a " +
+    "\"Special needs\" is a legal and administrative category a state assigns, not a " +
     "description of a child. It is the single largest factor in what adoption costs, so " +
     "both outcomes are shown below.",
   EMPLOYER_BENEFIT_CAPPED:
@@ -548,7 +548,7 @@ const NOTE_MESSAGES: Record<NoteCode, string> = {
     "cost. An employer cannot reimburse more than you spend.",
   NO_COST_DATA:
     "We do not have cost data for this adoption type yet. Nothing is being estimated at " +
-    "zero — we simply do not have the figures, and we would rather say so.",
+    "zero. We simply do not have the figures, and we would rather say so.",
 };
 
 function note(code: NoteCode): Note {
@@ -680,7 +680,7 @@ export function headlineSentence(result: CalcResult): string {
   if (isZeroRange(b.cashUpFront)) {
     return (
       `Based on ${result.asOfYear} figures, ${typeLabel} in ${result.state} looks like it ` +
-      `costs you nothing up front — the fees are waived or reimbursed on this path.`
+      `costs you nothing up front because the fees are waived or reimbursed on this path.`
     );
   }
 

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/png/tab-logo.png">
   <title>Post-Adoption Resource Finder - HavenLink</title>
-  <meta name="description" content="Find local post-adoption resources — counseling, trauma support, financial assistance, support groups, medical and educational services — near your ZIP code.">
+  <meta name="description" content="Find local post-adoption resources near your ZIP code, including counseling, trauma support, financial assistance, support groups, and medical and educational services.">
   <link rel="preload" href="/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/fraunces-italic-var.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/fonts/satoshi-var.woff2" as="font" type="font/woff2" crossorigin>
@@ -85,10 +85,10 @@
     <section class="ed-hero rf-hero" id="top">
       <canvas id="rfSurvey" class="ed-hero-canvas" aria-hidden="true"></canvas>
       <div class="ed-hero-inner">
-        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">HavenLink Registry &mdash; Post-Adoption Resource Survey HL-05</p>
+        <p class="ed-hero-eyebrow hm-eyebrow hm-reveal">HavenLink Registry · Post-Adoption Resource Survey HL-05</p>
         <h1 class="ed-hero-title hm-reveal" style="--d: .08s">Every kind of help, <em>within range.</em></h1>
         <p class="ed-hero-standfirst hm-reveal" style="--d: .16s">
-          Adoption doesn't end at placement &mdash; it settles into a neighborhood. Chart the counseling, trauma care, financial help, support groups, and medical and educational services around any ZIP code, drawn from more than 48,000 surveyed listings.
+          Adoption doesn't end at placement. It settles into a neighborhood. Chart the counseling, trauma care, financial help, support groups, and medical and educational services around any ZIP code, drawn from more than 48,000 surveyed listings.
         </p>
         <div class="ed-hero-actions hm-reveal" style="--d: .24s">
           <a href="#instrument" class="hm-btn hm-btn--ink">Open the instrument <span class="hm-btn-arrow">→</span></a>
@@ -108,16 +108,16 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">The instrument</span>
-          <span class="hm-index">Plate 01 &mdash; Field survey</span>
+          <span class="hm-index">Plate 01 · Field survey</span>
         </header>
         <h2 class="rf-statement hm-reveal">Set your origin. <em>The territory answers.</em></h2>
         <p class="ed-body rf-instrument-lede hm-reveal" style="--d: .06s">
-          Enter a ZIP code, set your range, choose what to chart. The survey plots every listing within reach &mdash; on the plate, and in the field notes beside it.
+          Enter a ZIP code, set your range, choose what to chart. The survey plots every listing within reach, both on the plate and in the field notes beside it.
         </p>
 
         <form class="rf-console hm-reveal" id="rf-form" style="--d: .12s">
           <div class="rf-field rf-field--origin">
-            <label class="rf-label" for="rf-zip">Origin &mdash; ZIP</label>
+            <label class="rf-label" for="rf-zip">Origin · ZIP</label>
             <input type="text" id="rf-zip" name="zip" inputmode="numeric" pattern="\d{5}"
               maxlength="5" placeholder="00000" autocomplete="postal-code" required>
           </div>
@@ -133,7 +133,7 @@
             </span>
           </div>
           <div class="rf-field rf-field--cats" role="group" aria-label="Categories to chart">
-            <span class="rf-label" id="rf-cats-label">Chart &mdash; categories</span>
+            <span class="rf-label" id="rf-cats-label">Chart · Categories</span>
             <div class="rf-cats" id="rf-cats">
               <label class="rf-cat"><input type="checkbox" name="category" value="counseling" checked><span class="rf-cat-key">A.</span><span class="rf-cat-name">Counseling</span></label>
               <label class="rf-cat"><input type="checkbox" name="category" value="trauma" checked><span class="rf-cat-key">B.</span><span class="rf-cat-name">Trauma support</span></label>
@@ -160,24 +160,24 @@
               <div id="rf-map" aria-label="Map of nearby resources">
                 <div class="rf-map-empty">
                   <span class="rf-map-empty-mark" aria-hidden="true"></span>
-                  Awaiting coordinates &mdash; set an origin above.
+                  Awaiting coordinates. Set an origin above.
                 </div>
               </div>
             </div>
             <p class="rf-figcap">
-              <span id="rf-fig-caption">Fig. 01 &mdash; Field survey</span>
+              <span id="rf-fig-caption">Fig. 01 · Field survey</span>
               <span>Locations approximate &middot; ZIP-centroid</span>
             </p>
           </div>
-          <aside class="rf-ledger" aria-label="Field notes — survey results">
+          <aside class="rf-ledger" aria-label="Field notes: survey results">
             <div class="rf-results" id="rf-results" hidden>
               <div class="rf-count" id="rf-count"></div>
               <div id="rf-list"></div>
-              <p class="rf-fieldnote">Confirm services, hours, and eligibility with the provider &mdash; the field changes faster than the map.</p>
+              <p class="rf-fieldnote">Confirm services, hours, and eligibility with the provider. The field changes faster than the map.</p>
             </div>
             <div class="rf-ledger-empty" aria-hidden="true">
               <span class="rf-ledger-empty-head">Field notes</span>
-              <p>No survey recorded yet. Set an origin and run the instrument &mdash; every finding is logged here, nearest first, with its distance and bearing.</p>
+              <p>No survey recorded yet. Set an origin and run the instrument. Every finding is logged here, nearest first, with its distance and bearing.</p>
             </div>
           </aside>
         </div>
@@ -189,14 +189,14 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">The legend</span>
-          <span class="hm-index">Plate 02 &mdash; What we chart</span>
+          <span class="hm-index">Plate 02 · What we chart</span>
         </header>
         <h2 class="rf-statement hm-reveal">Six categories. <em>One key.</em></h2>
         <ul class="ed-features rf-key">
           <li class="ed-feature hm-reveal">
             <span class="ed-feature-num">A.</span>
             <span class="ed-feature-name">Counseling</span>
-            <span class="ed-feature-desc">Licensed behavioral-health and family counseling facilities &mdash; for the conversations that need a professional in the room.</span>
+            <span class="ed-feature-desc">Licensed behavioral-health and family counseling facilities, for the conversations that need a professional in the room.</span>
           </li>
           <li class="ed-feature hm-reveal" style="--d: .05s">
             <span class="ed-feature-num">B.</span>
@@ -206,22 +206,22 @@
           <li class="ed-feature hm-reveal" style="--d: .1s">
             <span class="ed-feature-num">C.</span>
             <span class="ed-feature-name">Financial assistance</span>
-            <span class="ed-feature-desc">A small, national set of curated grant and subsidy organizations for adoptive families &mdash; fewer pins, farther reach.</span>
+            <span class="ed-feature-desc">A small, national set of curated grant and subsidy organizations for adoptive families. Fewer pins, farther reach.</span>
           </li>
           <li class="ed-feature hm-reveal" style="--d: .15s">
             <span class="ed-feature-num">D.</span>
             <span class="ed-feature-name">Support groups</span>
-            <span class="ed-feature-desc">Peer and family support groups &mdash; the rooms where adoptive parents trade what actually works.</span>
+            <span class="ed-feature-desc">Peer and family support groups: the rooms where adoptive parents trade what actually works.</span>
           </li>
           <li class="ed-feature hm-reveal" style="--d: .2s">
             <span class="ed-feature-num">E.</span>
             <span class="ed-feature-name">Medical services</span>
-            <span class="ed-feature-desc">Federally supported community health centers &mdash; primary and pediatric care, mapped to their exact address.</span>
+            <span class="ed-feature-desc">Federally supported community health centers, offering primary and pediatric care, mapped to their exact address.</span>
           </li>
           <li class="ed-feature hm-reveal" style="--d: .25s">
             <span class="ed-feature-num">F.</span>
             <span class="ed-feature-name">Educational services</span>
-            <span class="ed-feature-desc">National education and advocacy organizations for post-adoption learning &mdash; curated nationally, not tied to a single town.</span>
+            <span class="ed-feature-desc">National education and advocacy organizations for post-adoption learning, curated nationally rather than tied to a single town.</span>
           </li>
         </ul>
       </div>
@@ -232,18 +232,18 @@
       <div class="hm-container hm-container--editorial">
         <header class="hm-secthead hm-reveal">
           <span class="hm-eyebrow">The sources</span>
-          <span class="hm-index">Plate 03 &mdash; How the map is drawn</span>
+          <span class="hm-index">Plate 03 · How the map is drawn</span>
         </header>
         <div class="rf-prov">
           <div class="rf-prov-main">
             <h2 class="rf-statement hm-reveal">Drawn from the <em>public record.</em></h2>
             <p class="ed-body hm-reveal" style="--d: .06s">
-              Every listing on the plate comes from a named, public source &mdash; federal facility directories and a hand-curated set of national organizations. Nothing is sponsored, and nothing is placed by request.
+              Every listing on the plate comes from a named, public source: federal facility directories and a hand-curated set of national organizations. Nothing is sponsored, and nothing is placed by request.
             </p>
             <ul class="rf-sources hm-reveal" style="--d: .12s">
               <li class="rf-source">
                 <span class="rf-source-name">SAMHSA</span>
-                <span class="rf-source-desc">National directory of behavioral-health treatment facilities &mdash; counseling, trauma care, and support groups.</span>
+                <span class="rf-source-desc">National directory of behavioral-health treatment facilities, covering counseling, trauma care, and support groups.</span>
                 <span class="rf-source-count">29,682 listings</span>
               </li>
               <li class="rf-source">
@@ -268,8 +268,8 @@
           </div>
           <aside class="rf-crisis hm-reveal" style="--d: .12s" aria-label="Immediate help">
             <h3 class="rf-crisis-head">If you need help now</h3>
-            <p class="rf-crisis-line"><a href="tel:988">Call or text 988</a> &mdash; the Suicide &amp; Crisis Lifeline, any hour, any day.</p>
-            <p class="rf-crisis-line"><a href="tel:800-394-3366">800-394-3366</a> &mdash; the Child Welfare Hotline, for questions at every stage.</p>
+            <p class="rf-crisis-line"><a href="tel:988">Call or text 988</a> for the Suicide &amp; Crisis Lifeline, any hour, any day.</p>
+            <p class="rf-crisis-line"><a href="tel:800-394-3366">800-394-3366</a> reaches the Child Welfare Hotline, for questions at every stage.</p>
             <p class="rf-crisis-note">This finder is a directory, not an emergency service.</p>
           </aside>
         </div>

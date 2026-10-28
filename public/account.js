@@ -364,7 +364,7 @@
 
     const eyebrow = document.createElement("span");
     eyebrow.className = "newsletter-eyebrow";
-    eyebrow.textContent = "The Dispatch — Newsletter";
+    eyebrow.textContent = "The Dispatch · Newsletter";
 
     const title = document.createElement("h2");
     title.id = "newsletterTitle";
@@ -377,7 +377,7 @@
     const text = document.createElement("p");
     text.className = "newsletter-text";
     text.textContent =
-      "Our newsletter brings notes for each stage of the journey — what to prepare, and who can help. No spam.";
+      "Our newsletter brings notes for each stage of the journey: what to prepare, and who can help. No spam.";
 
     const accept = document.createElement("button");
     accept.type = "button";
@@ -406,7 +406,7 @@
 
     const confirmEyebrow = document.createElement("span");
     confirmEyebrow.className = "newsletter-eyebrow";
-    confirmEyebrow.textContent = "The Dispatch — Newsletter";
+    confirmEyebrow.textContent = "The Dispatch · Newsletter";
 
     const confirmTitle = document.createElement("p");
     confirmTitle.className = "newsletter-confirm-title";

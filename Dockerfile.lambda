@@ -1,4 +1,7 @@
-FROM public.ecr.aws/docker/library/node:20-slim AS build
+# CI passes whichever registry answered for node:20-slim (see the deploy workflow).
+ARG NODE_IMAGE=public.ecr.aws/docker/library/node:20-slim
+
+FROM ${NODE_IMAGE} AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -8,7 +11,7 @@ COPY public ./public
 COPY knowledge-tools ./knowledge-tools
 RUN npm run build
 
-FROM public.ecr.aws/docker/library/node:20-slim
+FROM ${NODE_IMAGE}
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci --omit=dev && npm cache clean --force
@@ -17,7 +20,8 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/src/data ./src/data
 COPY --from=build /app/knowledge-tools ./knowledge-tools
 COPY scripts ./scripts
-COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 /lambda-adapter /opt/extensions/lambda-adapter
+# Lambda Web Adapter 0.9.1 (arm64), vendored; see vendor/aws-lambda-adapter/README.md.
+COPY --chmod=0755 vendor/aws-lambda-adapter/lambda-adapter /opt/extensions/lambda-adapter
 ENV PORT=3000 AWS_LWA_PORT=3000 AWS_LWA_READINESS_CHECK_PATH=/health
 EXPOSE 3000
 CMD ["node", "dist/app.js"]

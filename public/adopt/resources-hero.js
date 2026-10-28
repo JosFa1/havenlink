@@ -249,7 +249,7 @@
     ctx.textAlign = "right";
     ctx.textBaseline = "top";
     ctx.fillStyle = "rgba(" + INK + ",0.5)";
-    ctx.fillText(lat.toFixed(4) + "° N — " + lng.toFixed(4) + "° W", W - 18, 16);
+    ctx.fillText(lat.toFixed(4) + "° N, " + lng.toFixed(4) + "° W", W - 18, 16);
     ctx.textAlign = "left";
     ctx.textBaseline = "alphabetic";
   }

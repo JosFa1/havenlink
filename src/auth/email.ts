@@ -80,7 +80,7 @@ ${link}
 
 If you did not create a HavenLink account, you can safely ignore this email.
 
-— The HavenLink Team`,
+The HavenLink Team`,
   });
 }
 

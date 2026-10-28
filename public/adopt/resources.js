@@ -343,7 +343,7 @@
 
     var figEl = document.getElementById("rf-fig-caption");
     if (figEl) {
-      figEl.textContent = "Fig. 01 — Survey of ZIP " + data.origin.zip + " · " + data.radiusMiles + " mi range";
+      figEl.textContent = "Fig. 01 · Survey of ZIP " + data.origin.zip + " · " + data.radiusMiles + " mi range";
     }
 
     return loadMaps().then(function () {
@@ -356,10 +356,10 @@
       // The list still works without the map.
       mapEl.innerHTML = '<div class="rf-map-fallback">' +
         (err && err.message === "MAPS_NOT_CONFIGURED"
-          ? "The map is not configured in this environment — every finding is logged in the field notes."
+          ? "The map is not configured in this environment. Every finding is logged in the field notes."
           : err && err.message === "MAPS_AUTH_FAILED"
-            ? "The map key was rejected by Google — every finding is still available in the field notes."
-            : "The map couldn't load right now — every finding is logged in the field notes.") + "</div>";
+            ? "The map key was rejected by Google. Every finding is still available in the field notes."
+            : "The map couldn't load right now. Every finding is logged in the field notes.") + "</div>";
       if (merged.length === 0) {
         showMsg("info", "Nothing charted within " + data.radiusMiles + " mi.");
       }

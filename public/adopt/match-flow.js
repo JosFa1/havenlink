@@ -320,7 +320,7 @@
       el(
         "p",
         "mtf-sub",
-        "Matching needs your completed intake form and home study — they tell us who you are and where you are, so we can pair you with the right licensed agency."
+        "Matching needs your completed intake form and home study. Together they tell us who you are and where you are, so we can pair you with the right licensed agency."
       )
     );
 
@@ -338,7 +338,7 @@
     var hsNote = "Confirm a completed home study, or take the readiness screener.";
     if (e.homeStudyResult === "NOT_YET_ELIGIBLE") {
       hsNote =
-        "Your readiness check came back not-yet-eligible. Revisit the home study when your circumstances change — matching unlocks once it passes.";
+        "Your readiness check came back not-yet-eligible. Revisit the home study when your circumstances change. Matching unlocks once it passes.";
     } else if (e.homeStudyResult === "INTERNATIONAL") {
       hsNote =
         "Your home study indicated an international adoption path, which matching doesn't support yet. See the home study page for USCIS guidance.";
@@ -369,7 +369,7 @@
         "mtf-sub",
         "We're building our agency network state by state, and " +
           name +
-          " isn't covered yet. Your profile is saved — matching will light up here the moment we arrive."
+          " isn't covered yet. Your profile is saved, and matching will light up here the moment we arrive."
       )
     );
     var back = el("a", "hm-textlink", "See how agency profiles work");
@@ -383,10 +383,10 @@
     wrap.appendChild(el("p", "hm-eyebrow mtf-kicker", "You're eligible"));
     wrap.appendChild(el("h3", "mtf-title", "Your profile is complete. Let's find your agency."));
     var sub = data.partnerState
-      ? "Good news — " +
+      ? "Good news: " +
         stateName(data.state) +
         " is served by a HavenLink partner agency. We'll pair you directly with a partner we work with hand in hand."
-      : "We'll match you with one of " +
+      : "Our intelligent matching model will pair you with one of " +
         (data.poolSize || "several") +
         " licensed agencies serving " +
         stateName(data.state) +
@@ -414,7 +414,7 @@
         "p",
         "mtf-sub",
         payload.partnerState
-          ? "A HavenLink partner — hand-selected, verified, and ready for you. Take a look around their site, then confirm the match to introduce yourself."
+          ? "A HavenLink partner: hand-selected, verified, and ready for you. Take a look around their site, then confirm the match to introduce yourself."
           : "Take your time: explore the agency's site and see if it feels right. Confirm to send the match to HavenLink, or ask for another agency."
       )
     );
@@ -470,7 +470,7 @@
         el(
           "p",
           "mtf-sub",
-          "HavenLink has your confirmed agency match on file. We'll be in touch — or reach us at havenlink.org@gmail.com."
+          "HavenLink has your confirmed agency match on file. We'll be in touch, or you can reach us at havenlink.org@gmail.com."
         )
       );
       render("matched", [wrap]);
@@ -479,7 +479,7 @@
     }
 
     var agency = match.agency;
-    wrap.appendChild(el("h3", "mtf-title", "It's official — you're matched with " + agency.name + "."));
+    wrap.appendChild(el("h3", "mtf-title", "It's official: you're matched with " + agency.name + "."));
 
     var when = "";
     if (match.matchedAt) {
@@ -497,7 +497,7 @@
         "p",
         "mtf-sub",
         (when ? "Confirmed " + when + ". " : "") +
-          "HavenLink has been notified — expect contact from our team within 1–2 business days to coordinate next steps with " +
+          "HavenLink has been notified. Expect contact from our team within 1–2 business days to coordinate next steps with " +
           agency.name +
           "."
       )

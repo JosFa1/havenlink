@@ -136,12 +136,12 @@
   function zeroReason(phaseRows, allRows) {
     if (phaseRows.length > 0) {
       /* Genuinely $0 with a real source: quote the row's own label. Seeded labels
-         are written as "<what it is> — <why it is free>", and only the second half
+         are written as "<what it is>: <why it is free>", and only the second half
          is news here, so prefer it. The whole sentence still reaches the reader
          through the group's <title> and the list fallback. */
       var label = phaseRows[0].label;
-      var dash = label.indexOf("—");
-      var reason = dash !== -1 ? label.slice(dash + 1).trim() : label;
+      var colon = label.indexOf(": ");
+      var reason = colon !== -1 ? label.slice(colon + 2).trim() : label;
       return { kind: "free", text: reason, full: label };
     }
     for (var i = 0; i < allRows.length; i++) {
@@ -622,7 +622,7 @@
       x1: plotX - 26, y1: zeroY, x2: endX + 26, y2: zeroY,
       "vector-effect": "non-scaling-stroke"
     }));
-    base.appendChild(text("$0 — WHERE YOU STAND TODAY", {
+    base.appendChild(text("$0 · WHERE YOU STAND TODAY", {
       x: plotX - 26, y: zeroY - 12, "class": "fc-tide-zero-label",
       "font-size": 12 * V.font
     }));
@@ -797,7 +797,7 @@
       /* The tick labels are truncated to fit; this carries the whole sentence, so
          hover and assistive tech get the sourced text rather than the ellipsis.
          A collapsed run still gets one <title> per member for the same reason. */
-      title.textContent = e.label + " — " + e.when +
+      title.textContent = e.label + " · " + e.when +
         (e.zero && e.zero.full ? " (" + e.zero.full + ")" : "");
       gg.appendChild(title);
 

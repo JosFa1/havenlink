@@ -265,7 +265,7 @@
       dt.className = "fc-row-sub";
       dd.className = "fc-row-sub";
     }
-    /* Some right-hand values are words, not figures ("None — full credit").
+    /* Some right-hand values are words, not figures ("None (full credit)").
        Held in the tabular column they are nowrap, so they set that column's
        width and squeeze the label beside them into a four-line rag. */
     if (opts.words) dd.className += " fc-row-words";
@@ -452,7 +452,7 @@
        arithmetic table. */
     addRow(els.net, "Credit phase-out applied",
       branch.taxCredit.phaseoutFactor === 1
-        ? "None — full credit"
+        ? "None (full credit)"
         : branch.taxCredit.phaseoutFactor === 0
           ? "Fully phased out"
           : Math.round(branch.taxCredit.phaseoutFactor * 100) + "% of the credit remains",
@@ -498,11 +498,11 @@
     if (ongoing.monthlySubsidy) {
       els.ongoingFigure.textContent = moneyRange(ongoing.monthlySubsidy);
       els.ongoingFigureLabel.textContent =
-        "per month — " + (ongoing.monthlySubsidyName || "monthly subsidy");
+        "per month · " + (ongoing.monthlySubsidyName || "monthly subsidy");
     } else if (ongoing.monthlySubsidyName) {
       els.ongoingFigure.textContent = "Negotiated";
       els.ongoingFigureLabel.textContent =
-        ongoing.monthlySubsidyName + " — the amount is set case by case";
+        ongoing.monthlySubsidyName + ": the amount is set case by case";
     } else {
       els.ongoingFigure.textContent = "—";
       els.ongoingFigureLabel.textContent = "No monthly subsidy applies to this path";
@@ -891,7 +891,7 @@
       els.forkDelta.textContent = swing > 0
         ? "Worth up to " + money(swing) + " either way"
         : (gatesSupport
-            ? "No difference in cost — it decides the ongoing support below"
+            ? "No difference in cost, but it decides the ongoing support below"
             : "No difference in cost on this path");
       els.branches.hidden = false;
     } else {
@@ -917,7 +917,7 @@
       if (theirs === 0 && mine > 0) {
         els.abRead.textContent =
           "At the top of each range, adopting from foster care in your state costs nothing up " +
-          "front — against " + money(mine) + " on the path you chose.";
+          "front, against " + money(mine) + " on the path you chose.";
       } else if (theirs > 0 && mine > theirs * 1.2) {
         els.abRead.textContent =
           "At the top of each range, the path you chose costs about " +
@@ -980,7 +980,7 @@
       title.className = "fc-saved-title";
       var when = new Date(row.savedAt);
       title.textContent =
-        "Version " + row.version + " — " + (row.inputs.adoptionTypeLabel || row.inputs.adoptionType) +
+        "Version " + row.version + " · " + (row.inputs.adoptionTypeLabel || row.inputs.adoptionType) +
         " in " + row.inputs.state + ", saved " + when.toLocaleDateString();
 
       var figure = document.createElement("span");
@@ -1058,7 +1058,7 @@
       /* The PDF lives on the saved row, not on a button up here: a download only
          exists once a version does, and every saved version keeps its own. */
       showMsg(els.saveMsg, "success",
-        "Saved as version " + out.data.version + " — download it from “Your saved " +
+        "Saved as version " + out.data.version + ". Download it from “Your saved " +
         "estimates” below. Re-running with different answers saves a new version " +
         "rather than replacing this one.");
       loadSaved();

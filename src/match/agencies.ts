@@ -508,7 +508,7 @@ export const AGENCIES: Agency[] = [
   // ----- Hawaii ------------------------------------------------------------------
   {
     id: "family-options-hi",
-    name: "Family Options — Hawaii",
+    name: "Family Options (Hawaii)",
     state: "HI",
     partner: false,
     url: "https://www.familyoptionshawaii.org/",
@@ -638,7 +638,7 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "adoption-connection-ia",
-    name: "Adoption Connection — Iowa",
+    name: "Adoption Connection (Iowa)",
     state: "IA",
     partner: false,
     url: "https://www.adoptioniowa.com/",
@@ -776,7 +776,7 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "youth-homes-mt",
-    name: "Youth Homes — Dan Fox Family Care",
+    name: "Youth Homes (Dan Fox Family Care)",
     state: "MT",
     partner: false,
     url: "https://youthhomesmt.org/locations/dan-fox-family-care-program/",
@@ -890,7 +890,7 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "holt-international-pa",
-    name: "Holt International — PA",
+    name: "Holt International (PA)",
     state: "PA",
     partner: false,
     url: "https://www.holtinternational.org/",
@@ -903,7 +903,7 @@ export const AGENCIES: Agency[] = [
   // ----- Tennessee ---------------------------------------------------------------
   {
     id: "adoption-assistance-tn",
-    name: "Adoption Assistance — TN",
+    name: "Adoption Assistance (TN)",
     state: "TN",
     partner: false,
     url: "https://www.adoptionassistance.com/",
@@ -988,7 +988,7 @@ export const AGENCIES: Agency[] = [
     url: "https://akinfamily.org/",
     logo: null,
     description:
-      "Washington's oldest children's non-profit — now Akin — offering family and adoption support statewide.",
+      "Washington's oldest children's non-profit, now known as Akin, offering family and adoption support statewide.",
     tags: ["Family services", "Adoption support"],
   },
   {
@@ -1004,7 +1004,7 @@ export const AGENCIES: Agency[] = [
   },
   {
     id: "holt-international-wa",
-    name: "Holt International — WA",
+    name: "Holt International (WA)",
     state: "WA",
     partner: false,
     url: "https://www.holtinternational.org/",
@@ -1056,7 +1056,7 @@ export const AGENCIES: Agency[] = [
     url: "https://lcfswi.org/",
     logo: null,
     description:
-      "One of Wisconsin's oldest adoption agencies — over 127 years — licensed to place children in 38 counties.",
+      "One of Wisconsin's oldest adoption agencies, with over 127 years of service, licensed to place children in 38 counties.",
     tags: ["Home study", "Placement", "Counseling"],
   },
   {
@@ -1076,7 +1076,7 @@ export const AGENCIES: Agency[] = [
   // discontinued adoption services in 2020.
   {
     id: "bethany-wy",
-    name: "Bethany Christian Services — WY",
+    name: "Bethany Christian Services (WY)",
     state: "WY",
     partner: false,
     url: "https://bethany.org/locations/us/wyoming/cheyenne",
@@ -1104,7 +1104,7 @@ export const AGENCIES: Agency[] = [
     url: "https://adoptionlife.org/",
     logo: null,
     description:
-      "Operating as Adoption Life — a non-profit full-service adoption agency licensed in Wyoming, Idaho, and Utah.",
+      "Operating as Adoption Life, a non-profit full-service adoption agency licensed in Wyoming, Idaho, and Utah.",
     tags: ["Home study", "Infant adoption"],
   },
   {
