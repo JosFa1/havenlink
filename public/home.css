@@ -2239,6 +2239,141 @@ body.proclamation-open .hl-chat-panel {
   }
 }
 
+/* ============================================================
+   Seminole County variant
+   Chairman Herr's resolution is a legal-size parchment sheet mounted in the
+   county's blue presentation folder, and the sheet reproduces the folder as
+   well as the paper: a blue mat down the sides and foot, and the stapled
+   pocket flap that covers the head of the page. The type is a Palatino face,
+   ragged right, every WHEREAS indented and run in; the resolve sits flush
+   left, the adoption line centred, the signing rule centred over the typed
+   name. The gold seal and the signature are left off on purpose.
+
+   Every measure below was read off the scan with the folder 1238 units wide
+   (the photo crops its right edge; the mat is taken as even on both sides).
+   Box geometry is in % (padding and margin on the sheet resolve against the
+   folder's width at every size); type is in em off the body size, which is
+   rem under 768px and tracks the folder width above it.
+
+   The accent is a deepened step of the folder blue - only the modal's header
+   band takes it (white at 74% reads 5.5:1); the sheet stays black on cream.
+   ============================================================ */
+
+.hl-proc-modal[data-accent="seminole"],
+.hl-proc-doc--seminole {
+  --orl-blue: #4f6ea8;
+  --orl-blue-deep: #2f4c80;
+}
+
+/* doubled class throughout: the shared proclamation rules are (0,2,0) and
+   some sit later in the file */
+.hl-proc-doc.hl-proc-doc--seminole {
+  --sem-folder: #7f9bcc;
+  --sem-paper: #eeeadf;
+  position: relative;
+  aspect-ratio: 1238 / 1978; /* a legal-size folder, not Letter */
+  padding: 0;
+  background-color: var(--sem-folder);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, "URW Palladio L", P052, "TeX Gyre Pagella", Georgia, serif;
+  color: #141210;
+}
+
+/* The pocket flap: full width along the top edge, cut away on the diagonal
+   at both corners, three staples across it. The outer span carries the drop
+   shadow because clip-path on the same element would cut the shadow off. */
+.hl-doc-semflap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  aspect-ratio: 1238 / 150;
+  filter: drop-shadow(0 1px 1.5px rgba(20, 32, 64, 0.38));
+  pointer-events: none;
+}
+
+.hl-doc-semflap > span {
+  display: block;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 89% 100%, 11% 100%);
+  /* staples where the original has them - a little left of centre, the
+     right-hand one set higher */
+  background:
+    linear-gradient(#c3c7ce, #8b919b) 14.3% 83.7% / 3.7% 2.2% no-repeat,
+    linear-gradient(#c3c7ce, #8b919b) 48.4% 83.7% / 3.7% 2.2% no-repeat,
+    linear-gradient(#c3c7ce, #8b919b) 82.8% 76% / 3.7% 2.2% no-repeat,
+    var(--sem-folder);
+}
+
+/* The parchment. Mottling is a low-frequency noise tinted grey-green, the
+   grain a fine one over it - both data URIs, which CSP img-src allows. */
+.hl-doc-semsheet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 3.07% 4%;
+  padding: 12.6% 8.7% 6% 9%; /* clears the flap; ~1in sides */
+  background-color: var(--sem-paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.3 0 0 0 0 0.28 0.5 0 0 0 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='420'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.022' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.45 0 0 0 0 0.4 0.5 0 0 0 -0.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  box-shadow: 0 1px 2px rgba(20, 32, 64, 0.28);
+  line-height: 1.23;
+}
+
+.hl-proc-doc--seminole .hl-doc-semtitle {
+  margin: 0 0 2.53em;
+  font-size: 1.051em;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.hl-proc-doc--seminole .hl-doc-semclause {
+  margin: 0 0 1.11em;
+  text-indent: 1.45em;
+}
+
+.hl-proc-doc--seminole .hl-doc-semresolve {
+  margin: 0 0 1.43em;
+}
+
+.hl-proc-doc--seminole .hl-doc-semadopted {
+  margin: 0;
+  text-align: center;
+}
+
+/* the blank where the signature went: the rule under it is the signing line,
+   a third of the measure, centred like the typed name beneath it */
+.hl-proc-doc--seminole .hl-doc-sigspace {
+  width: 31.5%;
+  height: 8.1em;
+  margin: 0 auto;
+  border-bottom-width: 1px;
+  border-bottom-color: #141210;
+}
+
+.hl-proc-doc--seminole .hl-doc-semsign .hl-doc-signer {
+  margin-top: 0.3em;
+  line-height: 1.31;
+  text-align: center;
+}
+
+/* Above 768px the sheet is laid out in the scan's units: --sem is 1/1238 of
+   the folder's width, so the body sets at the original's 12pt and every line
+   breaks close to where the original's does. */
+@media (min-width: 768px) {
+  .hl-proc-doc.hl-proc-doc--seminole {
+    --sem: calc(100cqw / 1238);
+    container-type: inline-size;
+  }
+
+  .hl-doc-semsheet {
+    font-size: calc(24.4 * var(--sem));
+  }
+}
+
 /* ---- narrow screens: same document, no fixed page ---- */
 
 @media (max-width: 767px) {
@@ -2346,6 +2481,21 @@ body.proclamation-open .hl-chat-panel {
   .hl-doc-foot-rule {
     width: 2.5rem;
     height: 1px;
+  }
+
+  /* the folder grows with the text here, like every other sheet */
+  .hl-proc-doc.hl-proc-doc--seminole {
+    aspect-ratio: auto;
+  }
+
+  .hl-doc-semsheet {
+    padding-left: 7%;
+    padding-right: 7%;
+  }
+
+  .hl-proc-doc--seminole .hl-doc-sigspace {
+    width: 60%;
+    height: 4.5em;
   }
 }
 

@@ -58,10 +58,13 @@ app.use(pageGuard);
 
 app.use(express.static(path.join(__dirname, "../public"), {
   setHeaders: (res, filePath) => {
-    // These filenames are intentionally not content-hashed, so use a bounded
-    // cache with revalidation rather than immutable caching. HTML remains
-    // uncached and can pick up a deploy immediately.
-    if (/\.(?:css|js|json|png|jpe?g|gif|svg|webp|ico|woff2?|pdf|gz)$/i.test(filePath)) {
+    // These filenames are intentionally not content-hashed. CSS/JS/JSON must
+    // change in lockstep with the uncached HTML, so browsers revalidate them on
+    // every load (a cheap 304 via the ETag) instead of serving a stale copy
+    // after a deploy. Media and fonts rarely change, so keep a bounded cache.
+    if (/\.(?:css|js|json)$/i.test(filePath)) {
+      res.setHeader("Cache-Control", "no-cache");
+    } else if (/\.(?:png|jpe?g|gif|svg|webp|ico|woff2?|pdf|gz)$/i.test(filePath)) {
       res.setHeader("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
     }
   },

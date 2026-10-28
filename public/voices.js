@@ -29,7 +29,7 @@
       img: "/png/buddy-dyer.webp",
       initials: "BD",
       alt: "Buddy Dyer, Mayor of Orlando",
-      action: { label: "Read the full proclamation", modal: "proclamation" }
+      action: { label: "Read the full letter", modal: "proclamation" }
     },
     {
       type: "coverage",
@@ -164,6 +164,16 @@
       img: "/png/anna-eskamani.png",
       initials: "AE",
       alt: "Anna V. Eskamani, Florida State Representative"
+    },
+    {
+      type: "quote",
+      quote: "The Seminole County Board of County Commissioners hereby honors and commends HavenLink for its outstanding achievements and its service to families across Central Florida and around the world.",
+      name: "Andria Herr",
+      title: "Mayor of Seminole County",
+      img: "/png/andria-herr.png",
+      initials: "AH",
+      alt: "Andria Herr, Mayor of Seminole County",
+      action: { label: "Read the full resolution", modal: "resolution-herr" }
     },
     {
       type: "quote",
@@ -484,18 +494,19 @@
   sync();
 
   /* ---------- Reproduced-document modals ----------
-     One shell, seven documents: Mayor Dyer's letter of recognition,
+     One shell, eight documents: Mayor Dyer's letter of recognition,
      Commissioner Rose's HavenLink Week proclamation, Commissioner Keen's
      letter, Mayor Sladek's letter from the City of Oviedo, Mayor Marks'
      proclamation from the City of Orange City, Mayor Demings' letter
-     from Orange County, and Senator Scott's letter from the United States
-     Senate. A card's
+     from Orange County, Senator Scott's letter from the United States
+     Senate, and Chairman Herr's resolution from the Seminole County Board
+     of County Commissioners. A card's
      data-voice-modal names which <article> to show; everything else - the
      focus trap, Escape, backdrop click, scroll lock - is shared, and each
      article supplies its own header strings via data-kicker/data-title.
 
      Only the Dyer letter has a PDF counterpart, so only it runs the probe
-     below; the other six are always the typeset article. */
+     below; the other seven are always the typeset article. */
 
   var modal = document.getElementById("proclamationModal");
   var frame = document.getElementById("proclamationFrame");
@@ -510,7 +521,8 @@
     "letter-sladek": document.getElementById("letterSladek"),
     "letter-demings": document.getElementById("letterDemings"),
     "letter-scott": document.getElementById("letterScott"),
-    "proclamation-marks": document.getElementById("proclamationMarks")
+    "proclamation-marks": document.getElementById("proclamationMarks"),
+    "resolution-herr": document.getElementById("resolutionHerr")
   };
   var kicker = document.getElementById("procKicker");
   var titleEl = document.getElementById("procTitle");

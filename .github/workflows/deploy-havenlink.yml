@@ -13,9 +13,10 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   APP_NAME: ${{ vars.APP_NAME }}
   DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
-  # Include the run ID so a failed deployment can be retried without trying
-  # to overwrite an immutable ECR tag that the previous run already pushed.
-  IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}
+  # Include the run ID and attempt so a failed deployment can be retried without
+  # trying to overwrite an immutable ECR tag that an earlier attempt already pushed.
+  # The run ID stays the same on "Re-run failed jobs"; only the attempt changes.
+  IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}-${{ github.run_attempt }}
   ECR_REPOSITORY: havenlink-serverless
   STACK_NAME: havenlink-serverless-candidate
 
@@ -43,6 +44,18 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
+
+      # The base images come from public.ecr.aws. Anonymous pulls there are capped
+      # at 500 GB/month, and GitHub runners share IPs with other projects, so a build
+      # can fail with "429 Data limit exceeded" through no fault of ours. Logged-in
+      # pulls are not under that cap. If the role lacks ecr-public:GetAuthorizationToken
+      # and sts:GetServiceBearerToken, this falls back to anonymous pulls instead of
+      # failing the deploy.
+      - name: Login to Amazon ECR Public
+        uses: aws-actions/amazon-ecr-login@v2
+        continue-on-error: true
+        with:
+          registry-type: public
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
